@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/bootstrap-p2pu-1.0.css">
+  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">P2PU</a>
+          <ul class="nav">
+            <li><a href="index.html">About badges</a></li>
+            <li class="active" ><a href="create-badge.html">Create a badge</a></li>
+            <li><a href="review.html">Review a badge</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="my-badges.html">My Badges</a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container body">
+
+    <div>
+      <h2>Create a Badge.</h2>
+      <p>We’ve created a series of tools to help you design and implement your badge easily.</p>
+    </div>
+    <div>
+      <form action="badge-preview.html">
+        <fieldset>
+          <legend>Legend</legend>
+     
+          <label>Badge image</label>
+          <input type="file" placeholder="Choose and image…">
+          <span class="help-block">Need some help creatig your image?.</span>
+
+          <label>Badge Headline:</label>
+          <textarea rows="3" class="span7" placeholder="What are you calling your Badge? Grab someone’s attention and make a learner interested."></textarea>
+          <span class="help-block"></span>
+
+          <label>Badge Subtitle:</label>
+          <textarea rows="3" class="span7" placeholder="Think about this as a short description. What are experts who hold this badge masters of?"></textarea>
+          <span class="help-block"></span>
+
+          <label>Signs of Mastery:</label>
+          <textarea rows="3" class="span7" placeholder="What specific skills should people with this badge demonstrate with their project?" ></textarea>
+          <span class="help-block"></span>
+
+          <button type="submit" class="btn">Submit</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/bootstrap.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
