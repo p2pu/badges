@@ -10,7 +10,7 @@ def home(request):
         {'title': 'Science Field Trip'},
         {'title': 'Open Licensee'},
     ]
-    context['projects']: [
+    context['projects'] = [
         {'title': 'IPhone movie'},
         {'title': 'Robots in Love'},
         {'title': 'Perfect bow'},

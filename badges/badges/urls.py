@@ -16,4 +16,6 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', include('landing.urls')),
+    url(r'^badge/', include('badge.urls')),
+    url(r'^project/', include('project.urls')),
 )

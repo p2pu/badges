@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+  <div>
+    <h2>Create a Badge.</h2>
+    <p>We’ve created a series of tools to help you design and implement your badge easily.</p>
+  </div>
+  <div>
+    <form action="">
+      <fieldset>
+        <legend>Legend</legend>
+   
+        <label>Badge image</label>
+        <input type="file" placeholder="Choose and image…">
+        <span class="help-block">Need some help creatig your image?.</span>
+
+        <label>Badge Headline:</label>
+        <textarea rows="3" class="span7" placeholder="What are you calling your Badge? Grab someone’s attention and make a learner interested."></textarea>
+        <span class="help-block"></span>
+
+        <label>Badge Subtitle:</label>
+        <textarea rows="3" class="span7" placeholder="Think about this as a short description. What are experts who hold this badge masters of?"></textarea>
+        <span class="help-block"></span>
+
+        <label>Signs of Mastery:</label>
+        <textarea rows="3" class="span7" placeholder="What specific skills should people with this badge demonstrate with their project?" ></textarea>
+        <span class="help-block"></span>
+
+        <button type="submit" class="btn">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+
+{% endblock %}
