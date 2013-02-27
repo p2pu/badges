@@ -4,7 +4,7 @@ def UriField(**kwargs):
     return models.CharField(max_length=255, **kwargs)
 
 class Badge(models.Model):
-    title = models.CharField(max_length=128)
+    title = models.CharField(max_length=128, unique=True)
     image_uri = UriField()
     description = models.CharField(max_length=128)
     requirements = models.CharField(max_length=1024)

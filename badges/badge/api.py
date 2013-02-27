@@ -80,16 +80,16 @@ def get_user_draft_badges(author_uri):
 
 
 def search_badges(expression=None, author_uri=None, attribute_value=None):
-    pass
+    raise Exception()
 
 
 def award_badge(uri, user_uri, expert_uri):
-    pass
+    raise Exception()
 
 
 def get_experts(uri):
-    pass
+    raise Exception()
 
 
 def relinquish_badge(uri, expert_uri):
-    pass
+    raise Exception()

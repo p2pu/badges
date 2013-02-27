@@ -10,7 +10,7 @@ from badge import api as badge_api
 
 
 class SimpleTest(TestCase):
-    
+
     def setUp(self):
         self.badge_attrs = [
             'uri',
@@ -81,3 +81,6 @@ class SimpleTest(TestCase):
         self.assertTrue(len(badges) == 0)
 
 
+    def test_unique_title(self):
+        badge = badge_api.create_badge(*self.badge_values)
+        self.assertRaises(Exception, badge_api.create_badge, self.badge_values)
