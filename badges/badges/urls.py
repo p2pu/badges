@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.i18n import i18n_patterns
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = i18n_patterns('',
     # Examples:
     # url(r'^$', 'badges.views.home', name='home'),
     # url(r'^badges/', include('badges.foo.urls')),
