@@ -1,0 +1,9 @@
+<div class="control-group {% if errors %}error{% endif %}">   
+  <label>Badge Headline:</label>
+  <input name="{{field.name}}" type="text" class="span7" placeholder="What are you calling your Badge? Grab someone’s attention and make a learner interested." {%if field.value %}value="{{field.value}}"{% endif %}>
+  {% for error in errors %}
+    <span class="help-block">{{ error }}</span>
+  {% endfor %}
+</div>
+
+

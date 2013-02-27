@@ -7,27 +7,51 @@
     <p>We’ve created a series of tools to help you design and implement your badge easily.</p>
   </div>
   <div>
-    <form action="">
+    <ul>
+    <b> {{form.errors}}</b>
+    <form action="" method="POST" enctype="multipart/form-data">
       <fieldset>
-        <legend>Legend</legend>
-   
-        <label>Badge image</label>
-        <input type="file" placeholder="Choose and image…">
-        <span class="help-block">Need some help creatig your image?.</span>
+        <legend>Badge information</legend>
 
-        <label>Badge Headline:</label>
-        <textarea rows="3" class="span7" placeholder="What are you calling your Badge? Grab someone’s attention and make a learner interested."></textarea>
-        <span class="help-block"></span>
+        {% csrf_token %}
 
-        <label>Badge Subtitle:</label>
-        <textarea rows="3" class="span7" placeholder="Think about this as a short description. What are experts who hold this badge masters of?"></textarea>
-        <span class="help-block"></span>
+        <div class="control-group {% if form.errors.image %}error{% endif %}">   
+          <label>Badge image</label>
+          <input name="image" type="file" placeholder="Choose an image…">
+          {% for error in form.errors.image %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
 
-        <label>Signs of Mastery:</label>
-        <textarea rows="3" class="span7" placeholder="What specific skills should people with this badge demonstrate with their project?" ></textarea>
-        <span class="help-block"></span>
+        <!--
+        {% include 'form_text_input.html' with field=form.title  errors=form.errors.title label='Badge Headline' placeholder='blah' %}
+        -->
 
-        <button type="submit" class="btn">Submit</button>
+        <div class="control-group {% if form.errors.title %}error{% endif %}">   
+          <label>Badge Headline:</label>
+          <input name="title" type="text" class="span7" placeholder="What are you calling your Badge? Grab someone’s attention and make a learner interested.">
+          {% for error in form.errors.title %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="control-group {% if form.errors.description %}error{% endif %}">   
+          <label>Badge Subtitle:</label>
+          <textarea name="description" rows="3" class="span7" placeholder="Think about this as a short description. What are experts who hold this badge masters of?"></textarea>
+          {% for error in form.errors.description %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+         
+        <div class="control-group {% if form.errors.requirements %}error{% endif %}">   
+          <label>Signs of Mastery:</label>
+          <textarea name="requirements" rows="6" class="span7" placeholder="What specific skills should people with this badge demonstrate with their project?" ></textarea>
+          {% for error in form.errors.requirements %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn btn-large">Save draft</button>
       </fieldset>
     </form>
   </div>
