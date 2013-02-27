@@ -49,7 +49,7 @@ class SimpleTest(TestCase):
         self.assertEqual(badge, badge2)
 
         # test that the badge shows up in drafts
-        badges = get_user_draft_badges(badge['author_uri'])
+        badges = badge_api.get_user_draft_badges(badge['author_uri'])
         self.assertEquals(len(badges), 1)
         self.assertEquals(badge2, badges[0])
 
@@ -70,7 +70,7 @@ class SimpleTest(TestCase):
 
         badges = badge_api.get_published_badges()
         self.assertTrue(len(badges) == 0)
-        badges = badge_api.get_user_draft_badges(badge['uri'])
+        badges = badge_api.get_user_draft_badges(badge['author_uri'])
         self.assertTrue(len(badges) == 1)
 
         badge_api.publish_badge(badge['uri'])
