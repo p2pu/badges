@@ -1,6 +1,9 @@
 from badge.models import Badge
 from datetime import datetime
 
+class DuplicateTitleError(Exception):
+    pass
+
 def uri2id( uri ):
     return uri.strip('/').split('/')[-1]
 
@@ -22,6 +25,9 @@ def _badge2dict(badge_db):
 
 
 def create_badge( title, image_uri, description, requirements, author_uri ):
+    if Badge.objects.filter(title=title).exists():
+        raise DuplicateTitleError('Badge titles need to be unique.')
+
     badge = Badge(
         title=title, 
         image_uri=image_uri, 
