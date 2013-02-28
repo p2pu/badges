@@ -19,7 +19,8 @@ def _badge2dict(badge_db):
         'image_uri': badge_db.image_uri,
         'description': badge_db.description,
         'requirements': badge_db.requirements,
-        'author_uri': badge_db.author_uri
+        'author_uri': badge_db.author_uri,
+        'publised': not badge_db.date_published == None
     }
     return badge
 
@@ -57,15 +58,16 @@ def update_badge(uri, image_uri=None, title=None, description=None, requirements
     if image_uri:
         badge_db.image_uri = image_uri
     if title:
+        if Badge.objects.exclude(id=badge_db.id).filter(title=title).exists():
+            raise DuplicateTitleError('Badge titles need to be unique.')
         badge_db.title = title
     if description:
-       badge_db.description = description
+        badge_db.description = description
     if requirements:
-       badge_db.requirements = requirements
+        badge_db.requirements = requirements
 
     badge_db.save()
     return get_badge(uri)
-
 
 
 def publish_badge(uri):

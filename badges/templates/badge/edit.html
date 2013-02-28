@@ -2,10 +2,10 @@
 {% load i18n %}
 
 {% block body %}
-  <div>
-    <h2>{% trans 'Create a Badge' %}</h2>
+  <div class="row">
+    <h2>{% blocktrans with badge_title=badge.title %}Edit {{badge_title}}{% endblocktrans %}</h2>
   </div>
-  <div>
+  <div class="row">
     {% include 'badge/form_snippet.html' %}
   </div>
 

@@ -1,0 +1,48 @@
+{% load i18n %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+  <fieldset>
+    <legend>Badge information</legend>
+
+    {% csrf_token %}
+
+    <div class="control-group {% if form.errors.image %}error{% endif %}">   
+      <label>Badge image</label>
+      <input name="image" type="file" required accept="image/*" />
+      {% for error in form.errors.image %}
+        <span class="help-block">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <!--
+    {% include 'form_text_input.html' with field=form.title  errors=form.errors.title label='Badge Headline' placeholder='blah' %}
+    -->
+
+    <div class="control-group {% if form.errors.title %}error{% endif %}">   
+      <label>Badge Headline:</label>
+      <input name="title" type="text" class="span7" placeholder="What are you calling your Badge? Grab someone’s attention and make a learner interested." {% if form.title.value %}value="{{form.title.value}}"{% endif %} required maxlength="128">
+      {% for error in form.errors.title %}
+        <span class="help-block">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <div class="control-group {% if form.errors.description %}error{% endif %}">   
+      <label>Badge Subtitle:</label>
+      <textarea name="description" rows="3" class="span7" placeholder="Think about this as a short description. What are experts who hold this badge masters of?" required  maxlength="128">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
+      {% for error in form.errors.description %}
+        <span class="help-block">{{ error }}</span>
+      {% endfor %}
+    </div>
+     
+    <div class="control-group {% if form.errors.requirements %}error{% endif %}">   
+      <label>Signs of Mastery:</label>
+      <textarea name="requirements" rows="6" class="span7" placeholder="What specific skills should people with this badge demonstrate with their project?" required >{% if form.requirements.value %}{{form.requirements.value}}{% endif %}</textarea>
+      {% for error in form.errors.requirements %}
+        <span class="help-block">{{ error }}</span>
+      {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-large">Save draft</button>
+  </fieldset>
+</form>
+

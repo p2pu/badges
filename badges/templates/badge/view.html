@@ -2,4 +2,42 @@
 {% load i18n %}
 
 {% block body %}
+
+  <div class="row">
+    <div class="span3">
+      <img src="{{badge.image.url}}"/>
+    </div>
+    <div class="span7">
+      <h3>{{badge.title}}</h3>
+      <p>{{badge.description}}</p>
+      <h3>Badge requirements</h3>
+      <p>{{badge.requirements}}</p>
+    </div>
+  </div>
+ 
+
+  <div class="row">
+    <p class="span12"><a href="apply.html" class="btn btn-large">{% trans 'Submit a project' %}</a></p>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <h3>Projects</h3>
+     
+      <ul class="thumbnails">
+        <li class="span3">
+          <div class="thumbnail">
+            <a href="project.html">
+              <img src="http://placehold.it/200x100"/>
+            </a>
+            <h3><a href="project.html">Robots in Love</a></h3>
+            <p>by Bob Jane<p>
+            <p>Create a movie with an iphone and a rocket!</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
 {% endblock %}
