@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -23,12 +25,16 @@
       <div class="container">
         <a class="brand" href="#">P2PU</a>
           <ul class="nav">
-            <li class="active"><a href="index.html">About badges</a></li>
-            <li><a href="create-badge.html">Create a badge</a></li>
-            <li><a href="review.html">Review a badge</a></li>
+            <li><a href="{% url landing %}">{% trans 'About badges' %}</a></li>
+            <li><a href="{% url badge_create %}">{% trans 'Create a badge' %}</a></li>
+            <li><a href="">{% trans 'Review a badge' %}</a></li>
           </ul>
           <ul class="nav pull-right">
-            <li><a href="my-badges.html">My Badges</a></li>
+            {% if request.user %}
+              <li><a href="">{% trans 'My Badges' %}</a></li>
+            {% else %}
+              <li><a href="">{% trans 'Log in' %}</a></li>
+            {% endif %}
           </ul>
       </div>
     </div>
