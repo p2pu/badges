@@ -18,16 +18,17 @@ def create( request ):
     else:    
         form = BadgeForm()
 
+    user_uri = u'/uri/user/{0}'.format(request.session['username'])
+
     if form.is_valid():
-        #TODO upload image
-        image = media_api.upload_image(request.FILES['image'], '/uri/user/1')
+        image = media_api.upload_image(request.FILES['image'], user_uri)
         try:
             badge = badge_api.create_badge(
                 form.cleaned_data['title'],
                 image['uri'],
                 form.cleaned_data['description'],
                 form.cleaned_data['requirements'],
-                '/uri/user/1'
+                user_uri
             )
             return http.HttpResponseRedirect(
                 reverse('badge_preview', args=(badge_api.uri2id(badge['uri']),))
@@ -42,7 +43,6 @@ def create( request ):
 
 def preview( request, badge_id ):
     context = {
-        'badge_id': badge_id,
         'badge': badge_api.get_badge(badge_api.id2uri(badge_id))
     }
     context['badge']['image'] = media_api.get_image(context['badge']['image_uri'])
@@ -92,6 +92,8 @@ def edit( request, badge_id ):
 
 def publish( request, badge_id ):
 
+    #TODO check user
+    badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     if request.method == 'POST':
         badge_api.publish_badge(badge_api.id2uri(badge_id))
         return http.HttpResponseRedirect(reverse(
@@ -100,7 +102,7 @@ def publish( request, badge_id ):
 
     return render_to_response(
         'badge/publish.html',
-         { 'badge_id': badge_id },
+         { 'badge': badge },
         context_instance=RequestContext(request)
     )
 

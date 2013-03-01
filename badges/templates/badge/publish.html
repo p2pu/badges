@@ -4,7 +4,7 @@
 {% block body %}
   <div class="alert">
     <p class="lead">{% blocktrans %}Publishing your badge will mean that you will no longer be able to edit the badge and make changes or corrections to it. Are you sure that you want to continue?{% endblocktrans %}</p>
-    <a class="btn pull-right" href="{% url badge_preview badge_id %}" >{% trans 'No, go back' %}</a>
+    <a class="btn pull-right" href="{% url badge_preview badge.id %}" >{% trans 'No, go back' %}</a>
     <form action="" method="POST">
       {% csrf_token %}  
       <button class="btn pull-right">{% trans "Yes, it's ready" %}</button>
