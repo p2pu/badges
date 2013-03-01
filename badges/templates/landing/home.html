@@ -16,7 +16,7 @@
         <li class="span2">
           <div class="thumbnail">
             <img src="http://placehold.it/100x100"/>
-            <h3><a href="badge.html">{{badge.title}}</a></h3>
+            <h3><a href="{% url badge_view badge.id %}">{{badge.title}}</a></h3>
           </div>
         </li>
       {% endfor %}
