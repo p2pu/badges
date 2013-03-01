@@ -32,6 +32,11 @@ class SimpleTest(TestCase):
         self.assertEqual(project, project2)
 
 
+    def test_one_project_per_badge(self):
+        project = project_api.create_project(**self.project_values)
+        self.assertRaises(Exception, project_api.create_project, kwargs=self.project_values)
+
+
     def test_submit_feedback(self):
         project = project_api.create_project(**self.project_values)
         project_api.submit_feedback(project['uri'], '/uri/user/expert/', 'Ugly', 'Bad', 'Good')
