@@ -14,6 +14,7 @@ class SimpleTest(TestCase):
     def setUp(self):
         self.badge_attrs = [
             'uri',
+            'id',
             'title',
             'image_uri',
             'description',
@@ -40,7 +41,8 @@ class SimpleTest(TestCase):
 
         # test attribute values
         attrs = self.badge_attrs
-        del(attrs[0])
+        del attrs[0]
+        del attrs[0]
         for key, value in zip(attrs, self.badge_values):
             self.assertEquals(badge[key], value)
        
@@ -57,6 +59,8 @@ class SimpleTest(TestCase):
     def test_update_badge(self):
         """ Test that we can update a badge """
         badge = badge_api.create_badge(*self.badge_values)
+        attrs = self.badge_attrs
+        del attrs[1]
         kwargs = dict(zip(self.badge_attrs, [badge['uri']] + self.badge_values))
         del kwargs['author_uri']
         kwargs['title'] = 'A new title'

@@ -14,6 +14,7 @@ def id2uri( id ):
 
 def _badge2dict(badge_db):
     badge = {
+        'id': badge_db.id,
         'uri': id2uri(badge_db.id),
         'title': badge_db.title,
         'image_uri': badge_db.image_uri,
