@@ -22,6 +22,10 @@ urlpatterns = i18n_patterns('',
     url(r'^project/', include('project.urls')),
 )
 
+urlpatterns += patterns('',
+    url(r'^oauth/', include('oauthclient.urls')),
+)
+
 if settings.DEBUG:
     urlpatterns += patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
