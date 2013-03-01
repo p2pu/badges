@@ -5,30 +5,10 @@
 
   <div>
     <div>
-      <h2>Submit Project for Content Marketing Badge.</h2>
-      <p>We’ve created a series of tools to help you design and implement your badge easily.</p>
+      <h2>{% blocktrans with badge_title=badge.title %}Submit Project for {{badge_title}}.{% endblocktrans %}</h2>
     </div>
     <div>
-      <form action="">
-        <fieldset>
-          <legend>Legend</legend>
-     
-          <input type="text" class="span4" placeholder="Project title?">
-          <span class="help-block"></span>
-          <input type="text" class="span4" placeholder="Project URL?">
-          <span class="help-block"></span>
-          <input type="text" class="span4" placeholder="What steps did you take to complete this task?">
-          <span class="help-block"></span>
-          <input type="text" class="span4" placeholder="What woudl you do differently next time?">
-          <span class="help-block"></span>
-          <input type="text" class="span4" placeholder="Upload a screenshot.">
-          <span class="help-block"></span>
-          <input type="text" class="span4" placeholder="Tags associated with project.">
-          <span class="help-block"></span>
-   
-          <button type="submit" class="btn">Submit</button>
-        </fieldset>
-      </form>
+      {% include 'project/form_snippet.html' %}
     </div>
   </div>
 
