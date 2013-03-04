@@ -37,11 +37,30 @@ class SimpleTest(TestCase):
         self.assertRaises(Exception, project_api.create_project, kwargs=self.project_values)
 
 
-    def test_submit_feedback(self):
+    def test_project_feedback_cycle(self):
         project = project_api.create_project(**self.project_values)
+
+        project_feedback = project_api.get_project_feedback(project['uri'])
+        self.assertEqual(len(project_feedback), 0)
+
         project_api.submit_feedback(project['uri'], '/uri/user/expert/', 'Ugly', 'Bad', 'Good')
-        self.assertTrue(False)
+        project_feedback = project_api.get_project_feedback(project['uri'])
+        self.assertEqual(len(project_feedback), 1)
+        self.assertIn('good', project_feedback[0]) 
+        self.assertIn('bad', project_feedback[0]) 
+        self.assertIn('ugly', project_feedback[0]) 
+        self.assertIn('expert_uri', project_feedback[0]) 
 
+        project_api.revise_project(project['uri'], 'everything is better now!!')
+        project_feedback = project_api.get_project_feedback(project['uri'])
+        self.assertEqual(len(project_feedback), 2)
+        self.assertIn('improvements', project_feedback[-1]) 
+        self.assertNotIn('work_url', project_feedback[-1])
 
-    def test_revise_project(self):
-        self.assertTrue(False)
+        project_api.submit_feedback(project['uri'], '/uri/user/expert/', 'Ugly', 'Bad', 'Good')
+
+        project_api.revise_project(project['uri'], 'everything is better now, promise!!', work_url='http://mywork.com/new-and-improved')
+        project_feedback = project_api.get_project_feedback(project['uri'])
+        self.assertEqual(len(project_feedback), 4)
+        self.assertIn('improvements', project_feedback[-1]) 
+        self.assertIn('work_url', project_feedback[-1])
