@@ -1,4 +1,6 @@
 from project.models import Project
+from project.models import Revision
+from project.models import Feedback
 from datetime import datetime
 
 
@@ -63,12 +65,77 @@ def get_project(uri):
     return _project2dict(project_db)
 
 
-def revise_project(project_uri, improvements, work_url=None):
-    pass
+def revise_project(project_uri, improvement, work_url=None):
+    
+    # TODO: check if user can revise
+
+    revision = Revision(
+        project=Project.objects.get(id=uri2id(project_uri)),
+        improvement=improvement,
+        date_created=datetime.utcnow()
+    )
+    if work_url:
+        revision.work_url = work_url
+    revision.save()
 
 
-def submit_feedback(project_uri, expert_uri, red, green, blue):
-    pass
+def submit_feedback(project_uri, expert_uri, good, bad, ugly):
+    project=Project.objects.get(id=uri2id(project_uri))
+    last_revision = None
+    if project.revision_set.count() > 0:
+        last_revision = project.revision_set.latest('date_created')
+
+    # TODO: check that we can submit feedback
+
+    feedback = Feedback(
+        project=project,
+        expert_uri=expert_uri,
+        good=good,
+        bad=bad,
+        ugly=ugly,
+        date_created=datetime.utcnow()
+    )
+    
+    if last_revision:
+        feedback.revision = last_revision
+
+    feedback.save()
+        
 
 
+def _revision2json(revision):
+    json = {
+        'improvement': revision.improvement,
+        'date_created': revision.date_created
+    }
+    if revision.work_url:
+        json['work_url'] = revision.work_url
+    return json
 
+
+def _feedback2json(feedback):
+    json = {
+        'expert_uri': feedback.expert_uri,
+        'good': feedback.good,
+        'bad': feedback.bad,
+        'ugly': feedback.ugly,
+        'date_created': feedback.date_created
+    }
+    return json
+
+
+def get_project_feedback(project_uri):
+    feedback_revision = []
+
+    project=Project.objects.get(id=uri2id(project_uri))
+
+    for feedback in Feedback.objects.filter(project=project).order_by('date_created'):
+        feedback_revision += [_feedback2json(feedback)]
+
+    for revision in Revision.objects.filter(project=project).order_by('date_created'):
+        feedback_revision += [_revision2json(revision)]
+
+    keyfunc = lambda obj: obj['date_created']
+    feedback_revision.sort(key=keyfunc)
+
+    return feedback_revision
