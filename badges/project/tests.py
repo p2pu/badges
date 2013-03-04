@@ -54,13 +54,16 @@ class SimpleTest(TestCase):
         project_api.revise_project(project['uri'], 'everything is better now!!')
         project_feedback = project_api.get_project_feedback(project['uri'])
         self.assertEqual(len(project_feedback), 2)
-        self.assertIn('improvements', project_feedback[-1]) 
-        self.assertNotIn('work_url', project_feedback[-1])
 
         project_api.submit_feedback(project['uri'], '/uri/user/expert/', 'Ugly', 'Bad', 'Good')
 
         project_api.revise_project(project['uri'], 'everything is better now, promise!!', work_url='http://mywork.com/new-and-improved')
         project_feedback = project_api.get_project_feedback(project['uri'])
         self.assertEqual(len(project_feedback), 4)
-        self.assertIn('improvements', project_feedback[-1]) 
-        self.assertIn('work_url', project_feedback[-1])
+ 
+        self.assertIn('improvement', project_feedback[1]) 
+        self.assertIn('date_created', project_feedback[1]) 
+        self.assertNotIn('work_url', project_feedback[1])
+
+        self.assertIn('improvement', project_feedback[3]) 
+        self.assertIn('work_url', project_feedback[3])
