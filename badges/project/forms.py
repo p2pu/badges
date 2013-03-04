@@ -5,5 +5,5 @@ class ProjectForm(forms.Form):
     url = forms.CharField()
     steps = forms.CharField(max_length=128)
     reflection = forms.CharField(max_length=128)
-    image = forms.FileField(max_length=128)
+    image = forms.FileField()
     tags = forms.CharField(max_length=128)

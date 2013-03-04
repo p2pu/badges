@@ -2,13 +2,13 @@
 
 <form action="" method="POST" enctype="multipart/form-data">
   <fieldset>
-    <legend></legend>
+    <legend>{% trans 'Project information' %}</legend>
 
     {% csrf_token %}
 
     <div class="control-group {% if form.errors.title %}error{% endif %}">
       <label>{% trans 'Title' %}</label>
-      <input type="text" class="span4" placeholder="{% trans 'Project title?' %}">
+      <input type="text" name="title" class="span4" placeholder="{% trans 'Project title?' %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required >
       {% for error in form.errors.title %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -16,7 +16,7 @@
 
     <div class="control-group {% if form.errors.url %}error{% endif %}">
       <label>{% trans 'Url' %}</label>
-      <input type="url" class="span4" placeholder="{% trans 'Project URL?' %}">
+      <input type="url" name="url" class="span4" placeholder="{% trans 'Project URL?' %}" {% if form.url.value %}value="{{form.url.value}}"{% endif %} required>
       {% for error in form.errors.url %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -24,7 +24,7 @@
 
     <div class="control-group {% if form.errors.steps %}error{% endif %}">
       <label>{% trans 'Steps taken' %}</label>
-      <textarea rows="4" class="span4" placeholder="{% trans 'What steps did you take to complete this task?' %}"></textarea>
+      <textarea name="steps" rows="4" class="span4" placeholder="{% trans 'What steps did you take to complete this task?' %}">{% if form.steps.value %}{{form.steps.value}}{% endif %}</textarea>
       {% for error in form.errors.steps %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -32,7 +32,7 @@
 
     <div class="control-group {% if form.errors.reflection %}error{% endif %}">
       <label>{% trans 'Reflection' %}</label>
-      <textarea rows="4" class="span4" placeholder="{% trans 'What would you do differently next time?' %}"></textarea>
+      <textarea name="reflection" rows="4" class="span4" placeholder="{% trans 'What would you do differently next time?' %}">{% if form.reflection.value %}{{form.reflection.value}}{% endif %}</textarea>
       {% for error in form.errors.reflection %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -40,7 +40,7 @@
 
     <div class="control-group {% if form.errors.image %}error{% endif %}">
       <label>{% trans 'Cover image' %}</label>
-      <input type="file" class="span4">
+      <input type="file" name="image" class="span4">
       <span class="help-block">{% trans 'Upload a screenshot.' %}</span>
       {% for error in form.errors.image %}
         <span class="help-block">{{ error }}</span>
@@ -49,7 +49,7 @@
 
     <div class="control-group {% if form.errors.tags %}error{% endif %}">
       <label>{% trans 'Tags' %}</label>
-      <input type="text" class="span4" placeholder="{% trans 'Tags associated with project.' %}">
+      <input type="text" name="tags" class="span4" placeholder="{% trans 'Tags associated with project.' %}" {% if form.tags.value %}value="{{form.tags.value}}"{% endif %} required>
       {% for error in form.errors.tags %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}

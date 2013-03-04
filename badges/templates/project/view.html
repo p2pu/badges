@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+
+  <div class="row">
+    <div class="span12">
+      <h2>{% blocktrans with badge_title=badge.title %}Project submitted for {{badge_title}}{% endblocktrans %}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span2">
+      <a href="{% url badge_view badge.id %}"><img src="{{ badge.image.url }}"></a>
+    </div>
+    <div class="span10">
+      <p>{{ badge.requirements }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <h2>{% blocktrans with project_title=project.title %}Version 1 submitted by ... {% endblocktrans %}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span4">
+      <img src="{{project.image.url}}"/>
+    </div>
+    <div class="span8">
+      <dl>
+        <dt>{% trans 'Title' %}</dt>
+        <dd>{{ project.title }}</dd>
+      </dl>
+      <dl>
+        <dt>{% trans 'Url' %}</dt>
+        <dd><a href="{{ project.work_url }}">{{ project.work_url }}</a></dd>
+      </dl>
+      <dl>
+        <dt>{% trans 'Steps taken' %}</dt>
+        <dd>{{ project.steps }}</dd>
+      </dl>
+      <dl>
+        <dt>{% trans 'Lessons learned' %}</dt>
+        <dd>{{ project.reflection }}</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="">
+      <a href="" class="btn btn-large pull-right">{% trans 'Review project' %}</a>
+    </div>
+  </div>
+
+{% endblock %}
