@@ -9,6 +9,8 @@ from badge import api as badge_api
 from media import models as media_api
 from project import api as project_api
 from project.forms import ProjectForm
+from project.forms import FeedbackForm
+from project.forms import RevisionForm
 
 def create( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
@@ -51,9 +53,11 @@ def view( request, project_id ):
     project['image'] = media_api.get_image(project['image_uri'])
     badge = badge_api.get_badge(project['badge_uri'])
     badge['image'] = media_api.get_image(project['image_uri'])
+    feedback = project_api.get_project_feedback(project['uri'])
     context = {
         'project': project,
-        'badge': badge
+        'badge': badge,
+        'feedback': feedback
     }
     return render_to_response(
         'project/view.html',
@@ -62,13 +66,63 @@ def view( request, project_id ):
     )
 
 
-def review( request, project_id ):
+def feedback( request, project_id ):
+    project = project_api.get_project(project_api.id2uri(project_id))
+    user_uri = '/uri/user/{0}'.format(request.session['username'])
+
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+    else:
+        form = FeedbackForm()
+
+    if form.is_valid():
+        project_api.submit_feedback(
+            project['uri'],
+            user_uri,
+            form.cleaned_data['good'],
+            form.cleaned_data['bad'],
+            form.cleaned_data['ugly']
+        )
+        return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
+
     context = {
         'project': project,
-        'badge': badge
+        'form': form
+    }
+
+    return render_to_response(
+        'project/feedback.html',
+        context,
+        context_instance=RequestContext(request)
+    )
+
+
+def revise( request, project_id ):
+    project = project_api.get_project(project_api.id2uri(project_id))
+
+    if request.method == 'POST':
+        form = RevisionForm(request.POST)
+    else:
+        form = RevisionForm()
+
+    if form.is_valid():
+        project_api.revise_project(
+            project['uri'],
+            form.cleaned_data['improvement'],
+            form.cleaned_data.get('work_url', None)
+        )
+        return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
+
+    context = {
+        'project': project,
+        'form': form
+    }
+
+    context = {
+        'project': project,
     }
     return render_to_response(
-        'project/review.html',
+        'project/revise.html',
         context,
         context_instance=RequestContext(request)
     )

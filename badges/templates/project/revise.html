@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+
+  <div class="row">
+    <form action="" method="POST" >
+      <fieldset>
+        {% csrf_token %}
+
+        <div class="control-group {% if form.errors.improvement %}error{% endif %}">
+          <label>{% trans 'Improvements made' %}</label>
+          <textarea rows="5" name="improvement" class="span8" placeholder="{% trans 'What changes have you made to the project?' %}" {% if form.improvement.value %}value="{{form.improvement.value}}"{% endif %} required ></textarea>
+          {% for error in form.errors.improvement %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="control-group {% if form.errors.work_url %}error{% endif %}">
+          <label>{% trans 'New work URL (optional)' %}</label>
+          <input type="url" name="work_url" class="span8" placeholder="{% trans 'What is good about the project?' %}" {% if form.work_url.value %}value="{{form.work_url.value}}"{% endif %} >
+          {% for error in form.errors.work_url %}
+            <span class="help-block">{{ error }}</span>
+          {% endfor %}
+        </div>
+
+        <button type="submit" class="btn">{% trans 'Submit feedback' %}</button>
+      </fieldset>
+    </form>
+
+  </div>
+
+{% endblock %}

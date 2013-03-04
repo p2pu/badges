@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load humanize %}
 
 {% block body %}
 
@@ -47,9 +48,34 @@
     </div>
   </div>
 
+  {% for fb in feedback %}
+    <div class="row">
+      <div class="span12">
+        {% if fb.improvement %}
+          <h2>{% blocktrans with date=fb.date_created|naturaltime %}Project revision on {{date}}{% endblocktrans %}</h2>
+          <h3>{% trans 'Improvements made' %}</h3>
+          <p>{{ fb.improvement }}</p>
+          {% if fb.work_url %}
+            <h3>{% trans 'New URL' %}</h3>
+            <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
+          {% endif %}
+        {% else %}
+          <h2>{% trans 'Feedback by ...' %}</h2>
+          <h3>{% trans 'Green' %}</h3>
+          <p>{{ fb.good }}</p>
+          <h3>{% trans 'Yellow' %}</h3>
+          <p>{{ fb.bad }}</p>
+          <h3>{% trans 'Red' %}</h3>
+          <p>{{ fb.ugly }}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
   <div class="row">
     <div class="">
-      <a href="" class="btn btn-large pull-right">{% trans 'Review project' %}</a>
+      <a href="{% url project_feedback project.id %}" class="btn btn-large pull-right">{% trans 'Give feedback' %}</a>
+      <a href="{% url project_revise project.id %}" class="btn btn-large pull-right">{% trans 'Revise project' %}</a>
     </div>
   </div>
 

@@ -7,3 +7,14 @@ class ProjectForm(forms.Form):
     reflection = forms.CharField(max_length=128)
     image = forms.FileField()
     tags = forms.CharField(max_length=128)
+
+
+class FeedbackForm(forms.Form):
+    good = forms.CharField(max_length=1024)
+    bad = forms.CharField(max_length=1024)
+    ugly = forms.CharField(max_length=1024)
+
+
+class RevisionForm(forms.Form):
+    work_url = forms.CharField(required=False)
+    improvement = forms.CharField(max_length=128)
