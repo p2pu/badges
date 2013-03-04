@@ -2,6 +2,10 @@ from project.models import Project
 from datetime import datetime
 
 
+class MultipleProjectError(Exception):
+    pass
+
+
 def uri2id(uri):
     return uri.strip('/').split('/')[-1]
 
@@ -29,7 +33,10 @@ def _project2dict(project_db):
 def create_project(badge_uri, user_uri, title, image_uri, work_url, steps, reflection, tags):
     
     if Project.objects.filter(user_uri=user_uri, badge_uri=badge_uri, date_deleted__isnull=True).exists():
-        raise Exception('A user can only submit 1 project for a badge')
+        raise MultipleProjectError('A user can only submit 1 project for a badge')
+
+    if isinstance(tags, list):
+        tags = ','.join(tags)
 
     project_db = Project(
         title=title,
@@ -37,7 +44,7 @@ def create_project(badge_uri, user_uri, title, image_uri, work_url, steps, refle
         work_url=work_url,
         steps=steps,
         reflection=reflection,
-        tags=','.join(tags),
+        tags=tags,
         badge_uri=badge_uri,
         user_uri=user_uri,
         date_created=datetime.utcnow(),
