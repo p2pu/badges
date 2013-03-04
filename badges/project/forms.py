@@ -2,7 +2,7 @@ from django import forms
 
 class ProjectForm(forms.Form):
     title = forms.CharField(max_length=128)
-    url = forms.CharField()
+    work_url = forms.CharField()
     steps = forms.CharField(max_length=128)
     reflection = forms.CharField(max_length=128)
     image = forms.FileField()

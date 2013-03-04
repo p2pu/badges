@@ -14,10 +14,10 @@
       {% endfor %}
     </div>
 
-    <div class="control-group {% if form.errors.url %}error{% endif %}">
+    <div class="control-group {% if form.errors.work_url %}error{% endif %}">
       <label>{% trans 'Url' %}</label>
-      <input type="url" name="url" class="span4" placeholder="{% trans 'Project URL?' %}" {% if form.url.value %}value="{{form.url.value}}"{% endif %} required>
-      {% for error in form.errors.url %}
+      <input type="url" name="work_url" class="span4" placeholder="{% trans 'Project URL?' %}" {% if form.work_url.value %}value="{{form.work_url.value}}"{% endif %} required>
+      {% for error in form.errors.work_url %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
     </div>
