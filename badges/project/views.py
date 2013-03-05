@@ -5,9 +5,9 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 
-from badge import api as badge_api
+from badge import models as badge_api
 from media import models as media_api
-from project import api as project_api
+from project import models as project_api
 from project.forms import ProjectForm
 from project.forms import FeedbackForm
 from project.forms import RevisionForm
@@ -35,7 +35,7 @@ def create( request, badge_id ):
                 form.cleaned_data['reflection'],
                 form.cleaned_data['tags']
             )
-            return http.HttpResponseRedirect(reverse('project_show', args=(project['id'],)))
+            return http.HttpResponseRedirect(reverse('project_view', args=(project['id'],)))
         except project_api.MultipleProjectError:
             messages.error(request, _('You have already submitted a project for this badge.'))
 

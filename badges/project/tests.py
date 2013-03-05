@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from project import api as project_api
+from project import models as project_api
 
 
 class SimpleTest(TestCase):

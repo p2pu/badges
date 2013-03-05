@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 from django.contrib import messages
 
 from badge.forms import BadgeForm
-from badge import api as badge_api
+from badge import models as badge_api
 from media import models as media_api
 
 def create( request ):

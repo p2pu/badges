@@ -6,7 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
-from badge import api as badge_api
+from badge import models as badge_api
 
 
 class SimpleTest(TestCase):

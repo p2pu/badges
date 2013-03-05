@@ -2,7 +2,7 @@ from django import http
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-from badge import api as badge_api
+from badge import models as badge_api
 
 def home(request):
     context = {}
