@@ -109,11 +109,13 @@ def publish( request, badge_id ):
 
 
 def view( request, badge_id ):
+    badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+    badge['image'] = media_api.get_image(badge['image_uri'])
     context = {
-        'badge': badge_api.get_badge(badge_api.id2uri(badge_id))
+        'badge': badge
     }
-    context['badge']['image'] = media_api.get_image(context['badge']['image_uri'])
-    context['projects'] = project_api.get_projects_for_badge(context['badge']['uri'])
+    context['projects'] = project_api.get_projects_for_badge(badge['uri'])
+    context['experts'] = badge_api.get_badge_experts(badge['uri'])
     for project in context['projects']:
         fetch_resources(project)
 

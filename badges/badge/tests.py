@@ -92,7 +92,7 @@ class SimpleTest(TestCase):
 
     def test_award_badge(self):
         badge = badge_api.create_badge(*self.badge_values)
-        self.assertNotIn(badge['author_uri'], badge_api.get_experts(badge['uri']))
+        self.assertNotIn(badge['author_uri'], badge_api.get_badge_experts(badge['uri']))
 
         badge_api.publish_badge(badge['uri'])
         kwargs = {
@@ -115,4 +115,4 @@ class SimpleTest(TestCase):
         # test that expert can award badge
         kwargs['expert_uri'] = badge['author_uri']
         badge_api.award_badge(**kwargs)
-        self.assertIn(kwargs['user_uri'], badge_api.get_experts(badge['uri']))
+        self.assertIn(kwargs['user_uri'], badge_api.get_badge_experts(badge['uri']))

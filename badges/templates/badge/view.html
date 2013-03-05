@@ -22,7 +22,7 @@
 
   <div class="row">
     <div class="span12">
-      <h3>Projects</h3>
+      <h3>{% trans 'Projects' %}</h3>
       <ul class="thumbnails">
         {% for project in projects %}    
           <li class="span3">
@@ -34,6 +34,17 @@
               <p>{% blocktrans with username=project.author.username %}by {{username}}{% endblocktrans %}<p>
             </div>
           </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12">
+      <h3>{% trans 'Experts' %}</h3>
+      <ul class="thumbnails">
+        {% for expert in experts %}
+          <li>{{expert}}</li>
         {% endfor %}
       </ul>
     </div>

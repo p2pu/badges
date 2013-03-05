@@ -108,7 +108,7 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
     if Award.objects.filter(badge=badge, user_uri=user_uri).exists():
         raise Exception('Badge already awarded to user')
 
-    valid_expert = expert_uri in get_experts(badge_uri)
+    valid_expert = expert_uri in get_badge_experts(badge_uri)
     badge_creator = user_uri == badge.author_uri
 
     # Check if we can award the badge
@@ -125,7 +125,7 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
     award.save()
 
 
-def get_experts(uri):
+def get_badge_experts(uri):
     awards = Award.objects.filter(badge_id=uri2id(uri))
     return [ award.user_uri for award in awards ]
 
