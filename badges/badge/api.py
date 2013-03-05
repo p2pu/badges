@@ -78,6 +78,11 @@ def publish_badge(uri):
     return True
 
 
+def remove_badge(uri, reason):
+    """ Mark a badge as removed - spam / inappropriate """
+    pass
+
+
 def get_published_badges():
     badges = Badge.objects.filter(date_published__isnull=False)
     return [_badge2dict(badge) for badge in badges]

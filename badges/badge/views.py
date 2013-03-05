@@ -1,7 +1,6 @@
 from django import http
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.generic.edit import FormView
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
