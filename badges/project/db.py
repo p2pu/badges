@@ -27,7 +27,7 @@ class Revision(models.Model):
 
 
 class Feedback(models.Model):
-    project = UriField()
+    project = models.ForeignKey(Project)
     revision = models.ForeignKey(Revision, null=True, blank=True)
     expert_uri = UriField()
     good = models.CharField(max_length=1024)

@@ -34,7 +34,8 @@ class SimpleTest(TestCase):
 
     def test_one_project_per_badge(self):
         project = project_api.create_project(**self.project_values)
-        self.assertRaises(Exception, project_api.create_project, kwargs=self.project_values)
+        with self.assertRaises(project_api.MultipleProjectError):
+            project_api.create_project(**self.project_values)
 
 
     def test_get_projects_for_badge(self):
@@ -57,13 +58,20 @@ class SimpleTest(TestCase):
         project_feedback = project_api.get_project_feedback(project['uri'])
         self.assertEqual(len(project_feedback), 0)
 
+        with self.assertRaises(Exception):
+            project_api.revise_project(project['uri'], 'All better')
+
         project_api.submit_feedback(project['uri'], '/uri/user/expert/', 'Ugly', 'Bad', 'Good')
         project_feedback = project_api.get_project_feedback(project['uri'])
         self.assertEqual(len(project_feedback), 1)
-        self.assertIn('good', project_feedback[0]) 
-        self.assertIn('bad', project_feedback[0]) 
-        self.assertIn('ugly', project_feedback[0]) 
-        self.assertIn('expert_uri', project_feedback[0]) 
+        self.assertIn('good', project_feedback[0])
+        self.assertIn('bad', project_feedback[0])
+        self.assertIn('ugly', project_feedback[0])
+        self.assertIn('expert_uri', project_feedback[0])
+
+        # test that multiple feedback cannont be submitted without a revision
+        with self.assertRaises(Exception):
+            project_api.submit_feedback(project['uri'], '/uri/user/expert/', 'Ugly', 'Bad', 'Good')
 
         project_api.revise_project(project['uri'], 'everything is better now!!')
         project_feedback = project_api.get_project_feedback(project['uri'])

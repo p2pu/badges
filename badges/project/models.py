@@ -71,11 +71,20 @@ def get_projects_for_badge(badge_uri):
 
 
 def revise_project(project_uri, improvement, work_url=None):
-    
-    # TODO: check if user can revise
+    project=Project.objects.get(id=uri2id(project_uri))
+
+    last_revision = None
+    if project.revision_set.count() > 0:
+        last_revision = project.revision_set.latest('date_created')
+    last_feedback = None
+    if project.feedback_set.count() > 0:
+        last_feedback = project.feedback_set.latest('date_created')
+
+    if not last_feedback or last_revision and last_revision.date_created > last_feedback.date_created:
+        raise Exception('Cannot submit a revison before receiving a review')
 
     revision = Revision(
-        project=Project.objects.get(id=uri2id(project_uri)),
+        project=project,
         improvement=improvement,
         date_created=datetime.utcnow()
     )
@@ -86,11 +95,17 @@ def revise_project(project_uri, improvement, work_url=None):
 
 def submit_feedback(project_uri, expert_uri, good, bad, ugly):
     project=Project.objects.get(id=uri2id(project_uri))
+
     last_revision = None
     if project.revision_set.count() > 0:
         last_revision = project.revision_set.latest('date_created')
+    last_feedback = None
+    if project.feedback_set.count() > 0:
+        last_feedback = project.feedback_set.latest('date_created')
 
-    # TODO: check that we can submit feedback
+    if last_feedback:
+        if not last_revision or last_feedback.date_created > last_revision.date_created:
+            raise Exception('No revision submitted on last feedback')
 
     feedback = Feedback(
         project=project,
