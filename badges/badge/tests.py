@@ -88,3 +88,31 @@ class SimpleTest(TestCase):
     def test_unique_title(self):
         badge = badge_api.create_badge(*self.badge_values)
         self.assertRaises(Exception, badge_api.create_badge, self.badge_values)
+
+
+    def test_award_badge(self):
+        badge = badge_api.create_badge(*self.badge_values)
+        self.assertNotIn(badge['author_uri'], badge_api.get_experts(badge['uri']))
+
+        badge_api.publish_badge(badge['uri'])
+        kwargs = {
+            'badge_uri': badge['uri'],
+            'user_uri': badge['author_uri'],
+            'expert_uri': badge['author_uri'],
+            'evidence_url': 'http://some.evi/dence'
+        }
+        
+        # test that the author have the badge
+        with self.assertRaisesRegexp(Exception, 'already awarded'):
+            badge_api.award_badge(**kwargs)
+
+        # test that non expert cannot award badge
+        kwargs['user_uri'] = '/uri/user/iwantbadge'
+        kwargs['expert_uri'] = '/uri/user/igivebadge'
+        with self.assertRaisesRegexp(Exception, 'Cannot award'):
+            badge_api.award_badge(**kwargs)
+
+        # test that expert can award badge
+        kwargs['expert_uri'] = badge['author_uri']
+        badge_api.award_badge(**kwargs)
+        self.assertIn(kwargs['user_uri'], badge_api.get_experts(badge['uri']))

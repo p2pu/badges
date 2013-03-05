@@ -1,4 +1,6 @@
 from badge.db import Badge
+from badge.db import Award
+
 from datetime import datetime
 
 class DuplicateTitleError(Exception):
@@ -75,6 +77,7 @@ def publish_badge(uri):
     badge_db = Badge.objects.get(id=uri2id(uri))
     badge_db.date_published = datetime.utcnow()
     badge_db.save()
+    award_badge(uri, badge_db.author_uri, badge_db.author_uri, 'http://TODO.com')
     return True
 
 
@@ -97,12 +100,34 @@ def search_badges(expression=None, author_uri=None, attribute_value=None):
     raise Exception()
 
 
-def award_badge(uri, user_uri, expert_uri):
-    raise Exception()
+def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
+    """ Award a badge to a user 
+        expert_uri - expert that is awarding the badge
+    """
+    badge = Badge.objects.get(id=uri2id(badge_uri))
+    if Award.objects.filter(badge=badge, user_uri=user_uri).exists():
+        raise Exception('Badge already awarded to user')
+
+    valid_expert = expert_uri in get_experts(badge_uri)
+    badge_creator = user_uri == badge.author_uri
+
+    # Check if we can award the badge
+    if not badge_creator and not valid_expert:
+        raise Exception('Cannot award badge')
+    
+    award = Award(
+        badge=badge,
+        user_uri=user_uri,
+        expert_uri=expert_uri,
+        evidence_url=evidence_url,
+        date_awarded=datetime.utcnow()
+    )
+    award.save()
 
 
 def get_experts(uri):
-    raise Exception()
+    awards = Award.objects.filter(badge_id=uri2id(uri))
+    return [ award.user_uri for award in awards ]
 
 
 def relinquish_badge(uri, expert_uri):
