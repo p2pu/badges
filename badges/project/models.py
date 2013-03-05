@@ -65,6 +65,11 @@ def get_project(uri):
     return _project2dict(project_db)
 
 
+def get_projects_for_badge(badge_uri):
+    projects = Project.objects.filter(badge_uri=badge_uri, date_deleted__isnull=True)
+    return [_project2dict(project) for project in projects]
+
+
 def revise_project(project_uri, improvement, work_url=None):
     
     # TODO: check if user can revise

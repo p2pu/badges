@@ -8,6 +8,8 @@ from django.contrib import messages
 from badge.forms import BadgeForm
 from badge import models as badge_api
 from media import models as media_api
+from project import models as project_api
+from project.view_helpers import fetch_resources
 
 def create( request ):
     template_name = 'badge/create.html'
@@ -111,7 +113,9 @@ def view( request, badge_id ):
         'badge': badge_api.get_badge(badge_api.id2uri(badge_id))
     }
     context['badge']['image'] = media_api.get_image(context['badge']['image_uri'])
-    context['projects'] = []
+    context['projects'] = project_api.get_projects_for_badge(context['badge']['uri'])
+    for project in context['projects']:
+        fetch_resources(project)
 
     return render_to_response(
         'badge/view.html',

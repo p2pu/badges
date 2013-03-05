@@ -11,6 +11,7 @@ from project import models as project_api
 from project.forms import ProjectForm
 from project.forms import FeedbackForm
 from project.forms import RevisionForm
+from project.view_helpers import fetch_resources
 
 def create( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
@@ -50,7 +51,7 @@ def create( request, badge_id ):
 def view( request, project_id ):
 
     project = project_api.get_project(project_api.id2uri(project_id))
-    project['image'] = media_api.get_image(project['image_uri'])
+    project = fetch_resources(project)
     badge = badge_api.get_badge(project['badge_uri'])
     badge['image'] = media_api.get_image(project['image_uri'])
     feedback = project_api.get_project_feedback(project['uri'])
