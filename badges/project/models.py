@@ -3,6 +3,8 @@ from project.db import Revision
 from project.db import Feedback
 from datetime import datetime
 
+from badge import models as badge_api
+
 
 class MultipleProjectError(Exception):
     pass
@@ -95,6 +97,9 @@ def revise_project(project_uri, improvement, work_url=None):
 
 def submit_feedback(project_uri, expert_uri, good, bad, ugly):
     project=Project.objects.get(id=uri2id(project_uri))
+
+    if not expert_uri in badge_api.get_badge_experts(project.badge_uri):
+        raise Exception('Only experts can submit feedback on projects')
 
     last_revision = None
     if project.revision_set.count() > 0:
