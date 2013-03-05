@@ -2,10 +2,7 @@ from media import db
 
 def upload_image(image_file, uploader_uri):
     image_db = db.Image(image_file=image_file, uploader_uri=uploader_uri)
-    try:
-        image_db.save()
-    except:
-        return None
+    image_db.save()
     return get_image("/uri/media/image/{0}".format(image_db.id))
 
 
@@ -15,7 +12,7 @@ def get_image(image_uri):
     try:
         image_db = db.Image.objects.get(id=image_id)
     except:
-        return None
+        raise
     image = {
         "uri": "/uri/media/image/{0}".format(image_db.id),
         "url": image_db.image_file.url,
