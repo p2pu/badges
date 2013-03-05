@@ -44,3 +44,10 @@ def redirect( request ):
     request.session['username'] = response.json()['user']
 
     return http.HttpResponseRedirect(reverse('landing'))
+
+
+def become( request, username ):
+    if settings.DEBUG:
+        request.session['username'] = username
+    return http.HttpResponseRedirect(reverse('landing'))
+
