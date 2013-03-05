@@ -34,7 +34,7 @@
               <li><a href="">{% trans 'My Badges' %}</a></li>
               <li><a href="{% url oauth_logout %}">{% trans 'Log out' %}</a></li>
             {% else %}
-              <li><a href="{{ OAUTH_LOGIN_URL }}">{% trans 'Log in' %}</a></li>
+              <li><a href="{% url oauth_login %}">{% trans 'Log in' %}</a></li>
             {% endif %}
           </ul>
       </div>

@@ -2,15 +2,27 @@ from django import http
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
+import urllib
 import requests
 
 def login( request ):
-    return http.HttpResponseRedirect()
+
+    referer = request.META.get('HTTP_REFERER')
+    if referer:
+        request.session['next_url'] = referer
+
+    params = {
+        'redirect_uri': "http://localhost:8000{0}".format(reverse('oauth_redirect')),
+        'client_id': settings.OAUTH_CLIENT_KEY,
+        'response_type': 'code',
+    }
+    login_url = '{0}?{1}'.format(settings.OAUTH_GRANT_URL, urllib.urlencode(params))
+    return http.HttpResponseRedirect(login_url)
 
 
 def logout( request ):
     del request.session['username']
-    return http.HttpResponseRedirect()
+    return http.HttpResponseRedirect(reverse('landing'))
 
 
 def redirect( request ):
@@ -42,6 +54,11 @@ def redirect( request ):
         raise Exception('Could not get identity for oauth provider')
 
     request.session['username'] = response.json()['user']
+
+    if request.session.get('next_url'):
+        next_url = request.session.get('next_url')
+        del request.session['next_url']
+        return http.HttpResponseRedirect(next_url)
 
     return http.HttpResponseRedirect(reverse('landing'))
 

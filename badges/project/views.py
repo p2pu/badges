@@ -12,7 +12,9 @@ from project.forms import ProjectForm
 from project.forms import FeedbackForm
 from project.forms import RevisionForm
 from project.view_helpers import fetch_resources
+from oauthclient.decorators import require_login
 
+@require_login
 def create( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     context = { 'badge': badge }

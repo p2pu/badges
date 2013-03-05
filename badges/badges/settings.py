@@ -116,7 +116,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'oauthclient.context_processors.login_url',
 )
 
 ROOT_URLCONF = 'badges.urls'
