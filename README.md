@@ -16,4 +16,4 @@ This project is written using django. To get up and running for development
 1. Load some test data: ```python /path/to/code/badges/badges/manage.py load_test_data /path/to/test/data```
 1. Run development server: ```python /path/to/code/badges/badges/manage.py runserver```
 1. Go to http://localhost:8000/ and play around
-1. And lastly, fix all the bugs, and cool new features and take over the world :)
+1. And lastly, fix all the bugs, add cool new features and take over the world :)
