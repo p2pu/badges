@@ -13,6 +13,7 @@ class FeedbackForm(forms.Form):
     good = forms.CharField(max_length=1024)
     bad = forms.CharField(max_length=1024)
     ugly = forms.CharField(max_length=1024)
+    award_badge = forms.BooleanField(required=False)
 
 
 class RevisionForm(forms.Form):

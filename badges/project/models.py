@@ -129,10 +129,10 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly):
     project=Project.objects.get(id=uri2id(project_uri))
 
     if not expert_uri in badge_api.get_badge_experts(project.badge_uri):
-        raise Exception('Only experts can submit feedback on projects')
+        raise Exception('Only experts can submit feedback on projects.')
 
     if not ready_for_feedback(project_uri):
-        raise Exception('No revision submitted on last feedback')
+        raise Exception('No revision submitted since last feedback.')
 
     feedback = Feedback(
         project=project,

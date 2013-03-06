@@ -30,8 +30,14 @@
             <span class="help-block">{{ error }}</span>
           {% endfor %}
         </div>
+
+        <div class="control-group">
+          <label class="checkbox"><input type="checkbox" name="award_badge"> {% trans 'Award badge' %}</label>
+        </div>
+
         <button type="submit" class="btn">{% trans 'Submit feedback' %}</button>
       </fieldset>
+
     </form>
 
   </div>
