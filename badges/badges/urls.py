@@ -20,6 +20,7 @@ urlpatterns = i18n_patterns('',
     url(r'^$', include('landing.urls')),
     url(r'^badge/', include('badge.urls')),
     url(r'^project/', include('project.urls')),
+    url(r'^dashboard/', include('dashboard.urls')),
 )
 
 urlpatterns += patterns('',

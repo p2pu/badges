@@ -13,14 +13,8 @@
     <h2>Got Expertise? Apply for a Spiffy Badge.</h2>
     <ul class="thumbnails">
       {% for badge in badges %}
-        <li class="span2">
-          <div class="thumbnail">
-            <img src="{{ badge.image.url }}"/>
-            <h3><a href="{% url badge_view badge.id %}">{{badge.title}}</a></h3>
-          </div>
-        </li>
+        {% include 'badge/badge_tile.html' %}
       {% endfor %}
-
     </ul>
     <p><a href="{% url badge_create %}" class="btn">{% trans 'Create a new badge' %}</a></p>
   </div>

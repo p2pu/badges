@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+  <div class="row">
+    <div class="span6">
+      <h2>Badges</h2>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="">Earned</a></li>
+        <li><a href="">Earned</a></li>
+        <li><a href="">Under review</a></li>
+        <li><a href="">Awarded</a></li>
+        <li><a href="">Created</a></li>
+      </ul>
+      <ul class="unstyled">
+        <li><a href="badge.html"><img src="http://placehold.it/50x50"/>Content Marketing</a></li>
+        <li><a href="badge.html"><img src="http://placehold.it/50x50"/>Movie Maker</a></li>
+      </ul>
+    </div>
+    <div class="span6">
+      <h2>Feedback</h2>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="">Latest</a></li>
+        <li><a href="">Your Projects</a></li>
+        <li><a href="">Peer Projects</a></li>
+      </ul>
+      <ul class="unstyled">
+        <li><a href="#"><img src="http://placehold.it/50x50"/>Veelahan Frow</a></li>
+        <li><a href="#"><img src="http://placehold.it/50x50"/>Manfred Ooolah</a></li>
+      </ul>
+
+    </div>
+  </div>
+
+  <hr/>
+  <div class="row">
+    <div class="span12">
+      <h2>{% trans 'Badges in the garden shed' %}</h2>
+      <ul class="thumbnails">
+        {% for badge in draft_badges %}
+          {% include 'badge/badge_tile.html' %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}

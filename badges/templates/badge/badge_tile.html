@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<li class="span2">
+  <div class="thumbnail">
+    <img src="{{ badge.image.url }}"/>
+    {% if badge.publised %}
+      <h3><a href="{% url badge_view badge.id %}">{{badge.title}}</a></h3>
+    {% else %}
+      <h3><a href="{% url badge_preview badge.id %}">{{badge.title}}</a></h3>
+    {% endif %}
+  </div>
+</li>
+
