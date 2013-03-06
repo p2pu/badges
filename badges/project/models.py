@@ -29,14 +29,14 @@ def _project2dict(project_db):
         'reflection': project_db.reflection,
         'tags': project_db.tags.split(','),
         'badge_uri': project_db.badge_uri,
-        'user_uri': project_db.user_uri
+        'author_uri': project_db.author_uri
     }
     return project
 
 
-def create_project(badge_uri, user_uri, title, image_uri, work_url, steps, reflection, tags):
+def create_project(badge_uri, author_uri, title, image_uri, work_url, steps, reflection, tags):
     
-    if Project.objects.filter(user_uri=user_uri, badge_uri=badge_uri, date_deleted__isnull=True).exists():
+    if Project.objects.filter(author_uri=author_uri, badge_uri=badge_uri, date_deleted__isnull=True).exists():
         raise MultipleProjectError('A user can only submit 1 project for a badge')
 
     if isinstance(tags, list):
@@ -50,7 +50,7 @@ def create_project(badge_uri, user_uri, title, image_uri, work_url, steps, refle
         reflection=reflection,
         tags=tags,
         badge_uri=badge_uri,
-        user_uri=user_uri,
+        author_uri=author_uri,
         date_created=datetime.utcnow(),
         date_updated=datetime.utcnow()
     )

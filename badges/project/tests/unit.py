@@ -7,7 +7,7 @@ class SimpleTest(TestCase):
 
     project_values = {
         'badge_uri': '/uri/badge/1',
-        'user_uri': '/uri/user/testuser/',
+        'author_uri': '/uri/user/testuser/',
         'title': 'Test Title',
         'image_uri': '/uri/image/1',
         'work_url': 'http://project.org/url',
@@ -41,9 +41,9 @@ class SimpleTest(TestCase):
     def test_get_projects(self):
         project = project_api.create_project(**self.project_values)
         project_values2 = self.project_values.copy()
-        project_values2['user_uri'] = '/uri/user/testuser2'
+        project_values2['author_uri'] = '/uri/user/testuser2'
         project = project_api.create_project(**project_values2)
-        project_values2['user_uri'] = '/uri/user/testuser3'
+        project_values2['author_uri'] = '/uri/user/testuser3'
         project = project_api.create_project(**project_values2)
         project_values2['badge_uri'] = '/uri/badge/3'
         project = project_api.create_project(**project_values2)
@@ -55,9 +55,9 @@ class SimpleTest(TestCase):
     def test_get_projects_for_badge(self):
         project = project_api.create_project(**self.project_values)
         project_values2 = self.project_values.copy()
-        project_values2['user_uri'] = '/uri/user/testuser2'
+        project_values2['author_uri'] = '/uri/user/testuser2'
         project = project_api.create_project(**project_values2)
-        project_values2['user_uri'] = '/uri/user/testuser3'
+        project_values2['author_uri'] = '/uri/user/testuser3'
         project = project_api.create_project(**project_values2)
         project_values2['badge_uri'] = '/uri/badge/3'
         project = project_api.create_project(**project_values2)

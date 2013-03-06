@@ -16,7 +16,7 @@ class ProjectIntegrationTests(TestCase):
 
     project_values = {
         'badge_uri': '/uri/badge/1',
-        'user_uri': '/uri/user/testuser',
+        'author_uri': '/uri/user/testuser',
         'title': 'Test Title',
         'image_uri': '/uri/image/1',
         'work_url': 'http://project.org/url',

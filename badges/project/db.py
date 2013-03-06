@@ -13,7 +13,7 @@ class Project(models.Model):
     reflection = models.CharField(max_length=1024)
     tags = models.CharField(max_length=255)
     badge_uri = UriField()
-    user_uri = UriField()
+    author_uri = UriField()
     date_created = models.DateTimeField()
     date_updated = models.DateTimeField()
     date_deleted = models.DateTimeField(null=True, blank=True)
