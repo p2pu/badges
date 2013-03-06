@@ -20,7 +20,7 @@
 
   <div class="row">
     <div class="span12">
-      <h2>{% blocktrans with project_title=project.title %}Version 1 submitted by ... {% endblocktrans %}</h2>
+      <h2>{% blocktrans with username=project.author.username %}Version 1 submitted by {{username}} {% endblocktrans %}</h2>
     </div>
   </div>
 
@@ -74,8 +74,12 @@
 
   <div class="row">
     <div class="">
-      <a href="{% url project_feedback project.id %}" class="btn btn-large pull-right">{% trans 'Give feedback' %}</a>
-      <a href="{% url project_revise project.id %}" class="btn btn-large pull-right">{% trans 'Revise project' %}</a>
+      {% if can_give_feedback %}
+        <a href="{% url project_feedback project.id %}" class="btn btn-large pull-right">{% trans 'Give feedback' %}</a>
+      {% endif %}
+      {% if can_revise %}
+        <a href="{% url project_revise project.id %}" class="btn btn-large pull-right">{% trans 'Revise project' %}</a>
+      {% endif %}
     </div>
   </div>
 

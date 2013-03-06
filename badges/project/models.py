@@ -72,7 +72,12 @@ def get_projects_for_badge(badge_uri):
     return [_project2dict(project) for project in projects]
 
 
-def revise_project(project_uri, improvement, work_url=None):
+def get_projects():
+    projects = Project.objects.filter(date_deleted__isnull=True)
+    return [_project2dict(project) for project in projects]
+
+
+def can_revise_project(project_uri):
     project=Project.objects.get(id=uri2id(project_uri))
 
     last_revision = None
@@ -83,6 +88,14 @@ def revise_project(project_uri, improvement, work_url=None):
         last_feedback = project.feedback_set.latest('date_created')
 
     if not last_feedback or last_revision and last_revision.date_created > last_feedback.date_created:
+        return False
+    return True
+
+
+def revise_project(project_uri, improvement, work_url=None):
+    project=Project.objects.get(id=uri2id(project_uri))
+
+    if not can_revise_project(project_uri):
         raise Exception('Cannot submit a revison before receiving a review')
 
     revision = Revision(
@@ -95,11 +108,9 @@ def revise_project(project_uri, improvement, work_url=None):
     revision.save()
 
 
-def submit_feedback(project_uri, expert_uri, good, bad, ugly):
+def ready_for_feedback(project_uri):
+    """ check if this is the right time in the cycle for an expert to give feedback """
     project=Project.objects.get(id=uri2id(project_uri))
-
-    if not expert_uri in badge_api.get_badge_experts(project.badge_uri):
-        raise Exception('Only experts can submit feedback on projects')
 
     last_revision = None
     if project.revision_set.count() > 0:
@@ -110,7 +121,18 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly):
 
     if last_feedback:
         if not last_revision or last_feedback.date_created > last_revision.date_created:
-            raise Exception('No revision submitted on last feedback')
+            return False
+    return True
+
+
+def submit_feedback(project_uri, expert_uri, good, bad, ugly):
+    project=Project.objects.get(id=uri2id(project_uri))
+
+    if not expert_uri in badge_api.get_badge_experts(project.badge_uri):
+        raise Exception('Only experts can submit feedback on projects')
+
+    if not ready_for_feedback(project_uri):
+        raise Exception('No revision submitted on last feedback')
 
     feedback = Feedback(
         project=project,
@@ -121,14 +143,17 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly):
         date_created=datetime.utcnow()
     )
     
+    last_revision = None
+    if project.revision_set.count() > 0:
+        last_revision = project.revision_set.latest('date_created')
+
     if last_revision:
         feedback.revision = last_revision
 
     feedback.save()
         
 
-
-def _revision2json(revision):
+def _revision2dict(revision):
     json = {
         'improvement': revision.improvement,
         'date_created': revision.date_created
@@ -138,7 +163,7 @@ def _revision2json(revision):
     return json
 
 
-def _feedback2json(feedback):
+def _feedback2dict(feedback):
     json = {
         'expert_uri': feedback.expert_uri,
         'good': feedback.good,
@@ -155,10 +180,10 @@ def get_project_feedback(project_uri):
     project=Project.objects.get(id=uri2id(project_uri))
 
     for feedback in Feedback.objects.filter(project=project).order_by('date_created'):
-        feedback_revision += [_feedback2json(feedback)]
+        feedback_revision += [_feedback2dict(feedback)]
 
     for revision in Revision.objects.filter(project=project).order_by('date_created'):
-        feedback_revision += [_revision2json(revision)]
+        feedback_revision += [_revision2dict(revision)]
 
     keyfunc = lambda obj: obj['date_created']
     feedback_revision.sort(key=keyfunc)
