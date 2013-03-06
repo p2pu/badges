@@ -5,35 +5,35 @@
             "description": "dest",
             "requirements": "req",
             "author_uri": "/uri/user/dirk",
-            "image": "/home/dirk/Documents/p2pu/badges/p2pu-opensource.png"
+            "image": "p2pu-opensource.png"
         },
         {
             "title": "Content Creator",
             "description": "dest",
             "requirements": "req",
             "author_uri": "/uri/user/vanessa",
-            "image": "/home/dirk/Documents/p2pu/badges/p2pu-contributor.png"
+            "image": "p2pu-contributor.png"
         },
         {
             "title": "Curator",
             "description": "dest",
             "requirements": "req",
             "author_uri": "/uri/user/bekka",
-            "image": "/home/dirk/Documents/p2pu/badges/p2pu-translator.png"
+            "image": "p2pu-translator.png"
         },
         {
             "title": "Community Leader",
             "description": "dest",
             "requirements": "req",
             "author_uri": "/uri/user/philipp",
-            "image": "/home/dirk/Documents/p2pu/badges/super-blogger.png"
+            "image": "super-blogger.png"
         },
         {
-            "title": "Cameleon",
+            "title": "DIYer",
             "description": "dest",
             "requirements": "req",
             "author_uri": "/uri/user/erika",
-            "image": "/home/dirk/Documents/p2pu/badges/encrypt_03.png"
+            "image": "diy-u-badge-p2pu.png"
         }
     ]
 }
