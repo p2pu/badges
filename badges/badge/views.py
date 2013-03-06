@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from badge.forms import BadgeForm
 from badge import models as badge_api
+from badge.view_helpers import fetch_badge_resources
 from media import models as media_api
 from project import models as project_api
 from project.view_helpers import fetch_resources
@@ -46,8 +47,7 @@ def preview( request, badge_id ):
     context = {
         'badge': badge_api.get_badge(badge_api.id2uri(badge_id))
     }
-    context['badge']['image'] = media_api.get_image(context['badge']['image_uri'])
-
+    fetch_badge_resources(context['badge'])
     return render_to_response(
         'badge/preview.html',
         context,
@@ -110,14 +110,12 @@ def publish( request, badge_id ):
 
 def view( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
-    badge['image'] = media_api.get_image(badge['image_uri'])
+    fetch_badge_resources(badge)
     context = {
         'badge': badge
     }
-    context['projects'] = project_api.get_projects_for_badge(badge['uri'])
+    context['projects'] = map(fetch_resources, project_api.get_projects_for_badge(badge['uri']))
     context['experts'] = badge_api.get_badge_experts(badge['uri'])
-    for project in context['projects']:
-        fetch_resources(project)
 
     return render_to_response(
         'badge/view.html',

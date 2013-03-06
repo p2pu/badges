@@ -60,7 +60,7 @@
             <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
           {% endif %}
         {% else %}
-          <h2>{% trans 'Feedback by ...' %}</h2>
+          <h2>{% blocktrans with username=fb.expert_uri %}Feedback by {{ username }}{% endblocktrans %}</h2>
           <h3>{% trans 'Green' %}</h3>
           <p>{{ fb.good }}</p>
           <h3>{% trans 'Yellow' %}</h3>
