@@ -12,8 +12,9 @@ This project is written using django. To get up and running for development
 1. Create a new virtual environment somewhere: ```virtualenv /path/to/somewhere```
 1. Activate the virtual environment: ```source /path/to/somewhere/bin/activate```
 1. Install dependancies: ```pip install -r /path/to/code/badges/requirements.txt```
-1. Sync database: ```python /path/to/code/badges/badges/manage.py syncdb```
-1. Load some test data: ```python /path/to/code/badges/badges/manage.py load_test_data /path/to/test/data```
-1. Run development server: ```python /path/to/code/badges/badges/manage.py runserver```
+1. Copy settings_local.dist.py to settings_local.py
+1. Sync database: ```python /path/to/code/badges/manage.py syncdb```
+1. Load some test data: ```python /path/to/code/badges/manage.py load_test_data /path/to/code/testdata/test_data.json```
+1. Run development server: ```python /path/to/code/badges/manage.py runserver```
 1. Go to http://localhost:8000/ and play around
 1. And lastly, fix all the bugs, add cool new features and take over the world :)
