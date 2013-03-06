@@ -11,7 +11,9 @@ from badge.view_helpers import fetch_badge_resources
 from media import models as media_api
 from project import models as project_api
 from project.view_helpers import fetch_resources
+from oauthclient.decorators import require_login
 
+@require_login
 def create( request ):
     template_name = 'badge/create.html'
 
@@ -43,6 +45,7 @@ def create( request ):
         context_instance=RequestContext(request))
 
 
+@require_login
 def preview( request, badge_id ):
     context = {
         'badge': badge_api.get_badge(badge_api.id2uri(badge_id))
@@ -55,6 +58,7 @@ def preview( request, badge_id ):
     )
 
 
+@require_login
 def edit( request, badge_id ):
     template_name = 'badge/edit.html'
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
@@ -91,6 +95,7 @@ def edit( request, badge_id ):
         context_instance=RequestContext(request))
 
 
+@require_login
 def publish( request, badge_id ):
 
     #TODO check user

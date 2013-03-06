@@ -81,6 +81,7 @@ def view( request, project_id ):
     )
 
 
+@require_login
 def feedback( request, project_id ):
     project = project_api.get_project(project_api.id2uri(project_id))
     user_uri = '/uri/user/{0}'.format(request.session['username'])
@@ -112,6 +113,7 @@ def feedback( request, project_id ):
     )
 
 
+@require_login
 def revise( request, project_id ):
     project = project_api.get_project(project_api.id2uri(project_id))
 
