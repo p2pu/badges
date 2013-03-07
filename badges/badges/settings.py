@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'project',
     'media',
     'oauthclient',
+    'notifications',
 )
 
 # A sample logging configuration. The only tangible logging

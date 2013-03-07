@@ -14,3 +14,6 @@ OAUTH_CLIENT_ID = ''
 OAUTH_CLIENT_KEY = ''
 OAUTH_CLIENT_SECRET = ''
 OAUTH_ID_URL = 'http://host.org/oauth/whoami/'
+
+LERNANTA_API_KEY = ''
+NOTIFICATION_URL = 'https://host.org/notification/url/'
