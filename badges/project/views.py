@@ -18,6 +18,7 @@ from oauthclient.decorators import require_login
 @require_login
 def create( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+    fetch_badge_resources(badge)
     context = { 'badge': badge }
     user_uri = '/uri/user/{0}'.format(request.session['username'])
 

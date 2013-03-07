@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div class="well">
+  <div class="row-fluid">
+    <div class="span2">
+      <a href="{% url badge_view badge.id %}"><img src="{{ badge.image.url }}"></a>
+    </div>
+    <div class="span10">
+      <h3>{{ badge.title }}</h3>
+      <dl>
+        <dt>{% trans 'Description' %}<dt>
+        <dd>{{ badge.description }}</dd>
+        <dt>{% trans 'Requirements' %}</dt>
+        <dd>{{ badge.requirements }}</dd>
+      </dl>
+    </div>
+  </div>
+</div>
+
