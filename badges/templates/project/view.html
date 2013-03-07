@@ -10,12 +10,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="span2">
-      <a href="{% url badge_view badge.id %}"><img src="{{ badge.image.url }}"></a>
-    </div>
-    <div class="span10">
-      <p>{{ badge.requirements }}</p>
-    </div>
+    {% include 'badge/badge_excerpt.html' %}
   </div>
 
   <div class="row">
