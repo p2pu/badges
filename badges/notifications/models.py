@@ -7,7 +7,8 @@ log = logging.getLogger(__name__)
 import requests
 
 def send_notification( receiver, subject, text, sender, callback=None):
-    
+    """ Send a notification to a single receiver via the P2PU API to a user  """
+
     data = {
         'api-key': settings.LERNANTA_API_KEY,
         'user': receiver,

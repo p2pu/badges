@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with project_title=project.title %}{{ project_title }} was revised!!{% endblocktrans %}

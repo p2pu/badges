@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% blocktrans %}
+
+X submitted a project for Y. Click here to give them some feedback.
+
+{% endblocktrans %}

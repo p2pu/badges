@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with badge_title=badge.title project_title=project.title%}{{ project_title }} was submitted for {{ badge_title }}!!{% endblocktrans %}

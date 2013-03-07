@@ -1,0 +1,7 @@
+{% load i18n %}
+
+{% blocktrans %}
+
+Your project was created. ...
+
+{% endblocktrans %}
