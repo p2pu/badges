@@ -4,6 +4,10 @@ from project.db import Feedback
 from datetime import datetime
 
 from badge import models as badge_api
+from project.notification_helpers import send_project_creation_notification
+from project.notification_helpers import send_project_creation_expert_notification
+from project.notification_helpers import send_feedback_notification
+from project.notification_helpers import send_revision_notification
 
 
 class MultipleProjectError(Exception):
@@ -56,7 +60,13 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, steps, ref
     )
     project_db.save()
 
-    return get_project(id2uri(project_db.id))
+    project = get_project(id2uri(project_db.id))
+
+    send_project_creation_notification(project)
+    experts = badge_api.get_badge_experts(project['badge_uri'])
+    send_project_creation_expert_notification(project, experts)
+
+    return project
 
 
 def get_project(uri):
@@ -97,6 +107,10 @@ def revise_project(project_uri, improvement, work_url=None):
 
     if not can_revise_project(project_uri):
         raise Exception('Cannot submit a revison before receiving a review')
+    
+    last_feedback = None
+    if project.feedback_set.count() > 0:
+        last_feedback = project.feedback_set.latest('date_created')
 
     revision = Revision(
         project=project,
@@ -106,6 +120,11 @@ def revise_project(project_uri, improvement, work_url=None):
     if work_url:
         revision.work_url = work_url
     revision.save()
+
+    send_revision_notification(
+        get_project(project_uri),
+        [last_feedback.expert_uri]
+    )
 
 
 def ready_for_feedback(project_uri):
@@ -151,6 +170,8 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly):
         feedback.revision = last_revision
 
     feedback.save()
+
+    send_feedback_notification(get_project(project_uri))
         
 
 def _revision2dict(revision):

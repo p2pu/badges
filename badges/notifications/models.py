@@ -42,9 +42,14 @@ def send_notification( receiver_uri, subject, text, html=None, sender=None, call
     if callback:
         data['callback'] = callback
 
-    response = requests.post(settings.NOTIFICATION_URL, data=simplejson.dumps(data))
+    response = None
+    try:
+        response = requests.post(settings.NOTIFICATION_URL, data=simplejson.dumps(data))
+    except requests.ConnectionError:
+        log.error('Could not connect to notification URL')
+        return False
 
-    if not response.status_code == 200:
-        log.error(u'Could not send email notificatoin to {0}'.format(receiver))
+    if not response or response.status_code == 200:
+        log.error(u'Could not send email notificatoin to {0}'.format(receiver_uri))
         return False
     return True
