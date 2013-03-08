@@ -1,5 +1,7 @@
 from badge.db import Badge
 from badge.db import Award
+from badge.notification_helpers import send_badge_creation_notification
+from badge.notification_helpers import send_badge_awarded_notification
 
 from datetime import datetime
 
@@ -42,7 +44,11 @@ def create_badge( title, image_uri, description, requirements, author_uri ):
         date_updated=datetime.utcnow()
     )
     badge.save()
-    return get_badge(id2uri(badge.id))
+    badge = get_badge(id2uri(badge.id))
+
+    send_badge_creation_notification(badge)
+
+    return badge
 
 
 def get_badge(uri):
@@ -123,6 +129,9 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
         date_awarded=datetime.utcnow()
     )
     award.save()
+
+    if not badge_creator:
+        send_badge_awarded_notification(get_badge(badge_uri), user_uri)
 
 
 def get_badge_experts(uri):

@@ -8,6 +8,8 @@ Replace this with more appropriate tests for your application.
 from django.test import TestCase
 from badge import models as badge_api
 
+from mock import patch
+
 
 class SimpleTest(TestCase):
 
@@ -54,6 +56,13 @@ class SimpleTest(TestCase):
         badges = badge_api.get_user_draft_badges(badge['author_uri'])
         self.assertEquals(len(badges), 1)
         self.assertEquals(badge2, badges[0])
+
+
+    def test_badge_create_sends_notification(self):
+        """ Test that we can create a badge """
+        with patch('notifications.models.send_notification') as send:
+            badge = badge_api.create_badge(*self.badge_values)
+            self.assertTrue(send.called)
 
 
     def test_update_badge(self):
@@ -116,3 +125,9 @@ class SimpleTest(TestCase):
         kwargs['expert_uri'] = badge['author_uri']
         badge_api.award_badge(**kwargs)
         self.assertIn(kwargs['user_uri'], badge_api.get_badge_experts(badge['uri']))
+
+        # test that badge awards triggers notifications
+        kwargs['user_uri'] = '/uri/user/ialsowantbadge'
+        with patch('notifications.models.send_notification') as send:
+            badge_api.award_badge(**kwargs)
+            self.assertTrue(send.called)
