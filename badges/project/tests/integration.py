@@ -1,4 +1,5 @@
 from django.test import TestCase
+from mock import patch
 
 from project import models as project_api
 from badge import models as badge_api
@@ -24,6 +25,15 @@ class ProjectIntegrationTests(TestCase):
         'reflection': 'Will do it earlier and more next time',
         'tags': ['test', 'tdd'],
     }
+
+
+    def setUp(self):
+        self.notification_patcher = patch('notifications.models.send_notification')
+        self.notification_patcher.start()
+
+
+    def tearDown(self):
+        self.notification_patcher.stop()
 
 
     def test_project_feedback_cycle(self):
