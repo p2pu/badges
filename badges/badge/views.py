@@ -119,7 +119,7 @@ def view( request, badge_id ):
     context = {
         'badge': badge
     }
-    context['projects'] = map(fetch_resources, project_api.get_projects_for_badge(badge['uri']))
+    context['projects'] = map(fetch_resources, project_api.search_projects(badge_uri=badge['uri']))
     context['experts'] = badge_api.get_badge_experts(badge['uri'])
 
     return render_to_response(

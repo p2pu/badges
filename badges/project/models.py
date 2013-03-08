@@ -87,6 +87,15 @@ def get_projects():
     return [_project2dict(project) for project in projects]
 
 
+def search_projects(badge_uri=None, author_uri=None):
+    projects = Project.objects.filter(date_deleted__isnull=True)
+    if badge_uri:
+        projects = projects.filter(badge_uri=badge_uri)
+    if author_uri:
+        projects = projects.filter(author_uri=author_uri)
+    return [_project2dict(project) for project in projects]
+
+
 def can_revise_project(project_uri):
     project=Project.objects.get(id=uri2id(project_uri))
 
