@@ -17,3 +17,5 @@ OAUTH_ID_URL = 'http://host.org/oauth/whoami/'
 
 LERNANTA_API_KEY = ''
 NOTIFICATION_URL = 'https://host.org/notification/url/'
+
+DEFAULT_FROM_ADDRESS = 'Admin'
