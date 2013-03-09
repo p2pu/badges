@@ -36,9 +36,14 @@ def send_notification( receiver_uri, subject, text, html=None, sender=None, call
         'user': receiver_username,
         'subject': subject,
         'text': text,
-        'sender': sender,
     }
+
+    if html:
+        data['html'] = html
     
+    if sender:
+        data['sender'] = sender
+
     if callback:
         data['callback'] = callback
 
@@ -49,7 +54,7 @@ def send_notification( receiver_uri, subject, text, html=None, sender=None, call
         log.error('Could not connect to notification URL')
         return False
 
-    if not response or response.status_code == 200:
-        log.error(u'Could not send email notificatoin to {0}'.format(receiver_uri))
+    if not response or not response.status_code == 200:
+        log.error(u'Could not send email notification to {0}'.format(receiver_uri))
         return False
     return True

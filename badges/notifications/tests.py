@@ -3,17 +3,13 @@ from mock import patch
 
 from notifications import models
 
-def postMock(*args, **kwargs):
-    class Response(object):
-        def __init__(self):
-            self.status_code = 200
-    return Response()
-
 
 class SimpleTest(TestCase):
 
     def test_send_notification(self):
-        with patch('requests.post', postMock) as requests_post:
+        with patch('requests.post') as requests_post:
+            requests_post.return_value.status_code = 200
+
             ret = models.send_notification(
                 '/uri/user/testuser',
                 'Notification subject',
@@ -23,6 +19,24 @@ class SimpleTest(TestCase):
                 'http://call.me'
             )
             self.assertTrue(ret)
+            self.assertTrue(requests_post.called)
+
+    
+    def test_send_notification_fail(self):
+        with patch('requests.post') as requests_post:
+            requests_post.return_value.status_code = 404
+
+            ret = models.send_notification(
+                '/uri/user/testuser',
+                'Notification subject',
+                'Notification text',
+                '<html></html>',
+                'The Sender',
+                'http://call.me'
+            )
+            self.assertFalse(ret)
+            self.assertTrue(requests_post.called)
+
 
     def test_send_notification_i18n(self):
         with patch('notifications.models.send_notification') as send_notification:
