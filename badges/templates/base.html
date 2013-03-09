@@ -30,8 +30,8 @@
             <li><a href="">{% trans 'Review a badge' %}</a></li>
           </ul>
           <ul class="nav pull-right">
-            {% if request.session.username %}
-              <li><a href="{% url dashboard request.session.username %}">{% trans 'My Badges' %}</a></li>
+            {% if request.session.user %}
+              <li><a href="{% url dashboard request.session.user.username %}">{% trans 'My Badges' %}</a></li>
               <li><a href="{% url oauth_logout %}">{% trans 'Log out' %}</a></li>
             {% else %}
               <li><a href="{% url oauth_login %}">{% trans 'Log in' %}</a></li>

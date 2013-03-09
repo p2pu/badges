@@ -22,7 +22,7 @@ def create( request ):
     else:    
         form = BadgeForm()
 
-    user_uri = u'/uri/user/{0}'.format(request.session['username'])
+    user_uri = request.session['user']['uri']
 
     if form.is_valid():
         image = media_api.upload_image(request.FILES['image'], user_uri)
@@ -62,6 +62,8 @@ def preview( request, badge_id ):
 def edit( request, badge_id ):
     template_name = 'badge/edit.html'
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+
+    # TODO ensure that this is the badge owner!
 
     if badge['publised']:
         messages.error(request, _('Badge already publised, create a new badge instead'))

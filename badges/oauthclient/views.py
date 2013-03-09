@@ -5,6 +5,8 @@ from django.core.urlresolvers import reverse
 import urllib
 import requests
 
+from p2pu_user import models as p2pu_user_api
+
 def login( request ):
 
     referer = request.META.get('HTTP_REFERER')
@@ -21,7 +23,7 @@ def login( request ):
 
 
 def logout( request ):
-    del request.session['username']
+    del request.session['user']
     return http.HttpResponseRedirect(reverse('landing'))
 
 
@@ -51,9 +53,13 @@ def redirect( request ):
 
     response = requests.get(settings.OAUTH_ID_URL, params=params)
     if response.status_code != 200:
-        raise Exception('Could not get identity for oauth provider')
+        raise Exception('Could not get identity from oauth provider')
 
-    request.session['username'] = response.json()['user']
+    username = response.json()['user']
+    #TODO user_url = response.json()['url']
+    user_image_url = response.json()['image_url']
+
+    request.session['user'] = p2pu_user_api.save_user(username, image_url)
 
     if request.session.get('next_url'):
         next_url = request.session.get('next_url')
@@ -65,6 +71,8 @@ def redirect( request ):
 
 def become( request, username ):
     if settings.DEBUG:
-        request.session['username'] = username
+        request.session['user'] = p2pu_user_api.save_user(
+            username, 'http://placehold.it/40x40'
+        )
     return http.HttpResponseRedirect(reverse('landing'))
 

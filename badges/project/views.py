@@ -20,7 +20,7 @@ def create( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
     context = { 'badge': badge }
-    user_uri = '/uri/user/{0}'.format(request.session['username'])
+    user_uri = request.session['user']['uri']
 
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
@@ -61,10 +61,10 @@ def view( request, project_id ):
     feedback = project_api.get_project_feedback(project['uri'])
     can_revise = False
     can_give_feedback = False
-    if request.session.get('username'):
-        if request.session['username'] == project['author']['username']:
+    if request.session.get('user'):
+        user_uri = request.session['user']['uri']
+        if user_uri == project['author_uri']:
             can_revise = project_api.can_revise_project(project['uri'])
-        user_uri = '/uri/user/{0}'.format(request.session['username'])
         can_give_feedback = project_api.ready_for_feedback(project['uri'])
         can_give_feedback &= user_uri in badge_api.get_badge_experts(badge['uri'])
 
@@ -86,7 +86,7 @@ def view( request, project_id ):
 def feedback( request, project_id ):
     project = project_api.get_project(project_api.id2uri(project_id))
     badge = badge_api.get_badge(project['badge_uri'])
-    user_uri = '/uri/user/{0}'.format(request.session['username'])
+    user_uri = request.session['user']['uri']
 
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
