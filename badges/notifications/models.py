@@ -12,11 +12,11 @@ log = logging.getLogger(__name__)
 def send_notification_i18n( receiver_uri, subject_template, text_template, html_template=None, context={}, sender=None, callback=None):
     """ translate the notification before sending it """
     
-    subject = localize_for_user(receiver_uri, subject_template, context)
-    text = localize_for_user(receiver_uri, text_template, context)
+    subject = localize_for_user(receiver_uri, subject_template, context).strip()
+    text = localize_for_user(receiver_uri, text_template, context).strip()
     html = None
     if html_template:
-        html = localize_for_user(receiver_uri, html_template, context)
+        html = localize_for_user(receiver_uri, html_template, context).strp()
 
     return send_notification(receiver_uri, subject, text, html, sender, callback)
 
@@ -57,4 +57,5 @@ def send_notification( receiver_uri, subject, text, html=None, sender=None, call
     if not response or not response.status_code == 200:
         log.error(u'Could not send email notification to {0}'.format(receiver_uri))
         return False
+
     return True
