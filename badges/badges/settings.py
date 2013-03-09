@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'media',
     'oauthclient',
     'notifications',
+    'p2pu_user',
 )
 
 # A sample logging configuration. The only tangible logging
