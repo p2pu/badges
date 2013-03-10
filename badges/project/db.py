@@ -9,7 +9,7 @@ class Project(models.Model):
     title = models.CharField(max_length=255)
     image_uri = UriField()
     work_url = models.URLField()
-    steps = models.CharField(max_length=1024)
+    description = models.CharField(max_length=1024)
     reflection = models.CharField(max_length=1024)
     tags = models.CharField(max_length=255)
     badge_uri = UriField()

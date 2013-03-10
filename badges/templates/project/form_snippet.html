@@ -20,10 +20,10 @@
       {% endfor %}
     </div>
 
-    <div class="control-group {% if form.errors.steps %}error{% endif %}">
+    <div class="control-group {% if form.errors.description %}error{% endif %}">
       <label>{% trans 'Project description:' %}</label>
-      <textarea name="steps" rows="4" class="span7" placeholder="{% trans 'What steps did you take to complete this project? (This helps experts give you more precise feedback.)' %}">{% if form.steps.value %}{{form.steps.value}}{% endif %}</textarea>
-      {% for error in form.errors.steps %}
+      <textarea name="description" rows="4" class="span7" placeholder="{% trans 'What steps did you take to complete this project? (This helps experts give you more precise feedback.)' %}">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
+      {% for error in form.errors.description %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
     </div>
