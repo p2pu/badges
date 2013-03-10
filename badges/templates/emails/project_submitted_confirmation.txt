@@ -1,0 +1,20 @@
+{% extends 'base.txt' %}
+{% load i18n %}
+
+{% block body %}
+<p>
+<p>
+A little birdie told us that you just submitted your project for feedback. Good stuff!
+</p>
+<p>
+We've let Experts in this area know that your project is ready. An "Expert" here is someone how already has the Badge that you've applied for--hopefully they will have some tasty feedback for you.
+</p>
+<p>
+You should hear from an Expert soon--we'll keep you updated.
+</p>
+</p>
+<p>
+Thanks for your creative work.<br />
+- The P2PU team
+</p>
+{% endblock %}

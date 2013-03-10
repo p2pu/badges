@@ -1,0 +1,35 @@
+{% extends 'base.txt' %}
+{% load i18n %}
+
+{% block body %}
+<p>
+Howdy!
+</p>
+<p>
+Your badge {{ badge.title }} is published, live, and ready-to-go.
+</p>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <img src="{{ badge.image.url }}" width="160px"/>
+            </td>
+            <td style="padding-left:20px; text-valign:top;">
+                <p>{{ badge.title }}</p>
+                <p>{{ badge.description }}</p>
+                <p>{{ badge.requirements }}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+Your Badge now exists on badges.p2pu.org and learners can apply for it immediately. As the Badge's creator, this badge will automatically appear on your profile.
+</p>
+<p>
+Tell the world about your spiffy Badge! {% include 'social_buttons.txt' %}
+</p>
+<p>
+Yours in the future of learning, <br/>
+- The P2PU team 
+</p>
+{% endblock %}

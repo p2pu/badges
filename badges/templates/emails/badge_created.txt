@@ -1,1 +1,6 @@
+{% extends 'base.txt' %}
 {% load i18n %}
+
+{% block body %}
+  Some filler text
+{% endblock %}

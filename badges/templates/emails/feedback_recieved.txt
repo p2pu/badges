@@ -1,0 +1,28 @@
+{% extends 'base.txt' %}
+{% load i18n %}
+
+{% block body %}
+<p>
+Greetings!
+</p>
+<p>
+Your project {{ project.title }} has some valuable feedback from an Expert.
+</p>
+<p>
+<ul style="list-style:none;">
+     <li>
+        <img src="{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
+        <a href="" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">View Feedback</a>
+    </li>
+</ul>
+</p>
+<p style="clear:left;">
+Hopefully this feedback sparks some new ideas for you. Why not take your project a bit further and resubmit it?
+</p>
+<p>
+We can't wait to see what you come up with.
+</p>
+<p>
+- The P2PU team
+</p>
+{% endblock %}
