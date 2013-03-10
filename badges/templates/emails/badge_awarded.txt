@@ -1,1 +1,22 @@
 {% load i18n %}
+{% blocktrans %}
+
+Howdy,
+
+An Expert has awarded your project {{ project.title }} a Badge. Check it out!
+
+{{ badge.title }}
+{{ badge.description }}
+{{ badge.requirements }}
+
+You are now an "Expert" in this area, and can award the Badge to others. Why not pay the learning karma forward and review a few projects?
+
+{% for project in projects %}   
+project.title - {% url project_feedback project.id %} 
+{% endfor %}
+
+
+Kudos to you! 
+- The P2PU team
+
+{% endblocktrans %}   

@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans with badge_title=badge.title project_title=project.title%}You have just submitted {{ project_title }} for {{ badge_title }}!!{% endblocktrans %}
+{% load i18n %}{% blocktrans with badge_title=badge.title project_title=project.title%}You just submitted a project - nice work!{% endblocktrans %}

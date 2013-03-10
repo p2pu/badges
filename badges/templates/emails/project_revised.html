@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<p>
+Howdy Expert,
+</p>
+<p>
+Some time ago, you graciously left feedback for {{ project.author.username }}'s project. Much obliged!
+</p>
+<p>
+Now {{ project.author.username }} has revised their project and resubmitted it. Would you take a look and see if they've mastered those skills?
+</p>
+<p>
+<ul style="list-style:none;">
+     <li>
+        <img src="{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
+        <a href="{% url project_feedback project.id %}" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">Give Feedback</a>
+    </li>
+</ul>
+</p>
+<p style="clear:left;">
+Mentorship rules. <br/>
+- The P2PU team
+</p>
+{% endblock %}

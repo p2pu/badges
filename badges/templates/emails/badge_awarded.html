@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<p>
+Howdy,
+</p>
+<p>
+An Expert has awarded your project {{ project.title }} a Badge. Check it out!
+</p>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <img src="{{ badge.image.url }}" width="160px"/>
+            </td>
+            <td style="padding-left:20px; text-valign:top;">
+                <p>{{ badge.title }}</p>
+                <p>{{ badge.description }}</p>
+                <p>{{ badge.requirements }}</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+You are now an "Expert" in this area, and can award the Badge to others. Why not pay the learning karma forward and review a few projects?
+</p>
+<p>
+<ul style="list-style:none;">
+{% for project in projects %}   
+     <li>
+        <img src="{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
+        <a href="{% url project_feedback project.id %}" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">Give Feedback</a>
+    </li>
+{% endfor %}
+</ul>
+</p>
+<p style="clear:left;">
+Kudos to you! <br/>
+- The P2PU team
+</p>
+{% endblock %}
