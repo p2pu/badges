@@ -1,7 +1,13 @@
 {% load i18n %}
-
 {% blocktrans %}
 
-Your project was created. ...
+A little birdie told us that you just submitted your project for feedback. Good stuff!
 
-{% endblocktrans %}
+We've let Experts in this area know that your project is ready. An "Expert" here is someone how already has the Badge that you've applied for--hopefully they will have some tasty feedback for you.
+
+You should hear from an Expert soon--we'll keep you updated.
+
+Thanks for your creative work.
+- The P2PU team
+
+{% endblocktrans %}   

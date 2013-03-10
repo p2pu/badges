@@ -1,6 +1,20 @@
-{% extends 'base.txt' %}
 {% load i18n %}
+{% blocktrans %}
 
-{% block body %}
-  Some filler text
-{% endblock %}
+Howdy!
+
+Your badge {{ badge.title }} is published, live, and ready-to-go.
+
+{{ badge.title }}                
+{{ badge.description }}                
+{{ badge.requirements }}
+
+Your Badge now exists on badges.p2pu.org and learners can apply for it immediately. As the Badge's creator, this badge will automatically appear on your profile.
+
+Tell the world about your spiffy Badge! 
+
+Yours in the future of learning, 
+- The P2PU team
+
+{% endblocktrans %}   
+     

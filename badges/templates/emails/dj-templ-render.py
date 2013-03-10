@@ -38,7 +38,7 @@ parser.add_option("--debug",
 parser.add_option("--undefined",
         dest='undefined',
         metavar='STRING',
-        default="XXX INVALID TEMPLATE VARIABLE NAME XXX",
+        default="%UNDEFINED-TEMPLATE-VAR%",
         help="sets undefined variables to STRING during template expansion "
         "[default: %default]")
 
@@ -52,7 +52,6 @@ if len(args) != 1:
 settings.configure(
         DEBUG_TEMPLATE = options.debug,
         TEMPLATE_DIRS = '.',
-        ROOT_URLCONF = 'http://',
         TEMPLATE_STRING_IF_INVALID = options.undefined
 )
 

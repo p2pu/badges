@@ -1,7 +1,17 @@
 {% load i18n %}
-
 {% blocktrans %}
 
-X submitted a project for Y. Click here to give them some feedback.
+Hullo there,
+
+Some time ago, you became a righteous expert with the {{ badge.title }} Badge.
+
+Now a few folks are looking for help with similar projects. Mind taking a few minutes to review their work?
+
+{% for project in projects %}   
+project.title - {% url project_feedback project.id %} 
+{% endfor %}
+
+Thanks for paying it forward, 
+- The P2PU team
 
 {% endblocktrans %}
