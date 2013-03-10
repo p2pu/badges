@@ -1,1 +1,1 @@
-{% load i18n %}{% blocktrans with badge_title=badge.title%}You've just created {{ badge_title }}!!{% endblocktrans %}
+{% load i18n %}{% blocktrans with badge_title=badge.title%}You've just made {{ badge_title }}. Congrats!{% endblocktrans %}
