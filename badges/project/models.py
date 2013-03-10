@@ -29,7 +29,7 @@ def _project2dict(project_db):
         'title': project_db.title,
         'image_uri': project_db.image_uri,
         'work_url': project_db.work_url,
-        'steps': project_db.steps,
+        'description': project_db.description,
         'reflection': project_db.reflection,
         'tags': project_db.tags.split(','),
         'badge_uri': project_db.badge_uri,
@@ -38,7 +38,7 @@ def _project2dict(project_db):
     return project
 
 
-def create_project(badge_uri, author_uri, title, image_uri, work_url, steps, reflection, tags):
+def create_project(badge_uri, author_uri, title, image_uri, work_url, description, reflection, tags):
     
     if Project.objects.filter(author_uri=author_uri, badge_uri=badge_uri, date_deleted__isnull=True).exists():
         raise MultipleProjectError('A user can only submit 1 project for a badge')
@@ -50,7 +50,7 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, steps, ref
         title=title,
         image_uri=image_uri,
         work_url=work_url,
-        steps=steps,
+        description=description,
         reflection=reflection,
         tags=tags,
         badge_uri=badge_uri,

@@ -36,7 +36,7 @@ def create( request, badge_id ):
                 form.cleaned_data['title'],
                 image['uri'],
                 form.cleaned_data['work_url'],
-                form.cleaned_data['steps'],
+                form.cleaned_data['description'],
                 form.cleaned_data['reflection'],
                 form.cleaned_data['tags']
             )

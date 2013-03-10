@@ -12,7 +12,7 @@ class SimpleTest(TestCase):
         'title': 'Test Title',
         'image_uri': '/uri/image/1',
         'work_url': 'http://project.org/url',
-        'steps': 'Did the test',
+        'description': 'Did the test',
         'reflection': 'Will do it earlier and more next time',
         'tags': ['test', 'tdd'],
     }
