@@ -7,17 +7,17 @@
         <h2>Preview badge</h2>
         <p>This is how your badge will look once published</p>
         <div class="well span10">
-            <div class="row">
-                <div class="thumbnail span2 p2pu-badge">
+            <div class="clearfix">
+                <div class="p2pu-badge">
                     <h4>{{badge.title}}</h4>
                     <img src="{{ badge.image.url }}"/>
                 </div>
 
                 <div class="span7">
-
-                    <p>{{badge.description}}</p>
-                    <h3>Badge requirements</h3>
-                    <p>{{badge.requirements}}</p>
+                    <h3>{% trans 'Description' %}:</h3>
+                        <p>{{badge.description}}</p>
+                    <h3>{% trans 'Requirements' %}:</h3>
+                        <p>{{badge.requirements}}</p>
                 </div>
             </div>
         </div>

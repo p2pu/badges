@@ -1,15 +1,4 @@
-.p2pu-badge{
-  padding: 20px 10px 5px;
-  background: #ffffff;
-  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJo…iIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+');
-  background: -moz-linear-gradient(top, #ffffff 0%, #ffffff 85%, #eeeeee 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(85%,#ffffff), color-stop(100%,#eeeeee));
-  background: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 85%,#eeeeee 100%);
-  background: -o-linear-gradient(top, #ffffff 0%,#ffffff 85%,#eeeeee 100%);
-  background: -ms-linear-gradient(top, #ffffff 0%,#ffffff 85%,#eeeeee 100%);
-  background: linear-gradient(to bottom, #ffffff 0%,#ffffff 85%,#eeeeee 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
-}
+
 #upload-bage-img{
 
 }
@@ -19,4 +8,18 @@
     margin-left: 0;
     float: none;
   }
+}
+.badge-view-projects{
+
+}
+.badge-view-projects, .badge-view-experts{
+  margin-top: 60px;
+  border-top: 1px solid $silver;
+  ul{
+    margin-left: -10px;
+  }
+}
+.p2pu-project{
+  padding-top: 15px;
+  text-align: center;
 }

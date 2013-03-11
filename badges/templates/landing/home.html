@@ -9,10 +9,11 @@
     <div class="hero-unit">
 
         <div class="row">
+            <h2>It's <span class="highlight-1">all</span> about
+                <span class="highlight-2">Badges</span>
+            </h2>
             <div class="span5 first-element">
-                <h2>It's <span class="highlight-1">all</span> about
-                    <span class="highlight-2">Badges</span>
-                </h2>
+
                 <p>
                     At P2PU, badges are a form of feedback that learners give to each other to iterate and improve
                     their projects. On badges.p2pu.org, you can create a badge, submit work for a badge, or, if you
@@ -22,7 +23,7 @@
             <div class="span6">
                 <div>
                     <ul class="thumbnails">
-                        {% for badge in badges|slice:'3' %}
+                        {% for badge in badges|slice:'4' %}
                             {% include 'badge/badge_tile.html' %}
                         {% endfor %}
                     </ul>

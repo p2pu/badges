@@ -14,41 +14,17 @@
 
   .thumbnails{
     li{
-      -webkit-perspective: 500;
-      -webkit-transform-style: preserve-3d;
-      -webkit-transition-property: perspective;
-      -webkit-transition-duration: 0.5s;
-      cursor: pointer;
-      &:hover{
-        -webkit-perspective: 5000;
-        .thumbnail{
-          height: 100%;
-          h3{
-            bottom: -80px;
-          }
-        }
+      position: relative;
+      z-index: 0;
 
-      }
-      .thumbnail{
-        background-color: $white;
-        position: relative;
-        h3{
-          position: absolute;
-          font-size: 1em;
-          border: 10px solid #fcfafa;
-          padding: 10px;
-          background-color: #deddcd;
-          line-height: 20px;
-          margin-top: -50px;
-          height: 50px;
-          margin-bottom: 0;
-          @include border-radius(10px);
-          text-align: center;
-          bottom: -30px;
-          left: 0;
-          width: 128px;
-          transition: bottom 2s linear;
+        img{
+          height: 112px;
         }
+      & + li{
+        margin-left: -80px;
+      }
+      &:hover{
+        z-index: 999;
       }
     }
   }
