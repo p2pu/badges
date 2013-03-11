@@ -1,17 +1,16 @@
 {% load i18n %}
 {% blocktrans %}
-
 Hullo there,
 
 Some time ago, you became a righteous expert with the {{ badge.title }} Badge.
 
 Now a few folks are looking for help with similar projects. Mind taking a few minutes to review their work?
+{% endblocktrans %}
 
 {% for project in projects %}   
 project.title - {% url project_feedback project.id %} 
 {% endfor %}
-
+{% blocktrans %}
 Thanks for paying it forward, 
 - The P2PU team
-
 {% endblocktrans %}
