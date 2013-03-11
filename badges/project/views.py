@@ -153,3 +153,14 @@ def revise( request, project_id ):
     )
 
 
+def review( request ):
+    """ This view shows a list of projects for a user that he/she can submit feedback on """
+    context = {
+        'projects': [],
+    }
+
+    return render_to_response(
+        'project/review.html',
+        context,
+        context_instance=RequestContext(request)
+    )

@@ -23,11 +23,11 @@
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="#">P2PU</a>
+        <a class="brand" href="http://info.p2pu.org">P2PU</a>
           <ul class="nav">
             <li><a href="{% url landing %}">{% trans 'About badges' %}</a></li>
             <li><a href="{% url badge_create %}">{% trans 'Create a badge' %}</a></li>
-            <li><a href="">{% trans 'Review a badge' %}</a></li>
+            <li><a href="{% url project_review %}">{% trans 'Review a badge' %}</a></li>
           </ul>
           <ul class="nav pull-right">
             {% if request.session.user %}

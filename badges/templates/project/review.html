@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load humanize %}
+
+{% block body %}
+
+  <div class="row">
+    <div class="span12">
+      {% for project in projects %}
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
