@@ -1,0 +1,29 @@
+.hero-unit{
+  padding-bottom: 120px;
+  h2{
+
+  }
+  .highlight-1{
+    color: $cyan;
+    text-transform: uppercase;
+  }
+  .highlight-2{
+    color: $clemintine;
+    text-transform: uppercase;
+  }
+}
+
+.tab-section{
+  margin-top: -113px;
+  .nav-tabs{
+    & > .active {
+      & a{
+        background-color: $white;
+        @include box-shadow(0 -1px 3px rgba(0, 0, 0, 0.055));
+      }
+    }
+    a{
+      color: $cyan;
+    }
+  }
+}

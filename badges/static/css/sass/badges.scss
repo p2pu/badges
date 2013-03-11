@@ -1,0 +1,22 @@
+/*!
+ *
+ *
+ * P2PU Badges project v 0.0.1
+ *
+ * Author Erika
+ *
+ */
+// Bootstrap
+@import "../libs/p2pu-css-framework/lib/bootstrap";
+
+// Bootstrap Responsive
+@import "../libs/p2pu-css-framework/lib/responsive";
+
+// Basic tags styles
+@import "init";
+
+// Navbar styling
+@import "navbar";
+
+// Landing page styling
+@import "landing";
