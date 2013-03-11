@@ -96,6 +96,13 @@ def search_projects(badge_uri=None, author_uri=None):
     return [_project2dict(project) for project in projects]
 
 
+def get_projects_ready_for_feedback(badge_uri):
+    projects = Project.objects.filter(date_deleted__isnull=True)
+    projects = projects.filter(badge_uri=badge_uri)
+    projects = [_project2dict(project) for project in projects if ready_for_feedback(id2uri(project.id))]
+    return projects
+
+
 def can_revise_project(project_uri):
     project=Project.objects.get(id=uri2id(project_uri))
 
@@ -107,6 +114,8 @@ def can_revise_project(project_uri):
         last_feedback = project.feedback_set.latest('date_created')
 
     if not last_feedback or last_revision and last_revision.date_created > last_feedback.date_created:
+        return False
+    if last_feedback and last_feedback.badge_awarded:
         return False
     return True
 
@@ -148,12 +157,14 @@ def ready_for_feedback(project_uri):
         last_feedback = project.feedback_set.latest('date_created')
 
     if last_feedback:
+        if last_feedback.badge_awarded:
+            return False
         if not last_revision or last_feedback.date_created > last_revision.date_created:
             return False
     return True
 
 
-def submit_feedback(project_uri, expert_uri, good, bad, ugly):
+def submit_feedback(project_uri, expert_uri, good, bad, ugly, badge_awarded=False):
     project=Project.objects.get(id=uri2id(project_uri))
 
     if not expert_uri in badge_api.get_badge_experts(project.badge_uri):
@@ -170,7 +181,9 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly):
         ugly=ugly,
         date_created=datetime.utcnow()
     )
-    
+    if badge_awarded:
+        feedback.badge_awarded = True
+
     last_revision = None
     if project.revision_set.count() > 0:
         last_revision = project.revision_set.latest('date_created')
@@ -181,7 +194,7 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly):
     feedback.save()
 
     send_feedback_notification(get_project(project_uri))
-        
+
 
 def _revision2dict(revision):
     json = {
@@ -201,6 +214,8 @@ def _feedback2dict(feedback):
         'ugly': feedback.ugly,
         'date_created': feedback.date_created
     }
+    if feedback.badge_awarded:
+        json['badge_awarded'] = True
     return json
 
 

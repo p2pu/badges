@@ -94,19 +94,20 @@ def feedback( request, project_id ):
         form = FeedbackForm()
 
     if form.is_valid():
-        project_api.submit_feedback(
-            project['uri'],
-            user_uri,
-            form.cleaned_data['good'],
-            form.cleaned_data['bad'],
-            form.cleaned_data['ugly']
-        )
         if form.cleaned_data.get('award_badge'):
             badge_api.award_badge(
                 badge['uri'], project['author_uri'], user_uri,
                 reverse('project_view', args=(project_id,))
             )
             messages.success(request, _('Badge awarded to user!'))
+        project_api.submit_feedback(
+            project['uri'],
+            user_uri,
+            form.cleaned_data['good'],
+            form.cleaned_data['bad'],
+            form.cleaned_data['ugly'],
+            form.cleaned_data.get('award_badge', False)
+        )
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
 
     context = {
@@ -155,8 +156,18 @@ def revise( request, project_id ):
 
 def review( request ):
     """ This view shows a list of projects for a user that he/she can submit feedback on """
+
+    user = request.session.get('user')
+    projects = []
+    if user:
+        user_badges = badge_api.get_user_badges(user['uri'])
+        for badge in user_badges:
+            projects += project_api.get_projects_ready_for_feedback(badge['uri'])
+    else:
+        pass        
+
     context = {
-        'projects': [],
+        'projects': projects,
     }
 
     return render_to_response(

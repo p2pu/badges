@@ -101,3 +101,24 @@ class ProjectIntegrationTests(TestCase):
         project_api.submit_feedback(project['uri'], badge['author_uri'], 'Ugly', 'Bad', 'Good')
         project_feedback = project_api.get_project_feedback(project['uri'])
         self.assertEqual(len(project_feedback), 1)
+
+
+    def test_final_feedback(self):
+        badge = badge_api.create_badge(**self.badge_values)
+        badge_api.publish_badge(badge['uri'])
+
+        project_values = self.project_values.copy()
+        project_values['badge_uri'] = badge['uri']
+        project = project_api.create_project(**project_values)
+
+        project_feedback = project_api.get_project_feedback(project['uri'])
+        self.assertEqual(len(project_feedback), 0)
+        
+        self.assertTrue(project_api.ready_for_feedback(project['uri']))
+        project_api.submit_feedback(project['uri'], badge['author_uri'], 'Ugly', 'Bad', 'Good', True)
+        project_feedback = project_api.get_project_feedback(project['uri'])
+        self.assertEqual(len(project_feedback), 1)
+
+        self.assertFalse(project_api.ready_for_feedback(project['uri']))
+        self.assertFalse(project_api.can_revise_project(project['uri']))
+

@@ -34,4 +34,4 @@ class Feedback(models.Model):
     bad = models.CharField(max_length=1024)
     ugly = models.CharField(max_length=1024)
     date_created = models.DateTimeField()
-
+    badge_awarded = models.BooleanField(default=False)

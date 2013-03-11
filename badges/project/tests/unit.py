@@ -99,3 +99,19 @@ class SimpleTest(TestCase):
         
         projects = project_api.search_projects(author_uri='/uri/user/user2', badge_uri='/uri/badge/3')
         self.assertEqual(len(projects), 0)
+
+
+    def test_get_projects_ready_for_feedback(self):
+        project_api.create_project('/uri/badge/1', '/uri/user/user1', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+        project_api.create_project('/uri/badge/1', '/uri/user/user2', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+        project_api.create_project('/uri/badge/1', '/uri/user/user3', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+
+        project_api.create_project('/uri/badge/2', '/uri/user/user1', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+        project_api.create_project('/uri/badge/2', '/uri/user/user4', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+        project_api.create_project('/uri/badge/2', '/uri/user/user5', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+
+        project_api.create_project('/uri/badge/3', '/uri/user/user1', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+        project_api.create_project('/uri/badge/3', '/uri/user/user6', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
+
+        projects_ready_for_feedback = project_api.get_projects_ready_for_feedback('/uri/badge/1')
+        self.assertEqual(len(projects_ready_for_feedback), 3)
