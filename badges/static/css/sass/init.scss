@@ -9,9 +9,9 @@ body, input, label, select, input, textarea, button{
   font-family: "sense", Helvetica, sans-serif;
 }
 
-.landing{
+/*.landing{
   background-color: $white;
-}
+}*/
 
 .btn-cyan {
   color: #FFFFFF;
@@ -46,4 +46,8 @@ body, input, label, select, input, textarea, button{
   &.first-element{
     margin-left: 0;
   }
+}
+
+footer{
+  margin: 1em 0;
 }
