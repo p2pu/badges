@@ -1,7 +1,7 @@
 # Django settings for badges project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -170,11 +170,17 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': path('badges.log'),
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 5
         }
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins', 'file'],
             'level': 'ERROR',
             'propagate': True,
         },
