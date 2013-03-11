@@ -6,10 +6,11 @@ Howdy Expert,
 Some time ago, you graciously left feedback for {{ project.author.username }}'s project. Much obliged!
 
 Now {{ project.author.username }} has revised their project and resubmitted it. Would you take a look and see if they've mastered those skills?
+{% endblocktrans %}
 
 project.title - {% url project_feedback project.id %} 
 
+{% blocktrans %}
 Mentorship rules. 
 - The P2PU team
-
-{% endblocktrans %}   
+{% endblocktrans %}

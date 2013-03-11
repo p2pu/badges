@@ -1,15 +1,13 @@
 {% load i18n %}
 {% blocktrans %}
-
 Greetings!
 
 Your project {{ project.title }} has some valuable feedback from an Expert.
-
-project.title - {% url project_feedback project.id %} 
-
+{% endblocktrans %}
+project.title - {{domain}}{% url project_view project.id %} 
+{% blocktrans %}
 Hopefully this feedback sparks some new ideas for you. Why not take your project a bit further and resubmit it?
 
 We can't wait to see what you come up with.
 - The P2PU team
-
 {% endblocktrans %}
