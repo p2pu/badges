@@ -1,6 +1,7 @@
 from django import http
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.contrib.sites.models import Site
 
 import urllib
 import requests
@@ -9,12 +10,13 @@ from p2pu_user import models as p2pu_user_api
 
 def login( request ):
 
+    current_site = Site.objects.get_current()
     referer = request.META.get('HTTP_REFERER')
     if referer:
         request.session['next_url'] = referer
 
     params = {
-        'redirect_uri': "http://localhost:8000{0}".format(reverse('oauth_redirect')),
+        'redirect_uri': "http://{0}{1}".format(current_site.domain, reverse('oauth_redirect')),
         'client_id': settings.OAUTH_CLIENT_KEY,
         'response_type': 'code',
     }
