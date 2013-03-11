@@ -6,3 +6,4 @@ local_settings.py
 venv
 uploads
 settings_local.py
+staticfiles
