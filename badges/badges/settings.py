@@ -150,6 +150,7 @@ INSTALLED_APPS = (
     'oauthclient',
     'notifications',
     'p2pu_user',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
