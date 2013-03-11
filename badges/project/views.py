@@ -166,6 +166,8 @@ def review( request ):
     else:
         pass        
 
+    map(fetch_resources, projects)
+
     context = {
         'projects': projects,
     }

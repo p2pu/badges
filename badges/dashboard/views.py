@@ -7,7 +7,6 @@ from django.contrib import messages
 
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
-from media import models as media_api
 from project import models as project_api
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
