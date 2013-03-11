@@ -1,9 +1,15 @@
 body {
   margin: 0;
-  font-family: "arvo", Helvetica, sans-serif;
   font-size: 16px;
   line-height: 22px;
   color: $slate;
+
+}
+body, input, label, select, input, textarea, button{
+  font-family: "sense", Helvetica, sans-serif;
+}
+
+.landing{
   background-color: $white;
 }
 

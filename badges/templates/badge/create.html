@@ -2,11 +2,9 @@
 {% load i18n %}
 
 {% block body %}
-  <div>
+  <div class="container">
     <h2>{% trans 'Create a Badge' %}</h2>
-  </div>
-  <div>
+
     {% include 'badge/form_snippet.html' %}
   </div>
-
 {% endblock %}

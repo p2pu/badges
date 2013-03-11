@@ -2,11 +2,8 @@
 {% load i18n %}
 
 {% block body %}
-  <div class="row">
-    <h2>{% blocktrans with badge_title=badge.title %}Edit {{badge_title}}{% endblocktrans %}</h2>
-  </div>
-  <div class="row">
-    {% include 'badge/form_snippet.html' %}
-  </div>
-
+    <div class="container">
+        <h2>{% blocktrans with badge_title=badge.title %}Edit {{badge_title}}{% endblocktrans %}</h2>
+        {% include 'badge/form_snippet.html' %}
+    </div>
 {% endblock %}
