@@ -163,13 +163,15 @@ def review( request ):
         user_badges = badge_api.get_user_badges(user['uri'])
         for badge in user_badges:
             projects += project_api.get_projects_ready_for_feedback(badge['uri'])
-    else:
-        pass        
 
-    map(fetch_resources, projects)
+
+    badges = []
+    if len(projects) == 0:
+        badges = badge_api.get_published_badges()
 
     context = {
-        'projects': projects,
+        'projects': map(fetch_resources, projects),
+        'badges': map(fetch_badge_resources, badges)
     }
 
     return render_to_response(

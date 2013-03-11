@@ -22,5 +22,22 @@
     </div>
   </div>
 
+  {% if not projects %}
+  <div class="row">
+    <div class="span12">
+      <p class="alert alert-info">{% blocktrans %}Currently there aren't any projects for you to review, but here are some badges that you can apply for.{% endblocktrans %}</p>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="row">
+    <div class="span12">
+      {% for badge in badges %}
+        {% include 'badge/badge_tile.html' %}
+      {% endfor %}
+    </div>
+  </div>
+
+
 
 {% endblock %}
