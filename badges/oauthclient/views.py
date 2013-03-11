@@ -60,7 +60,7 @@ def redirect( request ):
 
     username = response.json()['user']
     #TODO user_url = response.json()['url']
-    user_image_url = response.json()['image_url']
+    image_url = response.json()['image_url']
 
     request.session['user'] = p2pu_user_api.save_user(username, image_url)
 
