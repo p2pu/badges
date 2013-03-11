@@ -29,7 +29,7 @@ class SimpleTest(TestCase):
             '/uri/image/1',
             'Create a short movie',
             'Create a movie and upload it to youtube or vimeo',
-            '/uri/user/1',
+            '/uri/user/badgemaker',
         ]
 
 
@@ -131,3 +131,30 @@ class SimpleTest(TestCase):
         with patch('notifications.models.send_notification') as send:
             badge_api.award_badge(**kwargs)
             self.assertTrue(send.called)
+
+    def test_get_user_badges(self):
+        badge = badge_api.create_badge(*self.badge_values)
+        badge_api.publish_badge(badge['uri'])
+
+        badge_values = self.badge_values
+        badge_values[0] = 'Badge 2'
+        badge = badge_api.create_badge(*badge_values)
+        badge_api.publish_badge(badge['uri'])
+
+        badge_values[0] = 'Badge 3'
+        badge = badge_api.create_badge(*badge_values)
+        badge_api.publish_badge(badge['uri'])
+
+        badge_values[0] = 'Badge 4'
+        badge_values[4] = '/uri/user/bob'
+        badge = badge_api.create_badge(*badge_values)
+        badge_api.publish_badge(badge['uri'])
+
+        badges = badge_api.get_user_badges('/uri/user/badgemaker')
+        self.assertEqual(len(badges), 3)
+
+        badges = badge_api.get_user_badges('/uri/user/bob')
+        self.assertEqual(len(badges), 1)
+
+        badges = badge_api.get_user_badges('/uri/user/auser')
+        self.assertEqual(len(badges), 0)

@@ -102,6 +102,12 @@ def get_user_draft_badges(author_uri):
     return [_badge2dict(badge) for badge in badges]
 
 
+def get_user_badges(user_uri):
+    """ return all the badges awarded to a user """
+    awards = Award.objects.filter(user_uri=user_uri)
+    return [_badge2dict(award.badge) for award in awards]
+
+
 def search_badges(expression=None, author_uri=None, attribute_value=None):
     raise Exception()
 
@@ -120,7 +126,7 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
     # Check if we can award the badge
     if not badge_creator and not valid_expert:
         raise Exception('Cannot award badge')
-    
+
     award = Award(
         badge=badge,
         user_uri=user_uri,
