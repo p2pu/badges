@@ -23,6 +23,7 @@
       margin-top: 0;
       li{
         padding-top: 10px;
+        margin-right: 1.4375em;
         a{
           font-size: 1.25em;
           font-family: "arvo", Helvetica, sans-serif;
@@ -39,7 +40,7 @@
         }
         & + li{
           margin-left: 1.625em;
-          margin-right: 1.4375em;
+
           a{
             display: inline;
             border-left: 1px solid $slate;
@@ -52,6 +53,13 @@
       }
 
       &.pull-right{
+        li{
+          padding-top: 13px;
+          & + li{
+            padding-top: 10px;
+            margin-left: 0;
+          }
+        }
         a{
           font-size: 1em;
           color: $slate;

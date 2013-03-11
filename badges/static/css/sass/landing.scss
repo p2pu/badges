@@ -91,13 +91,9 @@
   }
 
   .tab-content{
-    margin-bottom: 0;
-    padding: 1em;
-    background-color: #fcfcfc;
-    @include border-radius(0);
-    border-bottom: 2px solid $metal;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    @extend .buletin;
+    border-left: 1px solid $silver;
+    border-right: 1px solid $silver;
   }
 
   hr{
