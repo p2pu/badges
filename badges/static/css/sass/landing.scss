@@ -37,6 +37,14 @@
       & a{
         background-color: $white;
         @include box-shadow(0 -1px 3px rgba(0, 0, 0, 0.055));
+        h3{
+          color: $slate;
+        }
+      }
+    }
+    a{
+      h3{
+        color: $cyan;
       }
     }
   }

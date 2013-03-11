@@ -1,6 +1,9 @@
 Django==1.4.5
 argparse==1.2.1
 distribute==0.6.24
+django-appconf==0.6
+django-compressor==1.2
 django-debug-toolbar==0.9.4
 requests==1.1.0
+six==1.2.0
 wsgiref==0.1.2
