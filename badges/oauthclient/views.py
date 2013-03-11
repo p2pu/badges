@@ -34,17 +34,18 @@ def redirect( request ):
     # get username
     # redirect to final destination
 
+    current_site = Site.objects.get_current()
     params = {
         'code': request.GET['code'],
         'grant_type': 'authorization_code',
         'client_id': settings.OAUTH_CLIENT_KEY,
         'client_secret': settings.OAUTH_CLIENT_SECRET,
-        'redirect_uri': "http://localhost:8000{0}".format(reverse('oauth_redirect')),
+        'redirect_uri': "http://{0}{1}".format(current_site.domain, reverse('oauth_redirect')),
     }
 
     response = requests.post(settings.OAUTH_TOKEN_URL, data=params)
     if response.status_code != 200:
-        raise Exception('Could not authenticate with oauth provider')
+        raise Exception(u'Could not authenticate with oauth provider.')
     data = response.json()
     access_token = data['access_token']
     refresh_token = data['refresh_token']
