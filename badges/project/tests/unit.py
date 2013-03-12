@@ -4,6 +4,7 @@ from mock import patch
 from project import models as project_api
 
 @patch('project.notification_helpers.fetch_resources', lambda x: x)
+@patch('badge.models.get_badge', lambda x: {})
 class SimpleTest(TestCase):
 
     project_values = {

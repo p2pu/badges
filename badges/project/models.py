@@ -43,6 +43,8 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, descriptio
     if Project.objects.filter(author_uri=author_uri, badge_uri=badge_uri, date_deleted__isnull=True).exists():
         raise MultipleProjectError('A user can only submit 1 project for a badge')
 
+    badge = badge_api.get_badge(badge_uri)
+
     if isinstance(tags, list):
         tags = ','.join(tags)
 
@@ -64,8 +66,7 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, descriptio
 
     send_project_creation_notification(project)
     experts = badge_api.get_badge_experts(project['badge_uri'])
-    send_project_creation_expert_notification(project, experts)
-
+    send_project_creation_expert_notification(project, badge, experts)
     return project
 
 

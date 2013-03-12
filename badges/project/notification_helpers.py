@@ -45,11 +45,15 @@ def send_project_creation_notification(project):
     )
     
 
-def send_project_creation_expert_notification(project, experts):
+def send_project_creation_expert_notification(project, badge, experts):
     subject_template = 'emails/project_submitted_expert_subject.txt'
     text_template = 'emails/project_submitted_expert.txt'
     html_template = 'emails/project_submitted_expert.html'
-    context = { 'project': fetch_resources(project) }
+    context = { 
+        'projects': [fetch_resources(project)],
+        'badge': badge
+    }
+    
     for expert in experts:
         send_notification_i18n(
             expert,
