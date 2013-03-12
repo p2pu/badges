@@ -5,6 +5,8 @@ from project import models as project_api
 from badge import models as badge_api
 
 
+@patch('project.notification_helpers.fetch_resources', lambda x: x)
+@patch('badge.notification_helpers.fetch_badge_resources', lambda x: x)
 class ProjectIntegrationTests(TestCase):
 
     badge_values = {

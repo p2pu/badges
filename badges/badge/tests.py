@@ -11,6 +11,7 @@ from badge import models as badge_api
 from mock import patch
 
 
+@patch('badge.notification_helpers.fetch_badge_resources', lambda x: x)
 class SimpleTest(TestCase):
 
     def setUp(self):

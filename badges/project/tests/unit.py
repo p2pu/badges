@@ -3,7 +3,7 @@ from mock import patch
 
 from project import models as project_api
 
-
+@patch('project.notification_helpers.fetch_resources', lambda x: x)
 class SimpleTest(TestCase):
 
     project_values = {
@@ -21,6 +21,7 @@ class SimpleTest(TestCase):
     def setUp(self):
         self.notification_patcher = patch('notifications.models.send_notification')
         self.notification_patcher.start()
+    
 
 
     def tearDown(self):
