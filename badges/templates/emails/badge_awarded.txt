@@ -13,7 +13,7 @@ You are now an "Expert" in this area, and can award the Badge to others. Why not
 {% endblocktrans %}
 
 {% for project in projects %}   
-project.title - {% url project_feedback project.id %} 
+{{ project.title }} - http://badges.p2pu.org{% url project_feedback project.id %} 
 {% endfor %}
 
 {% blocktrans %}

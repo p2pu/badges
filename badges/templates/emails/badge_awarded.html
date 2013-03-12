@@ -12,7 +12,9 @@ An Expert has awarded your project {{ project.title }} a Badge. Check it out!
     <tbody>
         <tr>
             <td>
-                <img src="{{ badge.image.url }}" width="160px"/>
+                <a href="http://badges.p2pu.org{% url badge_view badge.id %}">
+                    <img src="http://badges.p2pu.org{{ badge.image.url }}" width="160px"/>
+                </a>
             </td>
             <td style="padding-left:20px; text-valign:top;">
                 <p>{{ badge.title }}</p>
@@ -29,8 +31,8 @@ You are now an "Expert" in this area, and can award the Badge to others. Why not
 <ul style="list-style:none;">
 {% for project in projects %}   
      <li>
-        <img src="{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
-        <a href="{% url project_feedback project.id %}" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">Give Feedback</a>
+        <img src="http://badges.p2pu.org{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
+        <a href="http://badges.p2pu.org{% url project_view project.id %}" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">Give Feedback</a>
     </li>
 {% endfor %}
 </ul>

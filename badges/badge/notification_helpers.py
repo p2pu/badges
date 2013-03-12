@@ -20,7 +20,6 @@ def send_badge_awarded_notification(badge, expert_uri):
     subject_template = 'emails/badge_awarded_subject.txt'
     text_template = 'emails/badge_awarded.txt'
     html_template = 'emails/badge_awarded.html'
-    context = { 'badge': badge }
     context = { 'badge': fetch_badge_resources(badge) }
     return send_notification_i18n(
         expert_uri,
