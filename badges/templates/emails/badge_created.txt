@@ -9,7 +9,7 @@ Your badge {{ title }} is published, live, and ready-to-go.
 {{ requirements }}
 {% endblocktrans %}
 
-Your Badge now exists at http://badges.p2pu.org/{% url badge_view badge.id %} and learners can apply for it immediately. As the Badge's creator, this badge will automatically appear on your profile.
+Your Badge now exists at http://badges.p2pu.org{% url badge_view badge.id %} and learners can apply for it immediately. As the Badge's creator, this badge will automatically appear on your profile.
 
 Tell the world about your spiffy Badge! 
 

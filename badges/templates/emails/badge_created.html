@@ -12,7 +12,9 @@ Your badge {{ badge.title }} is published, live, and ready-to-go.
     <tbody>
         <tr>
             <td>
-                <img src="http://badges.p2pu.org/{{ badge.image.url }}" width="160px"/>
+                <a href="http://badges.p2pu.org{% url badge_view badge.id %}">
+                    <img src="http://badges.p2pu.org{{ badge.image.url }}" width="160px"/>
+                </a>
             </td>
             <td style="padding-left:20px; text-valign:top;">
                 <p>{{ badge.title }}</p>
