@@ -6,21 +6,7 @@
     <div class="preview-badge">
         <h2>Preview badge</h2>
         <p>This is how your badge will look once published</p>
-        <div class="well span10">
-            <div class="clearfix">
-                <div class="p2pu-badge">
-                    <h4>{{badge.title}}</h4>
-                    <img src="{{ badge.image.url }}"/>
-                </div>
-
-                <div class="span7">
-                    <h3>{% trans 'Description' %}:</h3>
-                        <p>{{badge.description}}</p>
-                    <h3>{% trans 'Requirements' %}:</h3>
-                        <p>{{badge.requirements}}</p>
-                </div>
-            </div>
-        </div>
+        {% include 'badge/badge_info.html' %}
         <div class="preview-control">
             <a href="{% url badge_edit badge.id %}" class="btn">{% trans 'Edit' %}</a>
             <a href="{% url badge_publish badge.id %}" class="btn btn-cyan">{% trans 'Publish' %}</a>

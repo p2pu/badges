@@ -3,84 +3,88 @@
 {% load humanize %}
 
 {% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <h2>{% blocktrans with badge_title=badge.title %}Project submitted for
+                    {{ badge_title }}{% endblocktrans %}</h2>
+            </div>
+        </div>
+        <div>
+            <p>Badge for the Project</p>
+            {% include 'badge/badge_info.html' %}
+        </div>
 
-  <div class="row">
-    <div class="span12">
-      <h2>{% blocktrans with badge_title=badge.title %}Project submitted for {{badge_title}}{% endblocktrans %}</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="span2">
-      <a href="{% url badge_view badge.id %}"><img src="{{ badge.image.url }}"></a>
-    </div>
-    <div class="span10">
-      <p>{{ badge.requirements }}</p>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="span12">
-      <h2>{% blocktrans with username=project.author.username %}Version 1 submitted by {{username}} {% endblocktrans %}</h2>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="span4">
-      <img src="{{project.image.url}}"/>
-    </div>
-    <div class="span8">
-      <dl>
-        <dt>{% trans 'Title' %}</dt>
-        <dd>{{ project.title }}</dd>
-      </dl>
-      <dl>
-        <dt>{% trans 'Url' %}</dt>
-        <dd><a href="{{ project.work_url }}">{{ project.work_url }}</a></dd>
-      </dl>
-      <dl>
-        <dt>{% trans 'Steps taken' %}</dt>
-        <dd>{{ project.steps }}</dd>
-      </dl>
-      <dl>
-        <dt>{% trans 'Lessons learned' %}</dt>
-        <dd>{{ project.reflection }}</dd>
-      </dl>
-    </div>
-  </div>
+            <div class="row">
+                <div class="span12">
+                    <h2>{% blocktrans with username=project.author.username %}Version 1 submitted by
+                        {{ username }} {% endblocktrans %}</h2>
+                </div>
+            </div>
 
-  {% for fb in feedback %}
-    <div class="row">
-      <div class="span12">
-        {% if fb.improvement %}
-          <h2>{% blocktrans with date=fb.date_created|naturaltime %}Project revision on {{date}}{% endblocktrans %}</h2>
-          <h3>{% trans 'Improvements made' %}</h3>
-          <p>{{ fb.improvement }}</p>
-          {% if fb.work_url %}
-            <h3>{% trans 'New URL' %}</h3>
-            <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
-          {% endif %}
-        {% else %}
-          <h2>{% blocktrans with username=fb.expert_uri %}Feedback by {{ username }}{% endblocktrans %}</h2>
-          <h3>{% trans 'Green' %}</h3>
-          <p>{{ fb.good }}</p>
-          <h3>{% trans 'Yellow' %}</h3>
-          <p>{{ fb.bad }}</p>
-          <h3>{% trans 'Red' %}</h3>
-          <p>{{ fb.ugly }}</p>
-        {% endif %}
-      </div>
-    </div>
-  {% endfor %}
+            <div class="row">
+                <div class="span4">
+                    <img src="{{ project.image.url }}"/>
+                </div>
+                <div class="span8">
+                    <dl>
+                        <dt>{% trans 'Title' %}</dt>
+                        <dd>{{ project.title }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>{% trans 'Url' %}</dt>
+                        <dd><a href="{{ project.work_url }}">{{ project.work_url }}</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>{% trans 'Steps taken' %}</dt>
+                        <dd>{{ project.steps }}</dd>
+                    </dl>
+                    <dl>
+                        <dt>{% trans 'Lessons learned' %}</dt>
+                        <dd>{{ project.reflection }}</dd>
+                    </dl>
+                </div>
+            </div>
 
-  <div class="row">
-    <div class="">
-      {% if can_give_feedback %}
-        <a href="{% url project_feedback project.id %}" class="btn btn-large pull-right">{% trans 'Give feedback' %}</a>
-      {% endif %}
-      {% if can_revise %}
-        <a href="{% url project_revise project.id %}" class="btn btn-large pull-right">{% trans 'Revise project' %}</a>
-      {% endif %}
-    </div>
-  </div>
+            {% for fb in feedback %}
+                <div class="row">
+                    <div class="span12">
+                        {% if fb.improvement %}
+                            <h2>{% blocktrans with date=fb.date_created|naturaltime %}Project revision on
+                                {{ date }}{% endblocktrans %}</h2>
+                            <h3>{% trans 'Improvements made' %}</h3>
+                            <p>{{ fb.improvement }}</p>
+                            {% if fb.work_url %}
+                                <h3>{% trans 'New URL' %}</h3>
+                                <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
+                            {% endif %}
+                        {% else %}
+                            <h2>{% blocktrans with username=fb.expert_uri %}Feedback by {{ username }}{% endblocktrans %}</h2>
+                            <h3>{% trans 'Green' %}</h3>
+                            <p>{{ fb.good }}</p>
+                            <h3>{% trans 'Yellow' %}</h3>
+                            <p>{{ fb.bad }}</p>
+                            <h3>{% trans 'Red' %}</h3>
+                            <p>{{ fb.ugly }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="row">
+                <div class="">
+                    {% if can_give_feedback %}
+                        <a href="{% url project_feedback project.id %}"
+                           class="btn btn-large pull-right">{% trans 'Give feedback' %}</a>
+                    {% endif %}
+                    {% if can_revise %}
+                        <a href="{% url project_revise project.id %}"
+                           class="btn btn-large pull-right">{% trans 'Revise project' %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
 
 {% endblock %}

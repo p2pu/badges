@@ -35,63 +35,66 @@
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
         <a class="brand" href="#">
             <img src="{{ STATIC_URL }}img/logo.png" alt="">
         </a>
-          <div class="nav-collapse collapse">
-              <ul class="nav">
-                  <li>
-                      <a href="{% url landing %}"
-                         class="{% block landing %}{% endblock landing %}">
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+              <li>
+                  <a href="{% url landing %}"
+                     class="{% block landing %}{% endblock landing %}">
 
-                          {% trans 'About' %}
+                      {% trans 'About' %}
+                  </a>
+                  <div class="navbar-custom-header-text">
+                      {% trans 'Badges' %}
+                  </div>
+              </li>
+              <li>
+                  <a href="{% url badge_create %}">
+                    {% trans 'Create' %}
+                  </a>
+                  <div class="navbar-custom-header-text">
+                      {% trans 'a Badge' %}
+                  </div>
+              </li>
+
+              <li>
+                  <a href="">
+                      {% trans 'Review' %}
+                  </a>
+                  <div class="navbar-custom-header-text">
+                      {% trans 'a Badge' %}
+                  </div>
+              </li>
+          </ul>
+          <ul class="nav pull-right">
+              {% if request.session.username %}
+                  <li>
+                      <a href="{% url dashboard request.session.username %}">
+                          {% trans 'My Badges' %}
                       </a>
-                      <div class="navbar-custom-header-text">
-                          {% trans 'Badges' %}
-                      </div>
                   </li>
                   <li>
-                      <a href="{% url badge_create %}">
-                        {% trans 'Create' %}
+                      <a href="{% url oauth_logout %}">
+                          {% trans 'Log out' %}
                       </a>
-                      <div class="navbar-custom-header-text">
-                          {% trans 'a Badge' %}
-                      </div>
                   </li>
-
+              {% else %}
                   <li>
-                      <a href="">
-                          {% trans 'Review' %}
+                      <a href="{% url oauth_login %}">
+                          <i class="icon-user"></i>
+                          {% trans 'Log in' %}
                       </a>
-                      <div class="navbar-custom-header-text">
-                          {% trans 'a Badge' %}
-                      </div>
                   </li>
-              </ul>
-              <ul class="nav pull-right">
-                  {% if request.session.username %}
-                      <li>
-                          <a href="{% url dashboard request.session.username %}">
-                              {% trans 'My Badges' %}
-                          </a>
-                      </li>
-                      <li>
-                          <a href="{% url oauth_logout %}">
-                              {% trans 'Log out' %}
-                          </a>
-                      </li>
-                  {% else %}
-                      <li>
-                          <a href="{% url oauth_login %}">
-                              <i class="icon-user"></i>
-                              {% trans 'Log in' %}
-                          </a>
-                      </li>
-                  {% endif %}
-              </ul>
-          </div>
-
-
+              {% endif %}
+          </ul>
+        </div>
       </div>
     </div>
   </div>

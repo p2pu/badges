@@ -3,43 +3,48 @@
 
 {% block body %}
 
-  <div class="row">
-    <form action="" method="POST" >
-      <fieldset>
-        {% csrf_token %}
-        <div class="control-group {% if form.errors.good %}error{% endif %}">
-          <label>{% trans 'Green' %}</label>
-          <textarea rows="5" name="good" class="span8" placeholder="{% trans 'What is good about the project?' %}" {% if form.good.value %}value="{{form.good.value}}"{% endif %} required ></textarea>
-          {% for error in form.errors.good %}
-            <span class="help-block">{{ error }}</span>
-          {% endfor %}
+    <div class="container">
+        <div>
+            <h2>Review Project progress</h2>
         </div>
-       
-        <div class="control-group {% if form.errors.bad %}error{% endif %}">
-          <label>{% trans 'Yellow' %}</label>
-          <textarea rows="5" name="bad" class="span8" placeholder="{% trans 'What is not so good about the project?' %}" {% if form.bad.value %}value="{{form.bad.value}}"{% endif %} required ></textarea>
-          {% for error in form.errors.bad %}
-            <span class="help-block">{{ error }}</span>
-          {% endfor %}
+        <div>
+            <form action="" method="POST">
+                <fieldset>
+                    {% csrf_token %}
+                    <div class="control-group {% if form.errors.good %}error{% endif %}">
+                        <label>{% trans 'Green' %}</label>
+                        <textarea rows="5" name="good" class="span8"
+                                  placeholder="{% trans 'What is good about the project?' %}"
+                                  {% if form.good.value %}value="{{ form.good.value }}"{% endif %} required></textarea>
+                        {% for error in form.errors.good %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="control-group {% if form.errors.bad %}error{% endif %}">
+                        <label>{% trans 'Yellow' %}</label>
+                        <textarea rows="5" name="bad" class="span8"
+                                  placeholder="{% trans 'What is not so good about the project?' %}"
+                                  {% if form.bad.value %}value="{{ form.bad.value }}"{% endif %} required></textarea>
+                        {% for error in form.errors.bad %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="control-group {% if form.errors.ugly %}error{% endif %}">
+                        <label>{% trans 'Green' %}</label>
+                        <textarea rows="5" name="ugly" class="span8"
+                                  placeholder="{% trans 'What concerns do you have with the project?' %}"
+                                  {% if form.ugly.value %}value="{{ form.ugly.value }}"{% endif %} required></textarea>
+                        {% for error in form.errors.ugly %}
+                            <span class="help-block">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    <div class="control-group">
+                        <label class="checkbox"><input type="checkbox" name="award_badge"> {% trans 'Award badge' %}
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-cyan btn-large">{% trans 'Submit feedback' %}</button>
+                </fieldset>
+            </form>
         </div>
-       
-        <div class="control-group {% if form.errors.ugly %}error{% endif %}">
-          <label>{% trans 'Green' %}</label>
-          <textarea rows="5" name="ugly" class="span8" placeholder="{% trans 'What concerns do you have with the project?' %}" {% if form.ugly.value %}value="{{form.ugly.value}}"{% endif %} required ></textarea>
-          {% for error in form.errors.ugly %}
-            <span class="help-block">{{ error }}</span>
-          {% endfor %}
-        </div>
-
-        <div class="control-group">
-          <label class="checkbox"><input type="checkbox" name="award_badge"> {% trans 'Award badge' %}</label>
-        </div>
-
-        <button type="submit" class="btn">{% trans 'Submit feedback' %}</button>
-      </fieldset>
-
-    </form>
-
-  </div>
-
+    </div>
 {% endblock %}
