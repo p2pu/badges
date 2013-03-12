@@ -1,14 +1,11 @@
 {% load i18n %}
-{% blocktrans %}
-
 Howdy Expert,
 
 Some time ago, you graciously left feedback for {{ project.author.username }}'s project. Much obliged!
 
 Now {{ project.author.username }} has revised their project and resubmitted it. Would you take a look and see if they've mastered those skills?
-{% endblocktrans %}
 
-project.title - {% url project_feedback project.id %} 
+{{ project.title }} - http://badges.p2pu.org{% url project_view project.id %} 
 
 {% blocktrans %}
 Mentorship rules. 
