@@ -1,10 +1,15 @@
 from django import http
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 from django.contrib.sites.models import Site
+from django.contrib import messages
 
 import urllib
 import requests
+
+import logging
+log = logging.getLogger(__name__)
 
 from p2pu_user import models as p2pu_user_api
 
@@ -45,7 +50,9 @@ def redirect( request ):
 
     response = requests.post(settings.OAUTH_TOKEN_URL, data=params)
     if response.status_code != 200:
-        raise Exception(u'Could not authenticate with oauth provider.')
+        messages.error(request, _('There was a problem while trying to log in! Please try again.'))
+        log.error(u'Could not authenticate with oauth provider: {0}.'.format(response.text))
+        return http.HttpResponseRedirect(reverse('landing'))
     data = response.json()
     access_token = data['access_token']
     refresh_token = data['refresh_token']
@@ -56,7 +63,9 @@ def redirect( request ):
 
     response = requests.get(settings.OAUTH_ID_URL, params=params)
     if response.status_code != 200:
-        raise Exception('Could not get identity from oauth provider')
+        messages.error(request, _('There was a problem while trying to log in! Please try again.'))
+        log.error(u'Could not get identity from oauth provider: {0}'.format(response.text))
+        return http.HttpResponseRedirect(reverse('landing'))
 
     username = response.json()['user']
     #TODO user_url = response.json()['url']
