@@ -9,10 +9,6 @@ body, input, label, select, input, textarea, button{
   font-family: "sense", Helvetica, sans-serif;
 }
 
-/*.landing{
-  background-color: $white;
-}*/
-
 .btn-cyan {
   color: #FFFFFF;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -47,6 +43,7 @@ body, input, label, select, input, textarea, button{
     margin-left: 0;
   }
 }
+
 .well{
   .p2pu-badge{
     margin-top: 20px;
@@ -54,4 +51,27 @@ body, input, label, select, input, textarea, button{
 }
 footer{
   margin: 1em 0;
+}
+
+.nav-tabs{
+  margin-bottom: 0px;
+  & > .active {
+    & a{
+      background-color: $white;
+      @include box-shadow(0 -1px 3px rgba(0, 0, 0, 0.055));
+      &:hover{
+        background-color: $white;
+      }
+    }
+  }
+
+}
+
+.tab-content{
+  background-color: $white;
+  border-bottom: 2px solid $silver;
+  border-left: 1px solid $silver;
+  border-right: 1px solid $silver;
+  padding: 12px 12px 12px 12px;
+  margin-bottom: 20px;
 }
