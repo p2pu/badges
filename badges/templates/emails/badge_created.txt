@@ -1,20 +1,19 @@
 {% load i18n %}
-{% blocktrans %}
-
+{% blocktrans with title=badge.title decription=badge.description requirements=badge.requirements%}
 Howdy!
 
-Your badge {{ badge.title }} is published, live, and ready-to-go.
+Your badge {{ title }} is published, live, and ready-to-go.
 
-{{ badge.title }}                
-{{ badge.description }}                
-{{ badge.requirements }}
+{{ title }}
+{{ description }}
+{{ requirements }}
+{% endblocktrans %}
 
-Your Badge now exists on badges.p2pu.org and learners can apply for it immediately. As the Badge's creator, this badge will automatically appear on your profile.
+Your Badge now exists at http://badges.p2pu.org/{% url badge_view badge.id %} and learners can apply for it immediately. As the Badge's creator, this badge will automatically appear on your profile.
 
 Tell the world about your spiffy Badge! 
 
+{% blocktrans %}
 Yours in the future of learning, 
 - The P2PU team
-
-{% endblocktrans %}   
-     
+{% endblocktrans %}
