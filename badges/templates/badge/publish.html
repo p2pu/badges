@@ -2,13 +2,28 @@
 {% load i18n %}
 
 {% block body %}
-  <div class="alert">
-    <p class="lead">{% blocktrans %}Publishing your badge will mean that you will no longer be able to edit the badge and make changes or corrections to it. Are you sure that you want to continue?{% endblocktrans %}</p>
-    <a class="btn pull-right" href="{% url badge_preview badge.id %}" >{% trans 'No, go back' %}</a>
-    <form action="" method="POST">
-      {% csrf_token %}  
-      <button class="btn pull-right">{% trans "Yes, it's ready" %}</button>
-    </form>
-    <div class="clearfix"></div>
-  </div>
+    <div class="container badge-preview-publish">
+        <div class="alert">
+            <p class="lead">
+                {% blocktrans %}Publishing your badge will mean that
+                    you will no longer be able to edit the badge and
+                    make changes or corrections to it.
+                    Are you sure that you want to continue?
+                {% endblocktrans %}
+            </p>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="publish-controlls pull-right btn-group">
+                    <button class="btn btn-cyan">{% trans "Yes, it's ready" %}</button>
+                    <a class="btn" href="{% url badge_preview badge.id %}" >
+                        {% trans 'No, go back' %}
+                    </a>
+                </div>
+            </form>
+            <div class="clearfix"></div>
+        </div>
+        {% include 'badge/badge_info.html' with draft='True' %}
+    </div>
+
 {% endblock %}

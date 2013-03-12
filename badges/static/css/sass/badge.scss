@@ -1,0 +1,40 @@
+
+
+
+.p2pu-badge{
+  text-align: center;
+  padding: 10px 10px 5px;
+  min-height: 184px;
+  position: relative;
+  @include gradient-vertical-three-colors($startColor: $white, $midColor: $white, $colorStop: 85%, $endColor: $silverLight );
+  @extend .thumbnail;
+  h4{
+    text-align: center;
+    border-bottom: 1px dotted $silver;
+    color: $cyan;
+    min-height: 50px;
+  }
+  img{
+    margin-bottom: 10px;
+  }
+  a{
+
+    display: block;
+    &:hover{
+      h4{
+        color: $clemintine;
+      }
+    }
+  }
+  &:hover{
+    text-decoration: none;
+    border-color: $cyan;
+    @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
+  }
+  .badge-draft{
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    bottom: -20px;
+  }
+}

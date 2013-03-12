@@ -2,8 +2,12 @@ Django==1.4.5
 South==0.7.6
 argparse==1.2.1
 distribute==0.6.24
+django-appconf==0.6
+django-compressor==1.2
 django-debug-toolbar==0.9.4
 mock==1.0.1
 psycopg2==2.4.6
 requests==1.1.0
+six==1.2.0
 wsgiref==0.1.2
+django-compressor==1.2

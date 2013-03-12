@@ -1,0 +1,3 @@
+[submodule "badges/static/css/libs/p2pu-css-framework"]
+	path = badges/static/css/libs/p2pu-css-framework
+	url = https://github.com/p2pu/p2pu-css-framework.git

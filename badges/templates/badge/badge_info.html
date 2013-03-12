@@ -1,0 +1,24 @@
+{% load i18n %}
+
+
+<div class="well">
+    <div class="clearfix">
+        <div class="p2pu-badge span2">
+            <h4>{{ badge.title }}</h4>
+            {% if draft %}
+                <img src="{{ STATIC_URL }}img/draft.png" alt="Draft" class="badge-draft">
+            {% endif %}
+            <img src="{{ badge.image.url }}"/>
+        </div>
+
+        <div class="span7">
+            <h3>{% trans 'Description' %}:</h3>
+
+            <p>{{ badge.description }}</p>
+
+            <h3>{% trans 'Requirements' %}:</h3>
+
+            <p>{{ badge.requirements }}</p>
+        </div>
+    </div>
+</div>

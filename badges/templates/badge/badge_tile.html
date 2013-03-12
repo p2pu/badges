@@ -1,13 +1,17 @@
 {% load i18n %}
 
-<li class="span2">
-  <div class="thumbnail">
-    <img src="{{ badge.image.url }}"/>
+<li class="p2pu-badge span2">
     {% if badge.publised %}
-      <h3><a href="{% url badge_view badge.id %}">{{badge.title}}</a></h3>
+        <a href="{% url badge_view badge.id %}">
+            <h4>{{badge.title}}</h4>
+            <img src="{{ badge.image.url }}"/>
+        </a>
     {% else %}
-      <h3><a href="{% url badge_preview badge.id %}">{{badge.title}}</a></h3>
+        <a href="{% url badge_preview badge.id %}">
+            <h4>{{badge.title}}</h4>
+            <img src="{{ badge.image.url }}"/>
+        </a>
     {% endif %}
-  </div>
+
 </li>
 

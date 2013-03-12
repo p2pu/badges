@@ -3,52 +3,53 @@
 
 {% block body %}
 
-  <div class="row">
-    <div class="span3">
-      <img src="{{badge.image.url}}"/>
+    <div class="container">
+        <div class="clearfix badge-view-badges">
+            <h2>Badge</h2>
+
+            {% include 'badge/badge_info.html' %}
+
+            <a href="{% url project_create badge.id %}" class="btn btn-large btn-cyan">
+                {% if projects %}
+                    {% trans 'Submit another project' %}
+                {% else %}
+                    {% trans 'Submit a project' %}
+                {% endif %}
+            </a>
+        </div>
+
+
+        <div class="clearfix badge-view-projects">
+            <h2>{% trans 'Projects' %}</h2>
+            <ul class="thumbnails p2pu-project">
+                {% for project in projects %}
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <a href="{% url project_view project.id %}">
+                                <img src="{{ project.image.url }}"/>
+                            </a>
+
+                            <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
+
+                            <p>{% blocktrans with username=project.author.username %}by
+                                {{ username }}{% endblocktrans %}<p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="clearfix badge-view-experts">
+            <h2>{% trans 'Experts' %}</h2>
+            <ul class="thumbnails">
+                {% for expert in experts %}
+                    <li>
+                        <a href="{{ expert }}">
+                            <img src="//placehold.it/100x100" alt="">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-    <div class="span7">
-      <h3>{{badge.title}}</h3>
-      <p>{{badge.description}}</p>
-      <h3>Badge requirements</h3>
-      <p>{{badge.requirements}}</p>
-    </div>
-  </div>
- 
-
-  <div class="row">
-    <p class="span12"><a href="{% url project_create badge.id %}" class="btn btn-large">{% trans 'Submit a project' %}</a></p>
-  </div>
-
-  <div class="row">
-    <div class="span12">
-      <h3>{% trans 'Projects' %}</h3>
-      <ul class="thumbnails">
-        {% for project in projects %}    
-          <li class="span3">
-            <div class="thumbnail">
-              <a href="{% url project_view project.id %}">
-                <img src="{{ project.image.url }}"/>
-              </a>
-              <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
-              <p>{% blocktrans with username=project.author.username %}by {{username}}{% endblocktrans %}<p>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="span12">
-      <h3>{% trans 'Experts' %}</h3>
-      <ul class="thumbnails">
-        {% for expert in experts %}
-          <li>{{expert}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-
-
 {% endblock %}

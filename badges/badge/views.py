@@ -102,6 +102,7 @@ def publish( request, badge_id ):
 
     #TODO check user
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+    fetch_badge_resources(badge)
     if request.method == 'POST':
         badge_api.publish_badge(badge_api.id2uri(badge_id))
         return http.HttpResponseRedirect(reverse(

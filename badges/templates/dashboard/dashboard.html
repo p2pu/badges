@@ -5,30 +5,74 @@
   <div class="row">
     <div class="span6">
       <h2>Badges</h2>
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="">Earned</a></li>
-        <li><a href="">Earned</a></li>
-        <li><a href="">Under review</a></li>
-        <li><a href="">Awarded</a></li>
-        <li><a href="">Created</a></li>
-      </ul>
-      <ul class="unstyled">
-        <li><a href="badge.html"><img src="http://placehold.it/50x50"/>Content Marketing</a></li>
-        <li><a href="badge.html"><img src="http://placehold.it/50x50"/>Movie Maker</a></li>
-      </ul>
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#badge-earned" data-toggle="tab">Earned</a></li>
+          <li><a href="#badge-review" data-toggle="tab">Under review</a></li>
+          <li><a href="#badge-awarded" data-toggle="tab">Awarded</a></li>
+          <li><a href="#badge-created" data-toggle="tab">Created</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="badge-earned">
+            <ul class="thumbnails fit-thumbnails">
+              {% for badge in earned_badges %}
+                {% include 'badge/badge_tile.html' %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="tab-pane" id="badge-review">
+            <ul class="thumbnails fit-thumbnails">
+              {% for badge in draft_badges %}
+                {% include 'badge/badge_tile.html' %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="tab-pane" id="badge-awarded">
+            <ul class="thumbnails fit-thumbnails">
+              {% for badge in awarded_badges %}
+                {% include 'badge/badge_tile.html' %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="tab-pane" id="badge-created">
+            <ul class="thumbnails fit-thumbnails">
+              {% for badge in created_badges %}
+                {% include 'badge/badge_tile.html' %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="span6">
       <h2>Feedback</h2>
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="">Latest</a></li>
-        <li><a href="">Your Projects</a></li>
-        <li><a href="">Peer Projects</a></li>
-      </ul>
-      <ul class="unstyled">
-        <li><a href="#"><img src="http://placehold.it/50x50"/>Veelahan Frow</a></li>
-        <li><a href="#"><img src="http://placehold.it/50x50"/>Manfred Ooolah</a></li>
-      </ul>
-
+      <div class="tabbable">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#feedback-latest" data-toggle="tab">Latest</a></li>
+          <li><a href="#feedback-your-projects" data-toggle="tab">Your Projects</a></li>
+          <li><a href="#feedback-peer-projects" data-toggle="tab">Peer Projects</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="feedback-latest">
+            <ul class="thumbnails fit-thumbnails">
+              {% for feedback in feedback_latest %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="tab-pane" id="feedback-your-projects">
+            <ul class="thumbnails fit-thumbnails">
+              {% for feedback in feedback_peer_projects %}
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="tab-pane" id="feedback-peer-projects">
+            <ul class="thumbnails fit-thumbnails">
+              {% for feedback in feedback_your_projects %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

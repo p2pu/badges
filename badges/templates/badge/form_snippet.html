@@ -6,7 +6,7 @@
 
     <div class="control-group {% if form.errors.image %}error{% endif %}">   
       <label>{% trans 'Choose an image to begin:' %}</label>
-      <input name="image" type="file" required accept="image/*" />
+      <input name="image" type="file" required accept="image/*" id="upload-bage-img"/>
       {% for error in form.errors.image %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -36,7 +36,7 @@
       {% endfor %}
     </div>
 
-    <button type="submit" class="btn btn-large">{% trans 'Save and preview your badge' %}</button>
+    <button type="submit" class="btn">Save draft</button>
   </fieldset>
 </form>
 
