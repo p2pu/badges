@@ -16,8 +16,8 @@
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
   {% compress css %}
-      <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css">
-      <link rel="stylesheet" href="{{STATIC_URL}}css/main.css">
+<!--      <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css"> -->
+<!--      <link rel="stylesheet" href="{{STATIC_URL}}css/main.css"> -->
       <link rel="stylesheet" type="text/x-scss"
             href="{{ STATIC_URL }}css/sass/badges.scss">
       <link rel="stylesheet" type="text/x-scss"
@@ -100,7 +100,7 @@
   </div>
 
 
-  <div class="body">
+  <div class="body container">
     {% if messages %}
       {% for message in messages %}
         <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -109,9 +109,8 @@
         </div>
       {% endfor %}
     {% endif %}
-
     {% block body %}{% endblock %}
-  </div>
+    </div>
 
   <footer>
       <div class="container">

@@ -17,7 +17,13 @@ def profile( request, username ):
     context = {}
     user_uri = u'/uri/user/{0}'.format(username)
     context['draft_badges'] = badge_api.get_user_draft_badges(user_uri)
+    context['earned_badges'] = badge_api.get_user_earned_badges(user_uri)
+    context['created_badges'] = badge_api.get_user_created_badges(user_uri)
+    context['awarded_badges'] = badge_api.get_user_awarded_badges(user_uri)
     map(fetch_badge_resources, context['draft_badges'])
+    map(fetch_badge_resources, context['earned_badges'])
+    map(fetch_badge_resources, context['created_badges'])
+    map(fetch_badge_resources, context['awarded_badges'])
 
     return render_to_response(
         'dashboard/dashboard.html',
