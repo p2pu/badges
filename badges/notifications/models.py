@@ -16,7 +16,7 @@ def send_notification_i18n( receiver_uri, subject_template, text_template, html_
     text = localize_for_user(receiver_uri, text_template, context).strip()
     html = None
     if html_template:
-        html = localize_for_user(receiver_uri, html_template, context).strp()
+        html = localize_for_user(receiver_uri, html_template, context).strip()
 
     return send_notification(receiver_uri, subject, text, html, sender, callback)
 
