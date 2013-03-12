@@ -1,13 +1,13 @@
 {% load i18n %}
-{% blocktrans %}
 Greetings!
 
 Your project {{ project.title }} has some valuable feedback from an Expert.
-{% endblocktrans %}
-project.title - {{domain}}{% url project_view project.id %} 
-{% blocktrans %}
+
+{{ project.title }} - http://badges.p2pu.org{% url project_view project.id %} 
+
 Hopefully this feedback sparks some new ideas for you. Why not take your project a bit further and resubmit it?
 
+{% blocktrans %}
 We can't wait to see what you come up with.
 - The P2PU team
 {% endblocktrans %}

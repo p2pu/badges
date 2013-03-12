@@ -11,8 +11,8 @@ Your project {{ project.title }} has some valuable feedback from an Expert.
 <p>
 <ul style="list-style:none;">
      <li>
-        <img src="{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
-        <a href="{% url project_feedback project.id %}" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">View Feedback</a>
+        <img src="http://badges.p2pu.org{{ project.image.url }}" width="100px" style="clear:left;float:left;margin-right:20px;margin-bottom:20px;"/>
+        <a href="http://badges.p2pu.org{% url project_view project.id %}" style="margin-top:25px;float:left;padding:15px;background-color:#A3BE00;color:white;display:inline-block;width:auto; text-align:center;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;text-decoration:none">View Feedback</a>
     </li>
 </ul>
 </p>
