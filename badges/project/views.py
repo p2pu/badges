@@ -8,6 +8,7 @@ from django.contrib import messages
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
 from media import models as media_api
+from p2pu_user import models as p2pu_user_api
 from project import models as project_api
 from project.forms import ProjectForm
 from project.forms import FeedbackForm
@@ -59,6 +60,8 @@ def view( request, project_id ):
     badge = badge_api.get_badge(project['badge_uri'])
     badge = fetch_badge_resources(badge)
     feedback = project_api.get_project_feedback(project['uri'])
+    for fb in feedback:
+        fb['expert'] = p2pu_user_api.get_user(fb['expert_uri'])
     can_revise = False
     can_give_feedback = False
     if request.session.get('user'):
