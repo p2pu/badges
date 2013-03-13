@@ -2,18 +2,48 @@
 {% load i18n %}
 
 {% block body %}
-<div class="container">
-    <div class="preview-badge">
-        <h2>Preview badge</h2>
-        <p>This is how your badge will look once published</p>
-        {% include 'badge/badge_info.html' %}
-        <div class="preview-control">
-            <a href="{% url badge_edit badge.id %}" class="btn">{% trans 'Edit' %}</a>
-            <a href="{% url badge_publish badge.id %}" class="btn btn-cyan">{% trans 'Publish' %}</a>
-        </div>
+    <div class="container badge-preview-publish">
+        <h2>{% trans 'Preview Your Masterpiece' %}</h2>
+        {% include 'badge/badge_info.html'  %}
+            
+        {% if request.session.user and request.session.user.uri = badge.author_uri %}
+            <div class="alert">
+                <h3>{% trans 'Stop' %}!</h3>
+                <p class="lead">
+                    Are you ready to publish your Badge?
+                    You won’t be able to edit it later.
+                    You might want to double-check: </p>
+                <p>
+                    {% blocktrans %}Publishing your badge will mean that
+                        you will no longer be able to edit the badge and
+                        make changes or corrections to it.
+                        Are you sure that you want to continue?
+                    {% endblocktrans %}
+                </p>
+                    <ul>
+                        <li>{% trans 'Spelling mistakes or missing digits' %}?</li>
+                        <li>{% trans 'Are all criteria present and accurate? ' %}</li>
+                        <li>{% trans 'Is your image clear, crisp and well-placed?' %}</li>
+                    </ul>
+                    <form action="{% url badge_publish badge.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="publish-controlls">
+                            <a class="btn" href="{% url badge_edit badge.id %}" >
+                                {% trans 'Edit Badge' %}
+                            </a>
+                            <a class="btn" href="{% url dashboard request.session.user.username %}">
+                                {% trans 'Save & Return Later' %}
+                            </a>
+                            <button class="btn btn-cyan">
+                                {% trans 'Publish this sucker' %}
+                            </button>
+
+                        </div>
+                    </form>
+                <div class="clearfix"></div>
+            </div>
+        {% endif %}
+
     </div>
-
-
-</div>
 
 {% endblock %}

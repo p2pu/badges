@@ -104,12 +104,10 @@ def edit( request, badge_id ):
 
 @require_login
 def publish( request, badge_id ):
-
-    #TODO check user
     user = request.session['user']
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
 
-    if not request.session['user']['uri'] == badge['author_uri']:
+    if not user['uri'] == badge['author_uri']:
         messages.error(request, _('You cannot publish someone elses badge!'))
         return http.HttpResponseRedirect(reverse(
             'badge_preview', args=(badge_id,)
@@ -121,16 +119,10 @@ def publish( request, badge_id ):
             'badge_view', args=(badge_id,)
         ))
 
-    fetch_badge_resources(badge)
-    return render_to_response(
-        'badge/publish.html',
-        {
-            'badge': badge,
-            'user': user,
-        },
-        context_instance=RequestContext(request)
-    )
-
+    return http.HttpResponseRedirect(reverse(
+        'badge_preview', args=(badge_id,)
+    ))
+    
 
 def view( request, badge_id ):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))

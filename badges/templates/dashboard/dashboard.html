@@ -4,14 +4,14 @@
 {% block body %}
     <div class="row">
         <div class="span6">
-            <h2>Badges</h2>
+            <h2>{% trans 'Badges' %}</h2>
 
             <div class="tabbable">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#badge-earned" data-toggle="tab">Earned</a></li>
-                    <li><a href="#badge-review" data-toggle="tab">Under review</a></li>
-                    <li><a href="#badge-awarded" data-toggle="tab">Awarded</a></li>
-                    <li><a href="#badge-created" data-toggle="tab">Created</a></li>
+                    <li class="active"><a href="#badge-earned" data-toggle="tab">{% trans 'Earned' %}</a></li>
+                    <li><a href="#badge-review" data-toggle="tab">{% trans 'Under review' %}</a></li>
+                    <li><a href="#badge-awarded" data-toggle="tab">{% trans 'Awarded' %}</a></li>
+                    <li><a href="#badge-created" data-toggle="tab">{% trans 'Created' %}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="badge-earned">
@@ -46,30 +46,33 @@
             </div>
         </div>
         <div class="span6">
-            <h2>Feedback</h2>
+            <h2>{% trans 'Feedback' %}</h2>
 
             <div class="tabbable">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#feedback-latest" data-toggle="tab">Latest</a></li>
-                    <li><a href="#feedback-your-projects" data-toggle="tab">Your Projects</a></li>
-                    <li><a href="#feedback-peer-projects" data-toggle="tab">Peer Projects</a></li>
+                    <li class="active"><a href="#feedback-latest" data-toggle="tab">{% trans 'Latest' %}</a></li>
+                    <li><a href="#feedback-your-projects" data-toggle="tab">{% trans 'Your Projects' %}</a></li>
+                    <li><a href="#feedback-peer-projects" data-toggle="tab">{% trans 'Peer Projects' %}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="feedback-latest">
                         <ul class="thumbnails fit-thumbnails">
-                            {% for feedback in feedback_latest %}
+                            {% for project in feedback_latest %}
+                                {% include 'project/project_tile.html' %}
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="tab-pane" id="feedback-your-projects">
                         <ul class="thumbnails fit-thumbnails">
-                            {% for feedback in feedback_peer_projects %}
+                            {% for project in feedback_your_projects %}
+                                {% include 'project/project_tile.html' %}
                             {% endfor %}
                         </ul>
                     </div>
                     <div class="tab-pane" id="feedback-peer-projects">
                         <ul class="thumbnails fit-thumbnails">
-                            {% for feedback in feedback_your_projects %}
+                            {% for project in feedback_peer_projects %}
+                                {% include 'project/project_tile.html' %}
                             {% endfor %}
                         </ul>
                     </div>

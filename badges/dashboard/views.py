@@ -25,6 +25,7 @@ def profile( request, username ):
     map(fetch_badge_resources, context['awarded_badges'])
 
     context['feedback_your_projects'] = project_api.search_projects(author_uri=user_uri)
+    map(fetch_resources, context['feedback_your_projects'])
     peer_projects = []
     feedback_latest = []
     for badge in context['earned_badges']:
@@ -32,9 +33,9 @@ def profile( request, username ):
         peer_projects += project_api.search_projects(badge_uri=badge['uri'])
 
     filter_func = lambda project: not project['author_uri'] == user_uri
-    feedback_peer_projects = filter(filter_func, peer_projects)
-    context['feedback_peer_projects'] = peer_projects
-    context['feedback_latest'] = feedback_latest
+    peer_projects = filter(filter_func, peer_projects)
+    context['feedback_peer_projects'] = map(fetch_resources, peer_projects)
+    context['feedback_latest'] = map(fetch_resources, feedback_latest)
     return render_to_response(
         'dashboard/dashboard.html',
         context,
