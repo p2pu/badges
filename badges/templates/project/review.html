@@ -4,39 +4,41 @@
 
 {% block body %}
 
-  <div class="row">
-    <div class="span12">
-      <ul class="thumbnails">
-        {% for project in projects %}    
-          <li class="span3">
-            <div class="thumbnail">
-              <a href="{% url project_view project.id %}">
-                <img src="{{ project.image.url }}"/>
-              </a>
-              <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
-              <p>{% blocktrans with username=project.author.username %}by {{username}}{% endblocktrans %}<p>
+    <div class="container">
+        <h2>{% trans 'Give Feedback to this Projects' %}</h2>
+        <ul class="thumbnails">
+            {% for project in projects %}
+                <li class="span3 p2pu-project">
+                    <div class="thumbnail ">
+                        <a href="{% url project_view project.id %}">
+                            <img src="{{ project.image.url }}"/>
+                        </a>
+
+                        <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
+
+                        <p>{% blocktrans with username=project.author.username %}by {{ username }}{% endblocktrans %}<p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if not projects %}
+        <div class="row">
+            <div class="span12">
+                <p class="alert alert-info">{% blocktrans %}Currently there aren't any projects for you to review, but
+                    here are some badges that you can apply for.{% endblocktrans %}</p>
             </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
+        </div>
+    {% endif %}
 
-  {% if not projects %}
-  <div class="row">
-    <div class="span12">
-      <p class="alert alert-info">{% blocktrans %}Currently there aren't any projects for you to review, but here are some badges that you can apply for.{% endblocktrans %}</p>
+    <div class="row">
+        <div class="span12">
+            {% for badge in badges %}
+                {% include 'badge/badge_tile.html' %}
+            {% endfor %}
+        </div>
     </div>
-  </div>
-  {% endif %}
-
-  <div class="row">
-    <div class="span12">
-      {% for badge in badges %}
-        {% include 'badge/badge_tile.html' %}
-      {% endfor %}
-    </div>
-  </div>
 
 
 

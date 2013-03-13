@@ -5,8 +5,12 @@
 
     <div class="container">
         <div>
-            <h2>{% blocktrans with badge_title=badge.title %}Submit Project for {{ badge_title }}
-                .{% endblocktrans %}</h2>
+            <h2>
+                {% blocktrans with badge_title=badge.title %}
+                    Submit Project
+                .{% endblocktrans %}
+            </h2>
+            {% include 'badge/badge_info.html' %}
         </div>
         <div>
             {% include 'project/form_snippet.html' %}
