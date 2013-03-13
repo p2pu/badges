@@ -61,7 +61,8 @@ def view( request, project_id ):
     badge = fetch_badge_resources(badge)
     feedback = project_api.get_project_feedback(project['uri'])
     for fb in feedback:
-        fb['expert'] = p2pu_user_api.get_user(fb['expert_uri'])
+        if fb.get('expert_uri'):
+            fb['expert'] = p2pu_user_api.get_user(fb['expert_uri'])
     can_revise = False
     can_give_feedback = False
     if request.session.get('user'):
