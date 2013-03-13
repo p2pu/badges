@@ -90,9 +90,12 @@ class SimpleTest(TestCase):
         badge_api.publish_badge(badge['uri'])
         self.assertRaises(Exception, badge_api.update_badge, [badge['uri']], {'title':'Updated title'})
         badges = badge_api.get_published_badges()
-        self.assertTrue(len(badges) == 1)
-        badges = badge_api.get_user_draft_badges(badge['uri'])
-        self.assertTrue(len(badges) == 0)
+        self.assertEqual(len(badges), 1)
+
+        badges = badge_api.get_user_draft_badges(badge['author_uri'])
+        self.assertEqual(len(badges), 0)
+        badges = badge_api.get_user_created_badges(badge['author_uri'])
+        self.assertEqual(len(badges), 1)
 
 
     def test_unique_title(self):
@@ -126,6 +129,11 @@ class SimpleTest(TestCase):
         kwargs['expert_uri'] = badge['author_uri']
         badge_api.award_badge(**kwargs)
         self.assertIn(kwargs['user_uri'], badge_api.get_badge_experts(badge['uri']))
+        badges = badge_api.get_user_earned_badges(kwargs['user_uri'])
+        self.assertEqual(len(badges), 1)
+        badges = badge_api.get_user_awarded_badges(kwargs['expert_uri'])
+        self.assertEqual(len(badges), 2) # 2 because author awards it to self
+
 
         # test that badge awards triggers notifications
         kwargs['user_uri'] = '/uri/user/ialsowantbadge'
@@ -151,11 +159,11 @@ class SimpleTest(TestCase):
         badge = badge_api.create_badge(*badge_values)
         badge_api.publish_badge(badge['uri'])
 
-        badges = badge_api.get_user_badges('/uri/user/badgemaker')
+        badges = badge_api.get_user_earned_badges('/uri/user/badgemaker')
         self.assertEqual(len(badges), 3)
 
-        badges = badge_api.get_user_badges('/uri/user/bob')
+        badges = badge_api.get_user_earned_badges('/uri/user/bob')
         self.assertEqual(len(badges), 1)
 
-        badges = badge_api.get_user_badges('/uri/user/auser')
+        badges = badge_api.get_user_earned_badges('/uri/user/auser')
         self.assertEqual(len(badges), 0)

@@ -8,6 +8,7 @@ from datetime import datetime
 class DuplicateTitleError(Exception):
     pass
 
+
 def uri2id( uri ):
     return uri.strip('/').split('/')[-1]
 
@@ -97,34 +98,26 @@ def get_published_badges():
     return [_badge2dict(badge) for badge in badges]
 
 
-# draft badges aka badges 'under review'
-def get_user_draft_badges(author_uri):
-    badges = Badge.objects.filter(author_uri=author_uri, date_published__isnull=True)
+def get_user_draft_badges(user_uri):
+    badges = Badge.objects.filter(author_uri=user_uri, date_published__isnull=True)
     return [_badge2dict(badge) for badge in badges]
 
-def get_user_earned_badges(author_uri):
-    badges = [award.badge for award in Award.objects.select_related().filter(user_uri=author_uri)]
-    return [_badge2dict(badge) for badge in badges]
 
-def get_user_awarded_badges(author_uri):
-    badges = [award.badge for award in Award.objects.select_related().filter(expert_uri=author_uri)]
-    return [_badge2dict(badge) for badge in badges]
-
-# created badges aka 'published' badges
 def get_user_created_badges(author_uri):
-    badges = Badge.objects.filter(author_uri=author_uri, date_published__lte=datetime.utcnow())
+    """ created badges aka 'published' badges """
+    badges = Badge.objects.filter(author_uri=author_uri, date_published__isnull=False)
     return [_badge2dict(badge) for badge in badges]
 
 
-
-def get_user_badges(user_uri):
-    """ return all the badges awarded to a user """
-    awards = Award.objects.filter(user_uri=user_uri)
+def get_user_earned_badges(user_uri):
+    awards = Award.objects.select_related().filter(user_uri=user_uri)
     return [_badge2dict(award.badge) for award in awards]
 
 
-def search_badges(expression=None, author_uri=None, attribute_value=None):
-    raise Exception()
+def get_user_awarded_badges(user_uri):
+    """ get badges awarded by this user """
+    badges = [award.badge for award in Award.objects.select_related().filter(expert_uri=user_uri)]
+    return [_badge2dict(badge) for badge in badges]
 
 
 def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
