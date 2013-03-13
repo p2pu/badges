@@ -63,7 +63,11 @@ def edit( request, badge_id ):
     template_name = 'badge/edit.html'
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
 
-    # TODO ensure that this is the badge owner!
+    if not request.session['user']['uri'] == badge['author_uri']:
+        messages.error(request, _('You cannot edit someone elses badge!'))
+        return http.HttpResponseRedirect(reverse(
+            'badge_preview', args=(badge_id,)
+        ))
 
     if badge['publised']:
         messages.error(request, _('Badge already publised, create a new badge instead'))
@@ -100,15 +104,21 @@ def edit( request, badge_id ):
 @require_login
 def publish( request, badge_id ):
 
-    #TODO check user
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
-    fetch_badge_resources(badge)
+
+    if not request.session['user']['uri'] == badge['author_uri']:
+        messages.error(request, _('You cannot publish someone elses badge!'))
+        return http.HttpResponseRedirect(reverse(
+            'badge_preview', args=(badge_id,)
+        ))
+
     if request.method == 'POST':
-        badge_api.publish_badge(badge_api.id2uri(badge_id))
+        badge_api.publish_badge(badge['uri'])
         return http.HttpResponseRedirect(reverse(
             'badge_view', args=(badge_id,)
         ))
 
+    fetch_badge_resources(badge)
     return render_to_response(
         'badge/publish.html',
          { 'badge': badge },
