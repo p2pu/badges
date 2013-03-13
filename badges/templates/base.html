@@ -65,7 +65,7 @@
               </li>
 
               <li>
-                  <a href="">
+                  <a href="{% url project_review %}">
                       {% trans 'Review' %}
                   </a>
                   <div class="navbar-custom-header-text">
@@ -74,9 +74,9 @@
               </li>
           </ul>
           <ul class="nav pull-right">
-              {% if request.session.username %}
+              {% if request.session.user %}
                   <li>
-                      <a href="{% url dashboard request.session.username %}">
+                      <a href="{% url dashboard request.session.user.username %}">
                           {% trans 'My Badges' %}
                       </a>
                   </li>
