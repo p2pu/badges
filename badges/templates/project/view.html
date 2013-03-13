@@ -12,7 +12,9 @@
         </div>
         <div>
             <p>Badge for the Project</p>
-            {% include 'badge/badge_info.html' %}
+            <a href="{% url badge_view badge.id %}">
+               {% include 'badge/badge_info.html' %}
+            </a>
         </div>
 
             <div class="row">
@@ -102,8 +104,8 @@
                                     <h4 class="pull-left">
                                         {% blocktrans with username=fb.expert.username %}Feedback by {{ username }}{% endblocktrans %}
                                     </h4>
-                                    <img src="{{ fb.expert.image_url }}" alt="{{ fb.expert.username }}"
-                                         class="thumbnail pull-right">
+                                    <a href="{% url dashboard fb.expert.username %}"><img src="{{ fb.expert.image_url }}" alt="{{ fb.expert.username }}"
+                                         class="thumbnail pull-right"></a>
                                 </div>
                             </div>
 
