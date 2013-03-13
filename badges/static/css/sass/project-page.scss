@@ -1,0 +1,74 @@
+.alert-error{
+  background-color: $bloodRed;
+  border-color: darken($bloodRed, 10%);
+  color: $white;
+  text-shadow: none;
+}
+
+.project-view{
+  .feedback{
+    .thumbnail{
+      display: inline;
+      max-height: 100px;
+      margin-left: 1.5em;
+    }
+    .feedback-head{
+      h4{
+        margin-left: -30px;
+      }
+    }
+    .feedback-labels{
+      float: none;
+      margin-left: 5px;
+      padding: 5px;
+      display: inline;
+    }
+    .feedback-content{
+      padding: 10px;
+      border: 1px solid darken($silverLight, 5%);
+      @include border-radius(5px);
+      background-color: $silverLight;
+      margin-left: 0;
+      float: none;
+      word-wrap: break-word;
+      &.content-green{
+        border-color: $successBackground;
+      }
+      &.content-yellow{
+        border-color: $warningBackground;
+      }
+      &.content-red{
+        border-color: $bloodRed;
+      }
+      &.content-blue{
+        border-color: $cleanBlue;
+      }
+    }
+
+    .alert-revise{
+      background-color: $cleanBlue;
+      border-color: darken($cleanBlue, 10%);
+      color: $white;
+      text-shadow: none;
+    }
+  }
+}
+
+.project-feedback-form{
+  label{
+    margin-bottom: -1px;
+    float: none;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 3px 3px 0 0;
+    font-weight: bold;
+  }
+
+  .checkbox-group{
+    margin-left: 10px;
+  }
+}
+
+.feedback-give-revise{
+  margin-top: 25px;
+}
