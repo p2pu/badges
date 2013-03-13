@@ -7,7 +7,7 @@
         <div class="clearfix badge-view-badges">
             <h2>Badge</h2>
 
-            {% include 'badge/badge_info.html' %}
+            {% include 'badge/badge_info.html' with view='True' %}
 
             {% if not user_is_expert %}
                 <a href="{% url project_create badge.id %}" class="btn btn-large btn-cyan">
@@ -15,10 +15,17 @@
                 </a>
             {% endif %}
         </div>
+        <div>
+            <h4>{% trans 'Want this badge? Submit a project and get some feedback' %}.</h4>
+            <a href="{% url project_create badge.id %}" class="btn btn-cyan btn-large">
+                {% trans 'Submit a project for this badge' %}
+            </a>
+        </div>
 
-
+        {% if projects %}
+        <hr>
         <div class="clearfix badge-view-projects">
-            <h2>{% trans 'Projects' %}</h2>
+            <h2>{% trans 'Want to see what kind of projects have received this badge' %}?</h2>
             <ul class="thumbnails p2pu-project">
                 {% for project in projects %}
                     <li class="span3">
@@ -36,18 +43,22 @@
                 {% endfor %}
             </ul>
         </div>
+        {% endif %}
 
+        {% if experts %}
+        <hr>
         <div class="clearfix badge-view-experts">
             <h2>{% trans 'Experts' %}</h2>
             <ul class="thumbnails">
                 {% for expert in experts %}
                     <li>
-                        <a href="{% url dashboard expert.username %}">
+                        <a href="{% url dashboard expert.username %}" class="thumbnail">
                             <img src="{{ expert.image_url }}" alt="{{ expert.username }}">
                         </a>
                     </li>
                 {% endfor %}
             </ul>
         </div>
+        {% endif %}
     </div>
 {% endblock %}

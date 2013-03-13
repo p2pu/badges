@@ -20,7 +20,7 @@ def create( request ):
 
     if request.method == 'POST':
         form = BadgeForm(request.POST, request.FILES)
-    else:    
+    else:
         form = BadgeForm()
 
     user_uri = request.session['user']['uri']
@@ -78,7 +78,7 @@ def edit( request, badge_id ):
 
     if request.method == 'POST':
         form = BadgeForm(request.POST, request.FILES)
-    else:    
+    else:
         form = BadgeForm(badge)
 
     if request.method == 'POST' and form.is_valid():

@@ -12,6 +12,12 @@
         </div>
 
         <div class="span7">
+            {% if view %}
+                <h4>{% trans 'We call this niffty badge' %}:</h4>
+                <h3>{{ badge.title }}</h3>
+                <h4>{% trans 'Because folks with this badge can' %}</h4>
+                <p>{{ badge.requirements }}</p>
+            {% else %}
             <h3>{% trans 'Description' %}:</h3>
 
             <p>{{ badge.description }}</p>
@@ -19,6 +25,7 @@
             <h3>{% trans 'Requirements' %}:</h3>
 
             <p>{{ badge.requirements }}</p>
+            {% endif %}
         </div>
     </div>
 </div>
