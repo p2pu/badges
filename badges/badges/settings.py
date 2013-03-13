@@ -1,7 +1,7 @@
 # Django settings for badges project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -128,8 +128,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like '/home/html/django_templates' or 'C:/www/django/templates'.
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #path('../templates'),
-    '/home/erika/DEV/p2pu/badges/badges/templates',
+    path('../templates'),
 )
 
 INSTALLED_APPS = (
