@@ -9,13 +9,11 @@
 
             {% include 'badge/badge_info.html' %}
 
-            <a href="{% url project_create badge.id %}" class="btn btn-large btn-cyan">
-                {% if projects %}
-                    {% trans 'Submit another project' %}
-                {% else %}
+            {% if not user_is_expert %}
+                <a href="{% url project_create badge.id %}" class="btn btn-large btn-cyan">
                     {% trans 'Submit a project' %}
-                {% endif %}
-            </a>
+                </a>
+            {% endif %}
         </div>
 
 
@@ -44,8 +42,8 @@
             <ul class="thumbnails">
                 {% for expert in experts %}
                     <li>
-                        <a href="{{ expert }}">
-                            <img src="//placehold.it/100x100" alt="">
+                        <a href="{% url dashboard expert.username %}">
+                            <img src="{{ expert.image_url }}" alt="{{ expert.username }}">
                         </a>
                     </li>
                 {% endfor %}

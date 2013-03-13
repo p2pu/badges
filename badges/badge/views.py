@@ -12,6 +12,7 @@ from media import models as media_api
 from project import models as project_api
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
+from p2pu_user import models as p2pu_user_api
 
 @require_login
 def create( request ):
@@ -133,7 +134,13 @@ def view( request, badge_id ):
         'badge': badge
     }
     context['projects'] = map(fetch_resources, project_api.search_projects(badge_uri=badge['uri']))
-    context['experts'] = badge_api.get_badge_experts(badge['uri'])
+
+    expert_uris = badge_api.get_badge_experts(badge['uri'])
+
+    if request.session.get('user'):
+        context['user_is_expert'] = request.session['user']['uri'] in expert_uris
+
+    context['experts'] = map(p2pu_user_api.get_user, expert_uris)
 
     return render_to_response(
         'badge/view.html',
