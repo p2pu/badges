@@ -9,18 +9,35 @@
 
             {% include 'badge/badge_info.html' with view='True' %}
 
-            {% if not user_is_expert %}
-                <a href="{% url project_create badge.id %}" class="btn btn-large btn-cyan">
-                    {% trans 'Submit a project' %}
+            <div class="pull-left">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu" data-size="large" data-hashtags="p2pu">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+            <div class="pull-left">
+            <!-- Place this tag where you want the share button to render. -->
+                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
+
+                <!-- Place this tag after the last share tag. -->
+                <script type="text/javascript">
+                  (function() {
+                      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                      po.src = 'https://apis.google.com/js/plusone.js';
+                      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                  })();
+                </script>
+            </div>
+
+        </div>
+
+        {% if not user_is_expert %}
+            <hr>
+            <div>
+                <h4>{% trans 'Want this badge? Submit a project and get some feedback' %}.</h4>
+                <a href="{% url project_create badge.id %}" class="btn btn-cyan btn-large">
+                    {% trans 'Submit a project for this badge' %}
                 </a>
-            {% endif %}
-        </div>
-        <div>
-            <h4>{% trans 'Want this badge? Submit a project and get some feedback' %}.</h4>
-            <a href="{% url project_create badge.id %}" class="btn btn-cyan btn-large">
-                {% trans 'Submit a project for this badge' %}
-            </a>
-        </div>
+            </div>
+        {% endif %}
 
         {% if projects %}
         <hr>
