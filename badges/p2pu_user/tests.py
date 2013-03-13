@@ -16,7 +16,7 @@ class SimpleTest(TestCase):
 
 
     def test_get_user(self):
-        user = user_api.save_user('testuser', 'http://placehold.it/40x40')
+        user = user_api.save_user('testuser', '/media/images/test.png')
         user2 = user_api.get_user(user['uri'])
         self.assertEqual(user, user2)
 
