@@ -78,11 +78,6 @@ def get_project(uri):
     return _project2dict(project_db)
 
 
-def get_projects_for_badge(badge_uri):
-    projects = Project.objects.filter(badge_uri=badge_uri, date_deleted__isnull=True)
-    return [_project2dict(project) for project in projects]
-
-
 def get_projects():
     projects = Project.objects.filter(date_deleted__isnull=True)
     return [_project2dict(project) for project in projects]

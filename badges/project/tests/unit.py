@@ -64,20 +64,6 @@ class SimpleTest(TestCase):
         self.assertEqual(len(projects), 4)
 
 
-    def test_get_projects_for_badge(self):
-        project = project_api.create_project(**self.project_values)
-        project_values2 = self.project_values.copy()
-        project_values2['author_uri'] = '/uri/user/testuser2'
-        project = project_api.create_project(**project_values2)
-        project_values2['author_uri'] = '/uri/user/testuser3'
-        project = project_api.create_project(**project_values2)
-        project_values2['badge_uri'] = '/uri/badge/3'
-        project = project_api.create_project(**project_values2)
-
-        projects = project_api.get_projects_for_badge(self.project_values['badge_uri'])
-        self.assertEqual(len(projects), 3)
-
-
     def test_search_projects(self):
         project_api.create_project('/uri/badge/1', '/uri/user/user1', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])
         project_api.create_project('/uri/badge/1', '/uri/user/user2', 'Title', '/uri/image/1', 'https://url.com', 'Description', 'Reflection', ['tag1', 'tag2'])

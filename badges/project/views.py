@@ -160,7 +160,7 @@ def review( request ):
     user = request.session.get('user')
     projects = []
     if user:
-        user_badges = badge_api.get_user_badges(user['uri'])
+        user_badges = badge_api.get_user_earned_badges(user['uri'])
         for badge in user_badges:
             projects += project_api.get_projects_ready_for_feedback(badge['uri'])
 
