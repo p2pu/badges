@@ -1,7 +1,6 @@
-{% load i18n %}
-Greetings!
+{% load i18n %}Greetings!
 
-Your project {{ project.title }} has some valuable feedback from an Expert.
+Your project '{{ project.title }}' has some valuable feedback from an Expert.
 
 {{ project.title }} - http://badges.p2pu.org{% url project_view project.id %} 
 
