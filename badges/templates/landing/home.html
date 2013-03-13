@@ -66,38 +66,13 @@
                     <div class="tab-pane active" id="learners-tab">
                         <h2>Roll Call: Meet the Learners.</h2>
                         <ul class="thumbnails">
+                          {% for user in users %}
                             <li class="span2">
-                                <a href="person.html" class="thumbnail">
-                                    <img src="http://placehold.it/100x100" alt="Bob"/>
+                                <a href="{% url dashboard user.username %}" class="thumbnail">
+                                    <img src="{{ user.image_url }}" alt="{{ user.username }}"/>
                                 </a>
                             </li>
-                            <li class="span2">
-                                <a href="person.html" class="thumbnail">
-                                    <img src="http://placehold.it/100x100" alt="Bob"/>
-                                </a>
-                            </li>
-                            <li class="span2">
-                                <a href="person.html" class="thumbnail">
-                                    <img src="http://placehold.it/100x100" alt="Bob"/>
-                                </a>
-                            </li>
-                            <li class="span2">
-                                <a href="person.html" class="thumbnail">
-                                    <img src="http://placehold.it/100x100" alt="Bob"/>
-                                </a>
-                            </li>
-                            </li>
-                            <li class="span2">
-                                <a href="person.html" class="thumbnail">
-                                    <img src="http://placehold.it/100x100" alt="Bob"/>
-                                </a>
-                            </li>
-                            </li>
-                            <li class="span2">
-                                <a href="person.html" class="thumbnail">
-                                    <img src="http://placehold.it/100x100" alt="Bob"/>
-                                </a>
-                            </li>
+                          {% endfor %}
                         </ul>
                         <p><a class="btn btn-cyan btn-large">See more!</a></p>
                     </div>
