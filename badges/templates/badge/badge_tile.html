@@ -7,7 +7,7 @@
             <img src="{{ badge.image.url }}"/>
         </a>
     {% else %}
-        <a href="{% url badge_preview badge.id %}">
+        <a href="{% url badge_publish badge.id %}">
             <h4>{{badge.title}}</h4>
             <img src="{{ badge.image.url }}"/>
         </a>

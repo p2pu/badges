@@ -2,90 +2,102 @@
 {% load i18n %}
 
 {% block body %}
-  <div class="row">
-    <div class="span6">
-      <h2>Badges</h2>
-      <div class="tabbable">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#badge-earned" data-toggle="tab">Earned</a></li>
-          <li><a href="#badge-review" data-toggle="tab">Under review</a></li>
-          <li><a href="#badge-awarded" data-toggle="tab">Awarded</a></li>
-          <li><a href="#badge-created" data-toggle="tab">Created</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="badge-earned">
-            <ul class="thumbnails fit-thumbnails">
-              {% for badge in earned_badges %}
-                {% include 'badge/badge_tile.html' %}
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="tab-pane" id="badge-review">
-            <ul class="thumbnails fit-thumbnails">
-              {% for badge in draft_badges %}
-                {% include 'badge/badge_tile.html' %}
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="tab-pane" id="badge-awarded">
-            <ul class="thumbnails fit-thumbnails">
-              {% for badge in awarded_badges %}
-                {% include 'badge/badge_tile.html' %}
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="tab-pane" id="badge-created">
-            <ul class="thumbnails fit-thumbnails">
-              {% for badge in created_badges %}
-                {% include 'badge/badge_tile.html' %}
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="span6">
-      <h2>Feedback</h2>
-      <div class="tabbable">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#feedback-latest" data-toggle="tab">Latest</a></li>
-          <li><a href="#feedback-your-projects" data-toggle="tab">Your Projects</a></li>
-          <li><a href="#feedback-peer-projects" data-toggle="tab">Peer Projects</a></li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="feedback-latest">
-            <ul class="thumbnails fit-thumbnails">
-              {% for feedback in feedback_latest %}
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="tab-pane" id="feedback-your-projects">
-            <ul class="thumbnails fit-thumbnails">
-              {% for feedback in feedback_peer_projects %}
-              {% endfor %}
-            </ul>
-          </div>
-          <div class="tab-pane" id="feedback-peer-projects">
-            <ul class="thumbnails fit-thumbnails">
-              {% for feedback in feedback_your_projects %}
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="row">
+        <div class="span6">
+            <h2>Badges</h2>
 
-  <hr/>
-  <div class="row">
-    <div class="span12">
-      <h2>{% trans 'Badges in the garden shed' %}</h2>
-      <ul class="thumbnails">
-        {% for badge in draft_badges %}
-          {% include 'badge/badge_tile.html' %}
-        {% endfor %}
-      </ul>
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#badge-earned" data-toggle="tab">Earned</a></li>
+                    <li><a href="#badge-review" data-toggle="tab">Under review</a></li>
+                    <li><a href="#badge-awarded" data-toggle="tab">Awarded</a></li>
+                    <li><a href="#badge-created" data-toggle="tab">Created</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="badge-earned">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for badge in earned_badges %}
+                                {% include 'badge/badge_tile.html' %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="badge-review">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for badge in draft_badges %}
+                                {% include 'badge/badge_tile.html' %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="badge-awarded">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for badge in awarded_badges %}
+                                {% include 'badge/badge_tile.html' %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="badge-created">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for badge in created_badges %}
+                                {% include 'badge/badge_tile.html' %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <h2>Feedback</h2>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#feedback-latest" data-toggle="tab">Latest</a></li>
+                    <li><a href="#feedback-your-projects" data-toggle="tab">Your Projects</a></li>
+                    <li><a href="#feedback-peer-projects" data-toggle="tab">Peer Projects</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="feedback-latest">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for feedback in feedback_latest %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="feedback-your-projects">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for feedback in feedback_peer_projects %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="feedback-peer-projects">
+                        <ul class="thumbnails fit-thumbnails">
+                            {% for feedback in feedback_your_projects %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <hr/>
+    <div class="row">
+        <div class="span12">
+            <h2>{% trans 'Badges in the garden shed' %}</h2>
+            {% if draft_badges %}
+            <ul class="thumbnails">
+                {% for badge in draft_badges %}
+                    {% include 'badge/badge_tile.html' %}
+                {% endfor %}
+            </ul>
+            {% else %}
+                <p>
+                    {% blocktrans %}
+                        In seems you haven't created any Badges yet.
+                    {% endblocktrans %}
+                    {% trans 'Come on and' %}
+                    <a href="{% url badge_create %}">{%trans 'create one' %}!</a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
 
 {% endblock %}

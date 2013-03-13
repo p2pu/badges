@@ -2,6 +2,19 @@
 
 <form action="" method="POST" enctype="multipart/form-data">
   <fieldset>
+    <legend>
+        {% blocktrans %}
+            Here you can create a badge to recognize the skills mastered in
+            creative projects.
+        {% endblocktrans %}
+        <br>
+        {% blocktrans %}
+            First, design what you'd like your badge to look like.
+            Next, describe what the badge is for.
+            Then, list criteria a project would need to meet in order to get the badge.
+            Hit "Save and Preview Badge" and you'll get to see it in all it's glory!
+        {% endblocktrans %}
+    </legend>
     {% csrf_token %}
 
     <div class="control-group {% if form.errors.image %}error{% endif %}">   
@@ -14,7 +27,8 @@
 
     <div class="control-group {% if form.errors.title %}error{% endif %}">   
       <label>{% trans 'Badge Title:' %}</label>
-      <input name="title" type="text" class="span7" placeholder="{% trans "What's your badge's headline?" %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required maxlength="128">
+      <input name="title" type="text" class="span7"
+             placeholder="{% trans "What's your badge's headline?" %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required maxlength="128">
       {% for error in form.errors.title %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -36,7 +50,7 @@
       {% endfor %}
     </div>
 
-    <button type="submit" class="btn">Save draft</button>
+    <button type="submit" class="btn btn-cyan">{% trans 'Save and preview your badge' %}</button>
   </fieldset>
 </form>
 

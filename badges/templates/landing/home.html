@@ -24,7 +24,9 @@
                         are an “expert” and already possess the badge, award it to someone else.
                     </p>
                     <p>
-                       Find out more....
+                        <a href="#">
+                            Find out more....
+                        </a>
                     </p>
                 </div>
                 <div class="span4 buletin-feature pull-right">
@@ -54,7 +56,6 @@
                         <a href="#learners-tab" data-toggle="tab">
                             <h3>Meet the Learners</h3>
                         </a>
-
                     </li>
                     <li>
                         <a href="#projects-tab" data-toggle="tab">
@@ -64,10 +65,9 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="learners-tab">
-                        <h2>Roll Call: Meet the Learners.</h2>
                         <ul class="thumbnails">
                           {% for user in users %}
-                            <li class="span2">
+                            <li class="">
                                 <a href="{% url dashboard user.username %}" class="thumbnail">
                                     <img src="{{ user.image_url }}" alt="{{ user.username }}"/>
                                 </a>

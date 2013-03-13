@@ -3,10 +3,16 @@ body {
   font-size: 16px;
   line-height: 22px;
   color: $slate;
-
 }
 body, input, label, select, input, textarea, button{
   font-family: "sense", Helvetica, sans-serif;
+}
+h1, h2, h3, h4{
+  font-family: "arvo", Helvetica, sans-serif;
+}
+legend{
+  font-size: 1em;
+  line-height: 1.5em;
 }
 
 .btn-cyan {

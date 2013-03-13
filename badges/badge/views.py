@@ -36,7 +36,7 @@ def create( request ):
                 user_uri
             )
             return http.HttpResponseRedirect(
-                reverse('badge_preview', args=(badge_api.uri2id(badge['uri']),))
+                reverse('badge_publish', args=(badge_api.uri2id(badge['uri']),))
             )
         except badge_api.DuplicateTitleError:
             form.errors['title'] = [_('Badge title needs to be unique'),]
@@ -105,6 +105,8 @@ def edit( request, badge_id ):
 @require_login
 def publish( request, badge_id ):
 
+    #TODO check user
+    user = request.session['user']
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
 
     if not request.session['user']['uri'] == badge['author_uri']:
@@ -122,7 +124,10 @@ def publish( request, badge_id ):
     fetch_badge_resources(badge)
     return render_to_response(
         'badge/publish.html',
-         { 'badge': badge },
+        {
+            'badge': badge,
+            'user': user,
+        },
         context_instance=RequestContext(request)
     )
 

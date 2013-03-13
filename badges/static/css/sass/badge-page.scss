@@ -9,9 +9,18 @@
   }
 }
 
-.badge-view-projects, .badge-view-experts, .badge-preview-publish{
+.badge-view-projects, .badge-view-experts{
   margin-top: 60px;
   ul{
     margin-left: -10px;
   }
 }
+
+.badge-preview-publish{
+  .alert{
+    a.btn{
+      border-bottom: inherit;
+    }
+  }
+}
+
