@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<li class="span3">
+    <div class="thumbnail p2pu-project">
+        <a href="{% url project_view project.id %}">
+            <img src="{{ project.image.url }}"/>
+        </a>
+        <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
+        <p>{% blocktrans with username=project.author.username %}by {{ username }}{% endblocktrans %}<p>
+    </div>
+</li>
