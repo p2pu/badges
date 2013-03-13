@@ -6,7 +6,9 @@ An Expert has awarded your project '{{ project.title }}' a Badge. Check it out!
 
 You are now an "Expert" in this area, and can award the Badge to others. Why not pay the learning karma forward and review a few projects?
 
-{% for project in projects %}{{ project.title }} by {{ project.author.username }} - http://badges.p2pu.org{% url project_view project.id %}{% endfor %}
+{% for project in projects %}
+{{ project.title }} by {{ project.author.username }} - http://badges.p2pu.org{% url project_view project.id %}
+{% endfor %}
 
 {% blocktrans %}Kudos to you! 
 - The P2PU team{% endblocktrans %}

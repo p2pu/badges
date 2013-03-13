@@ -98,20 +98,20 @@ def feedback( request, project_id ):
         form = FeedbackForm()
 
     if form.is_valid():
-        if form.cleaned_data.get('award_badge'):
-            badge_api.award_badge(
-                badge['uri'], project['author_uri'], user_uri,
-                reverse('project_view', args=(project_id,))
-            )
-            messages.success(request, _('Badge awarded to user!'))
         project_api.submit_feedback(
             project['uri'],
             user_uri,
             form.cleaned_data['good'],
             form.cleaned_data['bad'],
             form.cleaned_data['ugly'],
-            form.cleaned_data.get('award_badge', False)
+            form.cleaned_data.get('award_badge', form.cleaned_data.get('award_badge', False) )
         )
+        if form.cleaned_data.get('award_badge'):
+            badge_api.award_badge(
+                badge['uri'], project['author_uri'], user_uri,
+                reverse('project_view', args=(project_id,))
+            )
+            messages.success(request, _('Badge awarded to user!'))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
 
     context = {
