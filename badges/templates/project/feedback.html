@@ -30,7 +30,7 @@
                         {% endfor %}
                     </div>
                     <div class="control-group {% if form.errors.ugly %}error{% endif %}">
-                        <label>{% trans 'Green' %}</label>
+                        <label>{% trans 'Red' %}</label>
                         <textarea rows="5" name="ugly" class="span8"
                                   placeholder="{% trans 'What concerns do you have with the project?' %}"
                                   {% if form.ugly.value %}value="{{ form.ugly.value }}"{% endif %} required></textarea>
