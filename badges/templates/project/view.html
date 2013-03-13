@@ -3,7 +3,7 @@
 {% load humanize %}
 
 {% block body %}
-    <div class="container">
+    <div class="container project-view">
         <div class="row">
             <div class="span12">
                 <h2>{% blocktrans with badge_title=badge.title %}Project submitted for
@@ -74,42 +74,70 @@
 
             {% for fb in feedback %}
                 <div class="row">
-                    <div class="span12">
+                    <div class="span12 feedback">
+                        <hr>
                         {% if fb.improvement %}
-                            <h2>{% blocktrans with date=fb.date_created|naturaltime %}Project revision on
-                                {{ date }}{% endblocktrans %}</h2>
-                            <h3>{% trans 'Improvements made' %}</h3>
-                            <p>{{ fb.improvement }}</p>
+                            <h4>
+                                {% blocktrans with date=fb.date_created|naturaltime %}
+                                    Project revision on {{ date }}
+                                {% endblocktrans %}
+                            </h4>
+                            <div class="feedback-labels alert alert-revise">
+                                {% trans 'Improvements made' %}
+                            </div>
+                            <p class="feedback-content span6 content-blue">
+                                {{ fb.improvement }}
+                            </p>
+
                             {% if fb.work_url %}
-                                <h3>{% trans 'New URL' %}</h3>
-                                <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
+                                <div class="feedback-labels alert alert-revise">{% trans 'New URL' %}</div>
+                                <p class="feedback-content span6 content-blue">
+                                    <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
+                                </p>
+
                             {% endif %}
                         {% else %}
-                            <h2>{% blocktrans with username=fb.expert.username %}Feedback by {{ username }}{% endblocktrans %}</h2>
-                            <img src="{{ fb.expert.image_url }}" alt="{{ fb.expert.username }}">
-                            <h3>{% trans 'Green' %}</h3>
-                            <p>{{ fb.good }}</p>
-                            <h3>{% trans 'Yellow' %}</h3>
-                            <p>{{ fb.bad }}</p>
-                            <h3>{% trans 'Red' %}</h3>
-                            <p>{{ fb.ugly }}</p>
+                            <div class="feedback-head clearfix">
+                                <div class="span6">
+                                    <h4 class="pull-left">
+                                        {% blocktrans with username=fb.expert.username %}Feedback by {{ username }}{% endblocktrans %}
+                                    </h4>
+                                    <img src="{{ fb.expert.image_url }}" alt="{{ fb.expert.username }}"
+                                         class="thumbnail pull-right">
+                                </div>
+                            </div>
+
+                            <div class="feedback-labels alert alert-success">
+                                {% trans 'Green' %}
+                            </div>
+                            <p class="feedback-content span6 content-green">
+                                {{ fb.good }}
+                            </p>
+                            <div class="feedback-labels alert alert-warning">
+                                {% trans 'Yellow' %}
+                            </div>
+                            <p class="feedback-content content-yellow span6">
+                                {{ fb.bad }}
+                            </p>
+                            <div class="feedback-labels alert alert-error">
+                                {% trans 'Red' %}
+                            </div>
+                            <p class="feedback-content content-red span6">
+                                {{ fb.ugly }}
+                            </p>
                         {% endif %}
                     </div>
                 </div>
             {% endfor %}
-
-            <div class="row">
-                <div class="">
-                    {% if can_give_feedback %}
-                        <a href="{% url project_feedback project.id %}"
-                           class="btn btn-large pull-right">{% trans 'Give feedback' %}</a>
-                    {% endif %}
-                    {% if can_revise %}
-                        <a href="{% url project_revise project.id %}"
-                           class="btn btn-large pull-right">{% trans 'Revise project' %}</a>
-                    {% endif %}
-                </div>
+            <div class="feedback-give-revise">
+                {% if can_give_feedback %}
+                    <a href="{% url project_feedback project.id %}"
+                       class="btn btn-large btn-cyan">{% trans 'Give feedback' %}</a>
+                {% endif %}
+                {% if can_revise %}
+                    <a href="{% url project_revise project.id %}"
+                       class="btn btn-large btn-cyan">{% trans 'Revise project' %}</a>
+                {% endif %}
             </div>
         </div>
-
 {% endblock %}
