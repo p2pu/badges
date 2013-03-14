@@ -34,9 +34,11 @@
 
     <div class="row">
         <div class="span12">
-            {% for badge in badges %}
-                {% include 'badge/badge_tile.html' %}
-            {% endfor %}
+            <ul class="thumbnails">
+                {% for badge in badges %}
+                    {% include 'badge/badge_tile.html' %}
+                {% endfor %}
+            </ul>
         </div>
     </div>
 
