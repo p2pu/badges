@@ -1,5 +1,4 @@
-{% load i18n %}
-Howdy Expert,
+{% load i18n %}Howdy Expert,
 
 Some time ago, you graciously left feedback for {{ project.author.username }}'s project. Much obliged!
 

@@ -45,6 +45,9 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, descriptio
 
     badge = badge_api.get_badge(badge_uri)
 
+    if author_uri in badge_api.get_badge_experts(badge_uri):
+        raise Exception(u'Badge {0} already awarded to user'.format(badge_uri))
+
     if isinstance(tags, list):
         tags = ','.join(tags)
 

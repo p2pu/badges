@@ -1,14 +1,11 @@
-{% load i18n %}
-{% blocktrans %}
-Hullo there,
+{% load i18n %}Hullo there,
 
 Some time ago, you became a righteous expert with the {{ badge.title }} Badge.
 
 Now a few folks are looking for help with similar projects. Mind taking a few minutes to review their work?
-{% endblocktrans %}
 
 {% for project in projects %}   
-project.title - http://badges.p2pu.org{% url project_view project.id %} 
+{{ project.title }} by {{ project.author.username }} - http://badges.p2pu.org{% url project_view project.id %} 
 {% endfor %}
 {% blocktrans %}
 Thanks for paying it forward, 
