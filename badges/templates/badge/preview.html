@@ -8,11 +8,13 @@
             
         {% if request.session.user and request.session.user.uri = badge.author_uri %}
             <div class="alert">
-                <h3>{% trans 'Stop' %}!</h3>
                 <p class="lead">
+                    {% blocktrans %}
                     Are you ready to publish your Badge?
                     You won’t be able to edit it later.
-                    You might want to double-check: </p>
+                    You might want to double-check:
+                    {% endblocktrans %}
+                </p>
                 <p>
                     {% blocktrans %}Publishing your badge will mean that
                         you will no longer be able to edit the badge and
