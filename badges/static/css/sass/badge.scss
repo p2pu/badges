@@ -1,6 +1,12 @@
 
 
-
+.badge-info-wrap{
+  position: relative;
+  padding-bottom: 35px;
+  p{
+    color: $slate;
+  }
+}
 .p2pu-badge{
   text-align: center;
   padding: 10px 10px 5px;
@@ -39,4 +45,9 @@
     left: 0;
     bottom: -20px;
   }
+}
+.badge-social{
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
