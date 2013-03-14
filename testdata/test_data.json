@@ -29,6 +29,41 @@
             "image": "super-blogger.png"
         },
         {
+            "title": "Research",
+            "description": "dest",
+            "requirements": "req",
+            "author_uri": "/uri/user/paul",
+            "image": "super-blogger.png"
+        },
+        {
+            "title": "Reading",
+            "description": "dest",
+            "requirements": "req",
+            "author_uri": "/uri/user/paul",
+            "image": "super-blogger.png"
+        },
+        {
+            "title": "Conversation",
+            "description": "dest",
+            "requirements": "req",
+            "author_uri": "/uri/user/paul",
+            "image": "super-blogger.png"
+        },
+        {
+            "title": "Video Maker",
+            "description": "dest",
+            "requirements": "req",
+            "author_uri": "/uri/user/mick",
+            "image": "super-blogger.png"
+        },
+        {
+            "title": "Personal learning plan",
+            "description": "dest",
+            "requirements": "req",
+            "author_uri": "/uri/user/allison",
+            "image": "super-blogger.png"
+        },
+        {
             "title": "DIYer",
             "description": "dest",
             "requirements": "req",
