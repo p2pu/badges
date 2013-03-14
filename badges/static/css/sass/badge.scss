@@ -1,14 +1,18 @@
 
 
-.badge-wrapper{
-  margin-left: 0;
+.badge-info-wrap{
+  position: relative;
+  padding-bottom: 35px;
+  p{
+    color: $slate;
+  }
 }
 .p2pu-badge{
   text-align: center;
   padding: 10px 10px 5px;
   min-height: 212px;
   position: relative;
-
+  margin-left: 0;
   @include gradient-vertical-three-colors($startColor: $white, $midColor: $white, $colorStop: 85%, $endColor: $silverLight );
   @extend .thumbnail;
   h4{
@@ -43,5 +47,7 @@
   }
 }
 .badge-social{
-  margin-top: 1em;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

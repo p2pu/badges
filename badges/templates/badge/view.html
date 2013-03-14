@@ -12,7 +12,7 @@
         </div>
 
         {% if not user_is_expert %}
-            <hr>
+
             <div>
                 <h4>{% trans 'Want this badge? Submit a project and get some feedback' %}.</h4>
                 <a href="{% url project_create badge.id %}" class="btn btn-cyan btn-large">
