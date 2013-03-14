@@ -1,6 +1,9 @@
 .badges-landing-unit{
   padding-bottom: 60px;
   margin-top: 60px;
+  .row{
+    //margin-left: 30px;
+  }
   h2{
     font-family: "arvo", Helvetica, sans-serif;
   }
@@ -34,6 +37,7 @@
       vertical-align: middle;
       a{
         color: $white;
+        display: block;
       }
 
 
@@ -54,13 +58,11 @@
     li{
       position: relative;
       z-index: 0;
-      margin-left: 0;
-        img{
+
+      img{
           height: 112px;
-        }
-      & + li{
-        margin-left: 20px;
       }
+
       &:hover{
         z-index: 999;
       }
@@ -98,12 +100,5 @@
 
   hr{
     margin: 2.1875em 0px 1.5em 0px;
-  }
-}
-#learners-tab{
-  .thumbnails{
-    img{
-      height: 100px;
-    }
   }
 }

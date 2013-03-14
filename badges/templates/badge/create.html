@@ -2,9 +2,23 @@
 {% load i18n %}
 
 {% block body %}
-  <div class="container">
-    <h2>{% trans 'Create a Badge' %}</h2>
+    <div class="container">
+        <h2>{% trans 'Create a Badge' %}</h2>
 
-    {% include 'badge/form_snippet.html' %}
-  </div>
+        <div class="badge-create-intro">
+            {% blocktrans %}
+                Here you can create a badge to recognize the skills mastered in
+                creative projects.
+            {% endblocktrans %}
+            <br>
+            {% blocktrans %}
+                First, design what you'd like your badge to look like.
+                Next, describe what the badge is for.
+                Then, list criteria a project would need to meet in order to get the badge.
+                Hit "Save and Preview Badge" and you'll get to see it in all it's glory!
+            {% endblocktrans %}
+
+        </div>
+        {% include 'badge/form_snippet.html' %}
+    </div>
 {% endblock %}

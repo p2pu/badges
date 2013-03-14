@@ -1,0 +1,7 @@
+.avatar{
+  @extend .thumbnail;
+  min-width: 100px;
+  img{
+    max-height: 100px;
+  }
+}

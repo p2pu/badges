@@ -6,33 +6,33 @@
 
 {% block body %}
 <section class="container">
-
-
-        <div class="row-fluid badges-landing-unit">
+        <div class="badges-landing-unit">
             <h2>It's <span class="highlight-1">all</span> about
                 <span class="highlight-2">Badges</span>
             </h2>
             <div class="clearfix">
-                <div class="span7 first-element">
+                <div class="row">
+                    <div class="span7 first-element">
 
-                    <p>
-                        At P2PU, badges are a form of feedback that learners give to each other to iterate and improve
-                        their projects.
-                    </p>
-                    <p>
-                        On badges.p2pu.org, you can create a badge, submit work for a badge, or, if you
-                        are an “expert” and already possess the badge, award it to someone else.
-                    </p>
-                    <p>
-                        <a href="#">
-                            Find out more....
-                        </a>
-                    </p>
-                </div>
-                <div class="span4 buletin-feature pull-right">
-                    <h1>
-                        <a href="{% url badge_create %}" class="">{% trans 'Create Badge' %}</a>
-                    </h1>
+                        <p>
+                            At P2PU, badges are a form of feedback that learners give to each other to iterate and improve
+                            their projects.
+                        </p>
+                        <p>
+                            Here you can create a badge, submit work for a badge, or, if you
+                            are an “expert” and already possess the badge, award it to someone else.
+                        </p>
+                        <p>
+                            <a href="http://info.p2pu.org/">
+                                Find out more....
+                            </a>
+                        </p>
+                    </div>
+                    <div class="span4 buletin-feature pull-right">
+                        <h1>
+                            <a href="{% url badge_create %}" class="">{% trans 'Create a Badge' %}</a>
+                        </h1>
+                    </div>
                 </div>
             </div>
 
@@ -65,19 +65,19 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="learners-tab">
-                        <ul class="thumbnails">
-                          {% for user in users %}
-                            <li class="">
-                                <a href="{% url dashboard user.username %}" class="thumbnail">
-                                    <img src="{{ user.image_url }}" alt="{{ user.username }}"/>
-                                </a>
-                            </li>
-                          {% endfor %}
-                        </ul>
-                        <p><a class="btn btn-cyan btn-large">See more!</a></p>
+                        <div class="row">
+                            <ul class="thumbnails">
+                              {% for user in users %}
+                                <li>
+                                    <a href="{% url dashboard user.username %}" class="avatar">
+                                        <img src="{{ user.image_url }}" alt="{{ user.username }}"/>
+                                    </a>
+                                </li>
+                              {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                     <div class="tab-pane" id="projects-tab">
-                        <h2>Projects in the Community.</h2>
                         <ul class="thumbnails">
                             {% for project in projects %}
                                 <li class="span3">
@@ -91,7 +91,6 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                        <p><a class="btn btn-cyan btn-large">See more</a></p>
                     </div>
                 </div>
             </div>

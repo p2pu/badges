@@ -6,7 +6,7 @@
     <div class="container project-view">
         <div class="row">
             <div class="span12">
-                <h2>{% blocktrans with badge_title=badge.title %}Project submitted for
+                <h2>{% blocktrans with badge_title=badge.title %}Project submited for
                     {{ badge_title }}{% endblocktrans %}</h2>
             </div>
         </div>
@@ -19,7 +19,7 @@
 
             <div class="row">
                 <div class="span12">
-                    <h2>{% blocktrans with username=project.author.username %}Version 1 submitted by
+                    <h2>{% blocktrans with username=project.author.username %}Version 1 submited by
                         {{ username }} {% endblocktrans %}</h2>
                 </div>
             </div>
@@ -77,7 +77,6 @@
             {% for fb in feedback %}
                 <div class="row">
                     <div class="span12 feedback">
-                        <hr>
                         {% if fb.improvement %}
                             <h4>
                                 {% blocktrans with date=fb.date_created|naturaltime %}
