@@ -6,6 +6,7 @@
   padding: 10px 10px 5px;
   min-height: 184px;
   position: relative;
+  margin-left: 0;
   @include gradient-vertical-three-colors($startColor: $white, $midColor: $white, $colorStop: 85%, $endColor: $silverLight );
   @extend .thumbnail;
   h4{
