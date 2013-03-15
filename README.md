@@ -8,10 +8,16 @@ This is our third take on badges! It boils down to this: Create a badge, submit 
 This project is written using django. To get up and running for development
 
 1. Make a local copy of the code: ```git clone https://github.com/p2pu/badges```
+1. Init submodules: ```git submodule init```
+1. Fetch submodules: ```git submodule update```
 1. Install python and virtualenv (changes are good you already have them)
 1. Create a new virtual environment somewhere: ```virtualenv /path/to/somewhere```
 1. Activate the virtual environment: ```source /path/to/somewhere/bin/activate```
 1. Install dependancies: ```pip install -r /path/to/code/badges/requirements.txt```
+1. Install the sass compiler:
+    - Install ruby ```apt get install ruby``` (or user rbenv)
+    - Clone the sass git repository ```git clone git://github.com/nex3/sass.git```
+    - Install sass ```cd /path/to/sass/``` and ```rake install```
 1. Copy settings_local.dist.py to settings_local.py
 1. Sync database: ```python /path/to/code/badges/manage.py syncdb```
 1. Load some test data: ```python /path/to/code/badges/manage.py load_test_data /path/to/code/testdata/test_data.json```
