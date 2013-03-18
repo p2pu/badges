@@ -233,3 +233,16 @@ def get_project_feedback(project_uri):
     feedback_revision.sort(key=keyfunc)
 
     return feedback_revision
+
+
+def get_badge_uri_from_project_under_revision(project_uri):
+    project=Project.objects.get(id=uri2id(project_uri))
+
+    if project.feedback_set.count() > 0:
+        last_feedback = project.feedback_set.latest('date_created')
+        if last_feedback and not last_feedback.badge_awarded:
+            return None
+    return project.badge_uri
+
+
+

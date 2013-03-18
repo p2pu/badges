@@ -34,6 +34,19 @@ def profile( request, username ):
 
     filter_func = lambda project: not project['author_uri'] == user_uri
     peer_projects = filter(filter_func, peer_projects)
+
+    badges_under_revision = []
+    context['badges_under_revision'] = None
+    for project in context['feedback_your_projects']:
+        badge_uri = project_api.get_badge_uri_from_project_under_revision(project['uri'])
+        if badge_uri:
+            badge = badge_api.get_badge(badge_uri)
+            fetch_badge_resources(badge)
+            badges_under_revision.append(badge)
+
+    if badges_under_revision:
+        context['badges_under_revision'] = badges_under_revision
+
     context['feedback_peer_projects'] = map(fetch_resources, peer_projects)
     context['feedback_latest'] = map(fetch_resources, feedback_latest)
     return render_to_response(
