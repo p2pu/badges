@@ -1,12 +1,12 @@
 from django import forms
 
 class ProjectForm(forms.Form):
-    title = forms.CharField(max_length=128)
+    title = forms.CharField(max_length=255)
     work_url = forms.CharField()
-    description = forms.CharField(max_length=128)
-    reflection = forms.CharField(max_length=128)
+    description = forms.CharField(max_length=1024)
+    reflection = forms.CharField(max_length=1024)
     image = forms.FileField()
-    tags = forms.CharField(max_length=128)
+    tags = forms.CharField(max_length=255)
 
 
 class FeedbackForm(forms.Form):
@@ -18,4 +18,4 @@ class FeedbackForm(forms.Form):
 
 class RevisionForm(forms.Form):
     work_url = forms.CharField(required=False)
-    improvement = forms.CharField(max_length=128)
+    improvement = forms.CharField(max_length=1024)
