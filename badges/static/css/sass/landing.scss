@@ -7,13 +7,15 @@
   h2{
     font-family: "arvo", Helvetica, sans-serif;
   }
+  .highlight-1, .highlight-2{
+    text-transform: uppercase;
+    font-weight: bold;
+  }
   .highlight-1{
     color: $cyan;
-    text-transform: uppercase;
   }
   .highlight-2{
     color: $clemintine;
-    text-transform: uppercase;
   }
   .buletin-feature{
     margin-bottom: 0;
