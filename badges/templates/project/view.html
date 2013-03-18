@@ -6,20 +6,24 @@
     <div class="container project-view">
         <div class="row">
             <div class="span12">
-                <h2>{% blocktrans with badge_title=badge.title %}Project submited for
+                <h2>{% blocktrans with badge_title=badge.title %}Project submitted for
                     {{ badge_title }}{% endblocktrans %}</h2>
             </div>
         </div>
         <div>
             <p>Badge for the Project</p>
+            {% include 'badge/badge_info.html' with badge=badge %}
+            {% comment %}
             <a href="{% url badge_view badge.id %}">
                {% include 'badge/badge_info.html' %}
             </a>
+            {% endcomment %}
+            <hr>
         </div>
 
             <div class="row">
                 <div class="span12">
-                    <h2>{% blocktrans with username=project.author.username %}Version 1 submited by
+                    <h2>{% blocktrans with username=project.author.username %}Version 1 submitted by
                         {{ username }} {% endblocktrans %}</h2>
                 </div>
             </div>
@@ -45,25 +49,28 @@
             </div>
 
             <div class="row">
-              <div class="span12">
-                <div class="pull-left">
-                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu" data-size="large" data-hashtags="p2pu">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                </div>
-                <div class="pull-left">
-                <!-- Place this tag where you want the share button to render. -->
-                    <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
+                <div class="span12">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu" data-size="large" data-hashtags="p2pu">Tweet</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                        </div>
+                        <div class="pull-left">
+                        <!-- Place this tag where you want the share button to render. -->
+                            <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
 
-                    <!-- Place this tag after the last share tag. -->
-                    <script type="text/javascript">
-                      (function() {
-                          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                          po.src = 'https://apis.google.com/js/plusone.js';
-                          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                      })();
-                    </script>
+                            <!-- Place this tag after the last share tag. -->
+                            <script type="text/javascript">
+                              (function() {
+                                  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                  po.src = 'https://apis.google.com/js/plusone.js';
+                                  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                              })();
+                            </script>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
-              </div>
             </div>
 
             <div class="row">
@@ -109,19 +116,19 @@
                             </div>
 
                             <div class="feedback-labels alert alert-success">
-                                {% trans 'Green' %}
+                                {% trans 'Kudos' %}
                             </div>
                             <p class="feedback-content span6 content-green">
                                 {{ fb.good }}
                             </p>
                             <div class="feedback-labels alert alert-warning">
-                                {% trans 'Yellow' %}
+                                {% trans 'Questions' %}
                             </div>
                             <p class="feedback-content content-yellow span6">
                                 {{ fb.bad }}
                             </p>
                             <div class="feedback-labels alert alert-error">
-                                {% trans 'Red' %}
+                                {% trans 'Concerns' %}
                             </div>
                             <p class="feedback-content content-red span6">
                                 {{ fb.ugly }}

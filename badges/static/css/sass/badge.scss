@@ -1,12 +1,42 @@
-
-
-.badge-info-wrap{
+.badge-info{
   position: relative;
-  padding-bottom: 35px;
-  p{
-    color: $slate;
-  }
+  background: white;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 2em 1.5em;
+  color: rgba(0,0,0, .8);
+  text-shadow: 0 1px 0 #fff;
+  line-height: 1.5;
 }
+.badge-info:before, .badge-info:after{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.badge-info:after{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
 .p2pu-badge{
   text-align: center;
   padding: 10px 10px 5px;
@@ -47,7 +77,5 @@
   }
 }
 .badge-social{
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  margin-top: 1em;
 }

@@ -1,52 +1,65 @@
 {% load i18n %}
 
 <div class="row">
-<div class="well span7">
-    <div class="clearfix badge-info-wrap">
-        <div class="p2pu-badge span2">
-            <h4>{{ badge.title }}</h4>
-            {% if draft %}
-                <img src="{{ STATIC_URL }}img/draft.png" alt="Draft" class="badge-draft">
-            {% endif %}
-            <img src="{{ badge.image.url }}"/>
-        </div>
-        <div class="span4">
-            {% if view %}
-                <h4>{% trans 'We call this nifty badge' %}:</h4>
-                <h3>{{ badge.title }}</h3>
-                <h4>{% trans 'Because folks with this badge can' %}</h4>
-                <p>{{ badge.requirements }}</p>
-            {% else %}
-            <h3>{% trans 'Description' %}:</h3>
+    <div class="span7">
+        <div class="badge-info">
+            <div class="clearfix">
+                <a class="p2pu-badge span2" href="{% url badge_view badge.id %}">
+                    <h4>{{ badge.title }}</h4>
+                    <img src="{{ badge.image.url }}"/>
+                </a>
 
-            <p>{{ badge.description }}</p>
+                <div class="span4">
+                    {% if view %}
+                        <h4>{% trans 'We call this nifty badge' %}:</h4>
+                        <h3>{{ badge.title }}</h3>
+                        <h4>{% trans 'Because folks with this badge can' %}</h4>
+                        <p>{{ badge.requirements }}</p>
+                    {% else %}
+                        <h3>{% trans 'Description' %}:</h3>
 
-            <h3>{% trans 'Requirements' %}:</h3>
+                        <p>{{ badge.description }}</p>
 
-            <p>{{ badge.requirements }}</p>
-            {% endif %}
-        </div>
+                        <h3>{% trans 'Requirements' %}:</h3>
 
-        <div class="badge-social">
-            <div class="pull-left">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu" data-size="large" data-text="Check out the spiffy badge I made!">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                        <p>{{ badge.requirements }}</p>
+                    {% endif %}
+                </div>
+
+
+
             </div>
-            <div class="pull-left">
+        </div>
+        <div class="badge-social">
+            <div class="pull-right">
                 <!-- Place this tag where you want the share button to render. -->
-                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
+                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="28"></div>
 
                 <!-- Place this tag after the last share tag. -->
                 <script type="text/javascript">
-                    (function() {
-                        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                    (function () {
+                        var po = document.createElement('script');
+                        po.type = 'text/javascript';
+                        po.async = true;
                         po.src = 'https://apis.google.com/js/plusone.js';
-                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(po, s);
                     })();
                 </script>
             </div>
+            <div class="pull-right">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu"
+                   data-size="large" data-text="Check out the spiffy badge I made!">Tweet</a>
+                <script>!function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = "//platform.twitter.com/widgets.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, "script", "twitter-wjs");</script>
+            </div>
         </div>
-
     </div>
-</div>
 </div>
