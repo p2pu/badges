@@ -73,17 +73,28 @@
                   </div>
               </li>
           </ul>
-          <ul class="nav pull-right">
+          <ul class="nav pull-right right-links">
               {% if request.session.user %}
                   <li>
                       <a href="{% url dashboard request.session.user.username %}">
                           {% trans 'My Badges' %}
                       </a>
                   </li>
-                  <li>
-                      <a href="{% url oauth_logout %}">
-                          {% trans 'Log out' %}
+                  <li id="user-dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                          <img src="{{ request.session.user.image_url }}"
+                               alt="{{ request.session.user.username }}" height="30px"
+                                  width="30px"/>
+                          {{ request.session.user.username }}
+                          <i class="icon-caret-down"></i>
                       </a>
+                      <ul class="dropdown-menu">
+                          <li>
+                              <a href="{% url oauth_logout %}">
+                                  {% trans 'Log out' %}
+                              </a>
+                          </li>
+                      </ul>
                   </li>
               {% else %}
                   <li>
