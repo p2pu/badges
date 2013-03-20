@@ -240,7 +240,7 @@ def get_badge_uri_from_project_under_revision(project_uri):
 
     if project.feedback_set.count() > 0:
         last_feedback = project.feedback_set.latest('date_created')
-        if last_feedback and not last_feedback.badge_awarded:
+        if last_feedback and last_feedback.badge_awarded:
             return None
     return project.badge_uri
 
