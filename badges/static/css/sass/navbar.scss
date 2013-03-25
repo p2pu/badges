@@ -1,4 +1,6 @@
 .navbar{
+  position: relative;
+  z-index: 999;
   .navbar-inner{
     min-height: 85px;
     font-family: "arvo", Helvetica, sans-serif;

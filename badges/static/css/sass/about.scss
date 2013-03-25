@@ -14,7 +14,8 @@
       margin-left: 0;
       padding-left: 0;
       padding-right: 0;
-      border: 1px solid #e5e5e5;
+      border: 1px solid $silverUltraLight;
+      padding-bottom: 2px;
       @include border-radius(6px);
       li{
         a{
