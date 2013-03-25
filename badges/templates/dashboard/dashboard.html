@@ -5,8 +5,18 @@
 
 {% block body %}
     <div class="row">
+        <div class="span12">
+            <h2>
+                {% if request.session.user.username == user %}
+                    Your Dashboard
+                {% else %}
+                    This is {{ user }}'s Dashboard
+                {% endif %}
+
+            </h2>
+        </div>
         <div class="span6">
-            <h2>{% trans 'Badges' %}</h2>
+            <h3>{% trans 'Badges' %}</h3>
 
             <div class="tabbable">
                 <ul class="nav nav-tabs">
@@ -48,7 +58,7 @@
             </div>
         </div>
         <div class="span6">
-            <h2>{% trans 'Feedback' %}</h2>
+            <h3>{% trans 'Feedback' %}</h3>
 
             <div class="tabbable">
                 <ul class="nav nav-tabs">
@@ -86,7 +96,7 @@
     <hr/>
     <div class="row">
         <div class="span12">
-            <h2>{% trans 'Badges in the garden shed' %}</h2>
+            <h3>{% trans 'Badges in the garden shed' %}</h3>
             {% if draft_badges %}
             <ul class="thumbnails">
                 {% for badge in draft_badges %}

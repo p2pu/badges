@@ -49,6 +49,7 @@ def profile( request, username ):
 
     context['feedback_peer_projects'] = map(fetch_resources, peer_projects)
     context['feedback_latest'] = map(fetch_resources, feedback_latest)
+    context['user'] = username
     return render_to_response(
         'dashboard/dashboard.html',
         context,
