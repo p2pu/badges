@@ -2,12 +2,42 @@
   background-color: $white;
   padding: 25px;
   position: relative;
-  z-index: -1;
+  //z-index: -1;
 
+  .about-content{
+    .contents-title{
+      font-weight: bold;
+      margin-left: 15px;
+    }
+    font-size: 0.8em;
+    ul{
+      margin-left: 0;
+      padding-left: 0;
+      padding-right: 0;
+      border: 1px solid #e5e5e5;
+      @include border-radius(6px);
+      li{
+        a{
+          display: block;
+          margin: 0 0 -1px;
+        }
+        &:first-child{
+          a{
+
+          }
+        }
+      }
+    }
+  }
   img{
     margin: 15px auto;
   }
   .about-faqs, .about-more{
     margin-top: 25px;
+  }
+  .about-anchor{
+    &:hover{
+      text-decoration: none;
+    }
   }
 }
