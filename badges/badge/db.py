@@ -14,6 +14,9 @@ class Badge(models.Model):
     date_updated = models.DateTimeField()
     date_published = models.DateTimeField(blank=True, null=True)
 
+    def __unicode__(self):
+        return self.title
+
 
 class Award(models.Model):
     badge = models.ForeignKey(Badge)
@@ -21,3 +24,6 @@ class Award(models.Model):
     expert_uri = UriField()
     evidence_url = models.CharField(max_length=255)
     date_awarded = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.badge.title

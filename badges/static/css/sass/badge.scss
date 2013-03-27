@@ -7,6 +7,7 @@
   color: rgba(0,0,0, .8);
   text-shadow: 0 1px 0 #fff;
   line-height: 1.5;
+
 }
 .badge-info:before, .badge-info:after{
   z-index: -1;
@@ -75,6 +76,9 @@
     left: 0;
     bottom: -20px;
   }
+}
+.badge-info-title{
+  margin-top: 0;
 }
 .badge-social{
   margin-top: 1em;

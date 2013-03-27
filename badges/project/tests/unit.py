@@ -3,6 +3,7 @@ from mock import patch
 
 from project import models as project_api
 
+
 @patch('project.notification_helpers.fetch_resources', lambda x: x)
 @patch('badge.models.get_badge', lambda x: {})
 class SimpleTest(TestCase):
@@ -103,3 +104,4 @@ class SimpleTest(TestCase):
 
         projects_ready_for_feedback = project_api.get_projects_ready_for_feedback('/uri/badge/1')
         self.assertEqual(len(projects_ready_for_feedback), 3)
+

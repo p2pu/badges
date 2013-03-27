@@ -18,12 +18,18 @@ class Project(models.Model):
     date_updated = models.DateTimeField()
     date_deleted = models.DateTimeField(null=True, blank=True)
 
+    def __unicode__(self):
+        return self.title
+
 
 class Revision(models.Model):
     project = models.ForeignKey(Project)
     improvement = models.CharField(max_length=1024)
     work_url = models.URLField(null=True, blank=True)
     date_created = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.project.title
 
 
 class Feedback(models.Model):
@@ -35,3 +41,6 @@ class Feedback(models.Model):
     ugly = models.CharField(max_length=1024)
     date_created = models.DateTimeField()
     badge_awarded = models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.project.title

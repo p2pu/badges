@@ -10,23 +10,15 @@
                 </a>
 
                 <div class="span4">
-                    {% if view %}
-                        <h4>{% trans 'We call this nifty badge' %}:</h4>
-                        <h3>{{ badge.title }}</h3>
-                        <h4>{% trans 'Because folks with this badge can' %}</h4>
-                        <p>{{ badge.requirements }}</p>
-                    {% else %}
-                        <h3>{% trans 'Description' %}:</h3>
-
-                        <p>{{ badge.description }}</p>
-
-                        <h3>{% trans 'Requirements' %}:</h3>
-
-                        <p>{{ badge.requirements }}</p>
-                    {% endif %}
+                    <h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
+                    <h3>{{ badge.title }}</h3>
+                    <h4 class="badge-info-requirements">{% trans 'Because folks with this badge can' %}</h4>
+                    <p>{{ badge.requirements }}</p>
+                    {% comment %}
+                    <h4 class="badge-info-desc">{% trans 'Description' %}:</h4>
+                    <p>{{ badge.description }}</p>
+                    {% endcomment %}
                 </div>
-
-
 
             </div>
         </div>
