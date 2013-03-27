@@ -1,4 +1,6 @@
 .navbar{
+  position: relative;
+  z-index: 999;
   .navbar-inner{
     min-height: 85px;
     font-family: "arvo", Helvetica, sans-serif;
@@ -54,13 +56,32 @@
 
       &.pull-right{
         li{
-          padding-top: 13px;
+          margin-right: 0;
           & + li{
-            padding-top: 10px;
+            padding-left: 0;
             margin-left: 0;
+            a{
+              padding-left: 0;border: none;
+            }
+          }
+          &#user-dropdown{
+            margin-right: 0;
+            .dropdown-menu{
+              padding: 2px;
+              li{
+                padding: 0;
+                > a{
+                  display: block;
+                  padding: 0 0 0 0.5em;
+                  background-color: $white;
+                  background-image: none;
+                }
+              }
+            }
           }
         }
         a{
+          line-height: 40px;
           font-size: 1em;
           color: $slate;
         }
@@ -75,8 +96,6 @@
       margin-bottom: 0;
       color: #aab0bf;
       font-family: "sense", Helvetica, sans-serif;
-      //padding-left: 1.4375em;
-
     }
   }
 }

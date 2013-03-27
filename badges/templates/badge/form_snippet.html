@@ -32,7 +32,7 @@
      
     <div class="control-group {% if form.errors.requirements %}error{% endif %}">   
       <label>{% trans 'Badge Criteria:' %}</label>
-      <textarea name="requirements" rows="6" class="span7" placeholder="{% blocktrans %}List the specific skill folks need to show they've mastered with their project? It's useful to step them out so experts can identify them.{%endblocktrans%}" required >{% if form.requirements.value %}{{form.requirements.value}}{% endif %}</textarea>
+      <textarea name="requirements" rows="6" class="span7" placeholder="{% blocktrans %}List the specific skill folks need to show they've mastered with their project. It's useful to step them out so experts can identify them.{%endblocktrans%}" required >{% if form.requirements.value %}{{form.requirements.value}}{% endif %}</textarea>
       {% for error in form.errors.requirements %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}

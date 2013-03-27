@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block title %}P2PU Badges | Edit{% endblock %}
+
 {% block body %}
     <div class="container">
         <h2>{% blocktrans with badge_title=badge.title %}Edit {{badge_title}}{% endblocktrans %}</h2>
