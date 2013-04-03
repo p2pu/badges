@@ -149,7 +149,9 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
 
 def get_badge_experts(uri):
     awards = Award.objects.filter(badge_id=uri2id(uri))
-    return [ award.user_uri for award in awards ]
+    experts = [ award.user_uri for award in awards ]
+    experts = list(set(experts))
+    return experts
 
 
 def relinquish_badge(uri, expert_uri):
