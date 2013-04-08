@@ -149,6 +149,7 @@ INSTALLED_APPS = (
     'project',
     'media',
     'oauthclient',
+    'open_badges',
     'notifications',
     'p2pu_user',
     'south',
