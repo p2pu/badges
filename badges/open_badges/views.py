@@ -12,9 +12,7 @@ from p2pu_user.models import get_user
 from .responses import create_assertion_from_template
 from .responses import create_badge_from_template
 from .responses import create_organisation_from_template
-
-def test(request):
-    return HttpResponse('nekaj')
+from .helpers import reverse_url
 
 
 def get_assertion(request, uid):
@@ -22,7 +20,7 @@ def get_assertion(request, uid):
     Handle badge assertion requests.
     """
 
-    award = get_object_or_404(Award, pk=uid)
+    award = get_object_or_404(Award, pk=uid) # TODO: implement revoke
     badge = award.badge
     user = get_user(award.user_uri)
     recipient_email = user['username']
@@ -48,11 +46,13 @@ def get_badge(request, badge_id):
 
     badge = get_object_or_404(Badge, pk=badge_id)
     image = get_image(badge.image_uri)
+    criteria = reverse_url('badge_view', badge_id)
 
     badge = create_badge_from_template(
         name = badge.title,
         description = badge.description,
         image = image['url'],
+        criteria = criteria,
     )
     json_badge = json.dumps(badge)
 

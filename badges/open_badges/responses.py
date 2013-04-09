@@ -5,6 +5,7 @@ Mozilla Open Badges response templates.
 from django.conf import settings
 from .helpers import reverse_url
 from .helpers import static_url
+from .helpers import hash_email
 
 
 def create_assertion_from_template(**kwargs):
@@ -14,21 +15,20 @@ def create_assertion_from_template(**kwargs):
 
     uid = kwargs['uid']
     recipient_email = kwargs['recipient_email']
-    recipient_email_hashed = kwargs.get('recipient_email_hashed', False)
     image = kwargs.get('image')
     evidence = kwargs.get('evidence')
     issued_on = kwargs['issued_on'].isoformat()
     badge_id = kwargs['badge_id']
-
+    salt = settings.OPEN_BADGES_HASH_EMAIL_SALT
+    identity = hash_email(recipient_email, salt)
 
     ASSERTION_TEMPLATE = {
         'uid': uid,
         'recipient': {
             'type': 'email',
-            'email': recipient_email,
-            'hashed': recipient_email_hashed,
-            #'salt': 'deadsea',
-            #'identity': 'sha256$c7ef86405ba71b85acd8e2e95166c4b111448089f2e1599f42fe1bba46e865c5'
+            'hashed': True,
+            'salt': salt,
+            'identity': identity,
         },
         'image': static_url(image),
         'evidence': evidence,
@@ -36,7 +36,7 @@ def create_assertion_from_template(**kwargs):
         'badge': reverse_url('ob_get_badge', args=[badge_id]),
         'verify': {
             'type': 'hosted',
-            'url': reverse_url('ob_get_assertion', args=[uid])
+            'url': reverse_url('ob_get_assertion', args=[uid]),
         }
     }
 
