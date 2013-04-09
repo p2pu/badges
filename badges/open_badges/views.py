@@ -1,60 +1,70 @@
-# Create your views here.
+"""
+Handles Mozilla Open Badge requests.
+"""
+
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 import json
-from .helpers import reverse_url
-from .helpers import static_url
+from badge.models import Badge
+from badge.models import Award
+from media.models import get_image
+from p2pu_user.models import get_user
+from .responses import create_assertion_from_template
+from .responses import create_badge_from_template
+from .responses import create_organisation_from_template
 
 def test(request):
     return HttpResponse('nekaj')
 
 
 def get_assertion(request, uid):
+    """
+    Handle badge assertion requests.
+    """
 
-    TEST_ASSERTION = {
-        "uid": uid,
-        "recipient": {
-            "type": "email",
-            "hashed": True,
-            "salt": "deadsea",
-            "identity": "sha256$c7ef86405ba71b85acd8e2e95166c4b111448089f2e1599f42fe1bba46e865c5"
-        },
-        "image": static_url('images/super-blogger_2.png'),
-        "evidence": "https://example.org/beths-robot-work.html",
-        "issuedOn": 1359217910,
-        "badge": reverse_url('ob_get_badge', args=['9999']),
-        "verify": {
-            "type": "hosted",
-            "url": reverse_url('ob_get_assertion', args=[uid])
-        }
-    }
-    return HttpResponse(json.dumps(TEST_ASSERTION), mimetype="application/json")
+    award = get_object_or_404(Award, pk=uid)
+    badge = award.badge
+    user = get_user(award.user_uri)
+    recipient_email = user['username']
+    image = get_image(badge.image_uri)
+
+    assertion = create_assertion_from_template(
+        uid = uid,
+        recipient_email = recipient_email,
+        image = image['url'],
+        evidence = award.evidence_url,
+        issued_on = award.date_awarded,
+        badge_id = badge.pk,
+    )
+    json_assertion = json.dumps(assertion)
+
+    return HttpResponse(json_assertion, mimetype="application/json")
 
 
 def get_badge(request, badge_id):
-    TEST_BADGE = {
-        "name": "Awesome Robotics Badge",
-        "description": "For doing awesome things with robots that people think is pretty great.",
-        "image": static_url('images/super-blogger_2.png'),
-        "criteria": "https://example.org/robotics-badge.html",
-        "tags": ["robots", "awesome"],
-        "issuer": reverse_url('ob_get_organisation'),
-        "alignment": [
-            { "name": "CCSS.ELA-Literacy.RST.11-12.3",
-              "url": "http://www.corestandards.org/ELA-Literacy/RST/11-12/3",
-              "description": "Follow precisely a complex multistep procedure when carrying out experiments, taking measurements, or performing technical tasks; analyze the specific results based on explanations in the text."
-            },
-            { "name": "CCSS.ELA-Literacy.RST.11-12.9",
-              "url": "http://www.corestandards.org/ELA-Literacy/RST/11-12/9",
-              "description": " Synthesize information from a range of sources (e.g., texts, experiments, simulations) into a coherent understanding of a process, phenomenon, or concept, resolving conflicting information when possible."
-            }
-        ]
-    }
-    return HttpResponse(json.dumps(TEST_BADGE), mimetype="application/json")
+    """
+    Handles badge requests.
+    """
+
+    badge = get_object_or_404(Badge, pk=badge_id)
+    image = get_image(badge.image_uri)
+
+    badge = create_badge_from_template(
+        name = badge.title,
+        description = badge.description,
+        image = image['url'],
+    )
+    json_badge = json.dumps(badge)
+
+    return HttpResponse(json_badge, mimetype="application/json")
 
 
 def get_organisation(request):
-    TEST_ORGANISATION = {
-        "name": "P2PU",
-        "url": "https://www.p2pu.org",
-    }
-    return HttpResponse(json.dumps(TEST_ORGANISATION), mimetype="application/json")
+    """
+    Handle organisation requests.
+    """
+
+    organisation = create_organisation_from_template()
+    json_organisation = json.dumps(organisation)
+
+    return HttpResponse(json_organisation, mimetype="application/json")

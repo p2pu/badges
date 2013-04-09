@@ -7,4 +7,4 @@ def reverse_url(viewname, args=None):
 
 
 def static_url(path):
-    return settings.OPEN_BADGES_PUBLIC_URL + settings.MEDIA_URL + path
+    return settings.OPEN_BADGES_PUBLIC_URL + path
