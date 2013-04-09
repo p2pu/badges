@@ -3,6 +3,7 @@ Handles Mozilla Open Badge requests.
 """
 
 from django.http import HttpResponse
+from django.http import HttpResponseGone
 from django.shortcuts import get_object_or_404
 import json
 from badge.models import Badge
@@ -20,7 +21,11 @@ def get_assertion(request, uid):
     Handle badge assertion requests.
     """
 
-    award = get_object_or_404(Award, pk=uid) # TODO: implement revoke
+    award = get_object_or_404(Award, pk=uid)
+
+    if award.ob_state=='REVOKED':
+        return HttpResponseGone('{"revoked": true}', mimetype="application/json")
+
     badge = award.badge
     user = get_user(award.user_uri)
     recipient_email = user['username']

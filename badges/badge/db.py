@@ -19,11 +19,20 @@ class Badge(models.Model):
 
 
 class Award(models.Model):
+    OPEN_BADGES_STATE_CHOICES = (
+        ('NOT_PUBLISHED', 'NOT_PUBLISHED'),
+        ('PUBLISHED', 'PUBLISHED'),
+        ('REVOKED', 'REVOKED'),
+    )
+
     badge = models.ForeignKey(Badge)
     user_uri = UriField()
     expert_uri = UriField()
     evidence_url = models.CharField(max_length=255)
     date_awarded = models.DateTimeField()
+    ob_state = models.CharField(max_length=20, choices=OPEN_BADGES_STATE_CHOICES, default='NOT_PUBLISHED')
+    ob_date_published = models.DateTimeField(null=True, blank=True)
+    ob_date_revoked = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
         return self.badge.title
