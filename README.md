@@ -24,3 +24,30 @@ This project is written using django. To get up and running for development
 1. Run development server: ```python /path/to/code/badges/manage.py runserver```
 1. Go to http://localhost:8000/ and play around
 1. And lastly, fix all the bugs, add cool new features and take over the world :)
+
+### Mozilla Open Badge Integration and Development
+
+Documentation:
+* Badges/Technology https://wiki.mozilla.org/Badges/Technology
+* Assertions https://github.com/mozilla/openbadges/wiki/Assertions
+
+Setup Development Environment:
+1. Prepare validator
+  * user online http://validator.openbadges.org/
+  * or install validator locally
+    * $ install nodejs and npm
+    * $ git clone https://github.com/mozilla/openbadges-validator-service.git
+    * $ cd openbadges-validator-service
+    * $ npm install
+    * $ node app.js
+    * point your browser to http://localhost:8888
+1. Amend settings_local.py
+   * set OPEN_BADGES_PUBLIC_URL to your development box (and later to production public url)
+   * if using local validator, OPEN_BADGES_PUBLIC_URL='http://localhost:8000'
+   * otherwise play with ssh remote tunneling and set OPEN_BADGES_PUBLIC_URL accordingly
+1. Open Badges urls:
+  * OPEN_BADGES_PUBLIC_URL/openbadges/assertions/<uid>
+  * OPEN_BADGES_PUBLIC_URL/openbadges/badge/<badge_id>
+  * OPEN_BADGES_PUBLIC_URL/openbadges/organisation
+
+
