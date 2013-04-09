@@ -1,4 +1,5 @@
 from django import http
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
@@ -145,3 +146,9 @@ def view( request, badge_id ):
         context_instance=RequestContext(request)
     )
 
+
+@require_login
+def pushed_to_backpack( request, award_id ):
+    # TODO: needs further love
+    badge_api.award_was_pushed_to_backpack(award_id)
+    return HttpResponse('OK')

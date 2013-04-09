@@ -110,7 +110,13 @@ def get_user_created_badges(author_uri):
 
 def get_user_earned_badges(user_uri):
     awards = Award.objects.select_related().filter(user_uri=user_uri)
-    return [_badge2dict(award.badge) for award in awards]
+    ret_val = []
+    for award in awards:
+        badge_dict = _badge2dict(award.badge)
+        badge_dict['award_id'] = award.pk
+        badge_dict['award_ob_state'] = award.ob_state
+        ret_val.append(badge_dict)
+    return ret_val
 
 
 def get_user_awarded_badges(user_uri):
@@ -156,3 +162,14 @@ def get_badge_experts(uri):
 
 def relinquish_badge(uri, expert_uri):
     raise Exception()
+
+
+def award_was_pushed_to_backpack(award_id):
+    """
+    Signal to us that award was successfully pushed to Open Badges.
+    """
+
+    award = Award.objects.get(pk=award_id)
+    award.ob_state = 'PUBLISHED'
+    award.ob_date_published = datetime.utcnow()
+    award.save()

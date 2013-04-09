@@ -28,7 +28,7 @@ def get_assertion(request, uid):
 
     badge = award.badge
     user = get_user(award.user_uri)
-    recipient_email = user['username']
+    recipient_email = 'erika@p2pu.org'#user['username']
     image = get_image(badge.image_uri)
 
     assertion = create_assertion_from_template(
@@ -51,7 +51,7 @@ def get_badge(request, badge_id):
 
     badge = get_object_or_404(Badge, pk=badge_id)
     image = get_image(badge.image_uri)
-    criteria = reverse_url('badge_view', badge_id)
+    criteria = reverse_url('badge_view', args=[badge_id])
 
     badge = create_badge_from_template(
         name = badge.title,
