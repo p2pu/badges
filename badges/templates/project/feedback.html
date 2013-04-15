@@ -10,12 +10,12 @@
             <h2>{% trans 'Review Project Progress' %}</h2>
         </div>
         <div>
-            <form action="" method="POST">
+            <form action="" method="POST" class="span8 project-form-snippet">
                 <fieldset>
                     {% csrf_token %}
                     <div class="control-group {% if form.errors.good %}error{% endif %}">
                         <label class="alert alert-success span1">{% trans 'Kudos' %}</label>
-                        <textarea rows="5" name="good" class="span8 green"
+                        <textarea rows="5" name="good" class="ckeditor span8 green"
                                   placeholder="{% trans 'What is good about the project?' %}"
                                   {% if form.good.value %}value="{{ form.good.value }}"{% endif %} required></textarea>
                         {% for error in form.errors.good %}
@@ -24,7 +24,7 @@
                     </div>
                     <div class="control-group {% if form.errors.bad %}error{% endif %}">
                         <label class="yellow-label alert alert-warning span1">{% trans 'Questions' %}</label>
-                        <textarea rows="5" name="bad" class="span8 yellow"
+                        <textarea rows="5" name="bad" class="ckeditor span8 yellow"
                                   placeholder="{% trans 'What is not so good about the project?' %}"
                                   {% if form.bad.value %}value="{{ form.bad.value }}"{% endif %} required></textarea>
                         {% for error in form.errors.bad %}
@@ -33,7 +33,7 @@
                     </div>
                     <div class="control-group {% if form.errors.ugly %}error{% endif %}">
                         <label class="red-label alert alert-error span1">{% trans 'Concerns' %}</label>
-                        <textarea rows="5" name="ugly" class="span8 red"
+                        <textarea rows="5" name="ugly" class="ckeditor span8 red"
                                   placeholder="{% trans 'What concerns do you have with the project?' %}"
                                   {% if form.ugly.value %}value="{{ form.ugly.value }}"{% endif %} required></textarea>
                         {% for error in form.errors.ugly %}

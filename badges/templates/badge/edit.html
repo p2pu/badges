@@ -6,6 +6,6 @@
 {% block body %}
     <div class="container">
         <h2>{% blocktrans with badge_title=badge.title %}Edit {{badge_title}}{% endblocktrans %}</h2>
-        {% include 'badge/form_snippet.html' %}
+        {% include 'badge/form_snippet.html' with mode="editing" %}
     </div>
 {% endblock %}
