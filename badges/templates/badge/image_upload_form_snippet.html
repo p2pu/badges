@@ -3,6 +3,8 @@
     <div class="control-group">
         <label>{% trans 'Choose an image to begin:' %}</label>
         <input name="image" type="file" accept="image/*" id="upload-bage-img"/>
+        <span class="help-block">
+            If you are satisfied with the image you uploaded previously than leave this field blank</span>
     </div>
 {% else %}
     <div class="control-group {% if form.errors.image %}error{% endif %}">
