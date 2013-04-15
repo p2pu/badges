@@ -4,14 +4,18 @@
   <fieldset>
 
     {% csrf_token %}
-
+    {% include 'badge/image_upload_form_snippet.html' with mode=mode %}
+    {% comment %}
     <div class="control-group {% if form.errors.image %}error{% endif %}">
       <label>{% trans 'Choose an image to begin:' %}</label>
-      <input name="image" type="file" required accept="image/*" id="upload-bage-img"/>
-      {% for error in form.errors.image %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
+      <input name="image" type="file" {% if mode != 'editing' %}required{% endif %} accept="image/*" id="upload-bage-img"/>
+        {% if mode != "editing" %}
+            {% for error in form.errors.image %}
+            <span class="help-block">{{ error }}</span>
+            {% endfor %}
+        {% endif %}
     </div>
+    {% endcomment %}
 
     <div class="control-group {% if form.errors.title %}error{% endif %}">   
       <label>{% trans 'Badge Title:' %}</label>
