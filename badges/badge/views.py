@@ -82,14 +82,14 @@ def edit( request, badge_id ):
         form = BadgeForm(badge)
 
     if request.method == 'POST' and form.is_valid():
-        #TODO update image
-        #image = media_api.upload_image(request.FILES['image'], '/uri/user/1')
+        image = media_api.upload_image(request.FILES['image'], request.session['user']['uri'])
         try:
             updated = {}
             for attr in ['title', 'description', 'requirements']:
                 if not badge[attr] == form.cleaned_data[attr]:
                     updated[attr] = form.cleaned_data[attr]
 
+            updated['image_uri'] = image['uri']
             badge = badge_api.update_badge(badge['uri'], **updated)
             return http.HttpResponseRedirect(
                 reverse('badge_preview', args=(badge_api.uri2id(badge['uri']),))
@@ -144,4 +144,3 @@ def view( request, badge_id ):
         context,
         context_instance=RequestContext(request)
     )
-
