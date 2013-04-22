@@ -10,7 +10,7 @@ def uri2username(uri):
     return uri.strip('/').split('/')[-1]
 
 
-def save_user(username, image_url):
+def save_user(username, image_url, email):
 
     if not image_url.startswith('http'):
         image_url = ''.join(['https://p2pu.org', image_url])
@@ -19,13 +19,17 @@ def save_user(username, image_url):
         # update user
         user = User.objects.get(username=username)
         user.image_url = image_url
+        user.email = email
         user.date_updated = datetime.utcnow()
     else:
-        user = User(username=username, 
-            image_url=image_url, date_joined=datetime.utcnow(),
+        user = User(
+            username=username,
+            image_url=image_url,
+            email=email,
+            date_joined=datetime.utcnow(),
             date_updated=datetime.utcnow()
         )
-        user.save()
+    user.save()
 
     return get_user(username2uri(username))
 
@@ -33,6 +37,7 @@ def save_user(username, image_url):
 def _user2dict(user):
     return {
         'username': user.username,
+        'email': user.email,
         'uri': username2uri(user.username),
         'image_url': user.image_url
     }

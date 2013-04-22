@@ -14,6 +14,7 @@ from .responses import create_assertion_from_template
 from .responses import create_badge_from_template
 from .responses import create_organisation_from_template
 from .helpers import reverse_url
+from p2pu_user.models import get_user
 
 
 def get_assertion(request, uid):
@@ -27,8 +28,9 @@ def get_assertion(request, uid):
         return HttpResponseGone('{"revoked": true}', mimetype="application/json")
 
     badge = award.badge
-    user = get_user(award.user_uri)
-    recipient_email = 'erika@p2pu.org'#user['username']
+    #TODO set email from user from oauth object which is returned by lernanta
+    recipient_email = get_user(award.user_uri)['email']
+
     image = get_image(badge.image_uri)
 
     assertion = create_assertion_from_template(
@@ -40,7 +42,7 @@ def get_assertion(request, uid):
         badge_id = badge.pk,
     )
     json_assertion = json.dumps(assertion)
-
+    print json_assertion
     return HttpResponse(json_assertion, mimetype="application/json")
 
 

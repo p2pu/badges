@@ -68,10 +68,13 @@ def redirect( request ):
         return http.HttpResponseRedirect(reverse('landing'))
 
     username = response.json()['user']
+    email = response.json()['email']
     #TODO user_url = response.json()['url']
     image_url = response.json()['image_url']
 
-    request.session['user'] = p2pu_user_api.save_user(username, image_url)
+    user = p2pu_user_api.save_user(username, image_url, email)
+
+    request.session['user'] = user
 
     if request.session.get('next_url'):
         next_url = request.session.get('next_url')
