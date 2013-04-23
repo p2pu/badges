@@ -1,59 +1,60 @@
 import os
-import shutil
-from django.test import TestCase
 from PIL import Image
+from django.test import TestCase
 from media import models as media_api
-from django.conf import settings
 
 
 class TestImageProcessing(TestCase):
-    # image too large
-    # image converted
-    # image resized
 
-    SRC = '%s/test_images' % settings.MEDIA_ROOT
-    DEST = '%s/images' % os.path.dirname(__file__)
-
-    def setUp(self):
-
-        if not os.path.exists(self.DEST):
-            os.makedirs(self.DEST)
-
-        src_files = os.listdir(self.SRC)
-        for file_name in src_files:
-            full_file_name = os.path.join(self.SRC, file_name)
-            if (os.path.isfile(full_file_name)):
-                shutil.copy(full_file_name, self.DEST)
+    TEST_IMAGE_OK_FILES = ['old.gif', 'old.jpeg', 'old.jpg', 'old.png', 'old.tiff']
+    TEST_IMAGE_ERROR_FILES = ['garbage.png', 'unknown.png']
 
 
-    def tearDown(self):
+    def _get_image_file(self, image):
+        return '%s/images/%s' % (os.path.dirname(__file__), image)
+
+    def _test_process_image(self, image):
+        image_file = self._get_image_file(image)
+        # run
+        new_file = media_api.process_image(image_file)
+        # assert
+        pil_image = Image.open(new_file)
+        self.assertTrue(hasattr(pil_image, 'png'), 'Must be converted to PNG')
+        self.assertTrue(pil_image.size <= (128, 128), 'Size must be 128 by 128 or smaller')
+        self.assertTrue(new_file.endswith('.png'))
+
+    def _test_process_error_image(self, image):
+        image_file = self._get_image_file(image)
+
         try:
-           os.rmdir(self.DEST)
-        except OSError as ex:
-            print ex.errno
+            _ = media_api.process_image(image_file)
+        except media_api.UploadImageError:
+            return
+        except:
+            pass
 
+        self.assertTrue(False, 'UploadImageError not raised')
 
-    def extract_image_format(self,image_file):
-        image_base = os.path.basename(image_file)
-        _, img_format = os.path.splitext(image_base)
-        return img_format
+    def test_process_images_ok(self):
+        for image in self.TEST_IMAGE_OK_FILES:
+            self._test_process_image(image)
 
-    def get_image_size(self, image_file):
-        img = Image.open(image_file)
-        return img.size
+    def test_process_images_error(self):
+        for image in self.TEST_IMAGE_ERROR_FILES:
+            self._test_process_error_image(image)
 
+    def test_upload_image_success(self):
+        image_file = self._get_image_file(self.TEST_IMAGE_OK_FILES[0])
+        uploader_uri = '/user/test/1'
+        ret_val = media_api.upload_image(image_file, uploader_uri)
+        self.assertTrue(ret_val['url'].endswith('.png'))
 
-    def test_image_processing(self):
-        files = os.listdir(self.DEST)
-        for file_name in files:
-            new_url = media_api.process_image('%s/%s' % (self.DEST, file_name))
-
-            self.assertEquals('.png', self.extract_image_format(new_url))
-            self.assertTrue(True, max(self.get_image_size(new_url)) <= 128)
-
-
-
-
-
-
-
+    def test_get_not_existant_image(self):
+        image_uri = media_api._get_image_uri(99999)
+        try:
+            media_api.get_image(image_uri)
+        except media_api.GetImageError:
+            return
+        except:
+            pass
+        self.assertTrue(False, 'GetImageError not raised')

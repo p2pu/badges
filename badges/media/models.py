@@ -51,7 +51,7 @@ def get_image(image_uri):
               % (image_uri, image_id, )
 
         LOG.exception(msg)
-        raise UploadImageError(msg), None, sys.exc_info()[2]
+        raise GetImageError(msg), None, sys.exc_info()[2]
 
     image = {
         "uri": _get_image_uri(image_db.id),
@@ -77,7 +77,7 @@ def process_image(image_file):
 
         im.save(image_new_url, "png")
 
-        os.remove(image_file)
+        #os.remove(image_file)
 
     except (IOError, OSError):
         msg = 'Failed while processing image (image_file=%s, image_name=%s, image_new_url=%s).' \
