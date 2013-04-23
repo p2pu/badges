@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.conf import settings
 
 from badge.forms import BadgeForm
 from badge import models as badge_api
@@ -28,7 +29,11 @@ def create( request ):
 
     if form.is_valid():
         try:
-            image = media_api.upload_image(request.FILES['image'], user_uri)
+            image = media_api.upload_image(
+                request.FILES['image'],
+                user_uri,
+                media_root=settings.MEDIA_ROOT,
+                delete_original=True)
 
             badge = badge_api.create_badge(
                 form.cleaned_data['title'],

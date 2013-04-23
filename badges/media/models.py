@@ -7,8 +7,8 @@ import sys
 import logging
 import uuid
 from django.conf import settings
-from PIL import Image
-from media import db
+from PIL import Image as PilImage
+from media.db import Image
 
 LOG = logging.getLogger('badges.media.models')
 
@@ -21,15 +21,23 @@ class GetImageError(Exception):
     pass
 
 
-def upload_image(image_file, uploader_uri):
+def upload_image(image_file, uploader_uri, media_root=None, delete_original=False):
     """
     Upload image media API.
     """
 
-    image_file = process_image(image_file)
-
-    image_db = db.Image(image_file=image_file, uploader_uri=uploader_uri)
+    image_db = Image(image_file=image_file, uploader_uri=uploader_uri)
     image_db.save()
+
+    original_image_file = '%s/%s' % (media_root, image_db.image_file.name, )
+    image_file = process_image(original_image_file)
+
+    image_file = image_file.replace(media_root, '')[1:]
+    image_db.image_file.name = image_file
+    image_db.save()
+
+    if delete_original:
+        os.remove(original_image_file)
 
     image_uri = _get_image_uri(image_db.id)
 
@@ -44,9 +52,9 @@ def get_image(image_uri):
     image_id = _extract_image_id(image_uri)
 
     try:
-        image_db = db.Image.objects.get(id=image_id)
+        image_db = Image.objects.get(id=image_id)
 
-    except db.Image.DoesNotExist:
+    except Image.DoesNotExist:
         msg = 'Failed to load image (image_uri=%s, image_id=%s).' \
               % (image_uri, image_id, )
 
@@ -70,10 +78,10 @@ def process_image(image_file):
     size = 128, 128
 
     try:
-        im = Image.open(image_file)
+        im = PilImage.open(image_file)
 
         if max(im.size) > max(size):
-            im.thumbnail(size, Image.ANTIALIAS)
+            im.thumbnail(size, PilImage.ANTIALIAS)
 
         im.save(image_new_url, "png")
 

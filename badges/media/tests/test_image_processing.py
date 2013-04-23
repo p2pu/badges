@@ -9,9 +9,11 @@ class TestImageProcessing(TestCase):
     TEST_IMAGE_OK_FILES = ['old.gif', 'old.jpeg', 'old.jpg', 'old.png', 'old.tiff']
     TEST_IMAGE_ERROR_FILES = ['garbage.png', 'unknown.png']
 
+    def _get_media_root(self):
+        return '%s/images' % (os.path.dirname(__file__), )
 
     def _get_image_file(self, image):
-        return '%s/images/%s' % (os.path.dirname(__file__), image)
+        return '%s/%s' % (self._get_media_root(), image)
 
     def _test_process_image(self, image):
         image_file = self._get_image_file(image)
@@ -44,9 +46,9 @@ class TestImageProcessing(TestCase):
             self._test_process_error_image(image)
 
     def test_upload_image_success(self):
-        image_file = self._get_image_file(self.TEST_IMAGE_OK_FILES[0])
+        image_file = self.TEST_IMAGE_OK_FILES[0]
         uploader_uri = '/user/test/1'
-        ret_val = media_api.upload_image(image_file, uploader_uri)
+        ret_val = media_api.upload_image(image_file, uploader_uri, media_root=self._get_media_root())
         self.assertTrue(ret_val['url'].endswith('.png'))
 
     def test_get_not_existant_image(self):
