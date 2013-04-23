@@ -117,6 +117,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'open_badges.context_processors.process',
 )
 
 ROOT_URLCONF = 'badges.urls'
@@ -205,3 +206,8 @@ OAUTH_ID_URL = ''
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'sass --scss {infile} {outfile}'),
 )
+
+##################################################################
+# Open badges settings
+#################################################################
+OPEN_BADGES_ISSUER_JS_URL = '//beta.openbadges.org/issuer.js'

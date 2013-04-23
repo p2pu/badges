@@ -28,9 +28,7 @@ def get_assertion(request, uid):
         return HttpResponseGone('{"revoked": true}', mimetype="application/json")
 
     badge = award.badge
-    #TODO set email from user from oauth object which is returned by lernanta
     recipient_email = get_user(award.user_uri)['email']
-
     image = get_image(badge.image_uri)
 
     assertion = create_assertion_from_template(
