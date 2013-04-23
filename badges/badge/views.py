@@ -27,8 +27,9 @@ def create( request ):
     user_uri = request.session['user']['uri']
 
     if form.is_valid():
-        image = media_api.upload_image(request.FILES['image'], user_uri)
         try:
+            image = media_api.upload_image(request.FILES['image'], user_uri)
+
             badge = badge_api.create_badge(
                 form.cleaned_data['title'],
                 image['uri'],
@@ -41,6 +42,8 @@ def create( request ):
             )
         except badge_api.DuplicateTitleError:
             form.errors['title'] = [_('Badge title needs to be unique'),]
+        except media_api.UploadImageError:
+            form.errors['title'] = [_('Badge image cannot be uploaded'),]
 
     return render_to_response(
         template_name, {'form': form},
