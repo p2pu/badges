@@ -14,7 +14,7 @@ var P2PU_OpenBadges = window.P2PU_OpenBadges || {};
             OpenBadges.issue([assertion_url], function (errors, successes) {
                 if (successes.length === 1) {
                     $.get(pushed_to_backpack_url, function () {
-                        $this.addClass('hidden');
+                        $this.removeClass('btn-primary').addClass('disabled').html('In backpack');
                     });
                 }
             });

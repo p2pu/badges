@@ -3,10 +3,30 @@
   background: white;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  padding: 2em 1.5em;
+  padding: 25px 15px;
   color: rgba(0,0,0, .8);
   text-shadow: 0 1px 0 #fff;
   line-height: 1.5;
+
+  .badge-info-name{
+    color: $cyan;
+  }
+  .badge-info-img{
+    padding-top: 15px;
+    margin-left: 0;
+    text-align: center;
+    padding-right: 15px;
+  }
+
+  .badge-info-details{
+    margin-left: 0;
+    padding-left: 30px;
+    border-left: 1px solid $silver;
+  }
+  p, .badge-info-name {
+    font-family: $baseFontFamily;
+    margin-left: 10px;
+  }
 
 }
 .badge-info:before, .badge-info:after{
@@ -104,15 +124,11 @@
     border-color: $cyan;
     @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
   }
-  .badge-draft{
-    position: absolute;
-    z-index: 99;
-    left: 0;
-    bottom: -20px;
   }
-}
-.badge-info-title{
-  margin-top: 0;
+
+.badge-info-title, .badge-info-requirements, .badge-info-desc{
+  color: $gray;
+  font-size: 1em;
 }
 .badge-social{
   margin-top: 1em;
