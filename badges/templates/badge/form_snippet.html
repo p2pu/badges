@@ -1,17 +1,10 @@
 {% load i18n %}
 
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" class="span7">
   <fieldset>
 
     {% csrf_token %}
-
-    <div class="control-group {% if form.errors.image %}error{% endif %}">
-      <label>{% trans 'Choose an image to begin:' %}</label>
-      <input name="image" type="file" required accept="image/*" id="upload-bage-img"/>
-      {% for error in form.errors.image %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+    {% include 'badge/image_upload_form_snippet.html' with mode=mode %}
 
     <div class="control-group {% if form.errors.title %}error{% endif %}">   
       <label>{% trans 'Badge Title:' %}</label>

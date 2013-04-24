@@ -4,4 +4,15 @@
   img{
     max-height: 172px;
   }
+
+}
+.project-form-snippet{
+  margin-left: 0;
+}
+.project-summary{
+  dl{
+    &:first-child{
+      margin-top: 0;
+    }
+  }
 }
