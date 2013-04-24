@@ -3,12 +3,12 @@
 <li class="p2pu-badge span2">
     {% if badge.publised %}
         <a href="{% url badge_view badge.id %}">
-            <h4>{{badge.title}}</h4>
+            <h4>{{badge.title|truncatewords:5}}</h4>
             <img src="{{ badge.image.url }}"/>
         </a>
     {% else %}
         <a href="{% url badge_preview badge.id %}">
-            <h4>{{badge.title}}</h4>
+            <h4>{{ badge.title|truncatewords:35 }}</h4>
             <img src="{{ badge.image.url }}"/>
         </a>
     {% endif %}
