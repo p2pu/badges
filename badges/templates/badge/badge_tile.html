@@ -16,7 +16,7 @@
             <p class="badge-description">{{ badge.description|truncatewords:4 }}</p>
         </div>
         <div class="badge-controls clearfix">
-        {% if request.session.user.username == user and earned %}
+        {% if request.session.user.username == user.username and earned %}
             {% if badge.award_ob_state == 'NOT_PUBLISHED' %}
                 <a class="btn btn-mini btn-primary pull-left ob-push-to-backpack"
                    data-assertion-url="{% assertion_url badge %}"
