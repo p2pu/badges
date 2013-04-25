@@ -14,7 +14,8 @@ def load_test_data(data_file):
     for badge in test_data['badges']:
         p2pu_user_api.save_user(
             p2pu_user_api.uri2username(badge['author_uri']), 
-            'http://placehold.it/150x150'
+            'http://placehold.it/150x150',
+            '%s@p2pu.org' % p2pu_user_api.uri2username(badge['author_uri']),
         )
         with open(os.path.join(root, badge['image']), 'rb') as image_file:
             image = media_api.upload_image(
