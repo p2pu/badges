@@ -27,7 +27,12 @@
             {% endif %}
         {% endif %}
             <div class="badge-more-info-control">
-                <a href="{% url badge_view badge.id %}" class="badge-more-info">more info</a>
+                <a href="
+                {% if badge.publised %}
+                    {% url badge_view badge.id %}
+                {% else %}
+                    {% url badge_preview badge.id %}
+                {% endif %}" class="badge-more-info">more info</a>
                 <i class="icon-angle-right"></i>
             </div>
         </div>

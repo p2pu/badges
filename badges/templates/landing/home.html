@@ -65,30 +65,16 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="learners-tab">
-                        <div class="row">
-                            <ul class="thumbnails">
-                              {% for user in users %}
-                                <li>
-                                    <a href="{% url dashboard user.username %}" class="avatar">
-                                        <img src="{{ user.image_url }}" alt="{{ user.username }}"/>
-                                    </a>
-                                </li>
-                              {% endfor %}
-                            </ul>
-                        </div>
+                        <ul class="thumbnails">
+                          {% for user in users %}
+                            {% include 'p2pu_user/user_tile.html' %}
+                          {% endfor %}
+                        </ul>
                     </div>
                     <div class="tab-pane" id="projects-tab">
-                        <ul class="thumbnails">
+                        <ul class="p2pu-project-list fit-thumbnails">
                             {% for project in projects %}
-                                <li class="span3">
-                                    <div class="thumbnail p2pu-project">
-                                        <a href="{% url project_view project.id %}">
-                                            <img src="{{ project.image.url }}"/>
-                                        </a>
-                                        <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
-                                        <p>{% blocktrans with username=project.author.username %}by {{ username }}{% endblocktrans %}<p>
-                                    </div>
-                                </li>
+                                {% include 'project/project_tile.html' %}
                             {% endfor %}
                         </ul>
                     </div>
