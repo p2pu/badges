@@ -13,11 +13,12 @@
     <div class="row">
         <div class="span12">
             <aside class="dashboard-sidebar span2">
-                <img src="{{ request.session.user.image_url }}" class="img-polaroid"
-                     alt="{{ request.session.user.username }}" height="130px" width="130px"/>
+
+                <img src="{{ user.image_url }}" class="img-polaroid"
+                     alt="{{ user.username }}" height="130px" width="130px"/>
             </aside>
             <div class="dashboard-title span10">
-                <h2>This is {{ user }}'s Dashboard</h2>
+                <h2>This is {{ user.username }}'s Dashboard</h2>
             </div>
             <div class="dashboard-main-container span12">
                 <div class="tabbable">
