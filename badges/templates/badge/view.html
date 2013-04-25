@@ -41,11 +41,7 @@
             <h3>{% trans 'Experts' %}</h3>
             <ul class="thumbnails">
                 {% for expert in experts %}
-                    <li>
-                        <a href="{% url dashboard expert.username %}" class="avatar">
-                            <img src="{{ expert.image_url }}" alt="{{ expert.username }}">
-                        </a>
-                    </li>
+                    {% include 'p2pu_user/user_tile.html' with user=expert %}
                 {% endfor %}
             </ul>
         </div>
