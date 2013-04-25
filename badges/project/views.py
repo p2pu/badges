@@ -118,8 +118,11 @@ def feedback( request, project_id ):
         )
         if form.cleaned_data.get('award_badge'):
             badge_api.award_badge(
-                badge['uri'], project['author_uri'], user_uri,
-                reverse('project_view', args=(project_id,))
+                badge['uri'],
+                project['author_uri'],
+                user_uri,
+                reverse('project_view', args=(project_id,)),
+
             )
             messages.success(request, _('Badge awarded to user!'))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))

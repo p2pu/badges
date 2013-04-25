@@ -31,7 +31,7 @@ def create_assertion_from_template(**kwargs):
             'identity': identity,
         },
         'image': static_url(image),
-        'evidence': evidence,
+        'evidence': static_url(evidence),
         'issuedOn': issued_on,
         'badge': reverse_url('ob_get_badge', args=[badge_id]),
         'verify': {

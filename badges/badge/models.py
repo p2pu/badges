@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from badge.db import Badge
 from badge.db import Award
 from badge.notification_helpers import send_badge_creation_notification
@@ -83,7 +84,12 @@ def publish_badge(uri):
     badge_db = Badge.objects.get(id=uri2id(uri))
     badge_db.date_published = datetime.utcnow()
     badge_db.save()
-    award_badge(uri, badge_db.author_uri, badge_db.author_uri, 'http://TODO.com')
+    award_badge(
+        uri,
+        badge_db.author_uri,
+        badge_db.author_uri,
+        reverse('badge_view', args=(badge_db.pk)),
+    )
     return True
 
 
