@@ -29,6 +29,9 @@ def create( request ):
 
     if form.is_valid():
         try:
+            if request.FILES['image'].size > (256 * 1024):
+                raise media_api.UploadImageError('Image size too large.')
+
             image = media_api.upload_image(
                 request.FILES['image'],
                 user_uri,
@@ -48,7 +51,8 @@ def create( request ):
         except badge_api.DuplicateTitleError:
             form.errors['title'] = [_('Badge title needs to be unique'),]
         except media_api.UploadImageError:
-            form.errors['title'] = [_('Badge image cannot be uploaded'),]
+            form.errors['title'] = [_('Badge image cannot be uploaded. Possible reasons: format not supported'
+                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
 
     return render_to_response(
         template_name, {'form': form},
