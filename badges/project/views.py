@@ -52,7 +52,8 @@ def create( request, badge_id ):
         except project_api.MultipleProjectError:
             messages.error(request, _('You have already submitted a project for this badge.'))
         except media_api.UploadImageError:
-            form.errors['title'] = [_('Project image cannot be uploaded'),]
+            form.errors['title'] = [_('Project image cannot be uploaded. Possible reasons: format not supported'
+                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
 
     context['form'] = form
     return render_to_response(
