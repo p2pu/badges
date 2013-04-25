@@ -87,7 +87,9 @@ def redirect( request ):
 def become( request, username ):
     if settings.DEBUG:
         request.session['user'] = p2pu_user_api.save_user(
-            username, 'http://placehold.it/40x40'
+            username,
+            'http://placehold.it/40x40',
+            '%s@p2pu.org' % username,
         )
     return http.HttpResponseRedirect(reverse('landing'))
 
