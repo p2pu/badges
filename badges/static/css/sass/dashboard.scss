@@ -1,0 +1,25 @@
+.dashboard-sidebar{
+  margin-top: 20px;
+  margin-left: 0;
+  float: left;
+}
+
+.dashboard-main-container{
+  float: left;
+
+  .dashboard-title{
+    margin-bottom: 100px;
+  }
+  .tab h3{
+    margin: 0;
+  }
+
+  .p2pu-projects-tabs-content{
+    .dashboard-pills-menu{
+      margin-left: 10px;
+    }
+    .tab-content{
+      border: none;
+    }
+  }
+}
