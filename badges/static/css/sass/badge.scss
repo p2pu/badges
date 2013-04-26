@@ -9,7 +9,19 @@
   line-height: 1.5;
 
   .badge-info-name{
-    color: $cyan;
+    display: block;
+    h3{
+      color: $cyan;
+      margin: 0;
+    }
+    &:hover{
+      text-decoration: none;
+      & h3{
+        color: $clemintine;
+      }
+
+    }
+
   }
   .badge-info-img{
     padding-top: 15px;
@@ -23,7 +35,7 @@
     padding-left: 30px;
     border-left: 1px solid $silver;
   }
-  p, .badge-info-name {
+  p{
     font-family: $baseFontFamily;
     margin-left: 10px;
   }
@@ -82,6 +94,12 @@
     .badge-description{
       font-size: 12px;
     }
+  }
+  .badge-title{
+    h4{
+      color: $cyan;
+    }
+
   }
   .badge-controls{
     margin-bottom: 10px;

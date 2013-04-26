@@ -4,12 +4,14 @@
     <div class="span7">
         <div class="badge-info">
             <div class="clearfix">
-                <div class="span2 badge-info-img">
+                <a class="span2 badge-info-img" href="{% url badge_view badge.id %}">
                     <img src="{{ badge.image.url }}"/>
-                </div>
+                </a>
                 <div class="span4 badge-info-details">
                     <h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
-                    <h3 class="badge-info-name">{{ badge.title }}</h3>
+                    <a class="badge-info-name" href="{% url badge_view badge.id %}">
+                        <h3>{{ badge.title }}</h3>
+                    </a>
                     <h4 class="badge-info-requirements">{% trans 'Because folks with this badge can' %}</h4>
                     <p>{{ badge.requirements }}</p>
 

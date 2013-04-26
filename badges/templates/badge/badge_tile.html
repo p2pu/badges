@@ -12,7 +12,10 @@
             <img src="{{ badge.image.url }}"/>
         </a>
         <div class="badge-container">
-            <h4>{{ badge.title }}</h4>
+            <a  class="badge-title" href="{% if badge.publised %}{% url badge_view badge.id %}
+                     {% else %}{% url badge_preview badge.id %}{% endif %}">
+                <h4>{{ badge.title }}</h4>
+            </a>
             <p class="badge-description">{{ badge.description|truncatewords:4 }}</p>
         </div>
         <div class="badge-controls clearfix">
@@ -25,16 +28,12 @@
                 <a class="btn btn-mini disabled pull-left" href="">In backpack</a>
 
             {% endif %}
-        {% endif %}
             <div class="badge-more-info-control">
-                <a href="
-                {% if badge.publised %}
-                    {% url badge_view badge.id %}
-                {% else %}
-                    {% url badge_preview badge.id %}
-                {% endif %}" class="badge-more-info">more info</a>
+                <a href="http://backpack.openbadges.org/backpack" class="badge-more-info">more info</a>
                 <i class="icon-angle-right"></i>
             </div>
+        {% endif %}
+
         </div>
 
 </li>
