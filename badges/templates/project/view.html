@@ -15,11 +15,6 @@
         <div>
             <p>Badge for the Project</p>
             {% include 'badge/badge_info.html' with badge=badge %}
-            {% comment %}
-            <a href="{% url badge_view badge.id %}">
-               {% include 'badge/badge_info.html' %}
-            </a>
-            {% endcomment %}
             <hr>
         </div>
 
@@ -32,9 +27,9 @@
 
             <div class="row">
                 <div class="span4">
-                    <img src="{{ project.image.url }}"/>
+                    <img class="img-polaroid" src="{{ project.image.url }}"/>
                 </div>
-                <div class="span8">
+                <div class="span8 project-summary">
                     <dl>
                         <dt>{% trans 'Title' %}</dt>
                         <dd>{{ project.title }}</dd>
@@ -45,16 +40,15 @@
                     </dl>
                     <dl>
                         <dt>{% trans 'Steps taken' %}</dt>
-                        <dd>{{ project.description }}</dd>
+                        <dd>{% autoescape off %}{{ project.description }}{% endautoescape %}</dd>
                     </dl>
                 </div>
             </div>
 
             <div class="row">
               <div class="span12">
-                  <hr>
                  <h2>{% trans 'Lessons learned' %}</h2>
-                 <p>{{ project.reflection }}</p>
+                 <p>{% autoescape off %}{{ project.reflection }}{% endautoescape %}</p>
               </div>
             </div>
             
@@ -62,6 +56,7 @@
             {% for fb in feedback %}
                 <div class="row">
                     <div class="span12 feedback">
+                    <hr>
                         {% if fb.improvement %}
                             <h4>
                                 {% blocktrans with date=fb.date_created|naturaltime %}
@@ -71,9 +66,9 @@
                             <div class="feedback-labels alert alert-revise">
                                 {% trans 'Improvements made' %}
                             </div>
-                            <p class="feedback-content span6 content-blue">
-                                {{ fb.improvement }}
-                            </p>
+                            <div class="feedback-content span6 content-blue">
+                                {{ fb.improvement|safe }}
+                            </div>
 
                             {% if fb.work_url %}
                                 <div class="feedback-labels alert alert-revise">{% trans 'New URL' %}</div>
@@ -96,21 +91,21 @@
                             <div class="feedback-labels alert alert-success">
                                 {% trans 'Kudos' %}
                             </div>
-                            <p class="feedback-content span6 content-green">
-                                {{ fb.good }}
-                            </p>
+                            <div class="feedback-content span6 content-green">
+                                {{ fb.good|safe }}
+                            </div>
                             <div class="feedback-labels alert alert-warning">
                                 {% trans 'Questions' %}
                             </div>
-                            <p class="feedback-content content-yellow span6">
-                                {{ fb.bad }}
-                            </p>
+                            <div class="feedback-content content-yellow span6">
+                                {{ fb.bad|safe }}
+                            </div>
                             <div class="feedback-labels alert alert-error">
                                 {% trans 'Concerns' %}
                             </div>
-                            <p class="feedback-content content-red span6">
-                                {{ fb.ugly }}
-                            </p>
+                            <div class="feedback-content content-red span6">
+                                {{ fb.ugly|safe }}
+                            </div>
                         {% endif %}
                     </div>
                 </div>

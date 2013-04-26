@@ -1,17 +1,40 @@
 {% load i18n %}
+{% load open_badges_tags %}
 
 <li class="p2pu-badge span2">
-    {% if badge.publised %}
-        <a href="{% url badge_view badge.id %}">
-            <h4>{{badge.title}}</h4>
+
+        <a class="badge-image" href="
+            {% if badge.publised %}
+                {% url badge_view badge.id %}
+            {% else %}
+                {% url badge_preview badge.id %}
+            {% endif %}">
             <img src="{{ badge.image.url }}"/>
         </a>
-    {% else %}
-        <a href="{% url badge_preview badge.id %}">
-            <h4>{{badge.title}}</h4>
-            <img src="{{ badge.image.url }}"/>
-        </a>
-    {% endif %}
+        <div class="badge-container">
+            <a  class="badge-title" href="{% if badge.publised %}{% url badge_view badge.id %}
+                     {% else %}{% url badge_preview badge.id %}{% endif %}">
+                <h4>{{ badge.title }}</h4>
+            </a>
+            <p class="badge-description">{{ badge.description|truncatewords:4 }}</p>
+        </div>
+        <div class="badge-controls clearfix">
+        {% if request.session.user.username == user.username and earned %}
+            {% if badge.award_ob_state == 'NOT_PUBLISHED' %}
+                <a class="btn btn-mini btn-primary pull-left ob-push-to-backpack"
+                   data-assertion-url="{% assertion_url badge %}"
+                   data-pushed-to-backpack-url="{% pushed_to_backpack_url badge %}">Add to backpack</a>
+            {% else %}
+                <a class="btn btn-mini disabled pull-left" href="">In backpack</a>
+
+            {% endif %}
+            <div class="badge-more-info-control">
+                <a href="http://backpack.openbadges.org/backpack" class="badge-more-info">more info</a>
+                <i class="icon-angle-right"></i>
+            </div>
+        {% endif %}
+
+        </div>
 
 </li>
 

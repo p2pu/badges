@@ -1,15 +1,13 @@
-from django import http
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
-from django.contrib import messages
+
 
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
 from project import models as project_api
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
+from p2pu_user import models as user_api
 
 def profile( request, username ):
 
@@ -49,7 +47,7 @@ def profile( request, username ):
 
     context['feedback_peer_projects'] = map(fetch_resources, peer_projects)
     context['feedback_latest'] = map(fetch_resources, feedback_latest)
-    context['user'] = username
+    context['user'] = user_api.get_user(user_api.username2uri(username))
     return render_to_response(
         'dashboard/dashboard.html',
         context,

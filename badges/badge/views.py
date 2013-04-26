@@ -1,9 +1,11 @@
 from django import http
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.conf import settings
 
 from badge.forms import BadgeForm
 from badge import models as badge_api
@@ -26,8 +28,16 @@ def create( request ):
     user_uri = request.session['user']['uri']
 
     if form.is_valid():
-        image = media_api.upload_image(request.FILES['image'], user_uri)
         try:
+            if request.FILES['image'].size > (256 * 1024):
+                raise media_api.UploadImageError('Image size too large.')
+
+            image = media_api.upload_image(
+                request.FILES['image'],
+                user_uri,
+                media_root=settings.MEDIA_ROOT,
+                delete_original=True)
+
             badge = badge_api.create_badge(
                 form.cleaned_data['title'],
                 image['uri'],
@@ -40,6 +50,9 @@ def create( request ):
             )
         except badge_api.DuplicateTitleError:
             form.errors['title'] = [_('Badge title needs to be unique'),]
+        except media_api.UploadImageError:
+            form.errors['title'] = [_('Badge image cannot be uploaded. Possible reasons: format not supported'
+                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
 
     return render_to_response(
         template_name, {'form': form},
@@ -82,14 +95,14 @@ def edit( request, badge_id ):
         form = BadgeForm(badge)
 
     if request.method == 'POST' and form.is_valid():
-        image = media_api.upload_image(request.FILES['image'], request.session['user']['uri'])
+        #TODO update image
+        #image = media_api.upload_image(request.FILES['image'], '/uri/user/1')
         try:
             updated = {}
             for attr in ['title', 'description', 'requirements']:
                 if not badge[attr] == form.cleaned_data[attr]:
                     updated[attr] = form.cleaned_data[attr]
 
-            updated['image_uri'] = image['uri']
             badge = badge_api.update_badge(badge['uri'], **updated)
             return http.HttpResponseRedirect(
                 reverse('badge_preview', args=(badge_api.uri2id(badge['uri']),))
@@ -144,3 +157,10 @@ def view( request, badge_id ):
         context,
         context_instance=RequestContext(request)
     )
+
+
+@require_login
+def pushed_to_backpack( request, award_id ):
+    # TODO: needs further love
+    badge_api.award_was_pushed_to_backpack(award_id)
+    return HttpResponse('OK')

@@ -23,11 +23,12 @@ urlpatterns = i18n_patterns('',
     url(r'^badge/', include('badge.urls')),
     url(r'^project/', include('project.urls')),
     url(r'^dashboard/', include('dashboard.urls')),
-    url(r'^about$', 'django.views.generic.simple.direct_to_template', {'template': 'about/home.html'}, name='about')
+    url(r'^about$', 'django.views.generic.simple.direct_to_template', {'template': 'about/home.html'}, name='about'),
 )
 
 urlpatterns += patterns('',
     url(r'^oauth/', include('oauthclient.urls')),
+    url(r'^openbadges/', include('open_badges.urls')),
 )
 
 if settings.DEBUG:
