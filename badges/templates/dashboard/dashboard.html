@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}P2PU Badges | Dashboard{% endblock %}
 
 {% block js %}
-    <script type="text/javascript">
-        P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
+    <script>
+        var js_open_badges = "{% static 'js/open_badges.js' %}";
+        var js_open_badges_issuer = "{{ OPEN_BADGES_ISSUER_JS_URL }}";
+        require(["jquery", js_open_badges, js_open_badges_issuer], function($){
+            P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
+           })
     </script>
 {% endblock %}
 
