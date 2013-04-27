@@ -1,5 +1,6 @@
 from django.utils import simplejson
 from django.core.files import File
+from django.conf import settings
 
 from media import models as media_api
 from badge import models as badge_api
@@ -13,10 +14,16 @@ def load_test_data(data_file):
     for badge in test_data['badges']:
         p2pu_user_api.save_user(
             p2pu_user_api.uri2username(badge['author_uri']), 
-            'http://placehold.it/150x150'
+            'http://placehold.it/150x150',
+            '%s@p2pu.org' % p2pu_user_api.uri2username(badge['author_uri']),
         )
         with open(os.path.join(root, badge['image']), 'rb') as image_file:
-            image = media_api.upload_image(File(image_file), badge['author_uri'])
+            image = media_api.upload_image(
+                File(image_file),
+                badge['author_uri'],
+                media_root=settings.MEDIA_ROOT,
+                delete_original=False)
+
         badge['image_uri'] = image['uri']
         del badge['image']
         badge = badge_api.create_badge(**badge)

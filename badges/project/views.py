@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
+from django.conf import settings
 
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
@@ -29,8 +30,14 @@ def create( request, badge_id ):
         form = ProjectForm()
 
     if form.is_valid():
-        image = media_api.upload_image(request.FILES['image'], user_uri)
+
         try:
+            image = media_api.upload_image(
+                request.FILES['image'],
+                user_uri,
+                media_root=settings.MEDIA_ROOT,
+                delete_original=True)
+
             project = project_api.create_project(
                 badge['uri'],
                 user_uri,
@@ -44,6 +51,9 @@ def create( request, badge_id ):
             return http.HttpResponseRedirect(reverse('project_view', args=(project['id'],)))
         except project_api.MultipleProjectError:
             messages.error(request, _('You have already submitted a project for this badge.'))
+        except media_api.UploadImageError:
+            form.errors['title'] = [_('Project image cannot be uploaded. Possible reasons: format not supported'
+                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
 
     context['form'] = form
     return render_to_response(
@@ -108,8 +118,11 @@ def feedback( request, project_id ):
         )
         if form.cleaned_data.get('award_badge'):
             badge_api.award_badge(
-                badge['uri'], project['author_uri'], user_uri,
-                reverse('project_view', args=(project_id,))
+                badge['uri'],
+                project['author_uri'],
+                user_uri,
+                reverse('project_view', args=(project_id,)),
+
             )
             messages.success(request, _('Badge awarded to user!'))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))

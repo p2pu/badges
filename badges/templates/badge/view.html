@@ -27,20 +27,9 @@
         <hr>
         <div class="clearfix badge-view-projects">
             <h3>{% trans 'Want to see what kind of projects have received this badge' %}?</h3>
-            <ul class="thumbnails p2pu-project">
+            <ul class="p2pu-project-list fit-thumbnails">
                 {% for project in projects %}
-                    <li class="span3">
-                        <div class="thumbnail">
-                            <a href="{% url project_view project.id %}">
-                                <img src="{{ project.image.url }}"/>
-                            </a>
-
-                            <h3><a href="{% url project_view project.id %}">{{ project.title }}</a></h3>
-
-                            <p>{% blocktrans with username=project.author.username %}by
-                                {{ username }}{% endblocktrans %}<p>
-                        </div>
-                    </li>
+                    {% include 'project/project_tile.html' %}
                 {% endfor %}
             </ul>
         </div>
@@ -52,11 +41,7 @@
             <h3>{% trans 'Experts' %}</h3>
             <ul class="thumbnails">
                 {% for expert in experts %}
-                    <li>
-                        <a href="{% url dashboard expert.username %}" class="avatar">
-                            <img src="{{ expert.image_url }}" alt="{{ expert.username }}">
-                        </a>
-                    </li>
+                    {% include 'p2pu_user/user_tile.html' with user=expert %}
                 {% endfor %}
             </ul>
         </div>

@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" class="span7 project-form-snippet" >
   <fieldset>
     {% csrf_token %}
 
@@ -22,7 +22,11 @@
 
     <div class="control-group {% if form.errors.description %}error{% endif %}">
       <label>{% trans 'Project description:' %}</label>
-      <textarea name="description" rows="4" class="span7" placeholder="{% trans 'What steps did you take to complete this project? (This helps experts give you more precise feedback.)' %}">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
+      <textarea name="description" rows="4" class="ckeditor span7" placeholder="{% trans 'What steps did you take to complete this project? (This helps experts give you more precise feedback.)' %}">
+          {% if form.description.value %}
+              &lt;div&gt;{{form.description.value}}&lt;/div&gt;
+          {% endif %}
+      </textarea>
       {% for error in form.errors.description %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -30,7 +34,11 @@
 
     <div class="control-group {% if form.errors.reflection %}error{% endif %}">
       <label>{% trans 'Second thoughts?' %}</label>
-      <textarea name="reflection" rows="4" class="span7" placeholder="{% trans 'What might you do differently next time? (Experts might have ideas and suggestions for you.)' %}">{% if form.reflection.value %}{{form.reflection.value}}{% endif %}</textarea>
+      <textarea name="reflection" rows="4" class="ckeditor span7" placeholder="{% trans 'What might you do differently next time? (Experts might have ideas and suggestions for you.)' %}">
+          {% if form.reflection.value %}
+              &lt;div&gt;{{form.reflection.value}}&lt;/div&gt;
+          {% endif %}
+      </textarea>
       {% for error in form.errors.reflection %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
