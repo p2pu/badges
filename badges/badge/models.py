@@ -88,7 +88,7 @@ def publish_badge(uri):
         uri,
         badge_db.author_uri,
         badge_db.author_uri,
-        reverse('badge_view', args=(badge_db.pk)),
+        reverse('badge_view', args=(badge_db.pk, )),
     )
     return True
 
