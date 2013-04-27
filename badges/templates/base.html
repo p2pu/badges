@@ -146,10 +146,13 @@
 
     {% compress js %}
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script type="text/javascript">
+            this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
+        </script>
+        <script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
+        <script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
+        <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
     {% endcompress %}
-    <script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
-    <script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
-    <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
     {% block js %}{% endblock %}
 
 
