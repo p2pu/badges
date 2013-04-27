@@ -9,16 +9,16 @@
             <h2>Revise Project</h2>
         </div>
         <div>
-            <form action="" method="POST">
+            <form action="" method="POST" class="span7">
                 <fieldset>
                     {% csrf_token %}
 
                     <div class="control-group {% if form.errors.improvement %}error{% endif %}">
                         <label>{% trans 'Improvements made' %}</label>
-                        <textarea rows="5" name="improvement" class="span8"
+                        <textarea rows="5" name="improvement" class="ckeditor span8"
                                   placeholder="{% trans 'What changes have you made to the project?' %}"
                                   {% if form.improvement.value %}value="{{ form.improvement.value }}"{% endif %}
-                                  required></textarea>
+                                  ></textarea>
                         {% for error in form.errors.improvement %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}

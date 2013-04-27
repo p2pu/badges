@@ -1,7 +1,50 @@
+.p2pu-project-list{
+  list-style-type: none;
+  margin-left: 0;
+  border: 1px solid #aaa;
+  >li:first-child{
+    >.p2pu-project{
+      border-top: none;
+    }
+  }
+  border-radius: 4px;
+}
 .p2pu-project{
-  padding-top: 15px;
-  text-align: center;
-  img{
-    max-height: 172px;
+  padding: 15px;
+  background-color: $white;
+  border-top: 1px dotted #aaa;
+  .p2pu-project-img-link{
+    float: left;
+    display: block;
+    min-width: 128px;
+    min-height: 128px;
+    margin-right: 20px;
+    text-align: center;
+  }
+  .p2pu-project-info-field{
+    .p2pu-project-title{
+      color: $gray;
+      font-size: 1.2em;
+      font-weight: bold;
+      &:hover{
+        color: $cyan;
+        text-decoration: none;
+      }
+      .p2pu-project-desc{
+        margin-top: 10px;
+      }
+    }
+  }
+
+
+}
+.project-form-snippet{
+  margin-left: 0;
+}
+.project-summary{
+  dl{
+    &:first-child{
+      margin-top: 0;
+    }
   }
 }

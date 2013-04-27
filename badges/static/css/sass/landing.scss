@@ -62,7 +62,8 @@
       z-index: 0;
 
       img{
-          height: 112px;
+          max-height: 128px;
+          max-width: 128px;
       }
 
       &:hover{

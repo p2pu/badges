@@ -1,6 +1,7 @@
 from settings import *
 
 # conf for django debug toolbar
+DEBUG = True
 INSTALLED_APPS += ( 'debug_toolbar',)
 MIDDLEWARE_CLASSES += ( 'debug_toolbar.middleware.DebugToolbarMiddleware',)
 INTERNAL_IPS = ('127.0.0.1', )
@@ -19,3 +20,8 @@ LERNANTA_API_KEY = ''
 NOTIFICATION_URL = 'https://host.org/notification/url/'
 
 DEFAULT_FROM_ADDRESS = 'Admin'
+
+OPEN_BADGES_PUBLIC_URL = 'http://localhost:8000'
+OPEN_BADGES_ORGANISATION_NAME = 'P2PU Org.'
+OPEN_BADGES_ORGANISATION_URL = 'https://www.p2pu.org'
+OPEN_BADGES_HASH_EMAIL_SALT = 'alivesea'

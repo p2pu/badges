@@ -1,0 +1,32 @@
+.dashboard-sidebar{
+  margin-top: 20px;
+  margin-left: 0;
+  float: left;
+}
+.dashboard-title{
+    margin-bottom: 100px;
+    margin-top: 15px;
+    margin-left: 20px;
+  }
+.dashboard-main-container{
+  margin-left: 0;
+  margin-top: 25px;
+
+
+  .tab h3{
+    margin: 0;
+    color: $cyan;
+    &:hover{
+      color: $clemintine;
+    }
+  }
+
+  .p2pu-projects-tabs-content{
+    .dashboard-pills-menu{
+      margin-left: 10px;
+    }
+    .tab-content{
+      border: none;
+    }
+  }
+}

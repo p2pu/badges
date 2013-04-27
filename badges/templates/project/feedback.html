@@ -17,7 +17,7 @@
                         <label class="alert alert-success span1">{% trans 'Kudos' %}</label>
                         <textarea rows="5" name="good" class="ckeditor span8 green"
                                   placeholder="{% trans 'What is good about the project?' %}"
-                                  {% if form.good.value %}value="{{ form.good.value }}"{% endif %} required></textarea>
+                                  {% if form.good.value %}value="{{ form.good.value }}"{% endif %}></textarea>
                         {% for error in form.errors.good %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
@@ -26,7 +26,7 @@
                         <label class="yellow-label alert alert-warning span1">{% trans 'Questions' %}</label>
                         <textarea rows="5" name="bad" class="ckeditor span8 yellow"
                                   placeholder="{% trans 'What is not so good about the project?' %}"
-                                  {% if form.bad.value %}value="{{ form.bad.value }}"{% endif %} required></textarea>
+                                  {% if form.bad.value %}value="{{ form.bad.value }}"{% endif %}></textarea>
                         {% for error in form.errors.bad %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
@@ -35,7 +35,7 @@
                         <label class="red-label alert alert-error span1">{% trans 'Concerns' %}</label>
                         <textarea rows="5" name="ugly" class="ckeditor span8 red"
                                   placeholder="{% trans 'What concerns do you have with the project?' %}"
-                                  {% if form.ugly.value %}value="{{ form.ugly.value }}"{% endif %} required></textarea>
+                                  {% if form.ugly.value %}value="{{ form.ugly.value }}"{% endif %}></textarea>
                         {% for error in form.errors.ugly %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
