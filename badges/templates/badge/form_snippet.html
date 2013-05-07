@@ -17,7 +17,7 @@
 
     <div class="control-group {% if form.errors.description %}error{% endif %}">   
       <label>{% trans 'Badge Description:' %}</label>
-      <textarea name="description" rows="3" class="span7" placeholder="{% trans 'What is this badge for? A course? An event? A certain type of project?' %}" required  maxlength="128">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
+      <textarea name="description" rows="3" class="span7" placeholder="{% trans 'What is this Badge for? A course? An event? A certain type of project?' %}" required  maxlength="128">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
       {% for error in form.errors.description %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
@@ -31,7 +31,7 @@
       {% endfor %}
     </div>
 
-    <button type="submit" class="btn btn-cyan">{% trans 'Save and preview your badge' %}</button>
+    <button type="submit" class="btn btn-cyan">{% trans 'Save and preview your Badge' %}</button>
   </fieldset>
 </form>
 
