@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load projects_tags %}
 
 {% block title %}P2PU Badges | Give Feedback{% endblock %}
 
@@ -9,6 +10,36 @@
         <div>
             <h2>{% trans 'Review Project Progress' %}</h2>
         </div>
+        <div class="row">
+            <div class="clearfix span8">
+                <ul>
+                    {% include 'badge/badge_tile.html' with badge=badge  %}
+                </ul>
+                {% if feedback %}
+                <div>
+                    {% for feed in feedback %}
+                        <dl>On: {{ feed.date_created|date:'m.d.Y' }}:</dl>
+                        {% if feed.good %}
+                            <dt>Good:</dt>
+                            <dd>{{ feed.good|purge_content }}</dd>
+                        {% endif %}
+                        {% if feed.bad %}
+                            <dt>Bad: </dt>
+                            <dd>{{ feed.bad|purge_content }}</dd>
+                        {% endif %}
+                        {% if feed.ugly %}
+                            <dt>Ugly: </dt>
+                            <dd>{{ feed.ugly|purge_content }}</dd>
+                        {% endif %}
+                        {% if feed.improvement %}
+                            <dt>Improvement: </dt>
+                            <dd>{{ feed.improvement|purge_content }}</dd>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
         <div>
             <form action="" method="POST" class="span8 project-form-snippet">
                 <fieldset>
@@ -16,7 +47,7 @@
                     <div class="control-group {% if form.errors.good %}error{% endif %}">
                         <label class="alert alert-success span1">{% trans 'Kudos' %}</label>
                         <textarea rows="5" name="good" class="ckeditor span8 green"
-                                  placeholder="{% trans 'What is good about the project?' %}"
+                                  placeholder="{% trans 'What is strong and outstanding about the project?' %}"
                                   {% if form.good.value %}value="{{ form.good.value }}"{% endif %}></textarea>
                         {% for error in form.errors.good %}
                             <span class="help-block">{{ error }}</span>
@@ -25,7 +56,7 @@
                     <div class="control-group {% if form.errors.bad %}error{% endif %}">
                         <label class="yellow-label alert alert-warning span1">{% trans 'Questions' %}</label>
                         <textarea rows="5" name="bad" class="ckeditor span8 yellow"
-                                  placeholder="{% trans 'What is not so good about the project?' %}"
+                                  placeholder="{% trans 'What questions do you have about the project? Are there pieces you are not so sure about?' %}"
                                   {% if form.bad.value %}value="{{ form.bad.value }}"{% endif %}></textarea>
                         {% for error in form.errors.bad %}
                             <span class="help-block">{{ error }}</span>
@@ -34,18 +65,23 @@
                     <div class="control-group {% if form.errors.ugly %}error{% endif %}">
                         <label class="red-label alert alert-error span1">{% trans 'Concerns' %}</label>
                         <textarea rows="5" name="ugly" class="ckeditor span8 red"
-                                  placeholder="{% trans 'What concerns do you have with the project?' %}"
+                                  placeholder="{% trans 'What needs further development? Do you have ideas or resources that could help the project?' %}"
                                   {% if form.ugly.value %}value="{{ form.ugly.value }}"{% endif %}></textarea>
                         {% for error in form.errors.ugly %}
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
                     </div>
-                    <div class="control-group checkbox-group">
-                        <label class="checkbox">
-                            <input type="checkbox" name="award_badge"> {% trans 'Award Badge' %}
+                    <div class="roundedTwo">
+                        <input type="checkbox" value="None" id="roundedTwo" name="check" />
+                        <label for="roundedTwo"></label>
+                    </div>
+                    <div class="control-group checkbox-group roundedTwo">
+                        <label for="roundedTwo" class="checkbox">
+                            <input type="checkbox" id="roundedTwo" name="award_badge"> {% trans 'Has this project met all of the criteria for this Badge? If so, go ahead and award it!' %}
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-cyan btn-large">{% trans 'Submit feedback' %}</button>
+                    <label for="give-feedback">Or you can choose to submit your feedback and ask the learner to revise and submit.</label>
+                    <button type="submit" id="give-feedback" class="btn btn-cyan btn-large">{% trans 'Submit feedback' %}</button>
                 </fieldset>
             </form>
         </div>
