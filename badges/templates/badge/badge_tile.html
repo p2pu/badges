@@ -14,9 +14,9 @@
         <div class="badge-container">
             <a  class="badge-title" href="{% if badge.publised %}{% url badge_view badge.id %}
                      {% else %}{% url badge_preview badge.id %}{% endif %}">
-                <h4>{{ badge.title|truncatewords:3 }}</h4>
+                <h4>{{ badge.title|truncatewords:4 }}</h4>
             </a>
-            <p class="badge-description">{{ badge.description|truncatewords:4 }}</p>
+            <p class="badge-description">{{ badge.description|truncatewords:6 }}</p>
         </div>
         <div class="badge-controls clearfix">
         {% if request.session.user.username == user.username and earned %}

@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load humanize %}
 {% load projects_tags %}
 
+
 {% block title %}P2PU Badges | Give Feedback{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        Badges.ProjectView.init();
+    </script>
+{% endblock js %}
 
 {% block body %}
 
@@ -10,36 +18,54 @@
         <div>
             <h2>{% trans 'Review Project Progress' %}</h2>
         </div>
-        <div class="row">
+        <div class="row badge-and-feedback">
             <div class="clearfix span8">
-                <ul>
+                <ul class="badge-list">
                     {% include 'badge/badge_tile.html' with badge=badge  %}
                 </ul>
+                <div class="previous-interactions" id="previous-interactions">
                 {% if feedback %}
-                <div>
-                    {% for feed in feedback %}
-                        <dl>On: {{ feed.date_created|date:'m.d.Y' }}:</dl>
-                        {% if feed.good %}
-                            <dt>Good:</dt>
-                            <dd>{{ feed.good|purge_content }}</dd>
-                        {% endif %}
-                        {% if feed.bad %}
-                            <dt>Bad: </dt>
-                            <dd>{{ feed.bad|purge_content }}</dd>
-                        {% endif %}
-                        {% if feed.ugly %}
-                            <dt>Ugly: </dt>
-                            <dd>{{ feed.ugly|purge_content }}</dd>
-                        {% endif %}
-                        {% if feed.improvement %}
-                            <dt>Improvement: </dt>
-                            <dd>{{ feed.improvement|purge_content }}</dd>
-                        {% endif %}
-                    {% endfor %}
-                </div>
+                    <div class="feedback-already-given">
+                        {% for feed in feedback %}
+                            <dl>
+                                <h4>{{ feed.date_created|naturaltime }}
+                                    {% if feed.expert %}
+                                    {{ feed.expert }} wrote
+                                    {% endif %}:
+                                </h4>
+                                {% if feed.good %}
+                                    <dt>Kudos:</dt>
+                                    <dd>{{ feed.good|purge_content }}</dd>
+                                {% endif %}
+                                {% if feed.bad %}
+                                    <dt>Questions: </dt>
+                                    <dd>{{ feed.bad|purge_content }}</dd>
+                                {% endif %}
+                                {% if feed.ugly %}
+                                    <dt>Concerns: </dt>
+                                    <dd>{{ feed.ugly|purge_content }}</dd>
+                                {% endif %}
+                                {% if feed.improvement %}
+                                    <dt>Improvement: </dt>
+                                    <dd>{{ feed.improvement|purge_content }}</dd>
+                                {% endif %}
+                            </dl>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="no-feedback-yet">
+                        There is no Feedback given yet for this Project
+                    </div>
                 {% endif %}
+                </div>
+                <div class="show-more-previous-interactions">
+                    <a class="btn btn-mini pull-right btn-inverse show-more" href="#previous-interactions">
+                        {% trans 'Show more' %}
+                    </a>
+                </div>
             </div>
         </div>
+    <hr>
         <div>
             <form action="" method="POST" class="span8 project-form-snippet">
                 <fieldset>
@@ -71,17 +97,24 @@
                             <span class="help-block">{{ error }}</span>
                         {% endfor %}
                     </div>
-                    <div class="roundedTwo">
-                        <input type="checkbox" value="None" id="roundedTwo" name="check" />
-                        <label for="roundedTwo"></label>
-                    </div>
-                    <div class="control-group checkbox-group roundedTwo">
-                        <label for="roundedTwo" class="checkbox">
-                            <input type="checkbox" id="roundedTwo" name="award_badge"> {% trans 'Has this project met all of the criteria for this Badge? If so, go ahead and award it!' %}
+
+                    <div class="control-group checkbox-group clearfix">
+                        <label class="control-group-label">
+                            {% trans 'Has this project met all of the criteria for this Badge?' %}
+                        </label>
+                        <div class="squaredThree pull-right">
+                            <input type="checkbox" value="None" id="squaredThree" name="check" name="award_badge" />
+                            <label for="squaredThree" class="checkbox"></label>
+                        </div>
+                        <label class="custom-checkbox-label">
+                            {% trans 'If so, go ahead and award it!' %}
                         </label>
                     </div>
-                    <label for="give-feedback">Or you can choose to submit your feedback and ask the learner to revise and submit.</label>
-                    <button type="submit" id="give-feedback" class="btn btn-cyan btn-large">{% trans 'Submit feedback' %}</button>
+                    <div>
+                        <label for="give-feedback" class="control-group-label">Or you can choose to submit your feedback and ask the learner to revise and submit.</label>
+                        <button type="submit" id="give-feedback" class="btn">{% trans 'Submit feedback' %}</button>
+                    </div>
+
                 </fieldset>
             </form>
         </div>

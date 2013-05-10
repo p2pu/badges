@@ -208,6 +208,7 @@ def _revision2dict(revision):
 def _feedback2dict(feedback):
     json = {
         'expert_uri': feedback.expert_uri,
+        'expert': feedback.get_expert_from_uri,
         'good': feedback.good,
         'bad': feedback.bad,
         'ugly': feedback.ugly,

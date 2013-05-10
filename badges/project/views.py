@@ -97,10 +97,11 @@ def view( request, project_id ):
 
 
 @require_login
-def feedback( request, project_id ):
+def feedback(request, project_id ):
     project = project_api.get_project(project_api.id2uri(project_id))
     feedback = project_api.get_project_feedback(project_api.id2uri(project_id))
     badge = badge_api.get_badge(project['badge_uri'])
+    fetch_badge_resources(badge)
     user_uri = request.session['user']['uri']
 
     if request.method == 'POST':
@@ -127,6 +128,8 @@ def feedback( request, project_id ):
             )
             messages.success(request, _('Badge awarded to user!'))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
+
+
 
     context = {
         'badge': badge,
