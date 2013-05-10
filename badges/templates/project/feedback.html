@@ -98,13 +98,13 @@
                         {% endfor %}
                     </div>
 
-                    <div class="control-group checkbox-group clearfix">
+                    <div class="clearfix">
                         <label class="control-group-label">
                             {% trans 'Has this project met all of the criteria for this Badge?' %}
                         </label>
-                        <div class="squaredThree pull-right">
-                            <input type="checkbox" value="None" id="squaredThree" name="check" name="award_badge" />
-                            <label for="squaredThree" class="checkbox"></label>
+                        <div class="control-group checkbox-group award_badge pull-right">
+                            <input type="checkbox" value="None" id="award_badge" name="award_badge" />
+                            <label for="award_badge" class="checkbox"></label>
                         </div>
                         <label class="custom-checkbox-label">
                             {% trans 'If so, go ahead and award it!' %}

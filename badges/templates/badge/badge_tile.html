@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load open_badges_tags %}
 
-<li class="p2pu-badge span2">
+<li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}">
 
         <a class="badge-image" href="
             {% if badge.publised %}
@@ -16,7 +16,7 @@
                      {% else %}{% url badge_preview badge.id %}{% endif %}">
                 <h4>{{ badge.title|truncatewords:4 }}</h4>
             </a>
-            <p class="badge-description">{{ badge.description|truncatewords:6 }}</p>
+            <p class="badge-description">{{ badge.description|truncatewords:10 }}</p>
         </div>
         <div class="badge-controls clearfix">
         {% if request.session.user.username == user.username and earned %}

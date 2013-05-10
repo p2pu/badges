@@ -79,6 +79,9 @@
   @extend .thumbnail;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   border: 1px solid #aaa;
+  &.p2pu-badge-long{
+    height: 275px;
+  }
   .badge-image{
     text-align: center;
     min-height: 128px;
