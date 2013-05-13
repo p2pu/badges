@@ -3,7 +3,14 @@
 
 <li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}">
         {% if can_delete %}
-            <a href="{% url badge_delete badge.id %}" type="button" class="close" data-dismiss="p2pu-badge">×</a>
+            <a href="#" type="button" class="close" data-delete="p2pu-badge">×</a>
+            <div class="badge-delete-popover" style="display: none">
+                <p>{% trans 'Sure you want to delete this niffty Badge?' %}</p>
+                <div class="badge-delete-controls clearfix">
+                    <a href="{% url badge_delete badge.id %}" class="badge-delete-confirm btn btn-primary">{% trans 'Delete' %}</a>
+                    <a href="" class="badge-delete-cancel btn">{% trans 'Cancel' %}</a>
+                </div>
+            </div>
         {% endif %}
         <a class="badge-image" href="
             {% if badge.publised %}

@@ -12,6 +12,10 @@
             P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
            })
     </script>
+    <script src="{% static 'js/badges_dashboard_util.js' %}"></script>
+    <script>
+        Badges.Dashboard.init();
+    </script>
 {% endblock %}
 
 {% block body %}
