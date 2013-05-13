@@ -160,6 +160,26 @@ def view( request, badge_id ):
 
 
 @require_login
+def delete(request, badge_id):
+    """
+    Setting badge attribute 'active' to False
+    """
+    user_uri = request.session['user']['uri']
+
+    try:
+        badge_api.delete_badge(badge_id, user_uri)
+        messages.success(request, _('Success! You have deleted your badge'))
+    except badge_api.NotTheAuthorError:
+        messages.error(request, _('Error! You are not the author of the badge!'))
+    except Exception:
+        messages.error(request, _('Error! Badge has projects attached!'))
+
+    return http.HttpResponseRedirect(
+        reverse('dashboard', args=(p2pu_user_api.uri2username(user_uri),))
+    )
+
+
+@require_login
 def pushed_to_backpack( request, award_id ):
     # TODO: needs further love
     badge_api.award_was_pushed_to_backpack(award_id)

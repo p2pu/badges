@@ -2,7 +2,7 @@
 {% load open_badges_tags %}
 
 <li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}">
-
+        <a href="{% url badge_delete badge.id %}" type="button" class="close" data-dismiss="p2pu-badge">×</a>
         <a class="badge-image" href="
             {% if badge.publised %}
                 {% url badge_view badge.id %}

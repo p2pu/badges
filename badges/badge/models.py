@@ -1,16 +1,20 @@
 from django.core.urlresolvers import reverse
-from badge.db import Badge
-from badge.db import Award
-from badge.notification_helpers import send_badge_creation_notification
-from badge.notification_helpers import send_badge_awarded_notification
-
 from datetime import datetime
+from .db import Badge
+from .db import Award
+from .notification_helpers import send_badge_creation_notification
+from .notification_helpers import send_badge_awarded_notification
+#from project.models import search_projects
+
 
 class DuplicateTitleError(Exception):
     pass
 
+class NotTheAuthorError(Exception):
+    pass
 
-def uri2id( uri ):
+
+def uri2id(uri):
     return uri.strip('/').split('/')[-1]
 
 
@@ -27,6 +31,7 @@ def _badge2dict(badge_db):
         'description': badge_db.description,
         'requirements': badge_db.requirements,
         'author_uri': badge_db.author_uri,
+        'active': badge_db.active,
         'publised': not badge_db.date_published == None
     }
     return badge
@@ -54,10 +59,12 @@ def create_badge( title, image_uri, description, requirements, author_uri ):
 
 def get_badge(uri):
     badge_db = Badge.objects.get(id=uri2id(uri))
-    return _badge2dict(badge_db)
+    if badge_db.active:
+        return _badge2dict(badge_db)
+    return None
 
 
-def update_badge(uri, image_uri=None, title=None, description=None, requirements=None):
+def update_badge(uri, image_uri=None, title=None, description=None, requirements=None, active=True):
     """ only possible while draft """
     badge_db = Badge.objects.get(id=uri2id(uri))
 
@@ -80,6 +87,29 @@ def update_badge(uri, image_uri=None, title=None, description=None, requirements
     return get_badge(uri)
 
 
+def delete_badge(uri, user_uri):
+    """
+    Enables owner and admin to archive badge
+    """
+    from project.models import search_projects
+
+    badge_db = Badge.objects.get(id=uri2id(uri))
+    projects = search_projects(uri)
+
+    if badge_db.author_uri != user_uri:
+        raise NotTheAuthorError('You are not the author of the badge')
+
+    if projects:
+        raise Exception('Badge has projects. It can not be deleted.')
+
+    badge_db.active = False
+    badge_db.save()
+
+    #TODO: Check if badge in user backpack and revoke
+
+    return _badge2dict(badge_db)
+
+
 def publish_badge(uri):
     badge_db = Badge.objects.get(id=uri2id(uri))
     badge_db.date_published = datetime.utcnow()
@@ -99,23 +129,23 @@ def remove_badge(uri, reason):
 
 
 def get_published_badges():
-    badges = Badge.objects.filter(date_published__isnull=False)
+    badges = Badge.objects.filter(active=True, date_published__isnull=False)
     return [_badge2dict(badge) for badge in badges]
 
 
 def get_user_draft_badges(user_uri):
-    badges = Badge.objects.filter(author_uri=user_uri, date_published__isnull=True)
+    badges = Badge.objects.filter(author_uri=user_uri, active=True, date_published__isnull=True)
     return [_badge2dict(badge) for badge in badges]
 
 
 def get_user_created_badges(author_uri):
     """ created badges aka 'published' badges """
-    badges = Badge.objects.filter(author_uri=author_uri, date_published__isnull=False)
+    badges = Badge.objects.filter(author_uri=author_uri, active=True, date_published__isnull=False)
     return [_badge2dict(badge) for badge in badges]
 
 
 def get_user_earned_badges(user_uri):
-    awards = Award.objects.select_related().filter(user_uri=user_uri)
+    awards = Award.objects.select_related().filter(user_uri=user_uri, badge__active=True)
     ret_val = []
     for award in awards:
         badge_dict = _badge2dict(award.badge)
@@ -127,7 +157,7 @@ def get_user_earned_badges(user_uri):
 
 def get_user_awarded_badges(user_uri):
     """ get badges awarded by this user """
-    badges = [award.badge for award in Award.objects.select_related().filter(expert_uri=user_uri)]
+    badges = [award.badge for award in Award.objects.select_related().filter(expert_uri=user_uri, badge__active=True)]
     return [_badge2dict(badge) for badge in badges]
 
 

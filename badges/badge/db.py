@@ -10,6 +10,7 @@ class Badge(models.Model):
     description = models.CharField(max_length=128)
     requirements = models.CharField(max_length=1024)
     author_uri = UriField()
+    active = models.BooleanField(default=True)
     date_created = models.DateTimeField()
     date_updated = models.DateTimeField()
     date_published = models.DateTimeField(blank=True, null=True)

@@ -4,10 +4,10 @@ when you run "manage.py test".
 
 Replace this with more appropriate tests for your application.
 """
-
+from django.contrib.auth.models import User
 from django.test import TestCase
 from badge import models as badge_api
-
+from project import models as project_api
 from mock import patch
 
 
@@ -32,7 +32,6 @@ class SimpleTest(TestCase):
             'Create a movie and upload it to youtube or vimeo',
             '/uri/user/badgemaker',
         ]
-
 
     def test_create_and_get_badge(self):
         """ Test that we can create a badge """
@@ -167,3 +166,40 @@ class SimpleTest(TestCase):
 
         badges = badge_api.get_user_earned_badges('/uri/user/auser')
         self.assertEqual(len(badges), 0)
+
+    @patch('project.notification_helpers.fetch_resources', lambda x: x)
+    def test_deactivate_badge_with_no_projects(self):
+        # setup
+        badge = badge_api.create_badge(*self.badge_values)
+        badge_api.publish_badge(badge['uri'])
+        kwargs = {
+            'badge_uri': badge['uri'],
+            'user_uri': badge['author_uri'],
+            'expert_uri': badge['author_uri'],
+            'evidence_url': 'http://some.evi/dence'
+        }
+
+        # test that method raises error when user is not author of a badge
+        self.assertRaises(Exception, badge_api.delete_badge, badge['uri'], '/uri/user/iamnotthebadgeowner')
+
+        # test that badge 'active' attribute has been set to False
+        deleted_badge = badge_api.delete_badge(badge['uri'], badge['author_uri'])
+        self.assertFalse(deleted_badge['active'])
+
+        # test that method raises error when badge has projects attached to it
+        project = {
+            'badge_uri': badge['uri'],
+            'author_uri': '/uri/user/author',
+            'title': 'Test Project 1',
+            'image_uri': '/uri/image/1',
+            'work_url': 'http://example.com',
+            'description': 'Some description',
+            'reflection': 'Some other lesions learned',
+            'tags': 'tags'
+        }
+        project_api.create_project(**project)
+        self.assertRaises(Exception, badge_api.delete_badge, badge['uri'], badge['author_uri'])
+
+
+
+

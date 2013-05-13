@@ -9,7 +9,7 @@ from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
 from p2pu_user import models as user_api
 
-def profile( request, username ):
+def profile(request, username ):
 
     context = {}
     user_uri = u'/uri/user/{0}'.format(username)
