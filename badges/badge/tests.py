@@ -182,9 +182,9 @@ class SimpleTest(TestCase):
         # test that method raises error when user is not author of a badge
         self.assertRaises(Exception, badge_api.delete_badge, badge['uri'], '/uri/user/iamnotthebadgeowner')
 
-        # test that badge 'active' attribute has been set to False
+        # test that badge 'deleted' attribute has been set to False
         deleted_badge = badge_api.delete_badge(badge['uri'], badge['author_uri'])
-        self.assertFalse(deleted_badge['active'])
+        self.assertTrue(deleted_badge['deleted'])
 
         # test that method raises error when badge has projects attached to it
         project = {

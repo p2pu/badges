@@ -162,7 +162,7 @@ def view( request, badge_id ):
 @require_login
 def delete(request, badge_id):
     """
-    Setting badge attribute 'active' to False
+    Setting badge attribute 'deleted' to True
     """
     user_uri = request.session['user']['uri']
 

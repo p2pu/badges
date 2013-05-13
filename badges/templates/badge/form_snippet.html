@@ -16,7 +16,7 @@
     </div>
 
     <div class="control-group {% if form.errors.description %}error{% endif %}">   
-      <label>{% trans 'Descrbe your Badge:' %}</label>
+      <label>{% trans 'Describe your Badge:' %}</label>
       <textarea name="description" rows="3" class="span7" placeholder="{% trans 'What is this Badge for? A course? An event? A certain type of project?' %}" required  maxlength="128">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
       {% for error in form.errors.description %}
         <span class="help-block">{{ error }}</span>

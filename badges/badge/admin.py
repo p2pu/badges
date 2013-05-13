@@ -3,7 +3,7 @@ from badge.models import Badge
 from badge.models import Award
 
 class BadgeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'active', 'author_uri', 'date_created', )
+    list_display = ('title', 'deleted', 'author_uri', 'date_created', )
     list_filter = ('date_created', 'author_uri', )
 
 class AwardAdmin(admin.ModelAdmin):

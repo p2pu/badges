@@ -31,7 +31,7 @@ def _badge2dict(badge_db):
         'description': badge_db.description,
         'requirements': badge_db.requirements,
         'author_uri': badge_db.author_uri,
-        'active': badge_db.active,
+        'deleted': badge_db.deleted,
         'publised': not badge_db.date_published == None
     }
     return badge
@@ -59,12 +59,11 @@ def create_badge( title, image_uri, description, requirements, author_uri ):
 
 def get_badge(uri):
     badge_db = Badge.objects.get(id=uri2id(uri))
-    if badge_db.active:
-        return _badge2dict(badge_db)
-    return None
+    return _badge2dict(badge_db)
 
 
-def update_badge(uri, image_uri=None, title=None, description=None, requirements=None, active=True):
+
+def update_badge(uri, image_uri=None, title=None, description=None, requirements=None, deleted=False):
     """ only possible while draft """
     badge_db = Badge.objects.get(id=uri2id(uri))
 
@@ -102,7 +101,7 @@ def delete_badge(uri, user_uri):
     if projects:
         raise Exception('Badge has projects. It can not be deleted.')
 
-    badge_db.active = False
+    badge_db.deleted = True
     badge_db.save()
 
     #TODO: Check if badge in user backpack and revoke
@@ -129,23 +128,23 @@ def remove_badge(uri, reason):
 
 
 def get_published_badges():
-    badges = Badge.objects.filter(active=True, date_published__isnull=False)
+    badges = Badge.objects.filter(deleted=False, date_published__isnull=False)
     return [_badge2dict(badge) for badge in badges]
 
 
 def get_user_draft_badges(user_uri):
-    badges = Badge.objects.filter(author_uri=user_uri, active=True, date_published__isnull=True)
+    badges = Badge.objects.filter(author_uri=user_uri, deleted=False, date_published__isnull=True)
     return [_badge2dict(badge) for badge in badges]
 
 
 def get_user_created_badges(author_uri):
     """ created badges aka 'published' badges """
-    badges = Badge.objects.filter(author_uri=author_uri, active=True, date_published__isnull=False)
+    badges = Badge.objects.filter(author_uri=author_uri, deleted=False, date_published__isnull=False)
     return [_badge2dict(badge) for badge in badges]
 
 
 def get_user_earned_badges(user_uri):
-    awards = Award.objects.select_related().filter(user_uri=user_uri, badge__active=True)
+    awards = Award.objects.select_related().filter(user_uri=user_uri, badge__deleted=False)
     ret_val = []
     for award in awards:
         badge_dict = _badge2dict(award.badge)
@@ -157,7 +156,7 @@ def get_user_earned_badges(user_uri):
 
 def get_user_awarded_badges(user_uri):
     """ get badges awarded by this user """
-    badges = [award.badge for award in Award.objects.select_related().filter(expert_uri=user_uri, badge__active=True)]
+    badges = [award.badge for award in Award.objects.select_related().filter(expert_uri=user_uri, badge__deleted=False)]
     return [_badge2dict(badge) for badge in badges]
 
 
