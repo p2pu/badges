@@ -171,7 +171,7 @@ def delete(request, badge_id):
         messages.success(request, _('Success! You have deleted your badge'))
     except badge_api.NotTheAuthorError:
         messages.error(request, _('Error! You are not the author of the badge!'))
-    except Exception:
+    except badge_api.HasProjectsAttachedError:
         messages.error(request, _('Error! Badge has projects attached!'))
 
     return http.HttpResponseRedirect(

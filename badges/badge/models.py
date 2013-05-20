@@ -13,7 +13,7 @@ class DuplicateTitleError(Exception):
 class NotTheAuthorError(Exception):
     pass
 
-class HasProjectsAttached(Exception):
+class HasProjectsAttachedError(Exception):
     pass
 
 
@@ -103,7 +103,7 @@ def delete_badge(badge_uri, user_uri):
         raise NotTheAuthorError('You are not the author of the badge')
 
     if projects:
-        raise HasProjectsAttached('Badge has projects. It can not be deleted.')
+        raise HasProjectsAttachedError('Badge has projects. It can not be deleted.')
 
     badge_db.deleted = True
     badge_db.save()

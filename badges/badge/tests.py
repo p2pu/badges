@@ -198,7 +198,7 @@ class BadgesTests(TestCase):
         project_api.create_project(**project)
 
         # test that method raises error when badge has projects attached to it
-        with self.assertRaises(badge_api.HasProjectsAttached):
+        with self.assertRaises(badge_api.HasProjectsAttachedError):
             badge_api.delete_badge(badge['uri'], badge['author_uri'])
 
 
