@@ -167,7 +167,7 @@ def delete(request, badge_id):
     user_uri = request.session['user']['uri']
 
     try:
-        badge_api.delete_badge(badge_id, user_uri)
+        badge_api.delete_badge(badge_api.id2uri(badge_id), user_uri)
         messages.success(request, _('Success! You have deleted your badge'))
     except badge_api.NotTheAuthorError:
         messages.error(request, _('Error! You are not the author of the badge!'))

@@ -13,6 +13,9 @@ class DuplicateTitleError(Exception):
 class NotTheAuthorError(Exception):
     pass
 
+class HasProjectsAttached(Exception):
+    pass
+
 
 def uri2id(uri):
     return uri.strip('/').split('/')[-1]
@@ -86,20 +89,21 @@ def update_badge(uri, image_uri=None, title=None, description=None, requirements
     return get_badge(uri)
 
 
-def delete_badge(uri, user_uri):
+def delete_badge(badge_uri, user_uri):
     """
     Enables owner and admin to archive badge
     """
     from project.models import search_projects
 
-    badge_db = Badge.objects.get(id=uri2id(uri))
-    projects = search_projects(uri)
+    badge_db = Badge.objects.get(id=uri2id(badge_uri))
+    print badge_uri
+    projects = search_projects(badge_uri=badge_uri)
 
     if badge_db.author_uri != user_uri:
         raise NotTheAuthorError('You are not the author of the badge')
 
     if projects:
-        raise Exception('Badge has projects. It can not be deleted.')
+        raise HasProjectsAttached('Badge has projects. It can not be deleted.')
 
     badge_db.deleted = True
     badge_db.save()

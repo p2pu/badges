@@ -12,6 +12,7 @@ from mock import patch
 
 
 @patch('badge.notification_helpers.fetch_badge_resources', lambda x: x)
+@patch('project.notification_helpers.fetch_resources', lambda x: x)
 class SimpleTest(TestCase):
 
     def setUp(self):
@@ -167,26 +168,28 @@ class SimpleTest(TestCase):
         badges = badge_api.get_user_earned_badges('/uri/user/auser')
         self.assertEqual(len(badges), 0)
 
-    @patch('project.notification_helpers.fetch_resources', lambda x: x)
-    def test_deactivate_badge_with_no_projects(self):
+    def test_badge_without_projects_was_deleted_by_owner(self):
         # setup
         badge = badge_api.create_badge(*self.badge_values)
         badge_api.publish_badge(badge['uri'])
-        kwargs = {
-            'badge_uri': badge['uri'],
-            'user_uri': badge['author_uri'],
-            'expert_uri': badge['author_uri'],
-            'evidence_url': 'http://some.evi/dence'
-        }
-
-        # test that method raises error when user is not author of a badge
-        self.assertRaises(Exception, badge_api.delete_badge, badge['uri'], '/uri/user/iamnotthebadgeowner')
 
         # test that badge 'deleted' attribute has been set to False
         deleted_badge = badge_api.delete_badge(badge['uri'], badge['author_uri'])
         self.assertTrue(deleted_badge['deleted'])
 
-        # test that method raises error when badge has projects attached to it
+    def test_raise_error_on_badge_delete_if_not_owner(self):
+        # setup
+        badge = badge_api.create_badge(*self.badge_values)
+        badge_api.publish_badge(badge['uri'])
+
+        # test that method raises error when user is not author of a badge
+        with self.assertRaises(badge_api.NotTheAuthorError):
+            badge_api.delete_badge(badge['uri'], '/uri/user/iamnottheowner')
+
+    def test_raise_error_on_badge_if_has_projects(self):
+        # setup
+        badge = badge_api.create_badge(*self.badge_values)
+        badge_api.publish_badge(badge['uri'])
         project = {
             'badge_uri': badge['uri'],
             'author_uri': '/uri/user/author',
@@ -198,7 +201,10 @@ class SimpleTest(TestCase):
             'tags': 'tags'
         }
         project_api.create_project(**project)
-        self.assertRaises(Exception, badge_api.delete_badge, badge['uri'], badge['author_uri'])
+
+        # test that method raises error when badge has projects attached to it
+        with self.assertRaises(badge_api.HasProjectsAttached):
+            badge_api.delete_badge(badge['uri'], badge['author_uri'])
 
 
 
