@@ -13,13 +13,13 @@ var Badges = window.Badges || {};
     "use strict";
     var init = function () {
             $(function () {
-                console.log('it starts');
                 var $delete_button = $('*[data-delete="p2pu-badge"]'),
                     $badge_delete_cancel = $('.badge-delete-cancel');
 
                 $delete_button.on('click', function (e) {
                     e.preventDefault();
-                    var $badge_popover = $('.badge-delete-popover');
+                    var $this = $(this),
+                        $badge_popover = $this.parent().find('.badge-delete-popover');
                     $badge_popover.css('display', 'block');
                 });
 
