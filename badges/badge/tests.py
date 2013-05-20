@@ -1,10 +1,6 @@
 """
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
+Tests that are running badges API
 """
-from django.contrib.auth.models import User
 from django.test import TestCase
 from badge import models as badge_api
 from project import models as project_api
@@ -13,40 +9,39 @@ from mock import patch
 
 @patch('badge.notification_helpers.fetch_badge_resources', lambda x: x)
 @patch('project.notification_helpers.fetch_resources', lambda x: x)
-class SimpleTest(TestCase):
+class BadgesTests(TestCase):
 
-    def setUp(self):
-        self.badge_attrs = [
-            'uri',
-            'id',
-            'title',
-            'image_uri',
-            'description',
-            'requirements',
-            'author_uri'
-        ]
+    BADGES_ATTRIBUTES = [
+        'uri',
+        'id',
+        'title',
+        'image_uri',
+        'description',
+        'requirements',
+        'author_uri'
+    ]
 
-        self.badge_values = [
-            'Movie Maker',
-            '/uri/image/1',
-            'Create a short movie',
-            'Create a movie and upload it to youtube or vimeo',
-            '/uri/user/badgemaker',
-        ]
+    BADGE_VALUES = [
+        'Movie Maker',
+        '/uri/image/1',
+        'Create a short movie',
+        'Create a movie and upload it to youtube or vimeo',
+        '/uri/user/badgemaker',
+    ]
 
     def test_create_and_get_badge(self):
         """ Test that we can create a badge """
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
 
         # test the presence or attributes for a badge
-        for attr in self.badge_attrs:
+        for attr in self.BADGES_ATTRIBUTES:
             self.assertIn(attr, badge)
 
         # test attribute values
-        attrs = self.badge_attrs
+        attrs = self.BADGES_ATTRIBUTES
         del attrs[0]
         del attrs[0]
-        for key, value in zip(attrs, self.badge_values):
+        for key, value in zip(attrs, self.BADGE_VALUES):
             self.assertEquals(badge[key], value)
        
         # test make sure attributes are equal
@@ -62,16 +57,16 @@ class SimpleTest(TestCase):
     def test_badge_create_sends_notification(self):
         """ Test that we can create a badge """
         with patch('notifications.models.send_notification') as send:
-            badge = badge_api.create_badge(*self.badge_values)
+            badge = badge_api.create_badge(*self.BADGE_VALUES)
             self.assertTrue(send.called)
 
 
     def test_update_badge(self):
         """ Test that we can update a badge """
-        badge = badge_api.create_badge(*self.badge_values)
-        attrs = self.badge_attrs
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
+        attrs = self.BADGES_ATTRIBUTES
         del attrs[1]
-        kwargs = dict(zip(self.badge_attrs, [badge['uri']] + self.badge_values))
+        kwargs = dict(zip(self.BADGES_ATTRIBUTES, [badge['uri']] + self.BADGE_VALUES))
         del kwargs['author_uri']
         kwargs['title'] = 'A new title'
         badge_api.update_badge(**kwargs)
@@ -80,7 +75,7 @@ class SimpleTest(TestCase):
 
 
     def test_publish_badge(self):
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
 
         badges = badge_api.get_published_badges()
         self.assertTrue(len(badges) == 0)
@@ -99,12 +94,12 @@ class SimpleTest(TestCase):
 
 
     def test_unique_title(self):
-        badge = badge_api.create_badge(*self.badge_values)
-        self.assertRaises(Exception, badge_api.create_badge, self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
+        self.assertRaises(Exception, badge_api.create_badge, self.BADGE_VALUES)
 
 
     def test_award_badge(self):
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
         self.assertNotIn(badge['author_uri'], badge_api.get_badge_experts(badge['uri']))
 
         badge_api.publish_badge(badge['uri'])
@@ -142,10 +137,10 @@ class SimpleTest(TestCase):
             self.assertTrue(send.called)
 
     def test_get_user_badges(self):
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
         badge_api.publish_badge(badge['uri'])
 
-        badge_values = self.badge_values
+        badge_values = self.BADGE_VALUES
         badge_values[0] = 'Badge 2'
         badge = badge_api.create_badge(*badge_values)
         badge_api.publish_badge(badge['uri'])
@@ -170,7 +165,7 @@ class SimpleTest(TestCase):
 
     def test_badge_without_projects_was_deleted_by_owner(self):
         # setup
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
         badge_api.publish_badge(badge['uri'])
 
         # test that badge 'deleted' attribute has been set to False
@@ -179,7 +174,7 @@ class SimpleTest(TestCase):
 
     def test_raise_error_on_badge_delete_if_not_owner(self):
         # setup
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
         badge_api.publish_badge(badge['uri'])
 
         # test that method raises error when user is not author of a badge
@@ -188,7 +183,7 @@ class SimpleTest(TestCase):
 
     def test_raise_error_on_badge_if_has_projects(self):
         # setup
-        badge = badge_api.create_badge(*self.badge_values)
+        badge = badge_api.create_badge(*self.BADGE_VALUES)
         badge_api.publish_badge(badge['uri'])
         project = {
             'badge_uri': badge['uri'],
