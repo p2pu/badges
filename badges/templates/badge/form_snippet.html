@@ -7,31 +7,32 @@
     {% include 'badge/image_upload_form_snippet.html' with mode=mode %}
 
     <div class="control-group {% if form.errors.title %}error{% endif %}">   
-      <label>{% trans 'Badge Title:' %}</label>
+      <label>{% trans 'We Call This Niffty Badge:' %}</label>
       <input name="title" type="text" class="span7"
-             placeholder="{% trans "What's your badge's headline?" %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required maxlength="128">
+             placeholder="{% trans "Good titles are clear, concise and snappy -- like a headline." %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required maxlength="128">
       {% for error in form.errors.title %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
     </div>
 
     <div class="control-group {% if form.errors.description %}error{% endif %}">   
-      <label>{% trans 'Badge Description:' %}</label>
-      <textarea name="description" rows="3" class="span7" placeholder="{% trans 'What is this badge for? A course? An event? A certain type of project?' %}" required  maxlength="128">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
+      <label>{% trans 'Describe your Badge:' %}</label>
+      <textarea name="description" rows="3" class="span7" placeholder="{% trans 'What is this Badge for? A course? An event? A certain type of project?' %}" required  maxlength="128">{% if form.description.value %}{{form.description.value}}{% endif %}</textarea>
       {% for error in form.errors.description %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
     </div>
      
     <div class="control-group {% if form.errors.requirements %}error{% endif %}">   
-      <label>{% trans 'Badge Criteria:' %}</label>
-      <textarea name="requirements" rows="6" class="span7" placeholder="{% blocktrans %}List the specific skill folks need to show they've mastered with their project. It's useful to step them out so experts can identify them.{%endblocktrans%}" required >{% if form.requirements.value %}{{form.requirements.value}}{% endif %}</textarea>
+      <label>{% trans 'Because Folks With This Badge Can:' %}</label>
+      <textarea name="requirements" rows="6" class="span7"
+                placeholder="{% blocktrans %}Here it's good to list specific skills folks will need to show they've mastered. It's useful to step them out so the Experts can identify them.{%endblocktrans%}" required >{% if form.requirements.value %}{{form.requirements.value}}{% endif %}</textarea>
       {% for error in form.errors.requirements %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}
     </div>
 
-    <button type="submit" class="btn btn-cyan">{% trans 'Save and preview your badge' %}</button>
+    <button type="submit" class="btn btn-cyan">{% trans 'Save and preview your Badge' %}</button>
   </fieldset>
 </form>
 

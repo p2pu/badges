@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^publish/(?P<badge_id>[\d]+)/$', 'badge.views.publish', name='badge_publish'),
     url(r'^view/(?P<badge_id>[\d]+)/$', 'badge.views.view', name='badge_view'),
     url(r'^pushed/(?P<award_id>[\d]+)/$', 'badge.views.pushed_to_backpack', name='badge_pushed_to_backpack'),
+    url(r'^delete/(?P<badge_id>[\d]+)/$', 'badge.views.delete', name='badge_delete')
 )

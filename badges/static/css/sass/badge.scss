@@ -79,6 +79,44 @@
   @extend .thumbnail;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   border: 1px solid #aaa;
+
+  .close{
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    color: red;
+    @include opacity(60);
+  }
+
+  .badge-delete-popover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $slate;
+    color: $white;
+    left: 0;
+    top: 0;
+    @include opacity(90);
+    @include border-radius(4px);
+    p{
+      position: absolute;
+      bottom: 90px;
+      padding: 10px;
+      text-align: center;
+    }
+    .badge-delete-controls{
+      position: absolute;
+      bottom: 20px;
+      a{
+        display: inline-block;
+        margin: 4px 12px;
+      }
+    }
+  }
+
+  &.p2pu-badge-long{
+    height: 275px;
+  }
   .badge-image{
     text-align: center;
     min-height: 128px;

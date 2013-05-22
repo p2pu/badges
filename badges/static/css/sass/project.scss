@@ -23,17 +23,21 @@
   }
   .p2pu-project-info-field{
     .p2pu-project-title{
-      color: $gray;
       font-size: 1.2em;
       font-weight: bold;
       &:hover{
-        color: $cyan;
         text-decoration: none;
       }
       .p2pu-project-desc{
         margin-top: 10px;
       }
     }
+    .p2pu-project-submitter{
+        color: $gray;
+        &:hover{
+          color: $cyan;
+        }
+      }
   }
 
 

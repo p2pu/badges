@@ -16,9 +16,9 @@
         {% if not user_is_expert %}
 
             <div>
-                <h4>{% trans 'Want this badge? Submit a project and get some feedback' %}.</h4>
+                <h4>{% trans 'Want this Badge? Submit a project and get some feedback' %}.</h4>
                 <a href="{% url project_create badge.id %}" class="btn btn-cyan btn-large">
-                    {% trans 'Submit a project for this badge' %}
+                    {% trans 'Submit a project for this Badge' %}
                 </a>
             </div>
         {% endif %}
@@ -26,7 +26,7 @@
         {% if projects %}
         <hr>
         <div class="clearfix badge-view-projects">
-            <h3>{% trans 'Want to see what kind of projects have received this badge' %}?</h3>
+            <h3>{% trans 'Want to see what kind of projects have received this Badge' %}?</h3>
             <ul class="p2pu-project-list fit-thumbnails">
                 {% for project in projects %}
                     {% include 'project/project_tile.html' %}

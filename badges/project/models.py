@@ -1,13 +1,15 @@
-from project.db import Project
-from project.db import Revision
-from project.db import Feedback
 from datetime import datetime
 
-from badge import models as badge_api
-from project.notification_helpers import send_project_creation_notification
-from project.notification_helpers import send_project_creation_expert_notification
-from project.notification_helpers import send_feedback_notification
-from project.notification_helpers import send_revision_notification
+from .db import Project
+from .db import Revision
+from .db import Feedback
+from .notification_helpers import send_project_creation_notification
+from .notification_helpers import send_project_creation_expert_notification
+from .notification_helpers import send_feedback_notification
+from .notification_helpers import send_revision_notification
+
+from badge.models import get_badge
+from badge.models import get_badge_experts
 
 
 class MultipleProjectError(Exception):
@@ -39,13 +41,13 @@ def _project2dict(project_db):
 
 
 def create_project(badge_uri, author_uri, title, image_uri, work_url, description, reflection, tags):
-    
+
     if Project.objects.filter(author_uri=author_uri, badge_uri=badge_uri, date_deleted__isnull=True).exists():
         raise MultipleProjectError('A user can only submit 1 project for a badge')
 
-    badge = badge_api.get_badge(badge_uri)
+    badge = get_badge(badge_uri)
 
-    if author_uri in badge_api.get_badge_experts(badge_uri):
+    if author_uri in get_badge_experts(badge_uri):
         raise Exception(u'Badge {0} already awarded to user'.format(badge_uri))
 
     if isinstance(tags, list):
@@ -68,7 +70,7 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, descriptio
     project = get_project(id2uri(project_db.id))
 
     send_project_creation_notification(project)
-    experts = badge_api.get_badge_experts(project['badge_uri'])
+    experts = get_badge_experts(project['badge_uri'])
     send_project_creation_expert_notification(project, badge, experts)
     return project
 
@@ -166,7 +168,7 @@ def ready_for_feedback(project_uri):
 def submit_feedback(project_uri, expert_uri, good, bad, ugly, badge_awarded=False):
     project=Project.objects.get(id=uri2id(project_uri))
 
-    if not expert_uri in badge_api.get_badge_experts(project.badge_uri):
+    if not expert_uri in get_badge_experts(project.badge_uri):
         raise Exception('Only experts can submit feedback on projects.')
 
     if not ready_for_feedback(project_uri):
@@ -208,6 +210,7 @@ def _revision2dict(revision):
 def _feedback2dict(feedback):
     json = {
         'expert_uri': feedback.expert_uri,
+        'expert': feedback.get_expert_from_uri,
         'good': feedback.good,
         'bad': feedback.bad,
         'ugly': feedback.ugly,
