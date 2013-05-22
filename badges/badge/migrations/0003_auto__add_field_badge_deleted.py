@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         # Adding field 'Badge.deleted'
         db.add_column('badge_badge', 'deleted',
-                      self.gf('django.db.models.fields.BooleanField')(default=True),
+                      self.gf('django.db.models.fields.BooleanField')(default=False),
                       keep_default=False)
 
 
@@ -34,11 +34,11 @@ class Migration(SchemaMigration):
         },
         'badge.badge': {
             'Meta': {'object_name': 'Badge'},
-            'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'author_uri': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {}),
             'date_published': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'date_updated': ('django.db.models.fields.DateTimeField', [], {}),
+            'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image_uri': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
