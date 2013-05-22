@@ -56,6 +56,105 @@
 }
 
 .project-feedback-form{
+  .badge-and-feedback{
+    .badge-list{
+      float: left;
+      margin-left: 0;
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+    margin-bottom: 15px;
+    .previous-interactions{
+      overflow: hidden;
+      margin-left: 20px;
+      height: 260px;
+      dl h4{
+        color: $dark-apricot;
+      }
+    }
+    .feedback-already-given{
+
+    }
+    .no-feedback-yet{
+
+    }
+  }
+  .control-group{
+    label.alert{
+      box-shadow: rgba(0, 0, 0, 0.40) 1px 1px 7px;
+      & > div{
+        box-shadow: rgba(0, 0, 0, 0.40) 1px 1px 7px;
+      }
+    }
+  }
+  .project-form-snippet{
+    .award_badge {
+      width: 20px;
+      margin: 20px auto;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      float: left;
+    }
+
+    .award_badge label {
+      cursor: pointer;
+      position: absolute;
+      padding: 0;
+      margin: 0;
+      width: 25px;
+      height: 25px;
+      top: 0;
+      border-radius: 4px;
+      @include box-shadow(inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4));
+      @include gradient-vertical($gray, $grayDarker);
+      @include gradient-vertical($steel, darken($steel, 20%));
+
+    }
+
+    .award_badge label:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: alpha(opacity=0);
+        opacity: 0;
+        content: '';
+        position: absolute;
+        width: 9px;
+        height: 5px;
+        background: transparent;
+        top: 7px;
+        left: 7px;
+        border: 3px solid #fcfff4;
+        border-top: none;
+        border-right: none;
+        @include rotate(-45deg);
+    }
+
+    .award_badge label:hover::after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+        filter: alpha(opacity=30);
+        opacity: 0.3;
+    }
+
+    .award_badge input[type=checkbox]{
+      visibility: hidden;
+    }
+
+    .award_badge input[type=checkbox]:checked + label:after {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        filter: alpha(opacity=100);
+        opacity: 1;
+    }
+
+    .custom-checkbox-label{
+      margin-right: 10px;
+      float: left;
+    }
+  }
+  .control-group-label{
+    margin-left: 0;
+    padding-left: 0;
+  }
+
   label{
     margin-bottom: -1px;
     float: none;
@@ -65,11 +164,10 @@
     font-weight: bold;
   }
 
-  .checkbox-group{
-    margin-left: 10px;
-  }
+
 }
 
 .feedback-give-revise{
   margin-top: 25px;
 }
+

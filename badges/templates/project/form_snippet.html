@@ -55,7 +55,7 @@
 
     <div class="control-group {% if form.errors.tags %}error{% endif %}">
       <label>{% trans 'Tags' %}</label>
-      <input type="text" name="tags" class="span7" placeholder="{% trans 'Add some tags so folks can find your masterpiece.' %}" {% if form.tags.value %}value="{{form.tags.value}}"{% endif %} required>
+      <input type="text" name="tags" class="span7" placeholder="{% trans 'Add some tags so folks can find your masterpiece.' %}" {% if form.tags.value %}value="{{form.tags.value}}"{% endif %}>
       {% for error in form.errors.tags %}
         <span class="help-block">{{ error }}</span>
       {% endfor %}

@@ -42,5 +42,10 @@ class Feedback(models.Model):
     date_created = models.DateTimeField()
     badge_awarded = models.BooleanField(default=False)
 
+
+    def get_expert_from_uri(self):
+        expert_uri = str(self.expert_uri)
+        return expert_uri.split('/')[3]
+
     def __unicode__(self):
         return self.project.title

@@ -11,7 +11,7 @@
             <div class="p2pu-project-desc">
                 {{ project.description|purge_content|truncatewords:20 }}
             </div>
-            <a href="{% url dashboard username %}">
+            <a href="{% url dashboard username %}" class="p2pu-project-submitter">
                 {% blocktrans %}by {{ username }}{% endblocktrans %}
             </a>
         </div>

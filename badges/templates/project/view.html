@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load humanize %}
+{% load projects_tags %}
 
 {% block title %}P2PU Badges | View Project{% endblock %}
 
@@ -40,7 +41,7 @@
                     </dl>
                     <dl>
                         <dt>{% trans 'Steps taken' %}</dt>
-                        <dd>{% autoescape off %}{{ project.description }}{% endautoescape %}</dd>
+                        <dd>{{ project.description|purge_content }}</dd>
                     </dl>
                 </div>
             </div>
@@ -67,7 +68,7 @@
                                 {% trans 'Improvements made' %}
                             </div>
                             <div class="feedback-content span6 content-blue">
-                                {{ fb.improvement|safe }}
+                                {{ fb.improvement|purge_content }}
                             </div>
 
                             {% if fb.work_url %}
@@ -92,19 +93,19 @@
                                 {% trans 'Kudos' %}
                             </div>
                             <div class="feedback-content span6 content-green">
-                                {{ fb.good|safe }}
+                                {{ fb.good|purge_content }}
                             </div>
                             <div class="feedback-labels alert alert-warning">
                                 {% trans 'Questions' %}
                             </div>
                             <div class="feedback-content content-yellow span6">
-                                {{ fb.bad|safe }}
+                                {{ fb.bad|purge_content }}
                             </div>
                             <div class="feedback-labels alert alert-error">
                                 {% trans 'Concerns' %}
                             </div>
                             <div class="feedback-content content-red span6">
-                                {{ fb.ugly|safe }}
+                                {{ fb.ugly|purge_content }}
                             </div>
                         {% endif %}
                     </div>

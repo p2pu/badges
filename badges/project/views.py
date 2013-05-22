@@ -97,10 +97,13 @@ def view( request, project_id ):
 
 
 @require_login
-def feedback( request, project_id ):
+def feedback(request, project_id ):
     project = project_api.get_project(project_api.id2uri(project_id))
+    feedback = project_api.get_project_feedback(project_api.id2uri(project_id))
     badge = badge_api.get_badge(project['badge_uri'])
+    fetch_badge_resources(badge)
     user_uri = request.session['user']['uri']
+    user = request.session['user']
 
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
@@ -116,20 +119,22 @@ def feedback( request, project_id ):
             form.cleaned_data['ugly'],
             form.cleaned_data.get('award_badge', form.cleaned_data.get('award_badge', False) )
         )
+
         if form.cleaned_data.get('award_badge'):
             badge_api.award_badge(
                 badge['uri'],
                 project['author_uri'],
                 user_uri,
                 reverse('project_view', args=(project_id,)),
-
             )
-            messages.success(request, _('Badge awarded to user!'))
+            messages.success(request, _("Success! You've awarded the Badge to %s" % user['username']))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
 
     context = {
+        'badge': badge,
         'project': project,
-        'form': form
+        'form': form,
+        'feedback': feedback,
     }
 
     return render_to_response(
