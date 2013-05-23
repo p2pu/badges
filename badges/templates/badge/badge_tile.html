@@ -2,7 +2,7 @@
 {% load open_badges_tags %}
 
 <li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}">
-        {% if can_delete %}
+        {% if can_delete_badge %}
             <a href="#" type="button" class="close" data-delete="p2pu-badge">×</a>
             <div class="badge-delete-popover" style="display: none">
                 <p>{% trans 'Sure you want to delete this niffty Badge?' %}</p>

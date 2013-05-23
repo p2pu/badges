@@ -107,10 +107,11 @@
                                     <div class="tab-pane" id="badge-created">
                                         <ul class="thumbnails fit-thumbnails">
                                             {% for badge in created_badges %}
-                                                {% include 'badge/badge_tile.html' with can_delete='True' %}
+                                                {% include 'badge/badge_tile.html' with can_delete_badge=can_delete %}
                                             {% endfor %}
                                         </ul>
                                     </div>
+
                                 </div>
                             </div>
 
