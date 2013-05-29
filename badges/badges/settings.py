@@ -37,7 +37,12 @@ TIME_ZONE = 'Africa/Johannesburg'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+gettext = lambda s: s
 
+LANGUAGES = (
+    ('en', gettext('English')),
+    ('en-us', gettext('English-American')),
+)
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
