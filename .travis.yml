@@ -1,0 +1,18 @@
+language: python
+python:
+  - "3.3"
+  - "2.7"
+  - "2.6"
+
+env:
+  - DJANGO=1.3.1
+  - DJANGO=1.4
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install:
+  - pip install -q Django==$DJANGO --use-mirrors
+  - pip install pep8 --use-mirrors
+  - pip install https://github.com/dcramer/pyflakes/tarball/master
+  - pip install -q -e . --use-mirror
+  - pip install -r badges/requirements.txt --use-mirrors
+# command to run tests, e.g. python setup.py test
+script:  python badges/manage.py test
