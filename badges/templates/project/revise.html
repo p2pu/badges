@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block title %}P2PU Badges | Revise Project{% endblock %}
 
@@ -8,7 +9,10 @@
         <div>
             <h2>Revise Project</h2>
         </div>
-        <div>
+        <div class="row">
+            {% include 'badge/badge_info_vertical.html' with label='Revision for the Badge:' %}
+            {% crispy form form.revise_feedback %}
+            {% comment %}
             <form action="" method="POST" class="span7">
                 <fieldset>
                     {% csrf_token %}
@@ -37,6 +41,7 @@
                     <button type="submit" class="btn btn-cyan btn-large">{% trans 'Submit feedback' %}</button>
                 </fieldset>
             </form>
+            {% endcomment %}
         </div>
     </div>
 {% endblock %}

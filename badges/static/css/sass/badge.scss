@@ -23,17 +23,27 @@
     }
 
   }
-  .badge-info-img{
-    padding-top: 15px;
+  .badge-info-vertical-img, .badge-info-horizontal-img{
+    padding-bottom: 15px;
     margin-left: 0;
     text-align: center;
+
+  }
+  .badge-info-horizontal-img{
     padding-right: 15px;
   }
-
-  .badge-info-details{
+  .badge-info-vertical-img{
+    display: block;
+  }
+  .badge-info-vertical-details, .badge-info-horizontal-details{
     margin-left: 0;
-    padding-left: 30px;
+  }
+  .badge-info-horizontal-details{
     border-left: 1px solid $silver;
+    padding-left: 30px;
+  }
+  .badge-info-vertical-details{
+    border-top: 1px solid $silver;
   }
   p{
     font-family: $baseFontFamily;

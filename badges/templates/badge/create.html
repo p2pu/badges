@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block title %}P2PU Badges | Create{% endblock %}
 
@@ -21,6 +22,14 @@
             {% endblocktrans %}
 
         </div>
+
+        {% if user_is_partner %}
+            {% crispy form form.with_partner %}
+        {% else %}
+            {% crispy form form.without_partner %}
+        {% endif %}
+        {% comment %}
         {% include 'badge/form_snippet.html' %}
+        {% endcomment %}
     </div>
 {% endblock %}

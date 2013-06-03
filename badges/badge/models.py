@@ -1,10 +1,10 @@
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
 from datetime import datetime
 from .db import Badge
 from .db import Award
 from .notification_helpers import send_badge_creation_notification
 from .notification_helpers import send_badge_awarded_notification
-#from project.models import search_projects
 
 
 class DuplicateTitleError(Exception):
@@ -21,8 +21,8 @@ def uri2id(uri):
     return uri.strip('/').split('/')[-1]
 
 
-def id2uri( id ):
-    return '/uri/badge/{0}'.format(id)
+def id2uri(badge_id):
+    return '/uri/badge/%s' % badge_id
 
 
 def _badge2dict(badge_db):
@@ -35,12 +35,13 @@ def _badge2dict(badge_db):
         'requirements': badge_db.requirements,
         'author_uri': badge_db.author_uri,
         'deleted': badge_db.deleted,
-        'publised': not badge_db.date_published == None
+        'partner_name': badge_db.partner_name,
+        'publised': badge_db.date_published is not None
     }
     return badge
 
 
-def create_badge( title, image_uri, description, requirements, author_uri ):
+def create_badge(title, image_uri, description, requirements, author_uri, partner_name=None):
     if Badge.objects.filter(title=title).exists():
         raise DuplicateTitleError('Badge titles need to be unique.')
 
@@ -50,6 +51,7 @@ def create_badge( title, image_uri, description, requirements, author_uri ):
         description=description, 
         requirements=requirements, 
         author_uri=author_uri,
+        partner_name=partner_name,
         date_created=datetime.utcnow(),
         date_updated=datetime.utcnow()
     )
@@ -65,7 +67,6 @@ def get_badge(uri):
     return _badge2dict(badge_db)
 
 
-
 def update_badge(uri, image_uri=None, title=None, description=None, requirements=None, deleted=False):
     """ only possible while draft """
     badge_db = Badge.objects.get(id=uri2id(uri))
@@ -73,12 +74,12 @@ def update_badge(uri, image_uri=None, title=None, description=None, requirements
     # NOTE: not sure this should be in the API... what if the admin wants
     # to correct a small mistake
     if badge_db.date_published:
-        raise Exception('Badge cannot be updated after it has been publised')
+        raise Exception(_('Badge cannot be updated after it has been publised'))
     if image_uri:
         badge_db.image_uri = image_uri
     if title:
         if Badge.objects.exclude(id=badge_db.id).filter(title=title).exists():
-            raise DuplicateTitleError('Badge titles need to be unique.')
+            raise DuplicateTitleError(_('Badge titles need to be unique.'))
         badge_db.title = title
     if description:
         badge_db.description = description
@@ -93,10 +94,10 @@ def delete_badge(badge_uri, user_uri):
     """
     Enables owner and admin to archive badge
     """
-    from project.models import search_projects
+    from project.processors import search_projects
 
     badge_db = Badge.objects.get(id=uri2id(badge_uri))
-    print badge_uri
+
     projects = search_projects(badge_uri=badge_uri)
 
     if badge_db.author_uri != user_uri:
@@ -170,7 +171,7 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
     """
     badge = Badge.objects.get(id=uri2id(badge_uri))
     if Award.objects.filter(badge=badge, user_uri=user_uri).exists():
-        raise Exception('Badge already awarded to user')
+        raise Exception(_('Badge already awarded to user'))
 
     valid_expert = expert_uri in get_badge_experts(badge_uri)
     badge_creator = user_uri == badge.author_uri
@@ -194,7 +195,7 @@ def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
 
 def get_badge_experts(uri):
     awards = Award.objects.filter(badge_id=uri2id(uri))
-    experts = [ award.user_uri for award in awards ]
+    experts = [award.user_uri for award in awards]
     experts = list(set(experts))
     return experts
 

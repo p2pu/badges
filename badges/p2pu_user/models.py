@@ -1,4 +1,5 @@
-from p2pu_user.db import User
+from .db import User
+from .db import Partner
 
 from datetime import datetime
 
@@ -39,7 +40,8 @@ def _user2dict(user):
         'username': user.username,
         'email': user.email,
         'uri': username2uri(user.username),
-        'image_url': user.image_url
+        'image_url': user.image_url,
+        'partner': get_partners_for_user(username2uri(user.username))
     }
 
 
@@ -49,4 +51,46 @@ def get_user(user_uri):
 
 
 def get_users():
-    return [_user2dict(user) for user in User.objects.all() ]
+    return [_user2dict(user) for user in User.objects.all()]
+
+
+def _partner2dict(partner):
+    users = partner.users.all()
+    users_list = []
+    for user in users:
+        users_list.append(_user2dict(user))
+
+    return {
+        'name': partner.name,
+        'user': users_list,
+    }
+
+
+def create_partner(name, user_uri=None):
+    partner = Partner.objects.create(name=name)
+
+    if user_uri:
+        user = User.objects.get(username=uri2username(user_uri))
+        partner.users.add(user)
+
+    return _partner2dict(partner)
+
+
+def get_partner(partner_name):
+    """
+    Get the partner trough name attribute.
+    """
+    partner = Partner.objects.get(name=partner_name)
+    return _partner2dict(partner)
+
+
+def get_partners_for_user(user_uri):
+    user = User.objects.get(username=uri2username(user_uri))
+    partners = user.partner_set.all()
+
+    return_val = []
+    for partner in partners:
+        return_val.append(partner.name)
+    return return_val
+
+# TODO: update partner

@@ -11,4 +11,4 @@ env:
 install:
   - pip install -r badges/requirements.txt --use-mirrors
 # command to run tests, e.g. python setup.py test
-script:  python badges/manage.py test
+script:  python badges/manage.py test --settings=badges.settings

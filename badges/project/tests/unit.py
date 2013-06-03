@@ -1,12 +1,12 @@
 from django.test import TestCase
 from mock import patch
 
-from project import models as project_api
+from project import processors as project_api
 
 
-@patch('project.notification_helpers.fetch_resources', lambda x: x)
-@patch('badge.models.get_badge', lambda x: {})
-class SimpleTest(TestCase):
+@patch('project.notification_helpers.fetch_resources', lambda badge: badge)
+@patch('project.processors.get_badge', lambda uri: {})
+class ProjectUnitTests(TestCase):
 
     project_values = {
         'badge_uri': '/uri/badge/1',
@@ -19,16 +19,12 @@ class SimpleTest(TestCase):
         'tags': ['test', 'tdd'],
     }
 
-
     def setUp(self):
         self.notification_patcher = patch('notifications.models.send_notification')
         self.notification_patcher.start()
     
-
-
     def tearDown(self):
         self.notification_patcher.stop()
-
 
     def test_create_project(self):
         project = project_api.create_project(**self.project_values)
@@ -49,7 +45,6 @@ class SimpleTest(TestCase):
         project = project_api.create_project(**self.project_values)
         with self.assertRaises(project_api.MultipleProjectError):
             project_api.create_project(**self.project_values)
-
 
     def test_get_projects(self):
         project = project_api.create_project(**self.project_values)

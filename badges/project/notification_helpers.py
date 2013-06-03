@@ -63,3 +63,18 @@ def send_project_creation_expert_notification(project, badge, experts):
             context=context
         )
     #NOTE do we need a return value?
+
+
+
+def send_badge_needs_partner_feedback_notification(badge, project, author_uri):
+    subject_template = 'emails/project_awarded_partner_badge_subject.txt'
+    text_template = 'emails/project_awarded_partner_badge.txt'
+    html_template = 'emails/project_awarded_partner_badge.html'
+    context = { 'project': fetch_resources(project) }
+    return send_notification_i18n(
+        project['author_uri'],
+        subject_template,
+        text_template,
+        html_template,
+        context=context
+    )
