@@ -15,9 +15,9 @@ from .processors.search import search_results
 
 def home(request):
     context = {}
-    context['badges'] = map(fetch_badge_resources, badge_api.get_published_badges())[-5:]
-    context['projects'] = map(fetch_project_resources, project_api.get_projects())[-10:]
-    context['users'] = p2pu_user_api.get_users()[-20:]
+    context['badges'] = map(fetch_badge_resources, badge_api.last_n_published_badges(5))
+    context['projects'] = map(fetch_project_resources, project_api.last_n_projects(10))
+    context['users'] = p2pu_user_api.last_n_users(20)
     
     return render_to_response('landing/home.html', context, context_instance=RequestContext(request))
 

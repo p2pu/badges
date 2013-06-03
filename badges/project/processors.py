@@ -85,6 +85,10 @@ def get_project(uri):
     return _project2dict(project_db)
 
 
+def last_n_projects(n):
+    projects = Project.objects.filter(date_deleted__isnull=True).order_by('-pk')[:n]
+    return [_project2dict(project) for project in projects]
+
 def get_projects():
     projects = Project.objects.filter(date_deleted__isnull=True)
     return [_project2dict(project) for project in projects]
@@ -212,7 +216,7 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly, award_badge=False)
         feedback.badge_awarded = True
     elif award_badge: #and badge requires approval by partner
         result = submit_feedback_result.REQUIRES_APPROVAL
-        send_badge_needs_partner_feedback_notification(badge, project_uri, expert_uri)
+        send_badge_needs_partner_feedback_notification(badge, _project2dict(project), expert_uri)
 
     last_revision = None
     if project.revision_set.count() > 0:

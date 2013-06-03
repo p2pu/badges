@@ -41,7 +41,7 @@ def _user2dict(user):
         'email': user.email,
         'uri': username2uri(user.username),
         'image_url': user.image_url,
-        'partner': get_partners_for_user(username2uri(user.username))
+        'partner': _get_partners_for_user(user)
     }
 
 
@@ -49,6 +49,9 @@ def get_user(user_uri):
     user = User.objects.get(username=uri2username(user_uri))
     return _user2dict(user)
 
+def last_n_users(n):
+    users = User.objects.all().order_by('-date_joined')[:n]
+    return [_user2dict(user) for user in users]
 
 def get_users():
     return [_user2dict(user) for user in User.objects.all()]
@@ -86,6 +89,10 @@ def get_partner(partner_name):
 
 def get_partners_for_user(user_uri):
     user = User.objects.get(username=uri2username(user_uri))
+    return _get_partners_for_user(user)
+
+
+def _get_partners_for_user(user):
     partners = user.partner_set.all()
 
     return_val = []
