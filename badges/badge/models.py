@@ -131,9 +131,16 @@ def remove_badge(uri, reason):
     """ Mark a badge as removed - spam / inappropriate """
     pass
 
+
+def get_featured_badges():
+    badges = Badge.objects.filter(featured=True, date_published__isnull=False).order_by('date_published')[:5]
+    return [_badge2dict(badge) for badge in badges]
+
+
 def last_n_published_badges(n):
     badges = Badge.objects.filter(deleted=False, date_published__isnull=False).order_by('-date_published')[:n]
     return [_badge2dict(badge) for badge in badges]
+
 
 def get_published_badges():
     badges = Badge.objects.filter(deleted=False, date_published__isnull=False).order_by('-pk')

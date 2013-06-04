@@ -10,6 +10,7 @@ class Badge(models.Model):
     image_uri = UriField()
     description = models.CharField(max_length=128)
     requirements = models.CharField(max_length=1024)
+    featured = models.BooleanField(default=False)
     author_uri = UriField()
     partner_name = models.CharField(max_length=255, null=True, blank=True)
     deleted = models.BooleanField(default=False)
