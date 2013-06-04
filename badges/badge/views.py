@@ -77,11 +77,14 @@ def preview( request, badge_id ):
 
 
 @require_login
-def edit( request, badge_id ):
+def edit(request, badge_id):
+    user_uri = request.session['user']['uri']
+    user = p2pu_user_api.get_user(user_uri)
+    user_partner = user['partner']
     template_name = 'badge/edit.html'
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
 
-    if not request.session['user']['uri'] == badge['author_uri']:
+    if not user_uri == badge['author_uri']:
         messages.error(request, _('You cannot edit someone elses badge!'))
         return http.HttpResponseRedirect(reverse(
             'badge_preview', args=(badge_id,)
@@ -94,18 +97,25 @@ def edit( request, badge_id ):
         ))
 
     if request.method == 'POST':
-        form = BadgeForm(request.POST, request.FILES)
+        form = BadgeForm(request.POST, request.FILES, user_uri=user_uri, editing=True)
     else:
-        form = BadgeForm(badge)
+        form = BadgeForm(badge, user_uri=user_uri, editing=True)
 
     if request.method == 'POST' and form.is_valid():
-        #TODO update image
-        #image = media_api.upload_image(request.FILES['image'], '/uri/user/1')
         try:
             updated = {}
+            if 'image_uri' in request.FILES:
+                image = media_api.upload_image(
+                    request.FILES['image_uri'],
+                    request.session['user']['uri'],
+                    media_root=settings.MEDIA_ROOT,
+                )
+                updated['image_uri'] = image['uri']
+
             for attr in ['title', 'description', 'requirements']:
                 if not badge[attr] == form.cleaned_data[attr]:
                     updated[attr] = form.cleaned_data[attr]
+
 
             badge = badge_api.update_badge(badge['uri'], **updated)
             return http.HttpResponseRedirect(
@@ -115,7 +125,10 @@ def edit( request, badge_id ):
             form.errors['title'] = [_('Badge title needs to be unique'),]
 
     return render_to_response(
-        template_name, {'form': form},
+        template_name, {
+            'form': form,
+            'user_is_partner': user_partner,
+        },
         context_instance=RequestContext(request))
 
 
