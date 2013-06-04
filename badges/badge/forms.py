@@ -70,12 +70,22 @@ class BadgeForm(forms.Form):
     )
 
     def __init__(self, *args, **kwargs):
+        # Check if form is in editing mode
+        editing = False
+        if 'editing' in kwargs:
+            editing = kwargs.pop('editing')
+
         user_uri = kwargs.pop('user_uri')
         choices = [None] + p2pu_user_api.get_partners_for_user(user_uri)
 
         super(BadgeForm, self).__init__(*args, **kwargs)
+        # stack choices for partner
         self.fields['partner'].choices = [(0, '----') if name == None else (name, name)for name in choices]
 
+        # if form in in editing mode image does not need to be required
+        if editing:
+            self.fields['image_uri'].required = False
+            self.fields['image_uri'].help_text=_('If you are satisfied with the image you uploaded previously than leave this field blank')
 
     @property
     def with_partner(self):
@@ -104,6 +114,29 @@ class BadgeForm(forms.Form):
         helper.form_id = 'badge-create-form'
         helper.form_class = ''
         helper.form_tag = True
+        helper.layout = Layout(
+            Layout(
+                'image_uri',
+                'title',
+                'description',
+                'requirements',
+            ),
+            ButtonHolder(
+                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary btn-large'),
+            )
+        )
+        return helper
+
+
+    @property
+    def edit_without_partner(self):
+        #super(BadgeForm, self)
+        self.fields['image_uri'].required = False
+
+        helper = FormHelper()
+        helper.form_id = 'badge-create-form'
+        helper.form_class = ''
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'image_uri',
