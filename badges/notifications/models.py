@@ -18,6 +18,8 @@ def send_notification_i18n( receiver_uri, subject_template, text_template, html_
     if html_template:
         html = localize_for_user(receiver_uri, html_template, context).strip()
 
+    if settings.DEBUG:
+        return
     return send_notification(receiver_uri, subject, text, html, sender, callback)
 
 
@@ -47,15 +49,16 @@ def send_notification( receiver_uri, subject, text, html=None, sender=None, call
     if callback:
         data['callback'] = callback
 
-    response = None
-    try:
-        response = requests.post(settings.NOTIFICATION_URL, data=simplejson.dumps(data))
-    except requests.ConnectionError:
-        log.error('Could not connect to notification URL')
-        return False
+    if not settings.DEBUG:
+        response = None
+        try:
+            response = requests.post(settings.NOTIFICATION_URL, data=simplejson.dumps(data))
+        except requests.ConnectionError:
+            log.error('Could not connect to notification URL')
+            return False
 
-    if not response or not response.status_code == 200:
-        log.error(u'Could not send email notification to {0}'.format(receiver_uri))
-        return False
+        if not response or not response.status_code == 200:
+            log.error(u'Could not send email notification to {0}'.format(receiver_uri))
+            return False
 
-    return True
+        return True

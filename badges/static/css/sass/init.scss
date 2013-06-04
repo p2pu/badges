@@ -1,21 +1,25 @@
 body {
   margin: 0;
+  padding-top: 120px;
   font-size: 16px;
   line-height: 22px;
   color: $slate;
 }
-body, input, label, select, input, textarea, button{
+body, input, select, input, textarea, button{
   font-family: "sense", Helvetica, sans-serif;
 }
-h1, h2, h3, h4, dl, dt, dd{
+h1, h2, h3, h4, dl, dt, dd, label{
   font-family: "arvo", Helvetica, sans-serif;
+  text-shadow: 0 1px 0 #fff;
 }
 legend{
   font-size: 1em;
   line-height: 1.5em;
 }
-
-.btn-cyan {
+body{
+  background: url("/static/img/natural_paper.png") left top repeat;
+}
+/*.btn-cyan {
   color: #FFFFFF;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #039485;
@@ -39,7 +43,8 @@ legend{
   color: $white;
   background-color: #039485;
   *background-color: #003bb3;
-}
+}*/
+
 .navbar{
   margin-bottom: 0;
 }
@@ -54,6 +59,10 @@ legend{
   .p2pu-badge{
     margin-top: 10px;
   }
+}
+.upload-image-icon{
+  font-size: 1.4em;
+  margin-right: 5px;
 }
 footer{
   margin: 1em 0;

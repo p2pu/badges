@@ -1,4 +1,5 @@
 from django.db import models
+from p2pu_user.models import Partner
 
 def UriField(**kwargs):
     return models.CharField(max_length=255, **kwargs)
@@ -10,6 +11,7 @@ class Badge(models.Model):
     description = models.CharField(max_length=128)
     requirements = models.CharField(max_length=1024)
     author_uri = UriField()
+    partner_name = models.CharField(max_length=255, null=True, blank=True)
     deleted = models.BooleanField(default=False)
     date_created = models.DateTimeField()
     date_updated = models.DateTimeField()
@@ -26,7 +28,6 @@ class Award(models.Model):
         ('REVOKED', 'REVOKED'),
     )
 
-    badge = models.ForeignKey(Badge)
     user_uri = UriField()
     expert_uri = UriField()
     evidence_url = models.CharField(max_length=255)
@@ -34,6 +35,9 @@ class Award(models.Model):
     ob_state = models.CharField(max_length=20, choices=OPEN_BADGES_STATE_CHOICES, default='NOT_PUBLISHED')
     ob_date_published = models.DateTimeField(null=True, blank=True)
     ob_date_revoked = models.DateTimeField(null=True, blank=True)
+
+    # relationships
+    badge = models.ForeignKey(Badge)
 
     def __unicode__(self):
         return self.badge.title

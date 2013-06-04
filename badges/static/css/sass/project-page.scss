@@ -5,7 +5,46 @@
   text-shadow: none;
 }
 
+.feedback-create-form{
+  label[for^="id"]{
+    margin-left: 0;
+    padding: 5px;
+    border-radius: 3px 3px 0 0;
+    margin-bottom: -3px;
+    @extend .alert;
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 7px;
+  }
+  label[for$="good"]{
+    @extend .alert-success;
+  }
+  #cke_id_good {
+    border: 1px solid $dark-olive;
+  }
+  #cke_id_bad{
+    border: 1px solid $blood-orange;
+  }
+  label[for$="ugly"]{
+    @extend .alert-error;
+  }
+  #cke_id_ugly {
+    border: 1px solid #af1c00;
+  }
+}
+
 .project-view{
+  .project-info{
+    img{
+      float: left;
+      margin: 0 15px 35px 0;
+    }
+    dt i[class^="icon"] {
+      margin-right: 5px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-shadow: gray 1px 1px;
+    }
+  }
+
   .feedback{
     .thumbnail{
       display: inline;
@@ -64,14 +103,7 @@
       margin-bottom: 20px;
     }
     margin-bottom: 15px;
-    .previous-interactions{
-      overflow: hidden;
-      margin-left: 20px;
-      height: 260px;
-      dl h4{
-        color: $dark-apricot;
-      }
-    }
+
     .feedback-already-given{
 
     }
@@ -88,62 +120,6 @@
     }
   }
   .project-form-snippet{
-    .award_badge {
-      width: 20px;
-      margin: 20px auto;
-      position: relative;
-      padding: 0;
-      margin: 0;
-      float: left;
-    }
-
-    .award_badge label {
-      cursor: pointer;
-      position: absolute;
-      padding: 0;
-      margin: 0;
-      width: 25px;
-      height: 25px;
-      top: 0;
-      border-radius: 4px;
-      @include box-shadow(inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4));
-      @include gradient-vertical($gray, $grayDarker);
-      @include gradient-vertical($steel, darken($steel, 20%));
-
-    }
-
-    .award_badge label:after {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-        filter: alpha(opacity=0);
-        opacity: 0;
-        content: '';
-        position: absolute;
-        width: 9px;
-        height: 5px;
-        background: transparent;
-        top: 7px;
-        left: 7px;
-        border: 3px solid #fcfff4;
-        border-top: none;
-        border-right: none;
-        @include rotate(-45deg);
-    }
-
-    .award_badge label:hover::after {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-        filter: alpha(opacity=30);
-        opacity: 0.3;
-    }
-
-    .award_badge input[type=checkbox]{
-      visibility: hidden;
-    }
-
-    .award_badge input[type=checkbox]:checked + label:after {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-        filter: alpha(opacity=100);
-        opacity: 1;
-    }
 
     .custom-checkbox-label{
       margin-right: 10px;
@@ -163,11 +139,91 @@
     border-radius: 3px 3px 0 0;
     font-weight: bold;
   }
-
+  .feedback-form-award-info{
+    font-family: "arvo", Helvetica, sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 1.1em;
+  }
 
 }
 
-.feedback-give-revise{
-  margin-top: 25px;
+
+
+/**
+ * Checkbox Three
+ */
+.award-badge {
+	width: 160px;
+	height: 40px;
+	background: #333;
+	border-radius: 50px;
+	position: relative;
+    input[type=checkbox] {
+      visibility: hidden;
+    }
 }
 
+/**
+ * Create the text for the On position
+ */
+.award-badge:before {
+	content: 'Award';
+	position: absolute;
+	top: 10px;
+	left: 13px;
+	height: 2px;
+	color: $cyan;
+	font-size: 16px;
+    font-family: "arvo", Helvetica, sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 0.72em;
+}
+
+/**
+ * Create the label for the off position
+ */
+.award-badge:after {
+	content: "Don't award";
+	position: absolute;
+	top: 10px;
+	left: 80px;
+	height: 2px;
+	color: #ddd;
+	font-size: 16px;
+    font-family: "arvo", Helvetica, sans-serif;
+    text-shadow: 0 1px 0 #fff;
+    font-size: 0.72em;
+}
+
+/**
+ * Create the pill to click
+ */
+.award-badge label {
+	display: block;
+	width: 75px;
+	height: 30px;
+	border-radius: 50px;
+
+	-webkit-transition: all .5s ease;
+	-moz-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	-ms-transition: all .5s ease;
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	z-index: 1;
+	left: 4px;
+	background: #ddd;
+    padding: 0;
+    margin-left: 0;
+}
+
+/**
+ * Create the checkbox event for the label
+ * @type {[type]}
+ */
+.award-badge input[type=checkbox]:checked + label {
+	left: 78px;
+	background: $cyan;
+}

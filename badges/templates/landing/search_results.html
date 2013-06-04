@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load landing_tags %}
+
+{% block body %}
+    <section class="container">
+        {% with active=results|get_active_tab %}
+        {% if active %}
+        <h2>{% trans 'We searched for ' %}<strong>"{{ q }}"</strong>{% trans ' and this is what we found:' %}</h2>
+        <div class="tabbable tab-section">
+            <ul class="nav nav-tabs">
+                {% if results.badges|length > 0 %}
+                    <li {% if active == 'badges' %}class="active"{% endif %}>
+                        <a href="#badges" data-toggle="tab"><h3>Badges ({{ results.badges|length }})</h3></a>
+                    </li>
+                {% endif %}
+                {% if results.projects|length > 0 %}
+                    <li {% if active == 'projects' %}class="active"{% endif %}>
+                        <a href="#projects" data-toggle="tab"><h3>Projects ({{ results.projects|length }})</h3></a>
+                    </li>
+                {% endif %}
+                {% if results.learners|length > 0 %}
+                    <li {% if active == 'learners' %}class="active"{% endif %}>
+                        <a href="#learners" data-toggle="tab"><h3>Learners ({{ results.learners|length }})</h3></a>
+                    </li>
+                {% endif %}
+
+            </ul>
+            <div class="tab-content">
+                <div id="badges" class="tab-pane {% if active == 'badges' %}active{% endif %}">
+                    <ul class="thumbnails">
+                        {% for badge in results.badges %}
+                            {% include 'badge/badge_tile.html' %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="projects" class="tab-pane {% if active == 'projects' %}active{% endif %}">
+                    <ul class="p2pu-project-list fit-thumbnails">
+                        {% for project in results.projects %}
+                            {% include 'project/project_tile.html' %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div id="learners" class="tab-pane {% if active == 'learners' %}active{% endif %}">
+                    {% if results.learners|length %}
+                    <ul class="thumbnails">
+                    {% for learner in results.learners %}
+                        {% include 'p2pu_user/user_tile.html' with user=learner %}
+                    {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.tabbable -->
+        {% else %}
+            <h2>We couldn't find anything with that text, please give us more to work with.</h2>
+        {% endif %}
+        {% endwith %}
+    </section>
+{% endblock body %}

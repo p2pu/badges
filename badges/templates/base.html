@@ -35,7 +35,7 @@
 </head>
 
 <body>
-    <div class="navbar">
+    <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
                 <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -80,6 +80,7 @@
                             </div>
                         </li>
                     </ul>
+
                     <ul class="nav pull-right right-links">
                         {% if request.session.user %}
                             <li>
@@ -113,6 +114,9 @@
                             </li>
                         {% endif %}
                     </ul>
+                    <form class="navbar-search pull-right" action="{% url search %}">
+                        <input type="text" class="search-query span2" name="q" value="{{ q }}" placeholder="{% trans 'Search' %}">
+                    </form>
                 </div>
             </div>
         </div>
@@ -153,6 +157,7 @@
         <script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
         <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
         <script src="{% static 'js/project_view.js' %}"></script>
+        <script src="{% static 'js/vendor/bootstrap.file-input.js' %}"></script>
     {% endcompress %}
     {% block js %}{% endblock %}
 
