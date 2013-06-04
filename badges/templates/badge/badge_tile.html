@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load open_badges_tags %}
 
-<li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}">
+<li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}" data-next={{ next_page }}>
         {% if can_delete_badge %}
             <a href="#" type="button" class="close" data-delete="p2pu-badge">×</a>
             <div class="badge-delete-popover" style="display: none">

@@ -20,7 +20,7 @@
         <div class="row badge-and-feedback">
             {% include 'badge/badge_info_vertical.html' with label='Feedback for the Badge:' %}
 
-            <div class="clearfix project-feedback-form">
+            <div class="span9 clearfix project-feedback-form">
                 {% include 'project/feedback_thread.html' with feedback=feedback %}
                 {% crispy form form.give_feedback %}
             </div>

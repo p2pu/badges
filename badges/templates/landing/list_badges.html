@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}P2PU Badges | Browse{% endblock %}
+
+{% block js %}
+    <script>
+        var browse_badges = "{% static 'js/browse_all_badges.js' %}";
+
+        require(["jquery", browse_badges], function($){
+            Badges.Browse.init('{% url browse_all_badges %}');
+           })
+    </script>
+{% endblock %}
+
+{% block body %}
+    <section class="container browse-badges">
+        <h2>
+            {% trans 'Browse all the Badges.' %}
+        </h2>
+        <div class="content">
+            <ul class="thumbnails row" id="badges">
+                {% for badge in badges %}
+                    {% if badges.has_next %}
+                        {% include 'badge/badge_tile.html' with next_page=badges.next_page_number  %}
+                    {% else %}
+                        {% include 'badge/badge_tile.html' %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="navigation">
+            <ul class="pager">
+                <li class="previous">
+                    {% if badges.has_previous %}
+                        <a href="?page={{ badges.previous_page_number }}">&larr; {% trans 'Go to previous' %}</a>
+                    {% endif %}
+                </li>
+                <span class="current">
+                    Page {{ badges.number }} of {{ badges.paginator.num_pages }}.
+                </span>
+                <li class="next">
+                    {% if badges.has_next %}
+                        <a href="?page={{ badges.next_page_number }}">{% trans 'Load more' %}</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+
+    </section>
+{% endblock body %}

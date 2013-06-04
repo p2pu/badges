@@ -136,7 +136,7 @@ def last_n_published_badges(n):
     return [_badge2dict(badge) for badge in badges]
 
 def get_published_badges():
-    badges = Badge.objects.filter(deleted=False, date_published__isnull=False)
+    badges = Badge.objects.filter(deleted=False, date_published__isnull=False).order_by('-pk')
     return [_badge2dict(badge) for badge in badges]
 
 

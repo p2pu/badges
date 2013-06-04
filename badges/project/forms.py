@@ -96,7 +96,7 @@ class ProjectForm(forms.Form):
                 'tags',
             ),
             ButtonHolder(
-                Submit('submit', _('Create a project'), css_class='btn btn-primary large'),
+                Submit('submit', _('Create a project'), css_class='btn btn-primary btn-large'),
             )
         )
         return helper
@@ -146,7 +146,7 @@ class FeedbackForm(forms.Form):
     def give_feedback(self):
         helper = FormHelper()
         helper.form_id = 'feedback-create-form'
-        helper.form_class = 'feedback-create-form span9'
+        helper.form_class = 'feedback-create-form'
         helper.form_tag = True
         helper.layout = Layout(
             Layout(
@@ -158,7 +158,7 @@ class FeedbackForm(forms.Form):
                             If so, go ahead and award it!
                         </p>
                         <div class="control-group checkbox-group award-badge">
-                            <input type="checkbox" value="0" id="award-badge-input" name="award_badge" />
+                            <input type="checkbox" id="award-badge-input" class="checkboxinput" name="award_badge">
                             <label for="award-badge-input"></label>
                         </div>
                      """),
