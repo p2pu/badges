@@ -1,4 +1,5 @@
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -15,7 +16,7 @@ from .processors.search import search_results
 
 def home(request):
     context = {}
-    context['badges'] = map(fetch_badge_resources, badge_api.last_n_published_badges(5))
+    context['badges'] = map(fetch_badge_resources, badge_api.get_featured_badges())
     context['projects'] = map(fetch_project_resources, project_api.last_n_projects(10))
     context['users'] = p2pu_user_api.last_n_users(20)
     
@@ -49,6 +50,8 @@ def browse_all_badges(request):
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.
         badges = paginator.page(1)
+    except EmptyPage:
+        return HttpResponse(status=404)
 
     if request.is_ajax():
         return render_to_response('landing/browse_badges.html',{'badges': badges}, context_instance=RequestContext(request))

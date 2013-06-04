@@ -25,7 +25,7 @@ var Badges = window.Badges || {};
                                    // selector for the NEXT link (to page 2)
                     itemSelector : ".p2pu-badge",
                                    // selector for all items you'll retrieve
-                    debug        : true
+                    debug        : false
                                     // enable debug messaging ( to console.log )
                   });
             });
