@@ -1,0 +1,11 @@
+
+
+{% for badge in badges %}
+    {% if badges.has_next %}
+        {% include 'badge/badge_tile.html' with next_page=badges.next_page_number  %}
+    {% else %}
+        {% include 'badge/badge_tile.html' %}
+    {% endif %}
+{% endfor %}
+
+

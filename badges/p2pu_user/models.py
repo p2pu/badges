@@ -1,6 +1,5 @@
-from .db import User
-from .db import Partner
-
+from p2pu_user.db import User
+from p2pu_user.db import Partner
 from datetime import datetime
 
 def username2uri(username):

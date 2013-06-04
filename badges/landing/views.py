@@ -1,4 +1,4 @@
-from django import http
+from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
@@ -31,6 +31,31 @@ def search(request):
         'landing/search_results.html',{
             'q': q,
             'results': results,
+        },
+        context_instance=RequestContext(request)
+    )
+
+
+def browse_all_badges(request):
+
+    badges = badge_api.get_published_badges()
+    for badge in badges:
+        fetch_badge_resources(badge)
+    paginator = Paginator(badges, 10) # Show 10 badges per page
+
+    page = request.GET.get('page')
+    try:
+        badges = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        badges = paginator.page(1)
+
+    if request.is_ajax():
+        return render_to_response('landing/browse_badges.html',{'badges': badges}, context_instance=RequestContext(request))
+
+    return render_to_response(
+        'landing/list_badges.html',{
+            'badges': badges,
         },
         context_instance=RequestContext(request)
     )

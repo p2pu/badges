@@ -19,32 +19,9 @@ legend{
 body{
   background: url("/static/img/natural_paper.png") left top repeat;
 }
-/*.btn-cyan {
-  color: #FFFFFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #039485;
-  *background-color: #039485;
-  background-image: -moz-linear-gradient(top, #05C6B4, #039485);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#05C6B4), to(#039485));
-  background-image: -webkit-linear-gradient(top, #05C6B4, #039485);
-  background-image: -o-linear-gradient(top, #05C6B4, #039485);
-  background-image: linear-gradient(to bottom, #05C6B4, #039485);
-  background-repeat: repeat-x;
-  border-color: #039485;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#05C6B4', endColorstr='#039485', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+p{
+  word-wrap: break-word;
 }
-.btn-cyan:hover,
-.btn-cyan:active,
-.btn-cyan.active,
-.btn-cyan.disabled,
-.btn-cyan[disabled] {
-  color: $white;
-  background-color: #039485;
-  *background-color: #003bb3;
-}*/
-
 .navbar{
   margin-bottom: 0;
 }
