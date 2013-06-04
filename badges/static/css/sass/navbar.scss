@@ -1,6 +1,9 @@
 .navbar{
-  position: relative;
-  z-index: 999;
+  &.navbar-fixed-top.affix{
+    .navbar-inner{
+      padding-top: 0;
+    }
+  }
   .navbar-inner{
     min-height: 85px;
     font-family: "arvo", Helvetica, sans-serif;
@@ -8,8 +11,9 @@
     min-height: 40px;
     padding-left: 20px;
     padding-right: 20px;
-    @include gradient-vertical($snow, $snow);
 
+    @include gradient-vertical($snow, $snow);
+    //@include gradient-vertical(rgba(255,255,255, 0.6), rgba(255,255,255, 0.6));
     border: 1px solid #dddddd;
     @include border-radius(4px);
     @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
@@ -97,5 +101,8 @@
       color: #aab0bf;
       font-family: "sense", Helvetica, sans-serif;
     }
+  }
+  .navbar-search{
+    margin: 15px 25px 0 0;
   }
 }

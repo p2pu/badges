@@ -10,7 +10,7 @@ from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
 from media import models as media_api
 from p2pu_user import models as p2pu_user_api
-from project import models as project_api
+from project import processors as project_api
 from project.forms import ProjectForm
 from project.forms import FeedbackForm
 from project.forms import RevisionForm
@@ -52,8 +52,8 @@ def create( request, badge_id ):
         except project_api.MultipleProjectError:
             messages.error(request, _('You have already submitted a project for this badge.'))
         except media_api.UploadImageError:
-            form.errors['title'] = [_('Project image cannot be uploaded. Possible reasons: format not supported'
-                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
+            messages.error(request,_('Project image cannot be uploaded. Possible reasons: format not supported'
+                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'))
 
     context['form'] = form
     return render_to_response(
@@ -63,7 +63,7 @@ def create( request, badge_id ):
     )
 
 
-def view( request, project_id ):
+def view(request, project_id):
 
     project = project_api.get_project(project_api.id2uri(project_id))
     project = fetch_resources(project)
@@ -99,11 +99,11 @@ def view( request, project_id ):
 @require_login
 def feedback(request, project_id ):
     project = project_api.get_project(project_api.id2uri(project_id))
+    fetch_resources(project)
     feedback = project_api.get_project_feedback(project_api.id2uri(project_id))
     badge = badge_api.get_badge(project['badge_uri'])
     fetch_badge_resources(badge)
     user_uri = request.session['user']['uri']
-    user = request.session['user']
 
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
@@ -111,30 +111,35 @@ def feedback(request, project_id ):
         form = FeedbackForm()
 
     if form.is_valid():
-        project_api.submit_feedback(
-            project['uri'],
-            user_uri,
-            form.cleaned_data['good'],
-            form.cleaned_data['bad'],
-            form.cleaned_data['ugly'],
-            form.cleaned_data.get('award_badge', form.cleaned_data.get('award_badge', False) )
-        )
-
-        if form.cleaned_data.get('award_badge'):
-            badge_api.award_badge(
-                badge['uri'],
-                project['author_uri'],
+        try:
+            feedback = project_api.submit_feedback(
+                project['uri'],
                 user_uri,
-                reverse('project_view', args=(project_id,)),
+                form.cleaned_data['good'],
+                form.cleaned_data['bad'],
+                form.cleaned_data['ugly'],
+                form.cleaned_data.get('award_badge', form.cleaned_data.get('award_badge', False))
             )
-            messages.success(request, _("Success! You've awarded the Badge to %s" % user['username']))
+            if feedback == project_api.submit_feedback_result.AWARDED:
+                badge_api.award_badge(
+                    badge['uri'],
+                    project['author_uri'],
+                    user_uri,
+                    reverse('project_view', args=(project_id,)),
+                )
+                messages.success(request, _("Success! You've awarded the Badge to %s" % project['author']['username']))
+            elif feedback == project_api.submit_feedback_result.REQUIRES_APPROVAL:
+                messages.error(request, _("Badge can only be awarded by it's creator. "
+                                          "We had notified them that you liked this project."))
+        except Exception, e:
+            messages.error(request, _(e[0]))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
 
     context = {
         'badge': badge,
         'project': project,
         'form': form,
-        'feedback': feedback,
+        'feedback': project_api.get_project_feedback(project_api.id2uri(project_id))
     }
 
     return render_to_response(
@@ -145,8 +150,10 @@ def feedback(request, project_id ):
 
 
 @require_login
-def revise( request, project_id ):
+def revise(request, project_id):
     project = project_api.get_project(project_api.id2uri(project_id))
+    badge = badge_api.get_badge(project['badge_uri'])
+    fetch_badge_resources(badge)
 
     if request.method == 'POST':
         form = RevisionForm(request.POST)
@@ -154,20 +161,20 @@ def revise( request, project_id ):
         form = RevisionForm()
 
     if form.is_valid():
-        project_api.revise_project(
-            project['uri'],
-            form.cleaned_data['improvement'],
-            form.cleaned_data.get('work_url', None)
-        )
+        try:
+            project_api.revise_project(
+                project['uri'],
+                form.cleaned_data['improvement'],
+                form.cleaned_data.get('work_url', None)
+            )
+        except Exception as e:
+            messages.error(request, _(e.args[0]))
         return http.HttpResponseRedirect(reverse('project_view', args=(project_id,)))
 
     context = {
+        'badge': badge,
         'project': project,
         'form': form
-    }
-
-    context = {
-        'project': project,
     }
     return render_to_response(
         'project/revise.html',

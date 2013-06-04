@@ -11,7 +11,7 @@ admin.autodiscover()
 urlpatterns = i18n_patterns('',
     url(r'^scrapy/doc/', include('django.contrib.admindocs.urls')),
     url(r'^scrapy/', include(admin.site.urls)),
-    url(r'^$', include('landing.urls')),
+    url(r'^', include('landing.urls')),
     url(r'^badge/', include('badge.urls')),
     url(r'^project/', include('project.urls')),
     url(r'^dashboard/', include('dashboard.urls')),

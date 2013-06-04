@@ -9,117 +9,61 @@
     <div class="container project-view">
         <div class="row">
             <div class="span12">
-                <h2>{% blocktrans with badge_title=badge.title %}Project submitted for
-                    {{ badge_title }}{% endblocktrans %}</h2>
+                <h2>
+                    {% blocktrans with badge_title=badge.title %}
+                        Project submitted for {{ badge_title }} Badge.{% endblocktrans %}
+                </h2>
             </div>
         </div>
-        <div>
-            <p>Badge for the Project</p>
-            {% include 'badge/badge_info.html' with badge=badge %}
-            <hr>
-        </div>
+        <div class="row">
+            {% include 'badge/badge_info_vertical.html' with badge=badge %}
+            <div class="span9 project-info">
 
-            <div class="row">
-                <div class="span12">
-                    <h2>{% blocktrans with username=project.author.username %}Version 1 submitted by
-                        {{ username }} {% endblocktrans %}</h2>
-                </div>
-            </div>
+                {% with username=project.author.username %}
+                <h3>
+                    {% trans 'Version submitted' %} {{ project.date_created|naturaltime }}
+                    {% trans 'by' %}
+                    <a href="{% url dashboard username %}">{{ username }}</a>
+                </h3>
+                {% endwith %}
+                <img class="img-polaroid" src="{{ project.image.url }}"/>
 
-            <div class="row">
-                <div class="span4">
-                    <img class="img-polaroid" src="{{ project.image.url }}"/>
-                </div>
-                <div class="span8 project-summary">
+                <div class="project-summary">
                     <dl>
-                        <dt>{% trans 'Title' %}</dt>
+                        <dt><i class="icon-caret-right"></i>{% trans 'Title' %}</dt>
                         <dd>{{ project.title }}</dd>
                     </dl>
                     <dl>
-                        <dt>{% trans 'Url' %}</dt>
+                        <dt><i class="icon-caret-right"></i>{% trans 'Url' %}</dt>
                         <dd><a href="{{ project.work_url }}">{{ project.work_url }}</a></dd>
                     </dl>
                     <dl>
-                        <dt>{% trans 'Steps taken' %}</dt>
+                        <dt><i class="icon-caret-right"></i>{% trans 'Steps taken' %}</dt>
                         <dd>{{ project.description|purge_content }}</dd>
                     </dl>
+                    <dl>
+                        <dt><i class="icon-caret-right"></i>{% trans 'Lessons learned' %}</dt>
+                        <dd>{{ project.reflection|purge_content }}</dd>
+                    </dl>
                 </div>
+            {% if can_give_feedback and not feedback %}
+                <a href="{% url project_feedback project.id %}"
+                           class="btn btn-large btn-cyan">{% trans 'Give feedback' %}</a>
+            {% endif %}
             </div>
 
-            <div class="row">
-              <div class="span12">
-                 <h2>{% trans 'Lessons learned' %}</h2>
-                 <p>{% autoescape off %}{{ project.reflection }}{% endautoescape %}</p>
-              </div>
-            </div>
-            
+            {% include 'project/feedback_thread_view.html' with feedback=feedback %}
 
-            {% for fb in feedback %}
-                <div class="row">
-                    <div class="span12 feedback">
-                    <hr>
-                        {% if fb.improvement %}
-                            <h4>
-                                {% blocktrans with date=fb.date_created|naturaltime %}
-                                    Project revision on {{ date }}
-                                {% endblocktrans %}
-                            </h4>
-                            <div class="feedback-labels alert alert-revise">
-                                {% trans 'Improvements made' %}
-                            </div>
-                            <div class="feedback-content span6 content-blue">
-                                {{ fb.improvement|purge_content }}
-                            </div>
-
-                            {% if fb.work_url %}
-                                <div class="feedback-labels alert alert-revise">{% trans 'New URL' %}</div>
-                                <p class="feedback-content span6 content-blue">
-                                    <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
-                                </p>
-
-                            {% endif %}
-                        {% else %}
-                            <div class="feedback-head clearfix">
-                                <div class="span6">
-                                    <h4 class="pull-left">
-                                        {% blocktrans with username=fb.expert.username %}Feedback by {{ username }}{% endblocktrans %}
-                                    </h4>
-                                    <a href="{% url dashboard fb.expert.username %}"><img src="{{ fb.expert.image_url }}" alt="{{ fb.expert.username }}"
-                                         class="thumbnail pull-right"></a>
-                                </div>
-                            </div>
-
-                            <div class="feedback-labels alert alert-success">
-                                {% trans 'Kudos' %}
-                            </div>
-                            <div class="feedback-content span6 content-green">
-                                {{ fb.good|purge_content }}
-                            </div>
-                            <div class="feedback-labels alert alert-warning">
-                                {% trans 'Questions' %}
-                            </div>
-                            <div class="feedback-content content-yellow span6">
-                                {{ fb.bad|purge_content }}
-                            </div>
-                            <div class="feedback-labels alert alert-error">
-                                {% trans 'Concerns' %}
-                            </div>
-                            <div class="feedback-content content-red span6">
-                                {{ fb.ugly|purge_content }}
-                            </div>
-                        {% endif %}
-                    </div>
+            <div class="offset1 feedback-give-revise">
+                    {% if can_give_feedback and feedback %}
+                        <a href="{% url project_feedback project.id %}"
+                           class="btn btn-large btn-cyan">{% trans 'Give feedback' %}</a>
+                    {% endif %}
+                    {% if can_revise %}
+                        <a href="{% url project_revise project.id %}"
+                           class="btn btn-large btn-cyan">{% trans 'Revise project' %}</a>
+                    {% endif %}
                 </div>
-            {% endfor %}
-            <div class="feedback-give-revise">
-                {% if can_give_feedback %}
-                    <a href="{% url project_feedback project.id %}"
-                       class="btn btn-large btn-cyan">{% trans 'Give feedback' %}</a>
-                {% endif %}
-                {% if can_revise %}
-                    <a href="{% url project_revise project.id %}"
-                       class="btn btn-large btn-cyan">{% trans 'Revise project' %}</a>
-                {% endif %}
             </div>
         </div>
 {% endblock %}

@@ -42,11 +42,13 @@
                                 <h3>{% trans 'Feedback' %}</h3>
                             </a>
                         </li>
+                        {% if user.username == request.session.user.username %}
                         <li>
                             <a href="#garden-shed" data-toggle="tab" class="tab" >
                                 <h3>{% trans 'Badges in the garden shed' %}</h3>
                             </a>
                         </li>
+                        {% endif %}
                     </ul>
                     <div class="tab-content p2pu-projects-tabs-content">
                         <div class="tab-pane active" id="badges">

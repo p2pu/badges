@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with badge_title=badge.title%}Someone wants {{ badge_title }} Badge.{% endblocktrans %}

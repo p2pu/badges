@@ -7,3 +7,5 @@ venv
 uploads
 settings_local.py
 staticfiles
+static/css/libs/p2pu-css-framework
+db.sqlite

@@ -11,29 +11,31 @@ from badge.forms import BadgeForm
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
 from media import models as media_api
-from project import models as project_api
+from project import processors as project_api
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
 from p2pu_user import models as p2pu_user_api
 
+
+
 @require_login
-def create( request ):
-    template_name = 'badge/create.html'
+def create(request):
+    user_uri = request.session['user']['uri']
+    user = p2pu_user_api.get_user(user_uri)
+    user_partner = user['partner']
+
+    form = BadgeForm(user_uri=user_uri)
 
     if request.method == 'POST':
-        form = BadgeForm(request.POST, request.FILES)
-    else:
-        form = BadgeForm()
-
-    user_uri = request.session['user']['uri']
+        form = BadgeForm(request.POST, request.FILES, user_uri=user_uri)
 
     if form.is_valid():
         try:
-            if request.FILES['image'].size > (256 * 1024):
+            if request.FILES['image_uri'].size > (256 * 1024):
                 raise media_api.UploadImageError('Image size too large.')
 
             image = media_api.upload_image(
-                request.FILES['image'],
+                request.FILES['image_uri'],
                 user_uri,
                 media_root=settings.MEDIA_ROOT,
                 delete_original=True)
@@ -43,7 +45,8 @@ def create( request ):
                 image['uri'],
                 form.cleaned_data['description'],
                 form.cleaned_data['requirements'],
-                user_uri
+                user_uri,
+                partner_name=form.cleaned_data['partner']
             )
             return http.HttpResponseRedirect(
                 reverse('badge_publish', args=(badge_api.uri2id(badge['uri']),))
@@ -54,9 +57,10 @@ def create( request ):
             form.errors['title'] = [_('Badge image cannot be uploaded. Possible reasons: format not supported'
                                       '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
 
-    return render_to_response(
-        template_name, {'form': form},
-        context_instance=RequestContext(request))
+    return render_to_response('badge/create.html', {
+        'form': form,
+        'user_is_partner': user_partner,
+        },context_instance=RequestContext(request))
 
 
 @require_login
@@ -137,7 +141,7 @@ def publish( request, badge_id ):
     ))
     
 
-def view( request, badge_id ):
+def view(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
     context = {

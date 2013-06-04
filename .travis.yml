@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.3"
+  - "2.7"
+  - "2.6"
+
+env:
+  - DJANGO=1.3.1
+  - DJANGO=1.4
+# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install:
+  - pip install -r badges/requirements.txt --use-mirrors
+# command to run tests, e.g. python setup.py test
+script:  python badges/manage.py test --settings=badges.settings

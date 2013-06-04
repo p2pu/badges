@@ -14,6 +14,7 @@
 
 // Mixins already created for P2PU
 @import "../libs/p2pu-css-framework/p2pu/p2pu-mixins";
+@import "mixins";
 
 // Additional variables
 @import "variables";
@@ -29,6 +30,7 @@
 @import "avatar";
 @import "dashboard";
 @import "user";
+@import "feedback";
 
 // Navbar styling
 @import "navbar";

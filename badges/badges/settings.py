@@ -37,12 +37,14 @@ TIME_ZONE = 'Africa/Johannesburg'
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
 gettext = lambda s: s
 
 LANGUAGES = (
     ('en', gettext('English')),
     ('en-us', gettext('English-American')),
 )
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -147,6 +149,9 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'south',
+    'crispy_forms',
+    'compressor',
     'landing',
     'dashboard',
     'badge',
@@ -156,9 +161,9 @@ INSTALLED_APPS = (
     'open_badges',
     'notifications',
     'p2pu_user',
-    'south',
-    'compressor',
 )
+
+#TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -201,7 +206,8 @@ OAUTH_CLIENT_ID = ''
 OAUTH_CLIENT_KEY = ''
 OAUTH_CLIENT_SECRET = ''
 OAUTH_ID_URL = ''
-
+LERNANTA_API_KEY = ''
+NOTIFICATION_URL = 'https://host.org/notification/url/'
 
 ##################################################################
 # Django compressor settings
@@ -214,3 +220,8 @@ COMPRESS_PRECOMPILERS = (
 # Open badges settings
 #################################################################
 OPEN_BADGES_ISSUER_JS_URL = '//beta.openbadges.org/issuer.js'
+
+##################################################################
+# Crispy forms template
+#################################################################
+CRISPY_TEMPLATE_PACK = 'bootstrap'

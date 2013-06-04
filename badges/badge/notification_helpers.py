@@ -6,7 +6,7 @@ def send_badge_creation_notification(badge):
     subject_template = 'emails/badge_created_subject.txt'
     text_template = 'emails/badge_created.txt'
     html_template = 'emails/badge_created.html'
-    context = { 'badge': fetch_badge_resources(badge) }
+    context = {'badge': fetch_badge_resources(badge)}
     return send_notification_i18n(
         badge['author_uri'],
         subject_template,
@@ -23,7 +23,7 @@ def send_badge_awarded_notification(badge, expert_uri):
     context = { 'badge': fetch_badge_resources(badge) }
 
     # NOT the best place to hide this dependancy!!
-    from project import models as project_api
+    from project import processors as project_api
     from project.view_helpers import fetch_resources
 
     project = project_api.search_projects(badge['uri'], expert_uri)

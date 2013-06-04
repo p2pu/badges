@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load crispy_forms_tags %}
 
 {% block title %}P2PU Badges | Submit Project{% endblock %}
 
@@ -12,10 +13,11 @@
                     Submit Project
                 .{% endblocktrans %}
             </h2>
-            {% include 'badge/badge_info.html' %}
-        </div>
-        <div>
-            {% include 'project/form_snippet.html' %}
+            <div class="row">
+                {% include 'badge/badge_info_vertical.html' with label='Badge you are trying for' %}
+
+                {% crispy form form.create_project %}
+            </div>
         </div>
     </div>
 

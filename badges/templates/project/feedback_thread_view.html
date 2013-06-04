@@ -1,0 +1,91 @@
+{% load i18n %}
+{% load humanize %}
+{% load projects_tags %}
+
+{% for fb in feedback %}
+    <div class="row">
+        <div class="span12 feedback">
+        <hr>
+            {% if fb.improvement %}
+
+                <div class="feedback-img span2 pull-right">
+                    <a href="{% url dashboard project.author.username %}">
+                        <img src="{{ project.author.image_url }}" alt="{{ project.author.username }}"
+                             class="thumbnail pull-left">
+                    </a>
+                </div>
+                <div class="popover left span8 feedback-given pull-right" style="">
+                        <div class="arrow"></div>
+                        <h3 class="popover-title">
+                            {% trans 'Revision by' %}
+                            <a href="{% url dashboard project.author.username %}">
+                                {{ project.author.username }}
+                            </a><i class="icon-angle-right"></i>
+                            {{ fb.date_created|naturaltime }}
+                        </h3>
+                        <div class="popover-content">
+                            <div class="feedback-labels alert alert-revise">
+                                {% trans 'Improvements made' %}
+                            </div>
+                            <div class="feedback-content content-blue">
+                                {{ fb.improvement|purge_content }}
+                            </div>
+
+                            {% if fb.work_url %}
+                                <div class="feedback-labels alert alert-revise">{% trans 'New URL' %}</div>
+                                <p class="feedback-content content-blue">
+                                    <a href={{ fb.work_url }}>{{ fb.work_url }}</a>
+                                </p>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+
+            {% else %}
+                <div class="feedback-head clearfix">
+                <div class="feedback-img pull-left">
+                    <a href="{% url dashboard fb.expert.username %}"><img src="{{ fb.expert.image_url }}" alt="{{ fb.expert.username }}"
+                             class="thumbnail pull-left">
+                    </a>
+                </div>
+
+                <div class="popover right span8 feedback-given" style="">
+                        <div class="arrow"></div>
+                        <h3 class="popover-title">
+                            {% trans 'Feedback by' %}
+                            <a href="{% url dashboard fb.expert.username %}">
+                                {{ fb.expert.username }}
+                            </a><i class="icon-angle-right"></i>
+                            {{ fb.date_created|naturaltime }}
+                        </h3>
+                        <div class="popover-content">
+                            <div class="feedback-labels alert alert-success">
+                                {% trans 'Kudos' %}
+                            </div>
+                            <div class="feedback-content content-green">
+                                {{ fb.good|purge_content }}
+                            </div>
+                            <div class="feedback-labels alert alert-warning">
+                                {% trans 'Questions' %}
+                            </div>
+                            <div class="feedback-content content-yellow">
+                                {{ fb.bad|purge_content }}
+                            </div>
+                            <div class="feedback-labels alert alert-error">
+                                {% trans 'Concerns' %}
+                            </div>
+                            <div class="feedback-content content-red">
+                                {{ fb.ugly|purge_content }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endif %}
+        </div>
+    </div>
+{% endfor %}
