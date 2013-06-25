@@ -150,8 +150,12 @@
     <footer>
         <div class="container">
             <hr>
-            <img alt="We Issue OpenBadges" src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png" width="200" height="40">
-            <img src="{% static 'img/cc-icons.png' %}" alt="" class="pull-right">
+            <a href="http://backpack.openbadges.org" target="_blank">
+                <img alt="We Issue OpenBadges" src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png" width="200" height="40">
+            </a>
+            <a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank">
+                <img src="{% static 'img/cc-icons.png' %}" alt="" class="pull-right">
+            </a>
         </div>
     </footer>
 
@@ -169,6 +173,7 @@
         <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
         <script src="{% static 'js/project_view.js' %}"></script>
         <script src="{% static 'js/vendor/bootstrap.file-input.js' %}"></script>
+        <script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
     {% endcompress %}
     {% block js %}{% endblock %}
 
@@ -176,7 +181,7 @@
     {% if not debug %}
     <script type="text/javascript">
         var _gaq = [
-            ['_setAccount', 'UA-5757664-7'],
+            ['_setAccount', 'UA-5757664-7'],            
             ['_trackPageview']
         ];
         (function (d, t) {

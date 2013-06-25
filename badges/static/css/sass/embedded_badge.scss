@@ -1,0 +1,86 @@
+// Bootstrap
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "arvo", Helvetica, sans-serif;
+}
+
+.p2pu-badge{
+  display: block;
+  overflow: hidden;
+  line-height: 22px;
+  border: 1px solid #aaa;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.055);
+     -moz-box-shadow: 0 1px 3px rgba(0,0,0,.055);
+          box-shadow: 0 1px 3px rgba(0,0,0,.055);
+  -webkit-transition: all .2s ease-in-out;
+     -moz-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+  padding: 10px 10px 5px;
+  position: relative;
+  margin-left: 0;
+  background-color: #FFFFFF;
+
+
+  a{
+    display: block;
+    text-align: center;
+
+
+
+    > img {
+
+    }
+  }
+  .badge-container{
+    a{
+      text-align: left;
+      text-decoration: none;
+      h4{
+        color: #05c6b4;
+        font-size: 13px;
+      }
+      &:hover{
+        h4{
+          color: #ffbc1a;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .badge-description{
+      text-align: left;
+      color: #515665;
+      font-size: 12px;
+    }
+  }
+
+
+}
+
+// Add a hover state for linked versions only
+.p2pu-badge:hover {
+  border-color: #05c6b4;
+  -webkit-box-shadow: 0 1px 4px rgba(0,105,214,.25);
+     -moz-box-shadow: 0 1px 4px rgba(0,105,214,.25);
+          box-shadow: 0 1px 4px rgba(0,105,214,.25);
+  cursor: pointer;
+}
+
+// Images and captions
+.p2pu-badge > img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/*
+.thumbnail .caption {
+  padding: 9px;
+  color: $gray;
+}
+*/

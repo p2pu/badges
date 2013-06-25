@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}P2PU Badges | View{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/badge_share.js' %}"></script>
+    <script type="text/javascript">
+        Badges.Tile.share();
+    </script>
+{% endblock %}
 
 {% block body %}
 

@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 from badge.forms import BadgeForm
 from badge import models as badge_api
@@ -169,6 +170,8 @@ def view(request, badge_id):
 
     context['experts'] = map(p2pu_user_api.get_user, expert_uris)
 
+    context['iframe'] = 'http://%s%s' % (Site.objects.get_current(), reverse('badge_embed', args=[badge_id]))
+
     return render_to_response(
         'badge/view.html',
         context,
@@ -197,7 +200,19 @@ def delete(request, badge_id):
 
 
 @require_login
-def pushed_to_backpack( request, award_id ):
+def pushed_to_backpack(request, award_id):
     # TODO: needs further love
     badge_api.award_was_pushed_to_backpack(award_id)
     return HttpResponse('OK')
+
+
+def embed(request, badge_id):
+    badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+    fetch_badge_resources(badge)
+
+    return render_to_response(
+        'badge/embed/embed_badge.html',{
+            'badge': badge,
+        },
+        context_instance=RequestContext(request)
+    )

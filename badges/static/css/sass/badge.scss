@@ -50,6 +50,51 @@
     margin-left: 10px;
   }
 
+  .badge-sharing{
+    border-top: solid 1px $silver;
+    position: relative;
+    .btn-sharing-controls{
+      margin-top: -24px;
+      margin-left: 0px;
+        a{
+        font-family: $baseFontFamily;
+        font-size: 1em;
+        color: $pewter;
+        line-height: 20px;
+        margin-left: 10px;
+        padding: 0 8px;
+        &:hover, &.active{
+          text-decoration: none;
+          border-bottom: 2px $cyan solid;
+        }
+      }
+    }
+    .badge-sharing-inner{
+      position: relative;
+      left: 0;
+      padding-bottom: 70px;
+      overflow: hidden;
+      .badge-sharing-inner-wrap{
+        position: relative;
+        .badge-social{
+          position: absolute;
+          width: 100%;
+        }
+        .badge-embed{
+          position: absolute;
+          right: -100%;
+          width: 100%;
+          margin-top: 1em;
+          text-align: center;
+          textarea{
+            width: 90%;
+            margin: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
 }
 .badge-info:before, .badge-info:after{
   z-index: -1;

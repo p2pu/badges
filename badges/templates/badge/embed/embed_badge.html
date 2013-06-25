@@ -1,0 +1,29 @@
+{% load compress %}
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>P2PU Badges | {{ badge.title }}</title>
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss"
+              href="{% static 'css/sass/embedded_badge.scss' %}"/>
+    {% endcompress %}
+</head>
+<body>
+    <div class="p2pu-badge">
+
+        <a class="badge-image" href="{% url badge_view badge.id %}">
+            <img src="{{ badge.image.url }}"/>
+        </a>
+
+        <div class="badge-container">
+            <a class="badge-title" href="{% url badge_view badge.id %}">
+                <h4>{{ badge.title }}</h4>
+            </a>
+            <p class="badge-description">{{ badge.description }}</p>
+        </div>
+    </div>
+</body>
+</html>

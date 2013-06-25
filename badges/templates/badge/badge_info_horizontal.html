@@ -21,37 +21,51 @@
                 </div>
 
             </div>
-        </div>
-        <div class="badge-social">
-            <div class="pull-right social-item google">
-                <!-- Place this tag where you want the share button to render. -->
-                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="28"></div>
+            <div class="badge-sharing">
+                <div class="btn-sharing-controls span2">
+                    <a class="btn-share active" href="#">{% trans 'Share' %}</a>
+                    <a class="btn-embed" href="#" >{% trans 'Embed' %}</a>
+                </div>
+                <div class="badge-sharing-inner clearfix">
+                    <div class="badge-sharing-inner-wrap">
+                        <div class="badge-social">
+                            <div class="pull-right social-item google">
+                                <!-- Place this tag where you want the share button to render. -->
+                                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="28"></div>
 
-                <!-- Place this tag after the last share tag. -->
-                <script type="text/javascript">
-                    (function () {
-                        var po = document.createElement('script');
-                        po.type = 'text/javascript';
-                        po.async = true;
-                        po.src = 'https://apis.google.com/js/plusone.js';
-                        var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(po, s);
-                    })();
-                </script>
-            </div>
-            <div class="pull-right social-item twitter">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu"
-                   data-size="large" data-text="Check out the spiffy Badge I made!">Tweet</a>
-                <script>!function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "//platform.twitter.com/widgets.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-                }(document, "script", "twitter-wjs");</script>
+                                <!-- Place this tag after the last share tag. -->
+                                <script type="text/javascript">
+                                    (function () {
+                                        var po = document.createElement('script');
+                                        po.type = 'text/javascript';
+                                        po.async = true;
+                                        po.src = 'https://apis.google.com/js/plusone.js';
+                                        var s = document.getElementsByTagName('script')[0];
+                                        s.parentNode.insertBefore(po, s);
+                                    })();
+                                </script>
+                            </div>
+                            <div class="pull-right social-item twitter">
+                                <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu"
+                                   data-size="large" data-text="Check out the spiffy Badge I made!">Tweet</a>
+                                <script>!function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (!d.getElementById(id)) {
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = "//platform.twitter.com/widgets.js";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                                }(document, "script", "twitter-wjs");</script>
+                            </div>
+                        </div>
+                        <div class="badge-embed">
+                            <textarea><iframe id="badge_embed" type="text/html" frameborder="0" height="310" width="210" src="{{ iframe }}"> </iframe></textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 </div>

@@ -3,7 +3,7 @@ import os
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-
+PROJECT_DIR = os.path.dirname(__file__)
 ROOT = os.path.dirname(os.path.abspath(__file__))
 path = lambda *a: os.path.join(ROOT, *a)
 
@@ -82,7 +82,8 @@ STATICFILES_DIRS = (
     # Put strings here, like '/home/html/static' or 'C:/www/django/static'.
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    path('../static'),
+    #path('../static'),
+    os.path.join(PROJECT_DIR, '../static'),
 )
 
 # List of finder classes that know how to find static files in
