@@ -134,7 +134,7 @@
   @extend .thumbnail;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   border: 1px solid #aaa;
-
+  overflow: hidden;
   .close{
     position: absolute;
     right: 10px;
@@ -194,19 +194,25 @@
 
   }
   .badge-controls{
-    margin-bottom: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 90%;
+    height: 0;
+    padding: 0 10px;
+    background-color: hsla(0,0%,0%,0.5);
+    @include transition(height .1s linear);
     .badge-more-info-control{
-
+      color: $white;
     .icon-angle-right{
       line-height: 22px;
       font-size: 12px;
-      float: right;
     }
     .badge-more-info{
       font-size: 12px;
-      color: $slate;
+      color: $white;
       font-weight: bold;
-      float: right;
+      display: inline;
       &:hover{
         color: $cyan;
         text-decoration: none;
@@ -233,8 +239,13 @@
     text-decoration: none;
     border-color: $cyan;
     @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
+
+    .badge-controls{
+      height: 25px;
+      padding: 10px;
+    }
   }
-  }
+ }
 
 .badge-info-title, .badge-info-requirements, .badge-info-desc{
   color: $gray;
