@@ -1,4 +1,5 @@
 // Bootstrap
+@import "../../libs/p2pu-css-framework/lib/bootstrap";
 body{
   margin: 0;
   padding: 0;
@@ -24,43 +25,75 @@ body{
   position: relative;
   margin-left: 0;
   background-color: #FFFFFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-
-  a{
-    display: block;
+  .badge-image{
     text-align: center;
-
-
-
-    > img {
-
-    }
+    min-height: 100px;
+    display: block;
   }
   .badge-container{
-    a{
-      text-align: left;
-      text-decoration: none;
-      h4{
-        color: #05c6b4;
+    border-top: 1px dotted $silver;
+    .badge-title{
         font-size: 13px;
-      }
+        font-weight: bold;
+    }
+    .badge-description{
+      font-size: 12px;
+      line-height: 18px;
+    }
+  }
+  .pending-projects-container, .badge-controls{
+    position: absolute;
+    bottom: 5px;
+  }
+  .pending-projects-title{
+    color: $slate;
+    text-transform: uppercase;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 12px;
+
+  }
+  .pending-projects{
+    list-style-type: none;
+    margin-left: -10px;
+    margin-bottom: 0;
+    li{
+      float: left;
+      margin-left: 10px;
+      width: 40px;
+      height: 40px;
+      @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
       &:hover{
-        h4{
-          color: #ffbc1a;
-          text-decoration: underline;
-        }
+        @include box-shadow(0 1px 6px rgba(0, 105, 214, 0.45));
       }
     }
-
-    .badge-description{
-      text-align: left;
-      color: #515665;
-      font-size: 12px;
+    a{
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+    }
+    img{
+      height: 100%;
+      @include border-radius(4px);
     }
   }
 
-
+  .badge-description{
+    text-align: left;
+    color: #515665;
+    font-size: 12px;
+  }
 }
+
+
+
 
 // Add a hover state for linked versions only
 .p2pu-badge:hover {
@@ -78,9 +111,3 @@ body{
   margin-left: auto;
   margin-right: auto;
 }
-/*
-.thumbnail .caption {
-  padding: 9px;
-  color: $gray;
-}
-*/

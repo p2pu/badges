@@ -67,6 +67,11 @@ def get_badge(uri):
     return _badge2dict(badge_db)
 
 
+def get_badge_by_id(badge_id):
+    badge_uri = id2uri(badge_id)
+    return get_badge(badge_uri)
+
+
 def update_badge(uri, image_uri=None, title=None, description=None, requirements=None, deleted=False):
     """ only possible while draft """
     badge_db = Badge.objects.get(id=uri2id(uri))
@@ -175,6 +180,11 @@ def get_user_awarded_badges(user_uri):
     return [_badge2dict(badge) for badge in badges]
 
 
+def get_badge_id_from_parameter_url(url):
+    """ gets badge dict from url passed trough oEmbed"""
+    return url.split('/')[-2]
+
+
 def award_badge(badge_uri, user_uri, expert_uri, evidence_url):
     """ Award a badge to a user 
         expert_uri - expert that is awarding the badge
@@ -223,3 +233,10 @@ def award_was_pushed_to_backpack(award_id):
     award.ob_state = 'PUBLISHED'
     award.ob_date_published = datetime.utcnow()
     award.save()
+
+
+def check_if_user_has_badge(badge_uri, user_uri):
+    experts = get_badge_experts(badge_uri)
+    if user_uri in experts:
+        return True
+    return False

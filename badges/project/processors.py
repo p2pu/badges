@@ -89,6 +89,7 @@ def last_n_projects(n):
     projects = Project.objects.filter(date_deleted__isnull=True).order_by('-pk')[:n]
     return [_project2dict(project) for project in projects]
 
+
 def get_projects():
     projects = Project.objects.filter(date_deleted__isnull=True)
     return [_project2dict(project) for project in projects]

@@ -162,6 +162,7 @@ INSTALLED_APPS = (
     'open_badges',
     'notifications',
     'p2pu_user',
+    'services',
 )
 
 #TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -226,3 +227,8 @@ OPEN_BADGES_ISSUER_JS_URL = '//beta.openbadges.org/issuer.js'
 # Crispy forms template
 #################################################################
 CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+##################################################################
+# Embedding settings
+#################################################################
+ORGANISATION_URL = 'badges.p2pu.org'
