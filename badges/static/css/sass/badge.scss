@@ -170,7 +170,7 @@
   }
 
   &.p2pu-badge-long{
-    height: 275px;
+    height: 310px;
   }
   .badge-image{
     text-align: center;
@@ -198,8 +198,8 @@
     left: 0;
     bottom: 0;
     width: 90%;
-    height: 0;
-    padding: 0 10px;
+    padding: 5px 10px;
+    height: 25px;
     background-color: hsla(0,0%,0%,0.5);
     @include transition(height .1s linear);
     .badge-more-info-control{
@@ -241,8 +241,7 @@
     @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
 
     .badge-controls{
-      height: 25px;
-      padding: 10px;
+      height: 35px;
     }
   }
  }
