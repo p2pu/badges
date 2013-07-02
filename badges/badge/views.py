@@ -217,6 +217,7 @@ def view_embedded(request, badge_id):
     fetch_badge_resources(badge)
     projects = None
     user_has_badge = False
+    template = 'badge/embed/embedded_large.html'
 
     if username:
         user_has_badge = badge_api.check_if_user_has_badge(badge['uri'],
@@ -227,14 +228,19 @@ def view_embedded(request, badge_id):
     if projects:
         map(fetch_resources, projects)
 
+    # Extract rendering preference -> default large
     rendering = request.GET.get('rendering', 'large')
 
+    if rendering == 'normal':
+        template = 'badge/embed/embedded_normal.html'
+
     return render_to_response(
-        'badge/view_emedded.html', {
-        'badge': badge,
-        'projects': projects,
-        'user_has_badge': user_has_badge,
-        'rendering': rendering,
+        template,
+        {
+            'badge': badge,
+            'projects': projects,
+            'user_has_badge': user_has_badge,
+            'rendering': rendering,
         },
         context_instance=RequestContext(request)
     )
