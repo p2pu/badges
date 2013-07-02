@@ -9,5 +9,7 @@ env:
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install -r badges/requirements.txt --use-mirrors
+  - sudo apt-get install python-imaging
+  - sudo apt-get install libjpeg8-dev
 # command to run tests, e.g. python setup.py test
 script:  python badges/manage.py test --settings=badges.settings
