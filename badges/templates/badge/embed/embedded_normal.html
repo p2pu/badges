@@ -1,0 +1,11 @@
+{% extends 'badge/embed/base_emedded.html' %}
+
+{% load static %}
+{% load compress %}
+
+{% block css %}
+    {% compress css %}
+        <link rel="stylesheet" type="text/x-scss"
+          href="{% static 'css/sass/embedded/badge_embedded_normal.scss' %}"/>
+    {% endcompress %}
+{% endblock css %}
