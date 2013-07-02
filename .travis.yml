@@ -1,6 +1,5 @@
 language: python
 python:
-  - "3.3"
   - "2.7"
   - "2.6"
 
@@ -10,5 +9,12 @@ env:
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install -r badges/requirements.txt --use-mirrors
+
 # command to run tests, e.g. python setup.py test
-script:  python badges/manage.py test --settings=badges.settings
+script:  python badges/manage.py test badge notifications oauthclient open_badges p2pu_user project services
+ --settings=badges.settings
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change

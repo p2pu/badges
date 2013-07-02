@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-import datetime
-from south.db import db
+from django.shortcuts import get_object_or_404
 from south.v2 import DataMigration
-from django.db import models
+
 
 class Migration(DataMigration):
 
@@ -10,9 +9,10 @@ class Migration(DataMigration):
         badges_pk_list = [36, 22, 47, 27, 8]
 
         for badge_pk in badges_pk_list:
-            badge = orm.Badge.objects.get(pk=badge_pk)
-            badge.featured = True
-            badge.save()
+            badge = orm.Badge.objects.filter(pk=badge_pk)
+            if badge:
+                badge.featured = True
+                badge.save()
 
     def backwards(self, orm):
         raise RuntimeError('Cannot reverse this migration.')

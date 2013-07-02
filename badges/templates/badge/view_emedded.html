@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load compress %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Badge</title>
+
+    {% compress css %}
+        {% if rendering == 'large'  %}
+            <link rel="stylesheet" type="text/x-scss"
+                  href="{% static 'css/sass/embedded/badge_embedded_large.scss' %}">
+        {% else %}
+            <link rel="stylesheet" type="text/x-scss"
+              href="{% static 'css/sass/embedded/badge_embedded_normal.scss' %}"/>
+        {% endif %}
+    {% endcompress %}
+
+    <base target="_blank" />
+</head>
+<body>
+    <div class="p2pu-badge">
+        <a class="badge-image" href="{% url badge_view badge.id %}">
+            <img src="{{ badge.image.url }}"/>
+        </a>
+        <div class="badge-container">
+            <a  class="badge-title" href="{% url badge_view badge.id %}">
+                {{ badge.title }}
+            </a>
+            <p class="badge-description">{{ badge.description }}</p>
+            {% if projects %}
+                <div class="pending-projects-container">
+                    <div class="pending-projects-title">{% trans 'Projects that are waiting for your feedback' %}:</div>
+                    <ul class="pending-projects clearfix">
+                    {% for project in projects %}
+                        <li>
+                            <a href="{% url project_view project.id %}">
+                                <img src="{{ project.image.url }}" alt="{{ project.title }}" title="{{ project.title }}"/>
+                            </a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="badge-controls clearfix">
+                {% if not user_has_badge %}
+                    <a href="{% url project_create badge.id %}" class="btn btn-primary btn-mini">{% trans 'Apply for this Badge' %}</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -6,8 +6,8 @@ from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
 from project import processors as project_api
 from project.view_helpers import fetch_resources
-from oauthclient.decorators import require_login
 from p2pu_user import models as user_api
+
 
 def profile(request, username ):
 

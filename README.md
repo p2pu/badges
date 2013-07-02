@@ -1,4 +1,4 @@
-badges
+Badges [![Build Status](https://travis-ci.org/ercchy/badges.png?branch=master)](https://travis-ci.org/ercchy/badges)
 ======
 
 This is our third take on badges! It boils down to this: Create a badge, submit a project for a badge, get feedback and revise your project, receive the badge, give feedback and build the value of the badge you have by being part of an awesome community around it!
