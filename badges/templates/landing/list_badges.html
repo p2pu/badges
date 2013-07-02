@@ -7,8 +7,8 @@
 {% block js %}
     <script>
         var browse_badges = "{% static 'js/browse_all_badges.js' %}";
-
-        require(["jquery", browse_badges], function($){
+        var infinite_scroll_plugin = "{% static 'js/vendor/jquery.infinitescroll.js' %}"
+        require(["jquery", infinite_scroll_plugin, browse_badges], function($){
             Badges.Browse.init('{% url browse_all_badges %}');
            })
     </script>

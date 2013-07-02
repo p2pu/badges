@@ -32,15 +32,15 @@ def get_assertion(request, uid):
     image = get_image(badge.image_uri)
 
     assertion = create_assertion_from_template(
-        uid = uid,
-        recipient_email = recipient_email,
-        image = image['url'],
-        evidence = award.evidence_url,
-        issued_on = award.date_awarded,
-        badge_id = badge.pk,
+        uid=uid,
+        recipient_email=recipient_email,
+        image=image['url'],
+        evidence=award.evidence_url,
+        issued_on=award.date_awarded,
+        badge_id=badge.pk,
     )
     json_assertion = json.dumps(assertion)
-    print json_assertion
+
     return HttpResponse(json_assertion, mimetype="application/json")
 
 

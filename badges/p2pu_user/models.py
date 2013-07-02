@@ -2,6 +2,7 @@ from p2pu_user.db import User
 from p2pu_user.db import Partner
 from datetime import datetime
 
+
 def username2uri(username):
     return u'/uri/user/{0}'.format(username)
 
@@ -48,9 +49,11 @@ def get_user(user_uri):
     user = User.objects.get(username=uri2username(user_uri))
     return _user2dict(user)
 
+
 def last_n_users(n):
     users = User.objects.all().order_by('-date_joined')[:n]
     return [_user2dict(user) for user in users]
+
 
 def get_users():
     return [_user2dict(user) for user in User.objects.all()]

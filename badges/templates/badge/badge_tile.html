@@ -2,49 +2,52 @@
 {% load open_badges_tags %}
 
 <li class="p2pu-badge span2 {% if earned == 'True' %}p2pu-badge-long{% endif %}" data-next={{ next_page }}>
-        {% if can_delete_badge %}
-            <a href="#" type="button" class="close" data-delete="p2pu-badge">×</a>
-            <div class="badge-delete-popover" style="display: none">
-                <p>{% trans 'Sure you want to delete this niffty Badge?' %}</p>
-                <div class="badge-delete-controls clearfix">
-                    <a href="{% url badge_delete badge.id %}" class="badge-delete-confirm btn btn-primary">{% trans 'Delete' %}</a>
-                    <a href="" class="badge-delete-cancel btn">{% trans 'Cancel' %}</a>
-                </div>
+    {% if can_delete_badge %}
+        <a href="#" type="button" class="close" data-delete="p2pu-badge">×</a>
+        <div class="badge-delete-popover" style="display: none">
+            <p>{% trans 'Sure you want to delete this niffty Badge?' %}</p>
+
+            <div class="badge-delete-controls clearfix">
+                <a href="{% url badge_delete badge.id %}"
+                   class="badge-delete-confirm btn btn-primary">{% trans 'Delete' %}</a>
+                <a href="" class="badge-delete-cancel btn">{% trans 'Cancel' %}</a>
             </div>
-        {% endif %}
-        <a class="badge-image" href="
+        </div>
+    {% endif %}
+    <a class="badge-image" href="
             {% if badge.publised %}
                 {% url badge_view badge.id %}
             {% else %}
                 {% url badge_preview badge.id %}
             {% endif %}">
-            <img src="{{ badge.image.url }}"/>
-        </a>
-        <div class="badge-container">
-            <a  class="badge-title" href="{% if badge.publised %}{% url badge_view badge.id %}
+        <img src="{{ badge.image.url }}"/>
+    </a>
+
+    <div class="badge-container">
+        <a class="badge-title" href="{% if badge.publised %}{% url badge_view badge.id %}
                      {% else %}{% url badge_preview badge.id %}{% endif %}">
-                <h4>{{ badge.title|truncatewords:4 }}</h4>
-            </a>
-            <p class="badge-description">{{ badge.description|truncatewords:10 }}</p>
-        </div>
+            <h4>{{ badge.title }}</h4>
+        </a>
+
+        <p class="badge-description">{{ badge.description|truncatewords:10 }}</p>
+    </div>
+    {% if request.session.user.username == user.username and earned %}
         <div class="badge-controls clearfix">
-        {% if request.session.user.username == user.username and earned %}
             {% if badge.award_ob_state == 'NOT_PUBLISHED' %}
-                <a class="btn btn-mini btn-primary pull-left ob-push-to-backpack"
+                <a class="btn btn-mini btn-clementine pull-left ob-push-to-backpack"
                    data-assertion-url="{% assertion_url badge %}"
                    data-pushed-to-backpack-url="{% pushed_to_backpack_url badge %}">Add to Backpack</a>
             {% else %}
                 <a class="btn btn-mini disabled pull-left" href="">In backpack</a>
-
             {% endif %}
-            <div class="badge-more-info-control">
+            <div class="badge-more-info-control pull-right">
                 <a href="http://backpack.openbadges.org/backpack" target="_blank"
-                   class="badge-more-info">more info</a>
-                <i class="icon-angle-right"></i>
+                   class="badge-more-info">
+                    <i class="icon-angle-right"></i>
+                    more info
+                </a>
             </div>
-        {% endif %}
-
         </div>
-
+    {% endif %}
 </li>
 

@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}P2PU Badges | View{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/badge_share.js' %}"></script>
+    <script type="text/javascript">
+        Badges.Tile.share();
+    </script>
+{% endblock %}
 
 {% block body %}
 
     <div class="container">
         <div class="clearfix badge-view-badges">
-            <h2>{% trans 'Badge' %}</h2>
 
-            {% include 'badge/badge_info_horizontal.html' with view='True' %}
+
+            {% include 'badge/badge_info_horizontal.html' with view='True' experts=experts %}
 
         </div>
 
@@ -35,16 +43,6 @@
         </div>
         {% endif %}
 
-        {% if experts %}
-        <hr>
-        <div class="clearfix badge-view-experts">
-            <h3>{% trans 'Experts' %}</h3>
-            <ul class="thumbnails">
-                {% for expert in experts %}
-                    {% include 'p2pu_user/user_tile.html' with user=expert %}
-                {% endfor %}
-            </ul>
-        </div>
-        {% endif %}
+
     </div>
 {% endblock %}

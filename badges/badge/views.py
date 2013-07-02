@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.conf import settings
+from django.contrib.sites.models import Site
 
 from badge.forms import BadgeForm
 from badge import models as badge_api
@@ -157,9 +158,7 @@ def publish( request, badge_id ):
 def view(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
-    context = {
-        'badge': badge
-    }
+    context = dict(badge=badge)
     context['projects'] = map(fetch_resources, project_api.search_projects(badge_uri=badge['uri']))
 
     expert_uris = badge_api.get_badge_experts(badge['uri'])
@@ -168,6 +167,9 @@ def view(request, badge_id):
         context['user_is_expert'] = request.session['user']['uri'] in expert_uris
 
     context['experts'] = map(p2pu_user_api.get_user, expert_uris)
+
+    context['iframe'] = 'http://%s%s?rendering=normal' % (settings.ORGANISATION_URL,
+                                                          reverse('badge_view_embedded', args=[badge_id]))
 
     return render_to_response(
         'badge/view.html',
@@ -197,7 +199,42 @@ def delete(request, badge_id):
 
 
 @require_login
-def pushed_to_backpack( request, award_id ):
+def pushed_to_backpack(request, award_id ):
     # TODO: needs further love
     badge_api.award_was_pushed_to_backpack(award_id)
     return HttpResponse('OK')
+
+
+def view_embedded(request, badge_id):
+    # Get username from parameters or None
+    username = request.GET.get('username', None)
+    # Check if user is logged in
+    if 'user' in request.session:
+        username = request.session['user']['username']
+
+    badge_uri = badge_api.id2uri(badge_id)
+    badge = badge_api.get_badge(badge_uri)
+    fetch_badge_resources(badge)
+    projects = None
+    user_has_badge = False
+
+    if username:
+        user_has_badge = badge_api.check_if_user_has_badge(badge['uri'],
+                                                           p2pu_user_api.username2uri(username))
+    if user_has_badge:
+        projects = project_api.get_projects_ready_for_feedback(badge_uri)
+
+    if projects:
+        map(fetch_resources, projects)
+
+    rendering = request.GET.get('rendering', 'large')
+
+    return render_to_response(
+        'badge/view_emedded.html', {
+        'badge': badge,
+        'projects': projects,
+        'user_has_badge': user_has_badge,
+        'rendering': rendering,
+        },
+        context_instance=RequestContext(request)
+    )
