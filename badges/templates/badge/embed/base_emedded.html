@@ -5,16 +5,12 @@
 <html>
 <head>
     <title>Badge</title>
-
-    {% compress css %}
-        {% if rendering == 'large'  %}
+    {% block css %}
+        {% compress css %}
             <link rel="stylesheet" type="text/x-scss"
                   href="{% static 'css/sass/embedded/badge_embedded_large.scss' %}">
-        {% else %}
-            <link rel="stylesheet" type="text/x-scss"
-              href="{% static 'css/sass/embedded/badge_embedded_normal.scss' %}"/>
-        {% endif %}
-    {% endcompress %}
+        {% endcompress %}
+    {% endblock css %}
 
     <base target="_blank" />
 </head>
