@@ -91,7 +91,7 @@
                         </li>
                     </ul>
 
-                    <ul class="nav pull-right right-links">
+                    <ul class="nav pull-right right-links clearfix">
                         {% if request.session.user %}
                             <li>
                                 <a href="{% url dashboard request.session.user.username %}">
@@ -136,6 +136,9 @@
 
 
     <div class="body container">
+        <a href="http://openbadges.org" target="_blank" class="openbadges-insignia visible-phone pull-right">
+            <img alt="We Issue OpenBadges" src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue_Banner.png" width="50" height="70">
+        </a>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -150,7 +153,7 @@
     <footer>
         <div class="container">
             <hr>
-            <a href="http://backpack.openbadges.org" target="_blank">
+            <a href="http://backpack.openbadges.org" target="_blank" class="hidden-phone">
                 <img alt="We Issue OpenBadges" src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png" width="200" height="40">
             </a>
             <a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank">
