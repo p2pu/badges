@@ -52,7 +52,7 @@
             {% endif %}
             </div>
 
-            {% include 'project/feedback_thread_view.html' with feedback=feedback %}
+            {% include 'project/feedback_thread_view.html' with badge=badge feedback=feedback %}
 
             <div class="offset1 feedback-give-revise">
                     {% if can_give_feedback and feedback %}
