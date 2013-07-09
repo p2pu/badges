@@ -158,8 +158,8 @@ def publish( request, badge_id ):
 def view(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
-    context = dict(badge=badge)
-    context['projects'] = map(fetch_resources, project_api.search_projects(badge_uri=badge['uri']))
+    context = {'badge': badge}
+    context['projects'] = map(fetch_resources, project_api.search_projects_awarded_badges(badge_uri=badge['uri']))
 
     expert_uris = badge_api.get_badge_experts(badge['uri'])
 
