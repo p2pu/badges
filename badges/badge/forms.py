@@ -8,10 +8,13 @@ from crispy_forms.layout import Submit
 from crispy_forms.layout import Layout
 from crispy_forms.layout import ButtonHolder
 from p2pu_user import models as p2pu_user_api
+from parsley.decorators import parsleyfy
 
+
+@parsleyfy
 class BadgeForm(forms.Form):
     title = forms.CharField(
-        label=_('We Call This Niffty Badge:'),
+        label=_('We Call This Nifty Badge:'),
         required=True,
         max_length=128,
         widget=forms.TextInput(
@@ -32,7 +35,7 @@ class BadgeForm(forms.Form):
                 'title': _('Select a spiffy icon for your Badge')
             }),
         error_messages={
-            'required': _('Please give your niffty Badge an image')
+            'required': _('Please give your nifty Badge an image')
         }
     )
     description = forms.CharField(
@@ -80,12 +83,13 @@ class BadgeForm(forms.Form):
 
         super(BadgeForm, self).__init__(*args, **kwargs)
         # stack choices for partner
-        self.fields['partner'].choices = [(0, '----') if name == None else (name, name)for name in choices]
+        self.fields['partner'].choices = [(0, '----') if name is None else (name, name)for name in choices]
 
         # if form in in editing mode image does not need to be required
         if editing:
             self.fields['image_uri'].required = False
-            self.fields['image_uri'].help_text=_('If you are satisfied with the image you uploaded previously than leave this field blank')
+            self.fields['image_uri'].help_text = _('If you are satisfied with the image '
+                                                   'you uploaded previously than leave this field blank')
 
     @property
     def with_partner(self):
@@ -93,7 +97,7 @@ class BadgeForm(forms.Form):
         helper = FormHelper()
         helper.form_id = 'badge-create-form'
         helper.form_class = ''
-        helper.form_tag = True
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'image_uri',
@@ -113,7 +117,7 @@ class BadgeForm(forms.Form):
         helper = FormHelper()
         helper.form_id = 'badge-create-form'
         helper.form_class = ''
-        helper.form_tag = True
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'image_uri',
