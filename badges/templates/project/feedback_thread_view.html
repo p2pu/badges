@@ -6,6 +6,16 @@
     <div class="row">
         <div class="span12 feedback">
         <hr>
+            {% if fb.badge_awarded %}
+                <div class="alert alert-success">
+                     <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <h4>
+                        {% trans 'This project was awarded ' %}{{ badge.title }}
+                        {% trans 'Badge' %} {{ fb.date_created|naturaltime }}
+                        {% trans 'by' %} <a href="{% url dashboard fb.expert.username %}">{{ fb.expert.username }}</a>
+                    </h4>
+                </div>
+            {% endif %}
             {% if fb.improvement %}
 
                 <div class="feedback-img span2 pull-right">

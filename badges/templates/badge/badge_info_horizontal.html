@@ -1,13 +1,13 @@
 {% load i18n %}
 
 <div class="row">
-    <div class="span7">
+    <div>
         <div class="badge-info">
             <div class="clearfix">
-                <a class="span2 badge-info-img" href="{% url badge_view badge.id %}">
+                <a class="badge-info-img" href="{% url badge_view badge.id %}">
                     <img src="{{ badge.image.url }}"/>
                 </a>
-                <div class="span4 badge-info-horizontal-details">
+                <div class="badge-info-horizontal-details">
                     <h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
                     <a class="badge-info-name" href="{% url badge_view badge.id %}">
                         <h3>{{ badge.title }}</h3>
@@ -22,7 +22,7 @@
 
             </div>
             <div class="badge-sharing">
-                <div class="btn-sharing-controls span2">
+                <div class="btn-sharing-controls">
                     <a class="btn-share active" href="#">{% trans 'Share' %}</a>
                     <a class="btn-embed" href="#" >{% trans 'Embed' %}</a>
                 </div>
