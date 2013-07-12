@@ -95,6 +95,19 @@ def get_projects():
     return [_project2dict(project) for project in projects]
 
 
+def search_projects_awarded_badges(badge_uri=None, author_uri=None):
+    projects = []
+
+    if badge_uri:
+        projects = Project.objects.filter(badge_uri=badge_uri, feedback__badge_awarded=True,
+                                          date_deleted__isnull=True)
+    if author_uri:
+        projects = Project.objects.filter(author_uri=author_uri, feedback__badge_awarded=True,
+                                          date_deleted__isnull=True)
+
+    return [_project2dict(project) for project in projects]
+
+
 def search_projects(badge_uri=None, author_uri=None):
     projects = Project.objects.filter(date_deleted__isnull=True)
     if badge_uri:
