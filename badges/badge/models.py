@@ -58,7 +58,6 @@ def create_badge(title, image_uri, description, requirements, author_uri, partne
     badge.save()
 
     badge = _badge2dict(badge)
-    send_badge_creation_notification(badge)
     return badge
 
 
@@ -131,6 +130,8 @@ def publish_badge(uri):
         badge_db.author_uri,
         reverse('badge_view', args=(badge_db.pk, )),
     )
+    badge = _badge2dict(badge_db)
+    send_badge_creation_notification(badge)
     return True
 
 
