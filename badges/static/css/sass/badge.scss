@@ -164,6 +164,7 @@
     top: 0;
     @include opacity(90);
     @include border-radius(4px);
+    z-index: 1;
     p {
       position: absolute;
       bottom: 90px;
