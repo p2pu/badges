@@ -11,7 +11,7 @@ from p2pu_user import models as p2pu_user_api
 
 class BadgeForm(forms.Form):
     title = forms.CharField(
-        label=_('We Call This Niffty Badge:'),
+        label=_('We Call This Nifty Badge:'),
         required=True,
         max_length=128,
         widget=forms.TextInput(
@@ -32,7 +32,7 @@ class BadgeForm(forms.Form):
                 'title': _('Select a spiffy icon for your Badge')
             }),
         error_messages={
-            'required': _('Please give your niffty Badge an image')
+            'required': _('Please give your nifty Badge an image')
         }
     )
     description = forms.CharField(
