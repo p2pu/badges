@@ -32,7 +32,7 @@
                 <h4>{{ badge.title }}</h4>
             </a>
 
-            <p class="badge-description">{{ badge.description|truncatewords:10 }}</p>
+            <p class="badge-description">{{ badge.description }}</p>
         </div>
         {% if request.session.user.username == user.username and earned %}
             <div class="badge-controls clearfix">

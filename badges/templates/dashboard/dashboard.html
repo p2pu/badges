@@ -168,7 +168,7 @@
                             {% if draft_badges %}
                                 <ul class="thumbnails">
                                     {% for badge in draft_badges %}
-                                        {% include 'badge/badge_tile.html' with can_delete='True' %}
+                                        {% include 'badge/badge_tile.html' with can_delete_badge='True' %}
                                     {% endfor %}
                                 </ul>
                             {% else %}
