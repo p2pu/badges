@@ -7,7 +7,7 @@
     {% include 'badge/image_upload_form_snippet.html' with mode=mode %}
 
     <div class="control-group {% if form.errors.title %}error{% endif %}">   
-      <label>{% trans 'We Call This Niffty Badge:' %}</label>
+      <label>{% trans 'We Call This Nifty Badge:' %}</label>
       <input name="title" type="text" class="span7"
              placeholder="{% trans "Good titles are clear, concise and snappy -- like a headline." %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required maxlength="128">
       {% for error in form.errors.title %}
