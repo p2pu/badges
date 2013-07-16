@@ -63,7 +63,9 @@ def create_badge(title, image_uri, description, requirements, author_uri, partne
 
 
 def get_badge(uri):
-    badge_db = Badge.objects.get(id=uri2id(uri))
+    badge_db = Badge.objects.filter(id=uri2id(uri))
+    if badge_db:
+        badge_db = badge_db[0]
     return _badge2dict(badge_db)
 
 
