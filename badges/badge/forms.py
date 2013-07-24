@@ -51,7 +51,7 @@ class BadgeForm(forms.Form):
                                'A course? An event? '
                                'A certain type of project?'}),
         error_messages={
-            'required':_('Please describe your Badge')
+            'required': _('Please describe your Badge')
         })
 
     requirements = forms.CharField(
@@ -64,11 +64,11 @@ class BadgeForm(forms.Form):
                                     "they've mastered. It's useful to step them out so the "
                                     "Experts can identify them.")}),
         error_messages={
-            'required':_('Please tell us what are the requirements for the Badge')
+            'required': _('Please tell us what are the requirements for the Badge')
         })
 
     partner = forms.ChoiceField(
-        label=_('Is this a partner Badge?'),
+        label=_('Is this an "Affiliate Badge"?'),
         required=False,
     )
 
