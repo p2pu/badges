@@ -20,7 +20,7 @@ var Badges = window.Badges || {};
                     container: function (elem, isRadioOrCheckbox) {
                         var $container = $(elem).parent().parent().find(".control-group");
                         if ($container.length === 0) {
-                            $container = $("<span class='help-inline'></div>").insertAfter(elem);
+                            $container = $("<div class='help-inline'></div>").insertAfter(elem);
                         }
                         return $container;
                     }
