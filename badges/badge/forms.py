@@ -52,7 +52,7 @@ class BadgeForm(forms.Form):
         })
 
     requirements = forms.CharField(
-        label=_('Because Folks With This Badge Can:'),
+        label=_('Criteria to receive the Badge:'),
         required=True,
         max_length=128,
         widget=forms.Textarea(
