@@ -12,7 +12,7 @@ def create_response_from_template(**kwargs):
     title = kwargs['title']
     author_name = kwargs['author_name']
     author_url = kwargs['author_url']
-    template = get_template('services/badge_oembed.html')
+    template = get_template('oembed/badge_oembed.html')
     context = Context({
         'badge_url': kwargs['badge_url'],
         'maxwidth': kwargs['maxwidth'],
