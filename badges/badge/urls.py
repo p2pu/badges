@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     url(r'^pushed/(?P<award_id>[\d]+)/$', 'badge.views.pushed_to_backpack', name='badge_pushed_to_backpack'),
     url(r'^delete/(?P<badge_id>[\d]+)/$', 'badge.views.delete', name='badge_delete'),
     url(r'^view/(?P<badge_id>[\d]+)/embedded/$', 'badge.views.view_embedded', name='badge_view_embedded'),
+    url(r'^featured_feed/$', 'badge.views.featured_feed', name='badge_featured_feed'),
 )
