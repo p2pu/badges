@@ -21,7 +21,7 @@ urlpatterns = i18n_patterns('',
 urlpatterns += patterns('',
     url(r'^oauth/', include('oauthclient.urls')),
     url(r'^openbadges/', include('open_badges.urls')),
-    url(r'^services/', include('services.urls')),
+    url(r'^services/', include('oembed.urls')),
 )
 
 if settings.DEBUG:
