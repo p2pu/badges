@@ -7,6 +7,7 @@ from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.utils import simplejson as json
 
 from badge.forms import BadgeForm
 from badge import models as badge_api
@@ -16,7 +17,6 @@ from project import processors as project_api
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
 from p2pu_user import models as p2pu_user_api
-
 
 
 @require_login
@@ -112,6 +112,8 @@ def edit(request, badge_id):
                     media_root=settings.MEDIA_ROOT,
                 )
                 updated['image_uri'] = image['uri']
+
+            #TODO keep original image_uri if there's no image in POST
 
             for attr in ['title', 'description', 'requirements']:
                 if not badge[attr] == form.cleaned_data[attr]:
@@ -244,3 +246,15 @@ def view_embedded(request, badge_id):
         },
         context_instance=RequestContext(request)
     )
+
+
+def featured_feed(request):
+    featured = map(fetch_badge_resources, badge_api.get_featured_badges())
+    def add_url(badge):
+        badge['image_url'] = ''.join([
+            'http://',
+            Site.objects.get_current().domain, badge['image']['url']])
+        badge['url'] = ''.join(['http://', badge['url']])
+        return badge
+    featured = map(add_url, featured)
+    return http.HttpResponse(json.dumps(featured), content_type='application/json')
