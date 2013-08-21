@@ -138,92 +138,15 @@
     padding: 5px;
     border-radius: 3px 3px 0 0;
     font-weight: bold;
-  }
-  .feedback-form-award-info{
-    font-family: "arvo", Helvetica, sans-serif;
-    text-shadow: 0 1px 0 #fff;
-    font-size: 1.1em;
-  }
 
-}
-
-
-
-/**
- * Checkbox Three
- */
-.award-badge {
-	width: 160px;
-	height: 40px;
-	background: #333;
-	border-radius: 50px;
-	position: relative;
-    input[type=checkbox] {
-      visibility: hidden;
+    &[for=award-badge-input]{
+      font-family: $altFontFamily;
+      display: inline;
+      font-weight: normal;
+      font-size: inherit;
+      margin-left: 0;
     }
+  }
 }
 
-/**
- * Create the text for the On position
- */
-.award-badge:before {
-	content: 'Award';
-	position: absolute;
-	top: 10px;
-	left: 13px;
-	height: 2px;
-	color: $cyan;
-	font-size: 16px;
-    font-family: "arvo", Helvetica, sans-serif;
-    text-shadow: 0 1px 0 #fff;
-    font-size: 0.72em;
-}
 
-/**
- * Create the label for the off position
- */
-.award-badge:after {
-	content: "Don't award";
-	position: absolute;
-	top: 10px;
-	left: 80px;
-	height: 2px;
-	color: #ddd;
-	font-size: 16px;
-    font-family: "arvo", Helvetica, sans-serif;
-    text-shadow: 0 1px 0 #fff;
-    font-size: 0.72em;
-}
-
-/**
- * Create the pill to click
- */
-.award-badge label {
-	display: block;
-	width: 75px;
-	height: 30px;
-	border-radius: 50px;
-
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	transition: all .5s ease;
-	cursor: pointer;
-	position: absolute;
-	top: 5px;
-	z-index: 1;
-	left: 4px;
-	background: #ddd;
-    padding: 0;
-    margin-left: 0;
-}
-
-/**
- * Create the checkbox event for the label
- * @type {[type]}
- */
-.award-badge input[type=checkbox]:checked + label {
-	left: 78px;
-	background: $cyan;
-}
