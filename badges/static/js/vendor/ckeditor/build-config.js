@@ -14,7 +14,7 @@
  */
 
 var CKBUILDER_CONFIG = {
-	skin: 'moonocolor',
+	skin: 'moono',
 	preset: 'basic',
 	ignore: [
 		'dev',
@@ -43,17 +43,21 @@ var CKBUILDER_CONFIG = {
 		'fakeobjects' : 1,
 		'blockquote' : 1,
 		'bidi' : 1,
-		//'pbckcode' : 1,
 		'pastefromword' : 1,
 		'confighelper' : 1,
 		'panel' : 1,
 		'floatpanel' : 1,
 		'menu' : 1,
 		'menubutton' : 1,
-		'scayt' : 1
+		'scayt' : 1,
+		'find' : 1,
+		'indentlist' : 1,
+		'placeholder' : 1,
+		'youtube' : 1
 	},
 	languages : {
 		'af' : 1,
+		'sq' : 1,
 		'ar' : 1,
 		'eu' : 1,
 		'bn' : 1,
@@ -85,6 +89,7 @@ var CKBUILDER_CONFIG = {
 		'hi' : 1,
 		'hu' : 1,
 		'is' : 1,
+		'id' : 1,
 		'it' : 1,
 		'ja' : 1,
 		'km' : 1,
@@ -105,6 +110,7 @@ var CKBUILDER_CONFIG = {
 		'ru' : 1,
 		'sr' : 1,
 		'sr-latn' : 1,
+		'si' : 1,
 		'sk' : 1,
 		'sl' : 1,
 		'es' : 1,
@@ -114,6 +120,6 @@ var CKBUILDER_CONFIG = {
 		'ug' : 1,
 		'uk' : 1,
 		'vi' : 1,
-		'cy' : 1
+		'cy' : 1,
 	}
 };
