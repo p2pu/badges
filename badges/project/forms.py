@@ -110,7 +110,7 @@ class FeedbackForm(forms.Form):
         widget=forms.Textarea(
             attrs={
                 'placeholder': _('What is strong and outstanding about the project?'),
-                'class': 'ckeditor span9 green'
+                'class': 'ckeditor span9 green',
             }),
         error_messages={
             'required': _('Please tell us what you think is good about this project')
@@ -153,13 +153,11 @@ class FeedbackForm(forms.Form):
                 'good',
                 'bad',
                 'ugly',
-                HTML(u"""<p class="control-group-label feedback-form-award-info">
-                            Has this project met all of the criteria for this Badge?
-                            If so, go ahead and award it!
-                        </p>
-                        <div class="control-group checkbox-group award-badge">
+                HTML(u"""
+                        <div class="control-group checkbox-group">
                             <input type="checkbox" id="award-badge-input" class="checkboxinput" name="award_badge">
-                            <label for="award-badge-input"></label>
+                            <label for="award-badge-input">Has this project met all of the criteria for this Badge?
+                            If so, go ahead and award it!</label>
                         </div>
                      """),
             ),
