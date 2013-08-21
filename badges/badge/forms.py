@@ -57,7 +57,6 @@ class BadgeForm(forms.Form):
     requirements = forms.CharField(
         label=_('Criteria to receive the Badge:'),
         required=True,
-        max_length=128,
         widget=forms.Textarea(
             attrs={'cols': 80, 'rows': 6, 'class': 'span7',
                    'placeholder': _("Here it's good to list specific skills folks will need to show "

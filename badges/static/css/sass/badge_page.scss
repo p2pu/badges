@@ -59,4 +59,19 @@
       }
     }
   }
+  .parsley-error-list{
+    list-style-type: none;
+    font-weight: bold;
+    margin-left: 0;
+  }
+  .error .fileUpload{
+    .help-inline{
+      color: $errorText;
+      text-shadow: none;
+      ul li{
+        padding-top: 8px;
+        line-height: 10px;
+      }
+    }
+  }
 }
