@@ -11,7 +11,7 @@ install:
   - pip install -r badges/requirements.txt --use-mirrors
 
 # command to run tests, e.g. python setup.py test
-script:  python badges/manage.py test badge notifications oauthclient open_badges p2pu_user project services
+script:  python badges/manage.py test badge notifications oauthclient open_badges p2pu_user project oembed
  --settings=badges.settings
 
 notifications:

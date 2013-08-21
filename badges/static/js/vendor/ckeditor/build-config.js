@@ -43,7 +43,7 @@ var CKBUILDER_CONFIG = {
 		'fakeobjects' : 1,
 		'blockquote' : 1,
 		'bidi' : 1,
-		//'pbckcode' : 1,
+		'pbckcode' : 0,
 		'pastefromword' : 1,
 		'confighelper' : 1,
 		'panel' : 1,

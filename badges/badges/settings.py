@@ -163,7 +163,7 @@ INSTALLED_APPS = (
     'open_badges',
     'notifications',
     'p2pu_user',
-    'services',
+    'oembed',
 )
 
 #TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
