@@ -8,7 +8,10 @@ from crispy_forms.layout import Submit
 from crispy_forms.layout import Layout
 from crispy_forms.layout import ButtonHolder
 from p2pu_user import models as p2pu_user_api
+from parsley.decorators import parsleyfy
 
+
+@parsleyfy
 class BadgeForm(forms.Form):
     title = forms.CharField(
         label=_('We Call This Nifty Badge:'),
@@ -54,7 +57,6 @@ class BadgeForm(forms.Form):
     requirements = forms.CharField(
         label=_('Criteria to receive the Badge:'),
         required=True,
-        max_length=128,
         widget=forms.Textarea(
             attrs={'cols': 80, 'rows': 6, 'class': 'span7',
                    'placeholder': _("Here it's good to list specific skills folks will need to show "
@@ -85,7 +87,8 @@ class BadgeForm(forms.Form):
         # if form in in editing mode image does not need to be required
         if editing:
             self.fields['image_uri'].required = False
-            self.fields['image_uri'].help_text=_('If you are satisfied with the image you uploaded previously than leave this field blank')
+            self.fields['image_uri'].help_text = _('If you are satisfied with the image '
+                                                   'you uploaded previously than leave this field blank')
 
     @property
     def with_partner(self):
@@ -93,7 +96,7 @@ class BadgeForm(forms.Form):
         helper = FormHelper()
         helper.form_id = 'badge-create-form'
         helper.form_class = ''
-        helper.form_tag = True
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'image_uri',
@@ -113,7 +116,7 @@ class BadgeForm(forms.Form):
         helper = FormHelper()
         helper.form_id = 'badge-create-form'
         helper.form_class = ''
-        helper.form_tag = True
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'image_uri',
