@@ -12,6 +12,7 @@
                     <a class="badge-info-name" href="{% url badge_view badge.id %}">
                         <h3>{{ badge.title }}</h3>
                     </a>
+                    
                     <h4 class="badge-info-desc">{% trans 'Description' %}:</h4>
                     <p>{{ badge.description }}</p>
 
@@ -47,7 +48,7 @@
                             </div>
                             <div class="pull-right social-item twitter">
                                 <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu"
-                                   data-size="large" data-text="Check out this {{ badge.title }} Badge {{ badge.url }}">Tweet</a>
+                                   data-size="large" data-text="Check out the spiffy Badge I made!">Tweet</a>
                                 <script>!function (d, s, id) {
                                     var js, fjs = d.getElementsByTagName(s)[0];
                                     if (!d.getElementById(id)) {
