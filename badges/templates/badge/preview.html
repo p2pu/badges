@@ -5,13 +5,18 @@
 
 {% block body %}
     <div class="container badge-preview-publish">
-    {% if request.session.user and request.session.user.uri == badge.author_uri %}
-            <div class="alert preview-box">
+        <div class="row">
+            <h2>{% trans 'Preview Your Masterpiece' %}</h2>
+        </div>
+        {% include 'badge/badge_info_horizontal.html' %}
+        {% if request.session.user and request.session.user.uri == badge.author_uri %}
+            <div class="row">
+                <div class="alert preview-box">
                 <p class="lead">
                     {% blocktrans %}
-                    Are you ready to publish your Badge?
-                    You won’t be able to edit it later.
-                    You might want to double-check:
+                        Are you ready to publish your Badge?
+                        You won’t be able to edit it later.
+                        You might want to double-check:
                     {% endblocktrans %}
                 </p>
                 <ul>
@@ -22,7 +27,7 @@
                 <form action="{% url badge_publish badge.id %}" method="POST">
                     {% csrf_token %}
                     <div class="publish-controlls">
-                        <a class="btn" href="{% url badge_edit badge.id %}" >
+                        <a class="btn" href="{% url badge_edit badge.id %}">
                             {% trans 'Edit Badge' %}
                         </a>
                         <a class="btn" href="{% url dashboard request.session.user.username %}">
@@ -35,10 +40,8 @@
                     </div>
                 </form>
             </div>
+            </div>
         {% endif %}
-        <h2>{% trans 'Preview Your Masterpiece' %}</h2>
-        {% include 'badge/badge_info_horizontal.html' %}
-            
 
 
     </div>
