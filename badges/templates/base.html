@@ -23,7 +23,7 @@
         <link rel="stylesheet" type="text/x-scss"
               href="{% static 'css/libs/Font-Awesome/sass/font-awesome.scss' %}">
     {% endcompress %}
-
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arvo:regular,italic,bold,bolditalic" rel="stylesheet"
           type="text/css">
 
@@ -55,6 +55,11 @@
 
                 <div class="nav-collapse collapse">
                     <ul class="nav">
+                        <li>
+                            <a class="p2pu-tab" href="#">
+                                <i class="icon-chevron-sign-down p2pu-tab-icon"></i>
+                            </a>
+                        </li>
                         <li>
                             <a href="{% url about %}"
                                class="{% block about %}{% endblock about %}">
@@ -184,6 +189,19 @@
         <script src="{% static 'js/vendor/bootstrap.file-input.js' %}"></script>
         <script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
     {% endcompress %}
+    <script type="text/javascript" src="http://rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".p2pu-tab").p2puSlider({
+                navbarContainer: '.navbar',
+                icon: '.p2pu-tab-icon',
+                iconUp: 'icon-chevron-sign-down',
+                iconDown: 'icon-chevron-sign-up'
+            });
+
+        });
+    </script>
     {% block js %}{% endblock %}
 
 
