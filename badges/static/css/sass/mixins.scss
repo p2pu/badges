@@ -1,3 +1,24 @@
+@mixin p2pu-btn($startColor, $endColor, $border) {
+  color: $slate;
+  @include gradient-vertical($startColor: $startColor, $endColor: $endColor);
+  border-color: $startColor $endColor $border;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  cursor: pointer !important;
+  font-size: 20px;
+  padding: 7px 20px;
+  margin-top: 1px;
+  @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+  @include border-radius(5px);
+  border-radius: 5px;
+  font-weight: bold;
+  &:hover {
+    text-decoration: none;
+    @include gradient-vertical($startColor: $startColor, $endColor: $endColor);
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  }
+}
+
 .btn-clementine{
   @include buttonBackground($clemintine, $pumpkin);
 }

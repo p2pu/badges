@@ -20,18 +20,20 @@
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
         <link rel="stylesheet" type="text/x-scss"
               href="{% static 'css/sass/badges.scss' %}">
-        <link rel="stylesheet" type="text/x-scss"
-              href="{% static 'css/libs/Font-Awesome/sass/font-awesome.scss' %}">
     {% endcompress %}
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arvo:regular,italic,bold,bolditalic" rel="stylesheet"
           type="text/css">
 
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'img/apple-touch-icon-144x144-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'img/apple-touch-icon-114x114-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'img/apple-touch-icon-72x72-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{% static 'img/apple-touch-icon-57x57-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{% static 'img/apple-touch-icon-144x144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{% static 'img/apple-touch-icon-114x114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="{% static 'img/apple-touch-icon-72x72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"
+          href="{% static 'img/apple-touch-icon-57x57-precomposed.png' %}">
     <link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon-precomposed.png' %}">
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
 
@@ -41,174 +43,189 @@
 </head>
 
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="not-container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="brand" href="{% url landing %}">
-                    <img src="{% static 'img/logo.png' %}" alt="">
-                </a>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="navbar-btn visible-phone visible-tablet" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-align-justify"></i>
+            </a>
+            <!--
+            <button type="button" class="btn btn-navbar" >
+            -->
+            </button>
+            <a class="brand" href="{% url landing %}">
+                <img src="{% static 'img/logo-p2pu-menu.png' %}" alt="">
+            </a>
 
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li>
-                            <a class="p2pu-tab" href="#">
-                                <i class="icon-chevron-sign-down p2pu-tab-icon"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url about %}"
-                               class="{% block about %}{% endblock about %}">
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li>
+                        <a class="p2pu-tab" href="#">
+                            <i class="icon-chevron-sign-down p2pu-tab-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url about %}"
+                           class="{% block about %}{% endblock about %}">
 
-                                {% trans 'About' %}
-                            </a>
+                            {% trans 'About Badges' %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url badge_create %}">
+                            {% trans 'Create a Badge' %}
+                        </a>
+                    </li>
 
-                            <div class="navbar-custom-header-text">
-                                {% trans 'Badges' %}
-                            </div>
-                        </li>
-                        <li>
-                            <a href="{% url badge_create %}">
-                                {% trans 'Create' %}
-                            </a>
+                    <li>
+                        <a href="{% url browse_all_badges %}">
+                            {% trans 'Browse all Badges' %}
+                        </a>
+                    </li>
 
-                            <div class="navbar-custom-header-text">
-                                {% trans 'a Badge' %}
-                            </div>
-                        </li>
+                    <li>
+                        <a href="{% url project_review %}">
+                            {% trans 'Review a Project' %}
+                        </a>
+                    </li>
+                </ul>
 
-                        <li>
-                            <a href="{% url browse_all_badges %}">
-                                {% trans 'Browse' %}
-                            </a>
-
-                            <div class="navbar-custom-header-text">
-                                {% trans 'all Badges' %}
-                            </div>
-                        </li>
-
-                        <li>
-                            <a href="{% url project_review %}">
-                                {% trans 'Review' %}
-                            </a>
-
-                            <div class="navbar-custom-header-text">
-                                {% trans 'a Project' %}
-                            </div>
-                        </li>
-                    </ul>
-
-                    <ul class="nav pull-right right-links clearfix">
-                        {% if request.session.user %}
-                            <li>
-                                <a href="{% url dashboard request.session.user.username %}">
-                                    {% trans 'My Badges' %}
-                                </a>
-                            </li>
-                            <li id="user-dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <img src="{{ request.session.user.image_url }}"
-                                         alt="{{ request.session.user.username }}" height="40px"
-                                         width="40px"
-                                         />
-                                    {{ request.session.user.username }}
-                                    <i class="icon-caret-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{% url oauth_logout %}">
-                                            {% trans 'Log out' %}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="{% url oauth_login %}">
-                                    <i class="icon-user"></i>
-                                    {% trans 'Log in' %}
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                    <form class="navbar-search pull-right" action="{% url search %}">
-                        <input type="text" class="search-query span2" name="q" value="{{ q }}" placeholder="{% trans 'Search' %}">
-                    </form>
+                <div class="pull-right btn-toolbar" style="margin: 0;">
+                    <div class="btn-group">
+                        <a class="btn" href="{% url dashboard request.session.user.username %}">
+                            <img src="{{ request.session.user.image_url }}"
+                                 alt="{{ request.session.user.username }}" height="23px"
+                                 width="23px"
+                                    />
+                        </a>
+                        <a class="btn dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-search"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <form class="navbar-search" action="{% url search %}">
+                                <input type="text" class="span4" name="q" value="{{ q }}"
+                                       placeholder="{% trans 'Search for Badges, Projects or people...' %}">
+                            </form>
+                        </div>
+                        <a class="btn" href="https://p2pu.org/en/profile/edit/" target="_blank">
+                            <i class="icon-align-justify"></i>
+                        </a>
+                    </div>
                 </div>
+                {% comment %}
+                <ul class="nav pull-right right-links clearfix">
+                    {% if request.session.user %}
+                        <li>
+                            <a href="{% url dashboard request.session.user.username %}">
+                                {% trans 'My Badges' %}
+                            </a>
+                        </li>
+                        <li id="user-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <img src="{{ request.session.user.image_url }}"
+                                     alt="{{ request.session.user.username }}" height="40px"
+                                     width="40px"
+                                        />
+                                {{ request.session.user.username }}
+                                <i class="icon-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url oauth_logout %}">
+                                        {% trans 'Log out' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url oauth_login %}">
+                                <i class="icon-user"></i>
+                                {% trans 'Log in' %}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <form class="navbar-search pull-right" action="{% url search %}">
+                    <input type="text" class="search-query span2" name="q" value="{{ q }}"
+                           placeholder="{% trans 'Search' %}">
+                </form>
+                {% endcomment %}
             </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
-    <div class="body container">
-        <a href="http://openbadges.org" target="_blank" class="openbadges-insignia visible-phone pull-right">
-            <img alt="We Issue OpenBadges" src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue_Banner.png" width="50" height="70">
+
+<div class="body container">
+    <a href="http://openbadges.org" target="_blank" class="openbadges-insignia visible-phone pull-right">
+        <img alt="We Issue OpenBadges"
+             src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue_Banner.png" width="50"
+             height="70">
+    </a>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% block body %}{% endblock %}
+</div>
+
+<footer>
+    <div class="container">
+        <hr>
+        <a href="http://backpack.openbadges.org" target="_blank" class="hidden-phone">
+            <img alt="We Issue OpenBadges"
+                 src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png" width="200"
+                 height="40">
         </a>
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-        {% block body %}{% endblock %}
+        <a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank">
+            <img src="{% static 'img/cc-icons.png' %}" alt="" class="pull-right">
+        </a>
     </div>
+</footer>
 
-    <footer>
-        <div class="container">
-            <hr>
-            <a href="http://backpack.openbadges.org" target="_blank" class="hidden-phone">
-                <img alt="We Issue OpenBadges" src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png" width="200" height="40">
-            </a>
-            <a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank">
-                <img src="{% static 'img/cc-icons.png' %}" alt="" class="pull-right">
-            </a>
-        </div>
-    </footer>
+<script src="{% static 'js/require.js' %}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
 
-    <script src="{% static 'js/require.js' %}"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
-
-    {% compress js %}
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script type="text/javascript">
-            this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
-        </script>
-        <script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
-        <script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
-        <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
-        <script src="{% static 'js/project_view.js' %}"></script>
-        <script src="{% static 'js/vendor/bootstrap.file-input.js' %}"></script>
-        <script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
-    {% endcompress %}
-    <script type="text/javascript" src="http://rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $(".p2pu-tab").p2puSlider({
-                navbarContainer: '.navbar',
-                icon: '.p2pu-tab-icon',
-                iconUp: 'icon-chevron-sign-down',
-                iconDown: 'icon-chevron-sign-up'
-            });
-
-        });
+{% compress js %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+        this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
     </script>
-    {% block js %}{% endblock %}
+    <script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
+    <script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
+    <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
+    <script src="{% static 'js/project_view.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap.file-input.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
+{% endcompress %}
+<script type="text/javascript"
+        src="http://rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".p2pu-tab").p2puSlider({
+            navbarContainer: '.navbar',
+            icon: '.p2pu-tab-icon',
+            iconUp: 'icon-chevron-sign-down',
+            iconDown: 'icon-chevron-sign-up'
+        });
+
+    });
+</script>
+{% block js %}{% endblock %}
 
 
-    {% if not debug %}
+{% if not debug %}
     <script type="text/javascript">
         var _gaq = [
-            ['_setAccount', 'UA-5757664-7'],            
+            ['_setAccount', 'UA-5757664-7'],
             ['_trackPageview']
         ];
         (function (d, t) {
@@ -217,7 +234,7 @@
             s.parentNode.insertBefore(g, s)
         }(document, 'script'));
     </script>
-    {% endif %}
+{% endif %}
 
 </body>
 </html>
