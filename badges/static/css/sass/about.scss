@@ -3,6 +3,8 @@
   position: relative;
 
   .about-content{
+    float: left;
+    margin-right: 20px;
     .contents-title{
       font-weight: bold;
       margin-left: 15px;
@@ -28,6 +30,9 @@
         }
       }
     }
+  }
+  .content-body{
+    overflow: hidden;
   }
   img{
     margin: 15px auto;
