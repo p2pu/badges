@@ -44,8 +44,14 @@
     margin-top: 80px;
   }
 }
-// Pones and tablets
+// Phones and tablets
 @media (max-width: 979px){
+  body{
+    padding: 0;
+  }
+  .wrap{
+    padding: 0 20px;
+  }
   .nav-collapse{
     .dropdown-menu{
       display: block !important;
@@ -148,35 +154,17 @@
       background: linear-gradient(top, #484848, #383838);
     }
   }
-}
-
-@media (min-width: 979px) and (max-width: 1015px) {
-  body {
-    padding-top: 120px;
+  .p2pu-badge{
+    .overflow-handle{
+       height: 245px;
+    }
   }
 }
+
+
 
 // 10", 12" monitor
 @media (min-width: 979px) and (max-width: 1200px) {
-  body {
-    padding-top: 160px;
-  }
-  .navbar-search {
-    position: absolute;
-    bottom: -120px;
-    right: 0;
-    background-color: white;
-    padding: 10px;
-    -webkit-border-bottom-right-radius: 15px;
-    -webkit-border-bottom-left-radius: 15px;
-    -moz-border-radius-bottomright: 15px;
-    -moz-border-radius-bottomleft: 15px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  }
   .popover {
     &.span8 {
       width: 620px !important;
