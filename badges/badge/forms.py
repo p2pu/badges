@@ -99,14 +99,13 @@ class BadgeForm(forms.Form):
         helper.form_tag = False
         helper.layout = Layout(
             Layout(
-                'image_uri',
                 'title',
                 'description',
                 'requirements',
                 'partner',
             ),
             ButtonHolder(
-                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary'),
+                Submit('submit', _('Save and preview your Badge')),
             )
         )
         return helper
@@ -119,13 +118,12 @@ class BadgeForm(forms.Form):
         helper.form_tag = False
         helper.layout = Layout(
             Layout(
-                'image_uri',
                 'title',
                 'description',
                 'requirements',
             ),
             ButtonHolder(
-                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary'),
+                Submit('submit', _('Save and preview your Badge')),
             )
         )
         return helper
@@ -142,13 +140,12 @@ class BadgeForm(forms.Form):
         helper.form_tag = False
         helper.layout = Layout(
             Layout(
-                'image_uri',
                 'title',
                 'description',
                 'requirements',
             ),
             ButtonHolder(
-                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary'),
+                Submit('submit', _('Save and preview your Badge')),
             )
         )
         return helper

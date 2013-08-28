@@ -85,14 +85,13 @@ class ProjectForm(forms.Form):
         helper = FormHelper()
         helper.form_id = 'project-create-form'
         helper.form_class = 'span9'
-        helper.form_tag = True
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'title',
                 'work_url',
                 'description',
                 'reflection',
-                'image',
                 'tags',
             ),
             ButtonHolder(
