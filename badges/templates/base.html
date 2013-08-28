@@ -42,6 +42,7 @@
 </head>
 
 <body>
+
 <div class="wrap">
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -94,13 +95,26 @@
 
                 <div class="pull-right btn-toolbar" style="margin: 0;">
                     <div class="btn-group">
-                        <a class="btn" href="{% url dashboard request.session.user.username %}">
-                            <img src="{{ request.session.user.image_url }}"
-                                 alt="{{ request.session.user.username }}" height="23px"
-                                 width="23px"
-                                    />
-                        </a>
-                        <a class="btn dropdown-toggle visible-desktop" data-toggle="dropdown">
+                        {% if request.session.user %}
+                            <a class="btn" href="{% url dashboard request.session.user.username %}"
+                                    data-toggle="tooltip" title="{% trans 'My dashboard' %}">
+                                <img src="{{ request.session.user.image_url }}"
+                                     alt="{{ request.session.user.username }}" height="23px"
+                                     width="23px"
+                                        />
+                            </a>
+                            <a class="btn" href="{% url oauth_logout %}" data-toggle="tooltip"
+                               title="{% trans 'Sign out' %}">
+                                <i class="icon-signout"></i>
+                            </a>
+                        {% else %}
+                            <a class="btn" href="{% url oauth_login %}" data-toggle="tooltip"
+                               title="{% trans 'Sign in' %}">
+                                <i class="icon-signin"></i>
+                            </a>
+                        {% endif %}
+                        <a class="btn dropdown-toggle visible-desktop" data-toggle="dropdown"
+                               title="{% trans 'Search' %}">
                             <i class="icon-search"></i>
                         </a>
 
@@ -111,25 +125,19 @@
                                 <i class="icon-remove-sign clear-search"></i>
                             </form>
                         </div>
-                        <a class="btn" href="https://p2pu.org/en/profile/edit/" target="_blank">
+                        <a class="btn" href="https://p2pu.org/en/profile/edit/" target="_blank" data-toggle="tooltip"
+                               title="{% trans 'My settings' %}">
                             <i class="icon-align-justify"></i>
                         </a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 <div class="body container">
-    <a href="http://openbadges.org" target="_blank"
-       class="openbadges-insignia visible-phone pull-right">
-        <img alt="We Issue OpenBadges"
-             src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue_Banner.png"
-             width="50"
-             height="70">
-    </a>
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
@@ -144,7 +152,7 @@
 <footer>
     <div class="container">
         <hr>
-        <a href="http://backpack.openbadges.org" target="_blank" class="hidden-phone">
+        <a href="http://backpack.openbadges.org" target="_blank">
             <img alt="We Issue OpenBadges"
                  src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png"
                  width="200"
@@ -169,19 +177,19 @@
     <script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
     <script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
     <script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
-    <script src="{% static 'js/project_view.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap.file-input.js' %}"></script>
     <script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/vendor/jPanelMenu.js' %}"></script>
 {% endcompress %}
+
 <script type="text/javascript"
         src="http://rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
-
+{% block js %}{% endblock %}
 <script>
     Badges.Splash.init();
 </script>
-{% block js %}{% endblock %}
+
 
 
 {% if not debug %}

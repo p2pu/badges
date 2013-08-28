@@ -22,7 +22,8 @@
                 </div>
 
             </div>
-            <div class="badge-sharing">
+            {% if not preview %}
+                <div class="badge-sharing">
                 <div class="btn-sharing-controls">
                     <a class="btn-share active" href="#">{% trans 'Share' %}</a>
                     <a class="btn-embed" href="#" >{% trans 'Embed' %}</a>
@@ -66,6 +67,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
 
     </div>

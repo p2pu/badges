@@ -4,11 +4,12 @@ body {
   font-size: 16px;
   line-height: 22px;
   color: $slate;
-}
-body, input, select, input, textarea, button{
   font-family: "sense", Helvetica, sans-serif;
 }
-h1, h2, h3, h4, dl, dt, dd, label{
+input, select, textarea, button, dl, dt, dd, label{
+  font-family: "sense", Helvetica, sans-serif;
+}
+h1, h2, h3, h4{
   font-family: "arvo", Helvetica, sans-serif;
   text-shadow: 0 1px 0 #fff;
 }

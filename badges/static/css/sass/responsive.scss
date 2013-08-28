@@ -41,7 +41,7 @@
   }
   .badge-info {
     margin-left: 0;
-    margin-top: 80px;
+    //margin-top: 80px;
   }
 }
 // Phones and tablets
@@ -62,7 +62,7 @@
       height: 25px;
     }
     .nav{
-      margin-top: 120px;
+      margin-top: 160px;
     }
   }
 
@@ -92,7 +92,7 @@
         .clear-search{
           position: absolute;
           right: 5px;
-          top: 10px;
+          top: 15px;
           color: #ccc;
         }
       }
@@ -100,6 +100,12 @@
           position: absolute;
           top: 0;
           right: 0;
+        }
+        > .btn:nth-child(2){
+          position: absolute;
+          top: 0;
+          left: 45px;
+          line-height: 28px;
         }
         > .btn:last-child{
           position: absolute;
@@ -154,17 +160,111 @@
       background: linear-gradient(top, #484848, #383838);
     }
   }
+  .navbar-inner{
+    position: relative;
+  }
+  .openbadges-insignia{
+    position: absolute;
+    right: 10px;
+    top: -1px;
+  }
   .p2pu-badge{
     .overflow-handle{
        height: 245px;
     }
   }
+
+  // Dashboard
+  .dashboard-sidebar-img{
+    width: 40px;
+    height: 40px;
+  }
+  .dashboard-title{
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+  // Browse all badges
+  .browse-badges {
+    .thumbnails > li {
+      margin-left: 0px;
+    }
+    .row {
+      margin-left: 0;
+    }
+  }
+  // Badge view
+  .badge-social .social-item {
+    width: 105px;
+   }
+
+  //Project view
+  .project-view{
+    .project-info{
+      h3{
+        border-top: dotted 1px $slate;
+        margin-top: 40px;
+      }
+      img{
+        float: none !important;
+      }
+      dl{
+        word-wrap: break-word;
+      }
+    }
+  }
+  .feedback-head{
+    position: relative;
+  }
+
+  .feedback-img{
+    position: absolute;
+    top: 5px;
+    z-index: 1021;
+    left: 25px;
+    margin-right: 0;
+    img{
+      width: 40px;
+      height: 40px;
+      margin-left: 0 !important;
+    }
+  }
+  .feedback-improve{
+    .feedback-img{
+      right: 15px;
+      width: 50px;
+      left: initial;
+    }
+    .popover-title{
+      text-align: right;
+      padding-right: 70px;
+      padding-left: 15px;
+    }
+  }
+  .popover-title{
+    padding-left: 70px;
+    padding-bottom: 30px;
+  }
+  #project-create-form{
+    margin-top: 30px;
+    border-top: dotted 1px $slate;
+    padding-top: 20px;
+  }
+  footer a {
+    float: left;
+    margin: 10px;
+  }
+
 }
 
 
 
 // 10", 12" monitor
 @media (min-width: 979px) and (max-width: 1200px) {
+  // Navbar buttons
+  .navbar .btn-group .btn {
+    padding: 5px 5px;
+  }
   .popover {
     &.span8 {
       width: 620px !important;
@@ -231,7 +331,6 @@ and (max-width : 320px) {
   }
   .badge-info{
     margin-left: 0;
-    margin-top: 80px;
   }
   .badge-info-img{
     float: none !important;
@@ -253,20 +352,5 @@ and (max-width : 320px) {
   .p2pu-project .p2pu-project-img-link{
     float: none;
   }
-  .project-view{
-    .project-info{
-      h3{
-        padding-top: 60px;
-      }
-      img{
-        float: none !important;
-      }
-      dl{
-        word-wrap: break-word;
-      }
-    }
-    .popover{
-      overflow: hidden;
-    }
-  }
+
 }

@@ -106,7 +106,7 @@ class BadgeForm(forms.Form):
                 'partner',
             ),
             ButtonHolder(
-                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary btn-large'),
+                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary'),
             )
         )
         return helper
@@ -125,7 +125,7 @@ class BadgeForm(forms.Form):
                 'requirements',
             ),
             ButtonHolder(
-                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary btn-large'),
+                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary'),
             )
         )
         return helper
@@ -148,7 +148,7 @@ class BadgeForm(forms.Form):
                 'requirements',
             ),
             ButtonHolder(
-                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary btn-large'),
+                Submit('submit', _('Save and preview your Badge'), css_class='btn btn-primary'),
             )
         )
         return helper

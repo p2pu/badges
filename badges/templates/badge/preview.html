@@ -8,7 +8,7 @@
         <div class="row">
             <h2>{% trans 'Preview Your Masterpiece' %}</h2>
         </div>
-        {% include 'badge/badge_info_horizontal.html' %}
+        {% include 'badge/badge_info_horizontal.html' with preview='True' %}
         {% if request.session.user and request.session.user.uri == badge.author_uri %}
             <div class="row">
                 <div class="alert preview-box">
@@ -33,7 +33,7 @@
                         <a class="btn" href="{% url dashboard request.session.user.username %}">
                             {% trans 'Save & Return Later' %}
                         </a>
-                        <button class="btn btn-cyan">
+                        <button class="btn btn-primary">
                             {% trans 'Publish this Sucker' %}
                         </button>
 
