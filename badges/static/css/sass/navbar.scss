@@ -4,56 +4,54 @@
       padding-top: 0;
     }
   }
+  .navbar-btn {
+    float: left;
+    padding: 15px 20px;
+    color: #777;
+    font-size: 1.2em;
+  }
+  .brand{
+    margin-top: 5px;
+  }
+  .btn-group{
+    .btn{
+      height: 23px;
+      width: 23px;
+      padding: 7px 10px;
+    }
+  }
+  .dropdown-menu{
+    left: inherit;
+    right: 0;
+    padding: 0;
+    margin: 0;
+  }
   .navbar-inner{
-    min-height: 85px;
-    font-family: "arvo", Helvetica, sans-serif;
-    padding-top: 35px;
-    min-height: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-
     @include gradient-vertical($snow, $snow);
-    //@include gradient-vertical(rgba(255,255,255, 0.6), rgba(255,255,255, 0.6));
     border: 1px solid #dddddd;
     @include border-radius(4px);
     @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
+    padding-bottom: 5px;
 
-    a{
-      &.brand{
-        padding-top: 3px;
-        margin-bottom: 20px;
-        margin-right: 25px;
-      }
-    }
     .nav{
-      margin-top: 0;
+      margin-top: 10px;
       li{
-        padding-top: 10px;
-        margin-right: 1.4375em;
+        line-height: 32px;
         a{
-          font-size: 1.25em;
           font-family: "arvo", Helvetica, sans-serif;
           line-height: 1em;
-          padding: 0 15px 0 0;
-          color: $cyan;
+          padding: 9px 15px 9px;
+          color: #999999;
+          display: inline;
           &.active{
             color: $slate;
           }
           &:hover, .active:hover{
-            color: $clemintine;
+            color: $navbarText;
           }
-
-        }
-        & + li{
-          //margin-left: 1.625em;
-
-          a{
-            display: inline;
-            border-left: 1px solid $slate;
-            padding-left: 1.625em;
-          }
-          .navbar-custom-header-text{
-            padding-left: 2.350em;
+          &.p2pu-tab{
+            border-left: 1px solid #cccccc;
+            font-size: 1.2em;
           }
         }
       }
@@ -84,25 +82,26 @@
             }
           }
         }
-        a{
-          line-height: 40px;
-          font-size: 1em;
-          color: $slate;
-        }
+
       }
-    }
-
-
-    .navbar-custom-header-text {
-      font-size: 0.875em;
-      line-height: 1.57143em;
-      line-height: 1em;
-      margin-bottom: 0;
-      color: #aab0bf;
-      font-family: "sense", Helvetica, sans-serif;
     }
   }
   .navbar-search{
-    margin: 15px 25px 0 0;
+    margin: 5px;
   }
+  .clear-search{
+    position: absolute;
+    right: 5px;
+    top: 20%;
+    color: #CCC;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  input[type="text"]{
+    margin: 0;
+    padding-right: 30px;
+  }
+}
+#jPanelMenu-menu{
+  height: 100% !important;
 }

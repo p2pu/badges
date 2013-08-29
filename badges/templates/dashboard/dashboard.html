@@ -21,12 +21,10 @@
 {% block body %}
     <div class="row">
         <div class="span12">
-            <aside class="dashboard-sidebar span2">
-
-                <img src="{{ user.image_url }}" class="img-polaroid"
+        <img src="{{ user.image_url }}" class="img-polaroid dashboard-sidebar-img"
                      alt="{{ user.username }}" height="130px" width="130px"/>
-            </aside>
-            <div class="dashboard-title span10">
+
+            <div class="dashboard-title">
                 <h2>This is {{ user.username }}'s Dashboard</h2>
             </div>
             <div class="dashboard-main-container span12">

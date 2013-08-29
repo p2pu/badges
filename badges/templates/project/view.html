@@ -48,22 +48,25 @@
                 </div>
             {% if can_give_feedback and not feedback %}
                 <a href="{% url project_feedback project.id %}"
-                           class="btn btn-large btn-cyan">{% trans 'Give feedback' %}</a>
+                           class="btn btn-primary">{% trans 'Give feedback' %}</a>
             {% endif %}
             </div>
 
             {% include 'project/feedback_thread_view.html' with badge=badge feedback=feedback %}
-
-            <div class="offset1 feedback-give-revise">
-                    {% if can_give_feedback and feedback %}
-                        <a href="{% url project_feedback project.id %}"
-                           class="btn btn-large btn-cyan">{% trans 'Give feedback' %}</a>
-                    {% endif %}
-                    {% if can_revise %}
-                        <a href="{% url project_revise project.id %}"
-                           class="btn btn-large btn-cyan">{% trans 'Revise project' %}</a>
-                    {% endif %}
+            <div class="row">
+                <div class="span2">&nbsp;</div>
+                    <div class="span10 feedback-give-revise">
+                        {% if can_give_feedback and feedback %}
+                            <a href="{% url project_feedback project.id %}"
+                               class="btn btn-primary">{% trans 'Give feedback' %}</a>
+                        {% endif %}
+                        {% if can_revise %}
+                            <a href="{% url project_revise project.id %}"
+                               class="btn btn-primary">{% trans 'Revise project' %}</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+
         </div>
 {% endblock %}

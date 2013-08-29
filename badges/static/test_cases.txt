@@ -1,0 +1,5 @@
+Home page
+    Projects in the community tab
+    Search button
+    p2pu tab slide down
+About Badges
