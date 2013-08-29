@@ -2,17 +2,20 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% load compress %}
 
 {% block title %}P2PU Badges | Create{% endblock %}
 
 
 {% block js %}
+    {% compress js %}
     <script src="{% static 'js/vendor/parsley.js' %}"></script>
     <script src="{% static 'js/form_validation.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap-fileupload.min.js' %}"></script>
     <script type="text/javascript">
         Badges.Form.validate();
     </script>
+    {% endcompress %}
 {% endblock js %}
 
 {% block body %}
