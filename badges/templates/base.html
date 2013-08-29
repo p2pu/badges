@@ -194,6 +194,7 @@
 
 
 {% if not debug %}
+    {% compress %}
     <script type="text/javascript">
         var _gaq = [
             ['_setAccount', 'UA-5757664-7'],
@@ -205,6 +206,7 @@
             s.parentNode.insertBefore(g, s)
         }(document, 'script'));
     </script>
+    {% endcompress %}
 {% endif %}
 
 </body>
