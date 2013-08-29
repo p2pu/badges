@@ -2,11 +2,14 @@
 {% load static %}
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load compress %}
 
 {% block title %}P2PU Badges | Edit{% endblock %}
 
 {% block js %}
+    {% compress %}
     <script src="{% static 'js/vendor/bootstrap-fileupload.min.js' %}"></script>
+    {% endcompress %}
 {% endblock js %}
 
 {% block body %}
