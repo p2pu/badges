@@ -1,3 +1,6 @@
+.badge-view-badges{
+  margin-top: 50px;
+}
 .badge-info {
   position: relative;
   background: white;
@@ -50,7 +53,6 @@
     margin: 0 50px;
   }
   p {
-    font-family: $baseFontFamily;
     margin-left: 10px;
   }
 
@@ -209,22 +211,25 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 90%;
-    padding: 5px 10px;
-    height: 25px;
-    background-color: hsla(0, 0%, 0%, 0.5);
-    @include transition(height .1s linear);
+    width: 95%;
+    padding: 5px 5px;
+    height: 35px;
+
+
     .badge-more-info-control {
-      color: $white;
+
       .icon-angle-right {
         line-height: 22px;
         font-size: 12px;
       }
       .badge-more-info {
-        font-size: 12px;
-        color: $white;
+        font-size: 15px;
         font-weight: bold;
         display: inline;
+        line-height: 45px;
+        position: relative;
+        right: 0;
+        bottom: -8px;
         &:hover {
           color: $cyan;
           text-decoration: none;
@@ -271,9 +276,6 @@
     border-color: $cyan;
     @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
 
-    .badge-controls {
-      height: 35px;
-    }
   }
 }
 
@@ -284,5 +286,7 @@
 
 .badge-social {
   margin-top: 1em;
-
+  .social-item {
+    width: 120px;
+  }
 }

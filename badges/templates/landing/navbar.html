@@ -1,0 +1,87 @@
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="{% url landing %}">
+                <img src="{% static 'img/logo-p2pu-menu.png' %}" alt="">
+            </a>
+
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li>
+                        <a class="p2pu-tab" href="#">
+                            <i class="icon-chevron-sign-down p2pu-tab-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url about %}"
+                           class="{% block about %}{% endblock about %}">
+
+                            {% trans 'About Badges' %}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url badge_create %}">
+                            {% trans 'Create a Badge' %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url browse_all_badges %}">
+                            {% trans 'Browse all Badges' %}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url project_review %}">
+                            {% trans 'Review a Project' %}
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav pull-right right-links clearfix">
+                    {% if request.session.user %}
+                        <li>
+                            <a href="{% url dashboard request.session.user.username %}">
+                                {% trans 'My Badges' %}
+                            </a>
+                        </li>
+                        <li id="user-dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <img src="{{ request.session.user.image_url }}"
+                                     alt="{{ request.session.user.username }}" height="40px"
+                                     width="40px"
+                                        />
+                                {{ request.session.user.username }}
+                                <i class="icon-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url oauth_logout %}">
+                                        {% trans 'Log out' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url oauth_login %}">
+                                <i class="icon-user"></i>
+                                {% trans 'Log in' %}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <form class="navbar-search pull-right" action="{% url search %}">
+                    <input type="text" class="search-query span2" name="q" value="{{ q }}"
+                           placeholder="{% trans 'Search' %}">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

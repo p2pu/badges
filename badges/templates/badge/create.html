@@ -9,6 +9,7 @@
 {% block js %}
     <script src="{% static 'js/vendor/parsley.js' %}"></script>
     <script src="{% static 'js/form_validation.js' %}"></script>
+    <script src="{% static 'js/vendor/bootstrap-fileupload.min.js' %}"></script>
     <script type="text/javascript">
         Badges.Form.validate();
     </script>
@@ -32,7 +33,28 @@
             {% endblocktrans %}
 
         </div>
+
         <form id="badge-create-form" method="post" enctype="multipart/form-data" data-validate="parsley">
+            <label for="image_uri">{{ form.fields.image_uri.widget.attrs.title }}</label>
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload-new thumbnail">
+                    <img src="http://www.placehold.it/128x128/EFEFEF/AAAAAA&text=no+image"/>
+                </div>
+                <div class="fileupload-preview fileupload-exists thumbnail"
+                     style="max-width: 128px; max-height: 128px; line-height: 20px;">
+                </div>
+                <div id="div_id_image_uri" class="control-group">
+                    <div class="controls">
+                        <span class="btn btn-file">
+                            <span class="fileupload-new">Select image</span>
+                            <span class="fileupload-exists">Change</span>
+                            <input data-required="true" name="image_uri" title="Select a spiffy icon for your Badge"
+                                   type="file" class="fileinput fileUpload parsley-validated" id="id_image_uri">
+                        </span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                    </div>
+                </div>
+            </div>
             {% if user_is_partner %}
                 {% crispy form form.with_partner %}
             {% else %}

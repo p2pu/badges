@@ -64,10 +64,11 @@
     font-weight: bold;
     margin-left: 0;
   }
-  .error .fileUpload{
+  .error .btn-file{
     .help-inline{
       color: $errorText;
       text-shadow: none;
+      font-size: 16px;
       ul li{
         padding-top: 8px;
         line-height: 10px;

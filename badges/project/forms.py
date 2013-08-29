@@ -85,18 +85,17 @@ class ProjectForm(forms.Form):
         helper = FormHelper()
         helper.form_id = 'project-create-form'
         helper.form_class = 'span9'
-        helper.form_tag = True
+        helper.form_tag = False
         helper.layout = Layout(
             Layout(
                 'title',
                 'work_url',
                 'description',
                 'reflection',
-                'image',
                 'tags',
             ),
             ButtonHolder(
-                Submit('submit', _('Create a project'), css_class='btn btn-primary btn-large'),
+                Submit('submit', _('Create a project'), css_class='btn btn-primary '),
             )
         )
         return helper
@@ -165,7 +164,7 @@ class FeedbackForm(forms.Form):
                 HTML("""
                 <p for="give-feedback" class="control-group-label feedback-form-award-info">Or you can choose to submit your feedback and ask the learner to revise and submit.</p>
                 """),
-                Submit('submit', _('Submit feedback'), css_class='btn btn-primary btn-large'),
+                Submit('submit', _('Submit feedback'), css_class='btn btn-primary '),
             )
         )
         return helper
@@ -208,7 +207,7 @@ class RevisionForm(forms.Form):
                 'improvement',
             ),
             ButtonHolder(
-                Submit('submit', _('Submit revision'), css_class='btn btn-primary btn-large'),
+                Submit('submit', _('Submit revision'), css_class='btn btn-primary '),
             )
         )
         return helper

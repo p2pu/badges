@@ -1,0 +1,42 @@
+$btncolor: lighten($silver, 15%);
+.btn {
+  @include p2pu-btn($startColor: $btncolor, $endColor: $btncolor, $border: $silver);
+}
+.btn-group {
+  > .btn {
+    + .dropdown-toggle {
+      padding-left: 10px;
+      padding-right: 10px;
+      @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+      margin-right: -2px;
+    }
+    &:hover{
+       @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+    }
+  }
+}
+
+.btn-primary {
+  @include p2pu-btn($startColor: $cyan, $endColor: $cyan, $border: $cyan);
+  color: $white;
+  &:hover {
+    color: $white;
+  }
+}
+
+.btn-mini{
+  padding: 5px 15px !important;
+  font-size: 1em !important;
+}
+
+.btn-large{
+  padding: 10px 25px !important;
+  font-size: 25px !important;
+}
+.btn-clementine{
+  @include p2pu-btn($startColor: $clemintine, $endColor: $clemintine, $border: $clemintine);
+  color: $white;
+  &:hover {
+    color: $white;
+  }
+}

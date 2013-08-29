@@ -131,6 +131,7 @@ def edit(request, badge_id):
         template_name, {
             'form': form,
             'user_is_partner': user_partner,
+            'existing_img': media_api.get_image(badge['image_uri']),
         },
         context_instance=RequestContext(request))
 
