@@ -22,7 +22,7 @@
                     <h4 class="badge-info-horizontal-requirements">{% trans 'Experts' %}:</h4>
                     <ul class="badge-view-experts unstyled thumbnails">
                         {% for expert in experts %}
-                            <li class="{% ifnotequal badge.author.username expert.username%}badge-author{% endifnotequal %}">
+                            <li class="{% ifequal badge.author.username expert.username%}badge-author{% endifequal %}">
                                 <a href="{% url dashboard expert.username %}">
                                     <img class="img-rounded"
                                          src="{{ expert.image_url }}"
@@ -30,9 +30,6 @@
                                          title="{{ expert.username }}"/>
                                 </a>
                             </li>
-
-
-
                         {% endfor %}
                     </ul>
                 </div>

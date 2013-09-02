@@ -51,15 +51,21 @@
   .badge-info-img {
     float: left;
     margin: 0 50px;
+    min-width: 128px;
   }
   p {
     margin-left: 10px;
   }
   .badge-view-experts{
+    position: relative;
+    padding-left: 60px;
+    min-height: 50px;
     li{
       margin: 0px;
       &.badge-author{
-        margin-right: 20px;
+        position: absolute;
+        top: 0;
+        left: 0;
       }
       a{
         img{
