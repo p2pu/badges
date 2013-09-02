@@ -55,6 +55,25 @@
   p {
     margin-left: 10px;
   }
+  .badge-view-experts{
+    li{
+      margin: 0px;
+      &.badge-author{
+        margin-right: 20px;
+      }
+      a{
+        img{
+          width: 40px;
+          height: 40px;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      p{
+        margin-left: 0px
+      }
+    }
+  }
 
   .badge-sharing {
     border-top: solid 1px $silver;
@@ -279,9 +298,13 @@
   }
 }
 
-.badge-info-title, .badge-info-requirements, .badge-info-desc {
+.badge-info-title,
+.badge-info-horizontal-requirements,
+.badge-info-vertical-requirements,
+.badge-info-desc {
   color: $gray;
-  font-size: 1em;
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
 
 .badge-social {

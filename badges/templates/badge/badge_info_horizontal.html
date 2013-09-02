@@ -19,6 +19,22 @@
                     <h4 class="badge-info-horizontal-requirements">{% trans 'Criteria to receive the Badge' %}:</h4>
                     <p>{{ badge.requirements }}</p>
 
+                    <h4 class="badge-info-horizontal-requirements">{% trans 'Experts' %}:</h4>
+                    <ul class="badge-view-experts unstyled thumbnails">
+                        {% for expert in experts %}
+                            <li class="{% ifnotequal badge.author.username expert.username%}badge-author{% endifnotequal %}">
+                                <a href="{% url dashboard expert.username %}">
+                                    <img class="img-rounded"
+                                         src="{{ expert.image_url }}"
+                                         alt="{{ expert.username }}"
+                                         title="{{ expert.username }}"/>
+                                </a>
+                            </li>
+
+
+
+                        {% endfor %}
+                    </ul>
                 </div>
 
             </div>

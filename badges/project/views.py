@@ -82,12 +82,15 @@ def view(request, project_id):
         can_give_feedback = project_api.ready_for_feedback(project['uri'])
         can_give_feedback &= user_uri in badge_api.get_badge_experts(badge['uri'])
 
+    expert_uris = badge_api.get_badge_experts(badge['uri'])
+
     context = {
         'project': project,
         'badge': badge,
         'feedback': feedback,
         'can_revise': can_revise,
-        'can_give_feedback': can_give_feedback
+        'can_give_feedback': can_give_feedback,
+        'experts': map(p2pu_user_api.get_user, expert_uris)
     }
     return render_to_response(
         'project/view.html',
