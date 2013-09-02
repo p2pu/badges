@@ -78,3 +78,16 @@ blockquote{
     font-style: italic;
   }
 }
+
+.pager {
+  li {
+    &> a, &> span{
+      @include border-radius(5px);
+    }
+  }
+  .next, .previous{
+    &> a, &> span{
+      float: none;
+    }
+  }
+}

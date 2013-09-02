@@ -1,7 +1,19 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block site-section %}landing{% endblock site-section %}
+
+{% block js %}
+    <script>
+        var browse_users = "{% static 'js/browse_items.js' %}";
+        var infinite_scroll_plugin = "{% static 'js/vendor/jquery.infinitescroll.js' %}";
+        var twiter_behaviour = "{% static 'js/vendor/jquery.infinitescroll.twitter.behaviour.js' %}";
+        require(["jquery", infinite_scroll_plugin, twiter_behaviour, browse_users], function($){
+            Badges.Browse.user('{% url browse_all_badges %}');
+           })
+    </script>
+{% endblock %}
 
 {% block body %}
 <section class="container">
@@ -65,11 +77,30 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="learners-tab">
-                        <ul class="thumbnails">
+                        <ul class="thumbnails" id="landing-users">
                           {% for user in users %}
-                            {% include 'p2pu_user/user_tile.html' %}
+                                {% if users.has_next %}
+                                    {% include 'p2pu_user/user_tile.html' with next_page=users.next_page_number %}
+                                {% else %}
+                                    {% include 'p2pu_user/user_tile.html' %}
+                                {% endif %}
                           {% endfor %}
                         </ul>
+                        <div class="navigation">
+                            <ul class="pager">
+                                <li class="previous">
+                                    {% if users.has_previous %}
+                                        <a href="?page={{ users.previous_page_number }}">&larr; {% trans 'Go to previous' %}</a>
+                                    {% endif %}
+                                </li>
+                                
+                                <li class="next">
+                                    {% if users.has_next %}
+                                        <a class="btn" href="?page={{ users.next_page_number }}">{% trans 'Load more' %}</a>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="tab-pane" id="projects-tab">
                     {% if projects %}
