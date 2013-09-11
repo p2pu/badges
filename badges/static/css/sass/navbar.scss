@@ -1,5 +1,5 @@
 .navbar{
-  &.navbar-fixed-top.affix{
+  /*&.navbar-fixed-top.affix{
     .navbar-inner{
       padding-top: 0;
     }
@@ -85,6 +85,11 @@
 
       }
     }
+  }*/
+  // Search repositioning
+  .btn-group > .dropdown-menu{
+    right: 0;
+    left: initial;
   }
   .navbar-search{
     margin: 5px;
