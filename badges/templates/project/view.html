@@ -8,15 +8,13 @@
 {% block message %}
     {% for fb in feedback %}
         {% if 'badge_awarded' in fb and fb.badge_awarded %}
-            <div class="messages container">
-                <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <h4>
-                        {% trans 'This project was awarded ' %}{{ badge.title }}
-                        {% trans 'Badge' %} {{ fb.date_created|naturaltime }}
-                        {% trans 'by' %} <a href="{% url dashboard fb.expert.username %}">{{ feedback.0.expert.username }}</a>
-                    </h4>
-                </div>
+            <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4>
+                    {% trans 'This project was awarded ' %}{{ badge.title }}
+                    {% trans 'Badge' %} {{ fb.date_created|naturaltime }}
+                    {% trans 'by' %} <a href="{% url dashboard fb.expert.username %}">{{ feedback.0.expert.username }}</a>
+                </h4>
             </div>
         {% endif %}
     {% endfor %}
