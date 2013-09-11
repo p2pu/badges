@@ -14,12 +14,15 @@
     <title>{% block title %}P2PU Badges{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-
-    {% compress css %}
+    {% comment %}
         <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endcomment %}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'css/p2pu-bootstrap.css' %}">
         <link rel="stylesheet" type="text/x-scss"
               href="{% static 'css/sass/badges.scss' %}">
+
         <!-- Fav and touch icons -->
         <link rel="apple-touch-icon-precomposed" sizes="144x144"
               href="{% static 'img/apple-touch-icon-144x144-precomposed.png' %}">
@@ -53,9 +56,7 @@
                 <i class="icon-align-justify"></i>
             </a>
 
-            <a class="brand" href="{% url landing %}">
-                <img src="{% static 'img/logo-p2pu-menu.png' %}" alt="">
-            </a>
+            <a class="brand" href="{% url landing %}"></a>
 
             <ul class="nav">
                 <li>
@@ -138,17 +139,20 @@
 </div>
 
 <section>
+    <div class="messages container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="container alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% block message %}{% endblock %}
+    </div>
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
     {% block body %}{% endblock %}
-</div>
+</section>
 
 <footer>
     <div class="container">
