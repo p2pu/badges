@@ -139,17 +139,18 @@
 </div>
 
 <section>
-    <div class="messages container">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="container alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+    {% if messages %}
+        <div class="messages container">
+        {% for message in messages %}
+            <div class="container alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
     {% block message %}{% endblock %}
-    </div>
+
 
     {% block body %}{% endblock %}
 </section>
