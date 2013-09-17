@@ -48,13 +48,23 @@
   .badge-info-vertical-details {
     border-top: 1px solid $silver;
   }
-  .badge-info-img {
-    float: left;
-    margin: 0 50px;
+
+  /*.badge-info-img {
     min-width: 128px;
-  }
+  }*/
   p {
     margin-left: 10px;
+  }
+  .badge-view-toolbar{
+    [class^="btn"]{
+      font-size: 10px !important;
+      font-weight: normal !important;
+      padding: 5px !important;
+    }
+    [class^="icon"]{
+      font-size: 20px;
+      display: block;
+    }
   }
   .badge-view-experts{
     position: relative;
@@ -115,16 +125,17 @@
           position: absolute;
           right: -100%;
           width: 100%;
-          margin-top: 1em;
-          text-align: center;
           textarea {
             width: 90%;
-            margin: 0 10px;
+            display: block;
+            margin: 16px auto;
           }
         }
       }
     }
   }
+
+
 
 }
 

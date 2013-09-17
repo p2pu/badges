@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+<form id="badge-create-form" method="post" enctype="multipart/form-data" data-validate="parsley">
+
+	<div class="fileupload {% if existing_img %}fileupload-exists{% else %}fileupload-new{% endif %} span2"
+	     data-provides="fileupload">
+		<label for="image_uri">{{ form.fields.image_uri.widget.attrs.title }}</label>
+
+		<div class="fileupload-new thumbnail">
+			<img src="http://www.placehold.it/128x128/EFEFEF/AAAAAA&text=no+image" />
+		</div>
+		<div class="fileupload-preview fileupload-exists thumbnail"
+		     style="max-width: 128px; max-height: 128px; line-height: 20px;">
+			<img src="{{ existing_img }}" />
+		</div>
+		<div id="div_id_image_uri" class="control-group">
+			<div class="controls">
+        <span class="btn btn-mini btn-info btn-file">
+            <span class="fileupload-new">{% trans 'Select image' %}</span>
+            <span class="fileupload-exists">{% trans 'Change' %}</span>
+            <input {% if not editing %}data-required="true"{% endif %} name="image_uri"
+                   title="Select a spiffy icon for your Badge"
+                   type="file" class="fileinput fileUpload parsley-validated" id="id_image_uri">
+        </span>
+			</div>
+		</div>
+	</div>
+	<div class="badge-info-horizontal-details">
+		{% if user_is_partner %}
+			{% crispy form form.with_partner %}
+		{% else %}
+			{% crispy form form.without_partner %}
+			<button class="btn btn-primary preview-badge-button">
+				{% if badge.published %}
+					<i class="icon-save"></i>
+						{% trans 'Save' %}
+				{% else %}
+					<i class="icon-eye-open"></i>
+					{% trans 'Preview your Badge' %}
+				{% endif %}
+
+			</button>
+		{% endif %}
+	</div>
+
+</form>
+

@@ -2,6 +2,7 @@
 Form for creating a Badge
 """
 from django import forms
+from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -17,11 +18,13 @@ class BadgeForm(forms.Form):
         label=_('We Call This Nifty Badge:'),
         required=True,
         max_length=128,
+        help_text=_('Maximum 128 characters'),
         widget=forms.TextInput(
             attrs={
                 'placeholder': _('Good titles are clear, concise and snappy '
                                  '-- like a headline.'),
-                'class': 'span7'
+                'class': 'span7',
+                'data-remote': reverse_lazy('name_search')
             }),
         error_messages={
             'required': _('Please tell us how you want to call your Badge')
@@ -42,6 +45,7 @@ class BadgeForm(forms.Form):
         label=_('Describe your Badge:'),
         required=True,
         max_length=128,
+        help_text=_('Should be one paragraph, maximum 128 characters'),
         widget=forms.Textarea(
             attrs={
                 'cols': 80,
@@ -80,6 +84,10 @@ class BadgeForm(forms.Form):
         user_uri = kwargs.pop('user_uri')
         choices = [None] + p2pu_user_api.get_partners_for_user(user_uri)
 
+        published = False
+        if 'published' in kwargs:
+            published = kwargs.pop('published')
+
         super(BadgeForm, self).__init__(*args, **kwargs)
         # stack choices for partner
         self.fields['partner'].choices = [(0, '----') if name is None else (name, name)for name in choices]
@@ -89,6 +97,11 @@ class BadgeForm(forms.Form):
             self.fields['image_uri'].required = False
             self.fields['image_uri'].help_text = _('If you are satisfied with the image '
                                                    'you uploaded previously than leave this field blank')
+        # if badge has already been published than edit is limited only to requirements field
+        if published:
+            self.fields['image_uri'].widget.attrs['readonly'] = True
+            self.fields['title'].widget.attrs['readonly'] = True
+            self.fields['description'].widget.attrs['readonly'] = True
 
     @property
     def with_partner(self):
@@ -103,9 +116,6 @@ class BadgeForm(forms.Form):
                 'description',
                 'requirements',
                 'partner',
-            ),
-            ButtonHolder(
-                Submit('submit', _('Save and preview your Badge')),
             )
         )
         return helper
@@ -121,9 +131,6 @@ class BadgeForm(forms.Form):
                 'title',
                 'description',
                 'requirements',
-            ),
-            ButtonHolder(
-                Submit('submit', _('Save and preview your Badge')),
             )
         )
         return helper

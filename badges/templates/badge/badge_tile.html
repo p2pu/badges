@@ -18,7 +18,7 @@
             </div>
         {% endif %}
         <a class="badge-image" href="
-                {% if badge.publised %}
+                {% if badge.published %}
                     {% url badge_view badge.id %}
                 {% else %}
                     {% url badge_preview badge.id %}
@@ -27,7 +27,7 @@
         </a>
 
         <div class="badge-container">
-            <a class="badge-title" href="{% if badge.publised %}{% url badge_view badge.id %}
+            <a class="badge-title" href="{% if badge.published %}{% url badge_view badge.id %}
                          {% else %}{% url badge_preview badge.id %}{% endif %}">
                 <h4>{{ badge.title }}</h4>
             </a>

@@ -1,4 +1,4 @@
-/*global jQuery, window, document, console, OpenBadges */
+/*global jQuery, window, document, console, parsley */
 
 var Badges = window.Badges || {};
 
@@ -6,14 +6,16 @@ var Badges = window.Badges || {};
 
     'use strict';
 
-    var validate = function () {
+    var validate = function (url) {
+        var form = $('#badge-create-form');
 
         $(function () {
-            $('#badge-create-form').parsley({
-                trigger: 'change',
-                successClass: 'success',
-                errorClass: 'error',
-                errors: {
+            form.parsley({
+                trigger: 'keyup change blur'
+                , validateIfUnchanged: false
+                , successClass: 'success'
+                , errorClass: 'error'
+                , errors: {
                     classHandler: function (elem, isRadioOrCheckbox) {
                         return $(elem).parent().parent();
                     },
