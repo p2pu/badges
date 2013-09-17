@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}P2PU Badges | Preview{% endblock %}
+{% block title %}P2PU Badges | View{% endblock %}
 
 {% block body %}
 	<div class="container badge-preview">
@@ -22,7 +22,7 @@
 						</a>
 						{% endif %}
 				{% endif %}
-				{% if user.added_to_backpack %}
+				{% if user.added_to_backpack.0.ob_state == 'NOT_PUBLISHED' %}
 					<a class="btn" href="{% url badge_delete badge.id %}" data-toggle="tooltip"
 							data-origina-title="{% trans 'Add to your Backpack' %}" data-palcement="left">
 						<i class="icon-archive"></i>

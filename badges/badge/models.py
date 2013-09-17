@@ -226,9 +226,11 @@ def was_pushed_to_backpack(badge_id, user_uri):
     """
     Check if user has pushed this Badge to backpack
     """
-    award = Award.objects.filter(badge__id__exact=badge_id, user_uri=user_uri)
+    award = Award.objects.filter(badge_id=badge_id, user_uri=user_uri)
+
     if award:
-        return award[0].ob_state
+        print award.values('ob_state')
+        return award.values('ob_state')
 
     return None
 
