@@ -1,31 +1,48 @@
 {% load i18n %}
 
-	<div class="clearfix">
-		<a class="badge-info-img span2" href="
+<div class="clearfix">
+	<a class="badge-info-img span2" href="
 			{% if badge.published %}
           {% url badge_view badge.id %}
       {% else %}
           {% url badge_preview badge.id %}
       {% endif %}">
-			<img src="{{ badge.image.url }}" />
+		<img src="{{ badge.image.url }}" />
+	</a>
+
+	<div class="badge-info-horizontal-details">
+		<h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
+		<a class="badge-info-name" href="{% url badge_view badge.id %}">
+			<h3>{{ badge.title }}</h3>
 		</a>
 
-		<div class="badge-info-horizontal-details">
-			<h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
-			<a class="badge-info-name" href="{% url badge_view badge.id %}">
-				<h3>{{ badge.title }}</h3>
-			</a>
+		<h4 class="badge-info-desc">{% trans 'Description' %}:</h4>
 
-			<h4 class="badge-info-desc">{% trans 'Description' %}:</h4>
+		<p>{{ badge.description }}</p>
 
-			<p>{{ badge.description }}</p>
+		<h4 class="badge-info-horizontal-requirements">{% trans 'Criteria to receive the Badge' %}:</h4>
 
-			<h4 class="badge-info-horizontal-requirements">{% trans 'Criteria to receive the Badge' %}:</h4>
+		<p>{{ badge.requirements }}</p>
 
-			<p>{{ badge.requirements }}</p>
+		{% if experts %}
+		<h4 class="badge-info-horizontal-requirements">{% trans 'Experts' %}:</h4>
 
-		</div>
+		<ul class="badge-view-experts unstyled thumbnails">
+			{% for expert in experts %}
+				<li class="{% ifequal badge.author.username expert.username %}badge-author{% endifequal %}">
+					<a href="{% url dashboard expert.username %}">
+						<img class="img-rounded"
+						     src="{{ expert.image_url }}"
+						     alt="{{ expert.username }}"
+						     title="{{ expert.username }}" />
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
 	</div>
+</div>
 
 
 

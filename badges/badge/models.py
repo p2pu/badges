@@ -222,15 +222,16 @@ def relinquish_badge(uri, expert_uri):
     raise Exception()
 
 
-def was_pushed_to_backpack(badge_id, user_uri):
+def pushed_to_backpack(badge, user_uri):
     """
     Check if user has pushed this Badge to backpack
     """
-    award = Award.objects.filter(badge_id=badge_id, user_uri=user_uri)
+    award = Award.objects.filter(badge_id=badge['id'], user_uri=user_uri)
 
-    if award:
-        print award.values('ob_state')
-        return award.values('ob_state')
+    if len(award) == 1:
+        badge['award_id'] = award[0].pk
+        badge['award_ob_state'] = award[0].ob_state
+        return badge
 
     return None
 

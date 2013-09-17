@@ -172,11 +172,11 @@ def view(request, badge_id):
         user = request.session['user']
         user['is_expert'] = user['uri'] in expert_uris
         user['is_author'] = user['uri'] == badge['author_uri']
-        user['added_to_backpack'] = badge_api.was_pushed_to_backpack(badge_id, user['uri'])
         if user['is_author']:
             user['can_delete_badge'] = badge_api.is_allowed_to_remove(badge['uri'])
         if user['is_expert']:
             user['can_revise_projects'] = map(fetch_resources, project_api.get_projects_ready_for_feedback(badge['uri']))
+            user['added_to_backpack'] = badge_api.pushed_to_backpack(badge, user['uri'])
 
     experts = map(p2pu_user_api.get_user, expert_uris)
 
