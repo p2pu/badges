@@ -35,7 +35,11 @@
     .help-inline {
       ul{
         list-style: none;
+        margin-bottom: 0;
       }
+    }
+    .cke{
+      border-color: $errorText;
     }
   }
   .parsley-error-list{

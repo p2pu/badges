@@ -70,14 +70,13 @@ def create(request):
 def preview(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
-
     user = request.session['user']
-    user_is_author = user['uri'] == badge['author_uri']
+    user['is_author'] = _user_is_author(badge, user)
 
     return render_to_response(
         'badge/badge_info/preview.html', {
             'badge': badge,
-            'user_is_author': user_is_author,
+            'user': user,
         },
         context_instance=RequestContext(request)
     )
@@ -159,7 +158,7 @@ def publish(request, badge_id):
     return http.HttpResponseRedirect(reverse(
         'badge_preview', args=(badge_id,)
     ))
-    
+
 
 def view(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
@@ -171,7 +170,7 @@ def view(request, badge_id):
     if request.session.get('user'):
         user = request.session['user']
         user['is_expert'] = user['uri'] in expert_uris
-        user['is_author'] = user['uri'] == badge['author_uri']
+        user['is_author'] = _user_is_author(badge, user)
         if user['is_author']:
             user['can_delete_badge'] = badge_api.is_allowed_to_remove(badge['uri'])
         if user['is_expert']:
@@ -287,3 +286,8 @@ def name_search(request):
                 'error': _('Sorry, Badge with this name already exists')
             }
     return HttpResponse(json.dumps(title_exists), content_type="application/json", status=200)
+
+
+def _user_is_author(badge, user):
+    return user['uri'] == badge['author_uri']
+

@@ -62,7 +62,7 @@ class BadgeForm(forms.Form):
         label=_('Criteria to receive the Badge:'),
         required=True,
         widget=forms.Textarea(
-            attrs={'cols': 80, 'rows': 6, 'class': 'span7',
+            attrs={'cols': 80, 'rows': 6, 'class': 'span7 ckeditor',
                    'placeholder': _("Here it's good to list specific skills folks will need to show "
                                     "they've mastered. It's useful to step them out so the "
                                     "Experts can identify them.")}),

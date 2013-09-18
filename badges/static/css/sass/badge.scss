@@ -49,9 +49,9 @@
     border-top: 1px solid $silver;
   }
 
-  /*.badge-info-img {
-    min-width: 128px;
-  }*/
+  [id^="hint"]{
+    display: inline-block;
+  }
   p {
     margin-left: 10px;
   }
