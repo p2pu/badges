@@ -58,12 +58,16 @@
   .badge-view-toolbar{
     [class^="btn"]{
       font-size: 10px !important;
-      font-weight: normal !important;
       padding: 5px !important;
+      width: 70px;
+      white-space: initial;
+      line-height: 14px;
+      display: block;
     }
     [class^="icon"]{
       font-size: 20px;
       display: block;
+      margin: 3px 0;
     }
   }
   .badge-view-experts{
