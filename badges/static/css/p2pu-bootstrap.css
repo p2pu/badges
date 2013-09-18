@@ -5854,7 +5854,7 @@ hr {
   text-indent: -9999px;
   overflow: hidden; }
 .navbar .nav {
-  margin: 9px 10px 0 20px;
+  margin: 9px 10px 0 10px;
   font-family: "arvo", Helvetica, sans-serif; }
   .navbar .nav > li > a {
     font-family: "arvo", Helvetica, sans-serif;
@@ -5875,11 +5875,13 @@ hr {
     border-left: 1px solid #cccccc;
     font-size: 20px;
     line-height: 1px; }
-.navbar .btn-group > .btn {
-  padding: 3px;
-  width: 35px;
-  height: 35px;
-  line-height: 35px; }
+.navbar .btn-group {
+  margin-top: 0; }
+  .navbar .btn-group > .btn {
+    padding: 3px;
+    width: 35px;
+    height: 35px;
+    line-height: 35px; }
 
 .nav .dropdown-toggle .caret, .nav .dropdown-toggle:hover .caret {
   border-top-color: #05c6b4;
