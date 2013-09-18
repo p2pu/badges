@@ -1,8 +1,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-
-<form id="badge-create-form" method="post" enctype="multipart/form-data" data-validate="parsley">
+<form class="clearfix" id="badge-create-form" method="post" enctype="multipart/form-data" data-validate="parsley">
 
 	<div class="fileupload {% if existing_img %}fileupload-exists{% else %}fileupload-new{% endif %} span2"
 	     data-provides="fileupload">
@@ -27,7 +26,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="badge-info-horizontal-details">
+	<div class="badge-info-horizontal-details span7">
 		{% if user_is_partner %}
 			{% crispy form form.with_partner %}
 		{% else %}
@@ -35,7 +34,7 @@
 			<button class="btn btn-primary preview-badge-button">
 				{% if badge.published %}
 					<i class="icon-save"></i>
-						{% trans 'Save' %}
+					{% trans 'Save' %}
 				{% else %}
 					<i class="icon-eye-open"></i>
 					{% trans 'Preview your Badge' %}
@@ -46,4 +45,5 @@
 	</div>
 
 </form>
+
 

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load projects_tags %}
 
 <div class="clearfix">
 	<a class="badge-info-img span2" href="
@@ -22,7 +23,7 @@
 
 		<h4 class="badge-info-horizontal-requirements">{% trans 'Criteria to receive the Badge' %}:</h4>
 
-		<p>{{ badge.requirements }}</p>
+		<p>{{ badge.requirements|purge_content }}</p>
 
 		{% if experts %}
 		<h4 class="badge-info-horizontal-requirements">{% trans 'Experts' %}:</h4>

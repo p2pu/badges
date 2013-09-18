@@ -33,20 +33,33 @@
 
 		<form action="{% url badge_publish badge.id %}" method="POST">{% csrf_token %}
 			<div class="badge-info">
+				<div class="badge-view-toolbar btn-group btn-group-vertical pull-right">
+					{% if user.is_author %}
+						<a class="btn btn-mini pull-right" href="{% url badge_edit badge.id %}">
+							<i class="icon-edit"></i>
+							{% trans 'Edit your Badge' %}
+						</a>
+						<a class="btn" href="{% url badge_delete badge.id %}" data-toggle="tooltip"
+								data-origina-title="{% trans 'Delete your Badge' %}" data-palcement="left">
+							<i class="icon-remove-sign"></i>
+							{% trans 'Delete your Badge' %}
+						</a>
+						<a class="btn btn-mini pull-right" href="{% url dashboard request.session.user.username %}">
+							<i class="icon-save"></i>
+							{% trans 'Save & Return Later' %}
+						</a>
+						<button class="btn btn-primary" style="min-width: 107px;">
+							<i class="icon-thumbs-up"></i>
+							{% trans 'Publish this Sucker' %}
+						</button>
+
+					{% endif %}
+				</div>
 				{% include 'badge/badge_info/details.html' %}
 				<div class="clearfix">
-					<a class="btn btn-mini pull-right" href="{% url badge_edit badge.id %}">
-						<i class="icon-edit"></i>
-						{% trans 'Edit your Badge' %}
-					</a>
-					<a class="btn btn-mini pull-right" href="{% url dashboard request.session.user.username %}">
-						<i class="icon-save"></i>
-						{% trans 'Save & Return Later' %}
-					</a>
-					<button class="btn btn-primary offset2">
-						<i class="icon-thumbs-up"></i>
-						{% trans 'Publish this Sucker' %}
-					</button>
+
+
+
 				</div>
 
 			</div>
