@@ -50,7 +50,18 @@ def profile(request, username ):
     context['user'] = user_api.get_user(user_api.username2uri(username))
 
     return render_to_response(
-        'dashboard/dashboard.html',
+        'dashboard/dashboard_old.html',
+        context,
+        context_instance=RequestContext(request)
+    )
+
+
+def dashboard(request, username):
+    user = user_api.get_user(user_api.username2uri(username))
+
+
+    return render_to_response(
+        'dashboard/dashboard_old.html',
         context,
         context_instance=RequestContext(request)
     )

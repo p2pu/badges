@@ -23,7 +23,8 @@
 						</a>
 						{% endif %}
 				{% endif %}
-				{% if user.added_to_backpack %}
+
+				{% if user.added_to_backpack and user.added_to_backpack.award_ob_state == 'NOT_PUBLISHED' %}
 					<a class="btn ob-push-to-backpack"
 					   data-toggle="tooltip"
 						 data-origina-title="{% trans 'Add to your Backpack' %}" data-palcement="left"
@@ -32,11 +33,11 @@
 						<i class="icon-archive"></i>
 						{% trans 'Add to Backpack' %}
 					</a>
-				{% elif user.added_to_backpack.0.ob_state == 'PUBLISHED' %}
-					<a class="btn" href="{% url badge_delete badge.id %}" data-toggle="tooltip"
-							data-origina-title="{% trans 'Add to your Backpack' %}" data-palcement="left">
+				{% elif user.added_to_backpack.award_ob_state == 'PUBLISHED' %}
+					<a class="btn disabled" href="#" data-toggle="tooltip"
+							data-origina-title="{% trans 'In your Backpack' %}" data-palcement="left">
 						<i class="icon-archive"></i>
-						{% trans 'Add to Backpack' %}
+						{% trans 'In your Backpack' %}
 					</a>
 				{% endif %}
 			</div>
@@ -80,6 +81,7 @@
 
 
 {% block js %}
+	{% if user.is_author %}
   <script>
     var js_open_badges = "{% static 'js/open_badges.js' %}";
     var js_open_badges_issuer = "{{ OPEN_BADGES_ISSUER_JS_URL }}";
@@ -87,6 +89,7 @@
         P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
        })
   </script>
+	{% endif %}
 	<script src="{% static 'js/badge_share.js' %}"></script>
 	<script type="text/javascript">
 		Badges.Tile.share();
