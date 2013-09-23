@@ -1,0 +1,41 @@
+{% extends 'badge/badge_info/badge.html' %}
+{% load i18n %}
+{% load static %}
+{% load compress %}
+
+{% block title %}P2PU Badges | Preview{% endblock %}
+
+{% block body %}
+<div class="container badge-create">
+	<h2>{% trans 'Create a Badge' %}</h2>
+		<div class="badge-create-intro">
+			{% blocktrans %}
+				Here you can create a Badge to recognize the skills mastered in
+				creative projects.
+			{% endblocktrans %}
+			<br>
+			{% blocktrans %}
+				First, design what you'd like your Badge to look like.
+				Next, describe what the Badge is for.
+				Then, list criteria a project would need to meet in order to get the Badge.
+				Hit "Save and preview Badge" and you'll get to see it in all it's glory!
+			{% endblocktrans %}
+		</div>
+
+		<div class="badge-info">
+			{% include 'badge/badge_info/form.html' %}
+		</div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+	{% compress js %}
+		<script src="{% static 'js/vendor/parsley.js' %}"></script>
+		<script src="{% static 'js/form_validation.js' %}"></script>
+		<script src="{% static 'js/vendor/bootstrap-fileupload.min.js' %}"></script>
+		<script type="text/javascript">
+			Badges.Form.validate("{% url name_search %}");
+		</script>
+	{% endcompress %}
+{% endblock js %}

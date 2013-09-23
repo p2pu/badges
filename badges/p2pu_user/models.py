@@ -56,7 +56,7 @@ def last_n_users(n):
 
 
 def get_users():
-    return [_user2dict(user) for user in User.objects.all()]
+    return [_user2dict(user) for user in User.objects.all().order_by('-date_joined')]
 
 
 def _partner2dict(partner):

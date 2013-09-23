@@ -1,90 +1,11 @@
 .navbar{
-  &.navbar-fixed-top.affix{
-    .navbar-inner{
-      padding-top: 0;
-    }
-  }
-  .navbar-btn {
-    float: left;
-    padding: 15px 20px;
-    color: #777;
-    font-size: 1.2em;
-  }
-  .brand{
+  .nav-collapse{
     margin-top: 5px;
   }
-  .btn-group{
-    .btn{
-      height: 23px;
-      width: 23px;
-      padding: 7px 10px;
-    }
-  }
-  .dropdown-menu{
-    left: inherit;
+  // Search repositioning
+  .btn-group > .dropdown-menu{
     right: 0;
-    padding: 0;
-    margin: 0;
-  }
-  .navbar-inner{
-    @include gradient-vertical($snow, $snow);
-    border: 1px solid #dddddd;
-    @include border-radius(4px);
-    @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.065));
-    padding-bottom: 5px;
-
-    .nav{
-      margin-top: 10px;
-      li{
-        line-height: 32px;
-        a{
-          font-family: "arvo", Helvetica, sans-serif;
-          line-height: 1em;
-          padding: 9px 15px 9px;
-          color: #999999;
-          display: inline;
-          &.active{
-            color: $slate;
-          }
-          &:hover, .active:hover{
-            color: $navbarText;
-          }
-          &.p2pu-tab{
-            border-left: 1px solid #cccccc;
-            font-size: 1.2em;
-          }
-        }
-      }
-
-      &.pull-right{
-        li{
-          margin-right: 0;
-          & + li{
-            padding-left: 0;
-            margin-left: 0;
-            a{
-              padding-left: 0;border: none;
-            }
-          }
-          &#user-dropdown{
-            margin-right: 0;
-            .dropdown-menu{
-              padding: 2px;
-              li{
-                padding: 0;
-                > a{
-                  display: block;
-                  padding: 0 0 0 0.5em;
-                  background-color: $white;
-                  background-image: none;
-                }
-              }
-            }
-          }
-        }
-
-      }
-    }
+    left: initial;
   }
   .navbar-search{
     margin: 5px;

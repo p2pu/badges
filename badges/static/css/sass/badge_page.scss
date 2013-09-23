@@ -1,38 +1,17 @@
 
-#upload-bage-img{
-
-}
 .badge-create-intro{
-  border-bottom: 1px dotted $silverUltraLight;
   padding-bottom: 15px;
   line-height: 1.5em;
   margin-bottom: 15px;
 }
-.preview-badge{
-  .well{
-    float: none;
+.controls{
+  .help-block{
+    font-size: 12px;
+    font-style: italic;
+    color: #999 !important;
+    margin: 0 0 11px 0 !important;
   }
 }
-
-.badge-view-projects, .badge-view-experts{
-
-}
-
-.badge-preview-publish{
-  .alert{
-    a.btn{
-      border-bottom: inherit;
-    }
-  }
-}
-
-.preview-box{
-  margin-top: 20px;
-  form{
-    margin-bottom: 10px;
-  }
-}
-
 /******Form char check with parsley*********/
 .control-group {
   &.success{
@@ -56,19 +35,28 @@
     .help-inline {
       ul{
         list-style: none;
+        margin-bottom: 0;
       }
+    }
+    .cke{
+      border-color: $errorText;
     }
   }
   .parsley-error-list{
     list-style-type: none;
     font-weight: bold;
     margin-left: 0;
+    font-size: 12px;
   }
   .error .btn-file{
+    overflow: visible;
     .help-inline{
       color: $errorText;
       text-shadow: none;
-      font-size: 16px;
+      font-size: 10px;
+      position: absolute;
+      top: 34px;
+      left: 5px;
       ul li{
         padding-top: 8px;
         line-height: 10px;

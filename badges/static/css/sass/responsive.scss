@@ -194,6 +194,26 @@
     }
   }
   // Badge view
+  .badge-info-horizontal-details{
+    border-left: none !important;
+    padding-left: 10px !important;
+  }
+  .badge-info-img{
+    margin-right: 20px;
+  }
+  .badge-view-toolbar{
+    position: absolute;
+    bottom: 130px;
+    > .btn{
+      float: left;
+       + .btn{
+        margin-top: 0;
+      }
+    }
+  }
+  .badge-details{
+    padding-bottom: 90px;
+  }
   .badge-social .social-item {
     width: 105px;
    }
@@ -269,6 +289,10 @@
     &.span8 {
       width: 620px !important;
     }
+  }
+  // Badge View
+  .badge-info-img{
+    margin-right: 20px;
   }
 }
 

@@ -4,7 +4,18 @@
   color: $white;
   text-shadow: none;
 }
-
+.alert-success{
+  background-color: $olive;
+  border-color: darken($olive, 10%);
+  color: $slate;
+  text-shadow: none;
+}
+.alert-warning{
+  background-color: $clemintine;
+  border-color: darken($clemintine, 10%);
+  color: $slate;
+  text-shadow: none;
+}
 .feedback-create-form{
   label[for^="id"]{
     margin-left: 0;

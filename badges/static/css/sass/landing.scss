@@ -125,3 +125,15 @@
 .browse-badges-preloader{
   text-align: center;
 }
+.pager{
+  .next{
+    a{
+      display: inline;
+    }
+    #infscr-loading{
+      display: inline;
+      margin-left: 10px;
+    }
+  }
+}
+

@@ -1,0 +1,8 @@
+
+{% for user in users %}
+    {% if user.has_next %}
+        {% include 'p2pu_user/user_tile.html' with next_page=users.next_page_number  %}
+    {% else %}
+        {% include 'p2pu_user/user_tile.html' %}
+    {% endif %}
+{% endfor %}

@@ -14,25 +14,27 @@
     <title>{% block title %}P2PU Badges{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-
-    {% compress css %}
+    {% comment %}
         <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% endcomment %}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'css/p2pu-bootstrap.css' %}">
         <link rel="stylesheet" type="text/x-scss"
               href="{% static 'css/sass/badges.scss' %}">
-        <!-- Fav and touch icons -->
-        <link rel="apple-touch-icon-precomposed" sizes="144x144"
-              href="{% static 'img/apple-touch-icon-144x144-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114"
-              href="{% static 'img/apple-touch-icon-114x114-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72"
-              href="{% static 'img/apple-touch-icon-72x72-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" sizes="57x57"
-              href="{% static 'img/apple-touch-icon-57x57-precomposed.png' %}">
-        <link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon-precomposed.png' %}">
-        <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
         <link rel="stylesheet" href="{% static 'css/bootstrap-fileupload.min.css' %}">
     {% endcompress %}
+		<link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+		<!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{% static 'img/apple-touch-icon-144x144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{% static 'img/apple-touch-icon-114x114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="{% static 'img/apple-touch-icon-72x72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57"
+          href="{% static 'img/apple-touch-icon-57x57-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'img/apple-touch-icon-precomposed.png' %}">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Arvo:regular,italic,bold,bolditalic" rel="stylesheet"
           type="text/css">
@@ -53,9 +55,7 @@
                 <i class="icon-align-justify"></i>
             </a>
 
-            <a class="brand" href="{% url landing %}">
-                <img src="{% static 'img/logo-p2pu-menu.png' %}" alt="">
-            </a>
+            <a class="brand" href="{% url landing %}"></a>
 
             <ul class="nav">
                 <li>
@@ -126,10 +126,6 @@
                                 <i class="icon-remove-sign clear-search"></i>
                             </form>
                         </div>
-                        <a class="btn" href="https://p2pu.org/en/profile/edit/" target="_blank" data-toggle="tooltip"
-                               title="{% trans 'My settings' %}">
-                            <i class="icon-align-justify"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -137,18 +133,22 @@
     </div>
 </div>
 
-<div class="body container">
-
+<section>
     {% if messages %}
+        <div class="messages container">
         {% for message in messages %}
-            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            <div class="container alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                 {{ message }}
             </div>
         {% endfor %}
+        </div>
     {% endif %}
+    {% block message %}{% endblock %}
+
+
     {% block body %}{% endblock %}
-</div>
+</section>
 
 <footer>
     <div class="container">
@@ -181,7 +181,6 @@
     <script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
     <script src="{% static 'js/vendor/jPanelMenu.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
-    <script src="{% static 'js/vendor/bootstrap-fileupload.min.js' %}"></script>
 {% endcompress %}
 
 
@@ -195,6 +194,7 @@
 
 
 {% if not debug %}
+    {% compress js %}
     <script type="text/javascript">
         var _gaq = [
             ['_setAccount', 'UA-5757664-7'],
@@ -206,6 +206,7 @@
             s.parentNode.insertBefore(g, s)
         }(document, 'script'));
     </script>
+    {% endcompress %}
 {% endif %}
 
 </body>

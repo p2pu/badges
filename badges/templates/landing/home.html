@@ -1,88 +1,113 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block site-section %}landing{% endblock site-section %}
 
+{% block js %}
+    <script>
+        var browse_users = "{% static 'js/browse_items.js' %}";
+        var infinite_scroll_plugin = "{% static 'js/vendor/jquery.infinitescroll.js' %}";
+        var twiter_behaviour = "{% static 'js/vendor/jquery.infinitescroll.twitter.behaviour.js' %}";
+        require(["jquery", infinite_scroll_plugin, twiter_behaviour, browse_users], function($){
+            Badges.Browse.user('{% url browse_all_badges %}');
+           })
+    </script>
+{% endblock %}
+
 {% block body %}
-<section class="container">
-    <div class="badges-landing-unit">
-        <h2>Get <span class="highlight-1">Feedback</span>
-            on a <span class="highlight-2">Project</span> You Love.
-        </h2>
-        <div class="clearfix">
-            <div class="row">
-                <div class="span7 first-element">
 
-                    <p>
-                        At <a href="https://p2pu.org/en/">Peer 2 Peer University</a>,
-                        Badges are a form of feedback that learners give to each other
-                        in order to improve their projects.
-                    </p>
-                    <p>
-                        Here you can create a Badge, submit a Project for a Badge, or, if you are an
-                        "Expert" and already possess the Badge, award it to someone else.
-                    </p>
-                    <p>
-                        <a href="{% url about %}">
-                            Find out more....
-                        </a>
-                    </p>
-                </div>
-                <div class="span4 buletin-feature pull-right">
-                    <h1>
-                        <a href="{% url badge_create %}" class="">{% trans 'Create a Badge' %}</a>
-                    </h1>
+<section>
+    <div class="container">
+        <div class="badges-landing-unit">
+            <h2>Get <span class="highlight-1">Feedback</span>
+                on a <span class="highlight-2">Project</span> You Love.
+            </h2>
+            <div class="clearfix">
+                <div class="row">
+                    <div class="span7 first-element">
+
+                        <p>
+                            At <a href="https://p2pu.org/en/">Peer 2 Peer University</a>,
+                            Badges are a form of feedback that learners give to each other
+                            in order to improve their projects.
+                        </p>
+                        <p>
+                            Here you can create a Badge, submit a Project for a Badge, or, if you are an
+                            "Expert" and already possess the Badge, award it to someone else.
+                        </p>
+                        <p>
+                            <a href="{% url about %}">
+                                Find out more....
+                            </a>
+                        </p>
+                    </div>
+                    <div class="span4 buletin-feature pull-right">
+                        <h1>
+                            <a href="{% url badge_create %}" class="">{% trans 'Create a Badge' %}</a>
+                        </h1>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="first-element">
-            <div class="featured-badges">
-                <h1>Featured Badges</h1>
-                <ul class="thumbnails">
-                    {% for badge in badges|slice:'5' %}
-                        {% include 'badge/badge_tile.html' %}
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="tab-section">
-        <div class="row-fluid">
-            <div class="span12">
-                <ul id="landing-tabs" class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#learners-tab" data-toggle="tab">
-                            <h3>Meet the Learners</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#projects-tab" data-toggle="tab">
-                            <h3>Projects in the Community</h3>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="learners-tab">
-                        <ul class="thumbnails">
-                          {% for user in users %}
-                            {% include 'p2pu_user/user_tile.html' %}
-                          {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="tab-pane" id="projects-tab">
-                    {% if projects %}
-                        <ul class="p2pu-project-list fit-thumbnails">
-                            {% for project in projects %}
-                                {% include 'project/project_tile.html' %}
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                    </div>
+            <div class="first-element">
+                <div class="featured-badges">
+                    <h1>Featured Badges</h1>
+                    <ul class="thumbnails">
+                        {% for badge in badges|slice:'5' %}
+                            {% include 'badge/badge_tile.html' %}
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<section>
+    <div class="container">
+        <div class="learners">
+        <h1>Meet the Learners</h1>
+            <ul class="thumbnails" id="landing-users">
+              {% for user in users %}
+                    {% if users.has_next %}
+                        {% include 'p2pu_user/user_tile.html' with next_page=users.next_page_number %}
+                    {% else %}
+                        {% include 'p2pu_user/user_tile.html' %}
+                    {% endif %}
+              {% endfor %}
+            </ul>
+            <div class="navigation">
+                <ul class="pager">
+                    <li class="previous">
+                        {% if users.has_previous %}
+                            <a href="?page={{ users.previous_page_number }}">&larr; {% trans 'Go to previous' %}</a>
+                        {% endif %}
+                    </li>
+
+                    <li class="next">
+                        {% if users.has_next %}
+                            <a class="btn" href="?page={{ users.next_page_number }}">{% trans 'Load more' %}</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="projects">
+        <h1>Projects in the Community</h1>
+        {% if projects %}
+            <ul class="p2pu-project-list fit-thumbnails">
+                {% for project in projects %}
+                    {% include 'project/project_tile.html' %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</section>
+
+
 {% endblock %}

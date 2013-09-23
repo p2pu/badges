@@ -47,7 +47,6 @@ def search_users(text):
     users_val = []
     for user in users:
         users_val.append(p2pu_user_api._user2dict(user))
-    print users_val
     return users_val
 
 

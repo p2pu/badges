@@ -25,6 +25,9 @@
     }
 
   }
+  .badge-info-img{
+    margin-right: 20px;
+  }
   .badge-info-vertical-img, .badge-info-horizontal-img {
     padding-bottom: 15px;
     margin-left: 0;
@@ -48,12 +51,51 @@
   .badge-info-vertical-details {
     border-top: 1px solid $silver;
   }
-  .badge-info-img {
-    float: left;
-    margin: 0 50px;
+
+  [id^="hint"]{
+    display: inline-block;
   }
   p {
     margin-left: 10px;
+  }
+  .badge-view-toolbar{
+    [class^="btn"]{
+      font-size: 10px !important;
+      padding: 5px !important;
+      width: 70px;
+      white-space: initial;
+      line-height: 14px;
+      display: block;
+    }
+    [class^="icon"]{
+      font-size: 20px;
+      display: block;
+      margin: 3px 0;
+    }
+  }
+  .badge-view-experts{
+    position: relative;
+    padding-left: 60px;
+    min-height: 50px;
+    li{
+      margin: 0px;
+      &.badge-author{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      a{
+        img{
+          width: 40px;
+          height: 40px;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      p{
+        margin-left: 0px
+      }
+    }
   }
 
   .badge-sharing {
@@ -90,16 +132,17 @@
           position: absolute;
           right: -100%;
           width: 100%;
-          margin-top: 1em;
-          text-align: center;
           textarea {
             width: 90%;
-            margin: 0 10px;
+            display: block;
+            margin: 16px auto;
           }
         }
       }
     }
   }
+
+
 
 }
 
@@ -279,9 +322,13 @@
   }
 }
 
-.badge-info-title, .badge-info-requirements, .badge-info-desc {
+.badge-info-title,
+.badge-info-horizontal-requirements,
+.badge-info-vertical-requirements,
+.badge-info-desc {
   color: $gray;
-  font-size: 1em;
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
 
 .badge-social {

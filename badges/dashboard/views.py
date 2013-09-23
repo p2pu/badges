@@ -48,14 +48,20 @@ def profile(request, username ):
     context['feedback_peer_projects'] = map(fetch_resources, peer_projects)
     context['feedback_latest'] = map(fetch_resources, feedback_latest)
     context['user'] = user_api.get_user(user_api.username2uri(username))
-    context['can_delete'] = False
-
-    if 'user' in request.session:
-        if context['user']['username'] == request.session.get('user')['username']:
-            context['can_delete'] = True
 
     return render_to_response(
-        'dashboard/dashboard.html',
+        'dashboard/dashboard_old.html',
+        context,
+        context_instance=RequestContext(request)
+    )
+
+
+def dashboard(request, username):
+    user = user_api.get_user(user_api.username2uri(username))
+
+
+    return render_to_response(
+        'dashboard/dashboard_old.html',
         context,
         context_instance=RequestContext(request)
     )
