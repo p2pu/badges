@@ -1,0 +1,97 @@
+{% extends 'badge/badge_info/badge.html' %}
+{% load i18n %}
+{% load static %}
+{% load open_badges_tags %}
+
+{% block title %}P2PU Badges | View{% endblock %}
+
+{% block body %}
+	<div class="container badge-preview">
+		<div class="badge-info badge-view-badges">
+			<div class="badge-view-toolbar btn-group btn-group-vertical pull-right">
+				{% if user.is_author %}
+					<a class="btn" href="{% url badge_edit badge.id %}" data-toggle="tooltip"
+							data-origina-title="{% trans 'Edit your Badge' %}" data-palcement="left">
+						<i class="icon-edit-sign"></i>
+						{% trans 'Edit your Badge' %}
+					</a>
+						{% if user.can_delete_badge %}
+						<a class="btn" href="{% url badge_delete badge.id %}" data-toggle="tooltip"
+								data-origina-title="{% trans 'Delete your Badge' %}" data-palcement="left">
+							<i class="icon-remove-sign"></i>
+							{% trans 'Delete your Badge' %}
+						</a>
+						{% endif %}
+				{% endif %}
+
+				{% if user.added_to_backpack and user.added_to_backpack.award_ob_state == 'NOT_PUBLISHED' %}
+					<a class="btn ob-push-to-backpack"
+					   data-toggle="tooltip"
+						 data-origina-title="{% trans 'Add to your Backpack' %}" data-palcement="left"
+						 data-assertion-url="{% assertion_url badge %}"
+             data-pushed-to-backpack-url="{% pushed_to_backpack_url badge %}">
+						<i class="icon-archive"></i>
+						{% trans 'Add to Backpack' %}
+					</a>
+				{% elif user.added_to_backpack.award_ob_state == 'PUBLISHED' %}
+					<a class="btn disabled" href="#" data-toggle="tooltip"
+							data-origina-title="{% trans 'In your Backpack' %}" data-palcement="left">
+						<i class="icon-archive"></i>
+						{% trans 'In your Backpack' %}
+					</a>
+				{% endif %}
+			</div>
+			{% include 'badge/badge_info/details.html' %}
+
+			{% include 'badge/badge_info/sharing.html' %}
+
+		</div>
+		{% if user.can_revise_projects %}
+			<hr>
+			<div class="clearfix badge-view-projects">
+				<h3>{% trans 'These Projects Need Your Feedback' %}</h3>
+				<ul class="p2pu-project-list fit-thumbnails">
+					{% for project in user.can_revise_projects %}
+						{% include 'project/project_tile.html' %}
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+		{% if not user.is_expert %}
+			<div>
+				<h4>{% trans 'Want this Badge? Submit a project and get some feedback' %}.</h4>
+				<a href="{% url project_create badge.id %}" class="btn btn-primary">
+					{% trans 'Submit a project for this Badge' %}
+				</a>
+			</div>
+		{% endif %}
+		{% if projects %}
+			<hr>
+			<div class="clearfix badge-view-projects">
+				<h3>{% trans 'Want to see what kind of projects have received this Badge' %}?</h3>
+				<ul class="p2pu-project-list fit-thumbnails">
+					{% for project in projects %}
+						{% include 'project/project_tile.html' %}
+					{% endfor %}
+				</ul>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}
+
+
+{% block js %}
+	{% if user.is_author %}
+  <script>
+    var js_open_badges = "{% static 'js/open_badges.js' %}";
+    var js_open_badges_issuer = "{{ OPEN_BADGES_ISSUER_JS_URL }}";
+    require(["jquery", js_open_badges, js_open_badges_issuer], function($){
+        P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
+       })
+  </script>
+	{% endif %}
+	<script src="{% static 'js/badge_share.js' %}"></script>
+	<script type="text/javascript">
+		Badges.Tile.share();
+	</script>
+{% endblock %}

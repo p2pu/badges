@@ -36,7 +36,7 @@ def _badge2dict(badge_db):
         'author_uri': badge_db.author_uri,
         'deleted': badge_db.deleted,
         'partner_name': badge_db.partner_name,
-        'publised': badge_db.date_published is not None
+        'published': badge_db.date_published is not None
     }
     return badge
 
@@ -78,10 +78,6 @@ def update_badge(uri, image_uri=None, title=None, description=None, requirements
     """ only possible while draft """
     badge_db = Badge.objects.get(id=uri2id(uri))
 
-    # NOTE: not sure this should be in the API... what if the admin wants
-    # to correct a small mistake
-    if badge_db.date_published:
-        raise Exception(_('Badge cannot be updated after it has been publised'))
     if image_uri:
         badge_db.image_uri = image_uri
     if title:
@@ -97,19 +93,25 @@ def update_badge(uri, image_uri=None, title=None, description=None, requirements
     return get_badge(uri)
 
 
+def is_allowed_to_remove(badge_uri):
+    from project.processors import search_projects
+
+    projects = search_projects(badge_uri=badge_uri)
+
+    if len(projects):
+        return False
+    return True
+
+
 def delete_badge(badge_uri, user_uri):
     """
     Enables owner and admin to archive badge
     """
     from project.processors import search_projects
-
     badge_db = Badge.objects.get(id=uri2id(badge_uri))
-
     projects = search_projects(badge_uri=badge_uri)
-
     if badge_db.author_uri != user_uri:
         raise NotTheAuthorError('You are not the author of the badge')
-
     if projects:
         raise HasProjectsAttachedError('Badge has projects. It can not be deleted.')
 
@@ -132,12 +134,6 @@ def publish_badge(uri):
         reverse('badge_view', args=(badge_db.pk, )),
     )
     return True
-
-
-def remove_badge(uri, reason):
-    """ Mark a badge as removed - spam / inappropriate """
-    pass
-
 
 def get_featured_badges():
     badges = Badge.objects.filter(featured=True, date_published__isnull=False).order_by('date_published')[:5]
@@ -226,6 +222,20 @@ def relinquish_badge(uri, expert_uri):
     raise Exception()
 
 
+def pushed_to_backpack(badge, user_uri):
+    """
+    Check if user has pushed this Badge to backpack
+    """
+    award = Award.objects.filter(badge_id=badge['id'], user_uri=user_uri)
+
+    if len(award) == 1:
+        badge['award_id'] = award[0].pk
+        badge['award_ob_state'] = award[0].ob_state
+        return badge
+
+    return None
+
+
 def award_was_pushed_to_backpack(award_id):
     """
     Signal to us that award was successfully pushed to Open Badges.
@@ -242,3 +252,15 @@ def check_if_user_has_badge(badge_uri, user_uri):
     if user_uri in experts:
         return True
     return False
+
+
+def if_title_exists(search_query, badge_id):
+    badges = None
+
+    if search_query:
+        badges = Badge.objects.filter(title=search_query).exclude(id=badge_id).values('id')
+
+    if badges:
+        return badges
+
+    return None

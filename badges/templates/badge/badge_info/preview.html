@@ -1,0 +1,68 @@
+{% extends 'badge/badge_info/badge.html' %}
+{% load i18n %}
+
+{% block title %}P2PU Badges | Preview{% endblock %}
+
+{% block body %}
+
+
+	<div class="container badge-preview">
+
+		<h2>{% trans 'Preview Your Masterpiece' %}</h2>
+
+		<div class="badge-create-intro">
+
+			{% if user.is_author %}
+				<p class="lead">
+					{% blocktrans %}Are you ready to publish your Badge? You might want to double-check:{% endblocktrans %}
+				</p>
+				<ul>
+					<li>{% trans 'Spelling mistakes or missing digits' %}?</li>
+					<li>{% trans 'Are all criteria present and accurate? ' %}</li>
+					<li>{% trans 'Is your image clear, crisp and well-placed?' %}</li>
+				</ul>
+				<p>
+					<span class="label label-warning">{% trans 'Warning' %}</span>
+						<strong>
+							 {% trans 'Later you will only be able to edit criteria!' %}
+						</strong>
+				</p>
+			{% endif %}
+
+		</div>
+
+		<form action="{% url badge_publish badge.id %}" method="POST">{% csrf_token %}
+			<div class="badge-info">
+				<div class="badge-view-toolbar btn-group btn-group-vertical pull-right">
+					{% if user.is_author %}
+						<a class="btn btn-mini pull-right" href="{% url badge_edit badge.id %}">
+							<i class="icon-edit"></i>
+							{% trans 'Edit your Badge' %}
+						</a>
+						<a class="btn" href="{% url badge_delete badge.id %}" data-toggle="tooltip"
+								data-origina-title="{% trans 'Delete your Badge' %}" data-palcement="left">
+							<i class="icon-remove-sign"></i>
+							{% trans 'Delete your Badge' %}
+						</a>
+						<a class="btn btn-mini pull-right" href="{% url dashboard request.session.user.username %}">
+							<i class="icon-save"></i>
+							{% trans 'Save & Return Later' %}
+						</a>
+						<button class="btn btn-primary" style="min-width: 82px;">
+							<i class="icon-thumbs-up"></i>
+							{% trans 'Publish this Sucker' %}
+						</button>
+
+					{% endif %}
+				</div>
+				{% include 'badge/badge_info/details.html' %}
+				<div class="clearfix">
+
+
+
+				</div>
+
+			</div>
+		</form>
+	</div>
+{% endblock %}

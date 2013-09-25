@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<li class="p2pu-user">
+<li class="p2pu-user thumbnail" data-next="{{ next_page }}">
     <a href="{% url dashboard user.username %}" class="avatar">
         <img src="{{ user.image_url }}" alt="{{ user.username }}"/>
         <div class="user-info">

@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}P2PU Badges | Dashboard{% endblock %}
+
+{% block js %}
+    <script>
+        var js_open_badges = "{% static 'js/open_badges.js' %}";
+        var js_open_badges_issuer = "{{ OPEN_BADGES_ISSUER_JS_URL }}";
+        require(["jquery", js_open_badges, js_open_badges_issuer], function($){
+            P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
+           })
+    </script>
+    <script src="{% static 'js/badges_dashboard_util.js' %}"></script>
+    <script>
+        Badges.Dashboard.init();
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+            <img src="{{ user.image_url }}" class="img-polaroid dashboard-sidebar-img"
+                         alt="{{ user.username }}" height="130px" width="130px"/>
+
+                <div class="dashboard-title">
+                    <h2>This is {{ user.username }}'s Dashboard</h2>
+                </div>
+                <div class="dashboard-main-container span12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#badges" data-toggle="tab" class="tab">
+                                    <h3>{% trans 'Badges' %}</h3>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#projects" data-toggle="tab" class="tab">
+                                    <h3>{% trans 'Feedback' %}</h3>
+                                </a>
+                            </li>
+                            {% if user.username == request.session.user.username %}
+                            <li>
+                                <a href="#garden-shed" data-toggle="tab" class="tab" >
+                                    <h3>{% trans 'Badges in the garden shed' %}</h3>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <div class="tab-content p2pu-projects-tabs-content">
+                            <div class="tab-pane active" id="badges">
+
+                                <div class="tabbable">
+                                    <ul class="nav nav-pills dashboard-pills-menu">
+                                        <li class="{% if not earned_badges %}disabled {% else %}active{% endif %}">
+                                            <a href="#badge-earned" {% if earned_badges %}data-toggle="tab"{% endif %}>
+                                                {% trans 'Earned' %}
+                                            </a>
+                                        </li>
+                                        <li class="{% if not badges_under_revision %}disabled{% endif %}">
+                                            <a href="#badge-review"
+                                               {% if badges_under_revision %}
+                                                    data-toggle="tab"
+                                               {% else %}
+                                                    data-toggle="tooltip"
+                                                    data-original-title="{% trans 'No Badges under review' %}"
+                                               {% endif %}>
+                                               {% trans 'Under review' %}
+                                            </a>
+                                        </li>
+                                        <li class="{% if not awarded_badges %}disabled{% endif %}">
+                                            <a href="#badge-awarded" {% if awarded_badges %}data-toggle="tab"{% endif %}>
+                                                {% trans 'Awarded' %}
+                                            </a>
+                                        </li>
+                                        <li class="{% if not created_badges %}disabled{% endif %}">
+                                            <a href="#badge-created" {% if created_badges %}data-toggle="tab"{% endif %}>
+                                                {% trans 'Created' %}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="badge-earned">
+                                        {% if earned_badges %}
+                                            <ul class="thumbnails fit-thumbnails">
+                                                {% for badge in earned_badges %}
+                                                    {% include 'badge/badge_tile.html' with earned='True' %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                        </div>
+                                        <div class="tab-pane" id="badge-review">
+                                            <ul class="thumbnails fit-thumbnails">
+                                                {% for badge in badges_under_revision %}
+                                                    {% include 'badge/badge_tile.html' %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" id="badge-awarded">
+                                            <ul class="thumbnails fit-thumbnails">
+                                                {% for badge in awarded_badges %}
+                                                    {% include 'badge/badge_tile.html' %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" id="badge-created">
+                                            <ul class="thumbnails fit-thumbnails">
+                                                {% for badge in created_badges %}
+                                                    {% include 'badge/badge_tile.html' with can_delete_badge=can_delete %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane" id="projects">
+                                <div class="tabbable">
+                                    <ul class="nav nav-pills dashboard-pills-menu">
+                                        <li class="{% if not feedback_latest %}disabled {% else %}active{% endif %}">
+                                            <a href="#feedback-latest" {% if feedback_latest %}data-toggle="tab"{% endif %}>
+                                                {% trans 'Latest' %}
+                                            </a>
+                                        </li>
+                                        <li class="{% if not feedback_your_projects %}disabled{% endif %}">
+                                            <a href="#feedback-your-projects" {% if feedback_your_projects %}data-toggle="tab"{% endif %}>
+                                                {% trans 'Your Projects' %}
+                                            </a>
+                                        </li>
+                                        <li class="{% if not feedback_peer_projects %}disabled{% endif %}">
+                                            <a href="#feedback-peer-projects" {% if feedback_peer_projects %}data-toggle="tab"{% endif %}>
+                                                {% trans 'Peer Projects' %}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="feedback-latest">
+                                        {% if feedback_latest %}
+                                            <ul class="p2pu-project-list fit-thumbnails">
+                                                {% for project in feedback_latest %}
+                                                    {% include 'project/project_tile.html' %}
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+                                        </div>
+                                        <div class="tab-pane" id="feedback-your-projects">
+                                            <ul class="p2pu-project-list fit-thumbnails">
+                                                {% for project in feedback_your_projects %}
+                                                    {% include 'project/project_tile.html' %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" id="feedback-peer-projects">
+                                            <ul class="p2pu-project-list fit-thumbnails">
+                                                {% for project in feedback_peer_projects %}
+                                                    {% include 'project/project_tile.html' %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="garden-shed">
+                                {% if draft_badges %}
+                                    <ul class="thumbnails">
+                                        {% for badge in draft_badges %}
+                                            {% include 'badge/badge_tile.html' with can_delete_badge='True' %}
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>
+                                        {% blocktrans %}
+                                            In seems you haven't created any new Badges.
+                                        {% endblocktrans %}
+                                        {% trans 'Come on and' %}
+                                        <a href="{% url badge_create %}">{%trans 'create one' %}!</a>
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

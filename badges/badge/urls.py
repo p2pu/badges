@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^delete/(?P<badge_id>[\d]+)/$', 'badge.views.delete', name='badge_delete'),
     url(r'^view/(?P<badge_id>[\d]+)/embedded/$', 'badge.views.view_embedded', name='badge_view_embedded'),
     url(r'^featured_feed/$', 'badge.views.featured_feed', name='badge_featured_feed'),
+    url(r'^name_search/$', 'badge.views.name_search', name='name_search'),
 )

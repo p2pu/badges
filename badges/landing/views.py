@@ -15,12 +15,30 @@ from .processors.search import search_results
 
 
 def home(request):
-    context = {}
-    context['badges'] = map(fetch_badge_resources, badge_api.get_featured_badges())
-    context['projects'] = map(fetch_project_resources, project_api.last_n_projects(10))
-    context['users'] = p2pu_user_api.last_n_users(20)
+    featured_badges = map(fetch_badge_resources, badge_api.get_featured_badges())
+
+    users = p2pu_user_api.get_users()
+    paginator = Paginator(users, 16)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        return HttpResponse(status=404)
+
+    last_n_projects = map(fetch_project_resources, project_api.last_n_projects(10))
+
+    if request.is_ajax():
+        return render_to_response('p2pu_user/browse_users.html',
+                                  {'users': users},
+                                  context_instance=RequestContext(request))
     
-    return render_to_response('landing/home.html', context, context_instance=RequestContext(request))
+    return render_to_response('landing/home.html',{
+        'badges': featured_badges,
+        'users': users,
+        'projects': last_n_projects,
+        },context_instance=RequestContext(request))
 
 
 def search(request):
@@ -39,9 +57,8 @@ def search(request):
 
 def browse_all_badges(request):
 
-    badges = badge_api.get_published_badges()
-    for badge in badges:
-        fetch_badge_resources(badge)
+    badges = map(fetch_badge_resources, badge_api.get_published_badges())
+
     paginator = Paginator(badges, 10) # Show 10 badges per page
 
     page = request.GET.get('page')
@@ -54,7 +71,9 @@ def browse_all_badges(request):
         return HttpResponse(status=404)
 
     if request.is_ajax():
-        return render_to_response('landing/browse_badges.html',{'badges': badges}, context_instance=RequestContext(request))
+        return render_to_response('landing/browse_badges.html',
+                                  {'badges': badges},
+                                  context_instance=RequestContext(request))
 
     return render_to_response(
         'landing/list_badges.html',{

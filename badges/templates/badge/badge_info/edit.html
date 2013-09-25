@@ -1,0 +1,27 @@
+{% extends 'badge/badge_info/badge.html' %}
+{% load i18n %}
+{% load static %}
+{% load compress %}
+
+{% block title %}P2PU Badges | Edit{% endblock %}
+
+{% block body %}
+<div class="container">
+		<h2>{% trans 'Edit' %} {{ badge.title }}</h2>
+
+			<div class="badge-info">
+				{% include 'badge/badge_info/form.html' with editing='True' existing_img=existing_img.url %}
+			</div>
+		</div>
+{% endblock %}
+
+{% block js %}
+	{% compress js %}
+		<script src="{% static 'js/vendor/parsley.js' %}"></script>
+		<script src="{% static 'js/form_validation.js' %}"></script>
+		<script src="{% static 'js/vendor/bootstrap-fileupload.min.js' %}"></script>
+		<script type="text/javascript">
+			Badges.Form.validate();
+		</script>
+	{% endcompress %}
+{% endblock js %}

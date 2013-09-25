@@ -53,26 +53,31 @@ def create(request):
                 reverse('badge_publish', args=(badge_api.uri2id(badge['uri']),))
             )
         except badge_api.DuplicateTitleError:
-            form.errors['title'] = [_('Badge title needs to be unique'),]
+            form.errors['title'] = [_('Badge title needs to be unique'), ]
         except media_api.UploadImageError:
             form.errors['title'] = [_('Badge image cannot be uploaded. Possible reasons: format not supported'
-                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'),]
+                                      '(png, jpeg, jpg, gif), file size too large (up to 256kb).'), ]
 
-    return render_to_response('badge/create.html', {
-        'form': form,
-        'user_is_partner': user_partner,
-        },context_instance=RequestContext(request))
+    return render_to_response(
+        'badge/badge_info/create.html', {
+            'form': form,
+            'user_is_partner': user_partner,
+        },
+        context_instance=RequestContext(request))
 
 
 @require_login
-def preview( request, badge_id ):
-    context = {
-        'badge': badge_api.get_badge(badge_api.id2uri(badge_id))
-    }
-    fetch_badge_resources(context['badge'])
+def preview(request, badge_id):
+    badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+    fetch_badge_resources(badge)
+    user = request.session['user']
+    user['is_author'] = _user_is_author(badge, user)
+
     return render_to_response(
-        'badge/preview.html',
-        context,
+        'badge/badge_info/preview.html', {
+            'badge': badge,
+            'user': user,
+        },
         context_instance=RequestContext(request)
     )
 
@@ -82,7 +87,6 @@ def edit(request, badge_id):
     user_uri = request.session['user']['uri']
     user = p2pu_user_api.get_user(user_uri)
     user_partner = user['partner']
-    template_name = 'badge/edit.html'
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
 
     if not user_uri == badge['author_uri']:
@@ -91,16 +95,10 @@ def edit(request, badge_id):
             'badge_preview', args=(badge_id,)
         ))
 
-    if badge['publised']:
-        messages.error(request, _('Badge already publised, create a new badge instead'))
-        return http.HttpResponseRedirect(reverse(
-            'badge_view', args=(badge_id,)
-        ))
-
     if request.method == 'POST':
-        form = BadgeForm(request.POST, request.FILES, user_uri=user_uri, editing=True)
+        form = BadgeForm(request.POST, request.FILES, user_uri=user_uri, editing=True, published=badge['published'])
     else:
-        form = BadgeForm(badge, user_uri=user_uri, editing=True)
+        form = BadgeForm(badge, user_uri=user_uri, editing=True, published=badge['published'])
 
     if request.method == 'POST' and form.is_valid():
         try:
@@ -113,22 +111,26 @@ def edit(request, badge_id):
                 )
                 updated['image_uri'] = image['uri']
 
-            #TODO keep original image_uri if there's no image in POST
-
             for attr in ['title', 'description', 'requirements']:
                 if not badge[attr] == form.cleaned_data[attr]:
                     updated[attr] = form.cleaned_data[attr]
 
-
             badge = badge_api.update_badge(badge['uri'], **updated)
+
+            if badge['published']:
+                return http.HttpResponseRedirect(
+                    reverse('badge_view', args=(badge_api.uri2id(badge['uri']),))
+                )
+
             return http.HttpResponseRedirect(
                 reverse('badge_preview', args=(badge_api.uri2id(badge['uri']),))
             )
         except badge_api.DuplicateTitleError:
-            form.errors['title'] = [_('Badge title needs to be unique'),]
+            form.errors['title'] = [_('Badge title needs to be unique'), ]
 
     return render_to_response(
-        template_name, {
+        'badge/badge_info/edit.html', {
+            'badge': badge,
             'form': form,
             'user_is_partner': user_partner,
             'existing_img': media_api.get_image(badge['image_uri']),
@@ -137,7 +139,7 @@ def edit(request, badge_id):
 
 
 @require_login
-def publish( request, badge_id ):
+def publish(request, badge_id):
     user = request.session['user']
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
 
@@ -156,27 +158,38 @@ def publish( request, badge_id ):
     return http.HttpResponseRedirect(reverse(
         'badge_preview', args=(badge_id,)
     ))
-    
+
 
 def view(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
-    context = {'badge': badge}
-    context['projects'] = map(fetch_resources, project_api.search_projects_awarded_badges(badge_uri=badge['uri']))
-
+    projects = map(fetch_resources, project_api.search_projects_awarded_badges(badge_uri=badge['uri']))
     expert_uris = badge_api.get_badge_experts(badge['uri'])
+    user = None
 
     if request.session.get('user'):
-        context['user_is_expert'] = request.session['user']['uri'] in expert_uris
+        user = request.session['user']
+        user['is_expert'] = user['uri'] in expert_uris
+        user['is_author'] = _user_is_author(badge, user)
+        if user['is_author']:
+            user['can_delete_badge'] = badge_api.is_allowed_to_remove(badge['uri'])
+        if user['is_expert']:
+            user['can_revise_projects'] = map(fetch_resources, project_api.get_projects_ready_for_feedback(badge['uri']))
+            user['added_to_backpack'] = badge_api.pushed_to_backpack(badge, user['uri'])
 
-    context['experts'] = map(p2pu_user_api.get_user, expert_uris)
+    experts = map(p2pu_user_api.get_user, expert_uris)
 
-    context['iframe'] = 'http://%s%s?rendering=normal' % (settings.ORGANISATION_URL,
-                                                          reverse('badge_view_embedded', args=[badge_id]))
+    iframe = 'http://%s%s?rendering=normal' % (settings.ORGANISATION_URL,
+                                               reverse('badge_view_embedded', args=[badge_id]))
 
     return render_to_response(
-        'badge/view.html',
-        context,
+        'badge/badge_info/view.html', {
+            'user': user,
+            'badge': badge,
+            'projects': projects,
+            'experts': experts,
+            'iframe': iframe,
+        },
         context_instance=RequestContext(request)
     )
 
@@ -202,7 +215,7 @@ def delete(request, badge_id):
 
 
 @require_login
-def pushed_to_backpack(request, award_id ):
+def pushed_to_backpack(request, award_id):
     # TODO: needs further love
     badge_api.award_was_pushed_to_backpack(award_id)
     return HttpResponse('OK')
@@ -251,6 +264,7 @@ def view_embedded(request, badge_id):
 
 def featured_feed(request):
     featured = map(fetch_badge_resources, badge_api.get_featured_badges())
+
     def add_url(badge):
         badge['image_url'] = ''.join([
             'http://',
@@ -259,3 +273,21 @@ def featured_feed(request):
         return badge
     featured = map(add_url, featured)
     return http.HttpResponse(json.dumps(featured), content_type='application/json')
+
+
+def name_search(request):
+    search_q = request.GET.get('title', '')
+    title_exists = {'success': ''}
+
+    if request.is_ajax():
+
+        if badge_api.if_title_exists(search_q.strip(), 172):
+            title_exists = {
+                'error': _('Sorry, Badge with this name already exists')
+            }
+    return HttpResponse(json.dumps(title_exists), content_type="application/json", status=200)
+
+
+def _user_is_author(badge, user):
+    return user['uri'] == badge['author_uri']
+
