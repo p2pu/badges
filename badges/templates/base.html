@@ -164,17 +164,16 @@
 
 {% compress js %}
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
-	<script src="{% static 'js/homepage.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.sidr.min.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
 	<script type="text/javascript">
 		this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
 	</script>
 	<script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
 	<script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
 	<script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
-	<script src="{% static 'js/vendor/jquery.sidr.min.js' %}"></script>
 {% endcompress %}
-
+<script src="{% static 'js/homepage.js' %}"></script>
 
 <script type="text/javascript"
         src="http://rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
