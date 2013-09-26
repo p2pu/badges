@@ -10,7 +10,7 @@
         var infinite_scroll_plugin = "{% static 'js/vendor/jquery.infinitescroll.js' %}";
         var twiter_behaviour = "{% static 'js/vendor/jquery.infinitescroll.twitter.behaviour.js' %}";
         require(["jquery", infinite_scroll_plugin, twiter_behaviour, browse_users], function($){
-            Badges.Browse.user('{% url browse_all_badges %}');
+            Badges.Browse.user();
            })
     </script>
 {% endblock %}
