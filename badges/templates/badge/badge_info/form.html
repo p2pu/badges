@@ -31,17 +31,17 @@
 			{% crispy form form.with_partner %}
 		{% else %}
 			{% crispy form form.without_partner %}
-			<button class="btn btn-primary preview-badge-button">
-				{% if badge.published %}
-					<i class="icon-save"></i>
-					{% trans 'Save' %}
-				{% else %}
-					<i class="icon-eye-open"></i>
-					{% trans 'Preview your Badge' %}
-				{% endif %}
-
-			</button>
 		{% endif %}
+		<button class="btn btn-primary preview-badge-button">
+			{% if badge.published %}
+				<i class="icon-save"></i>
+				{% trans 'Save' %}
+			{% else %}
+				<i class="icon-eye-open"></i>
+				{% trans 'Preview your Badge' %}
+			{% endif %}
+
+		</button>
 	</div>
 
 </form>
