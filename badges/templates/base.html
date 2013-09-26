@@ -16,6 +16,7 @@
 	<meta name="viewport" content="width=device-width">
 	{% compress css %}
 		<link rel="stylesheet" href="{% static 'css/p2pu-bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'css/libs/jquery.sidr.dark.css' %}">
 		<link rel="stylesheet" type="text/x-scss"
 		      href="{% static 'css/sass/badges.scss' %}">
 		<link rel="stylesheet" href="{% static 'css/bootstrap-fileupload.min.css' %}">
@@ -47,7 +48,7 @@
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="navbar-btn visible-phone visible-tablet" data-toggle="collapse"
-				   data-target=".nav-collapse">
+				   data-target=".nav-collapse" href="#main-menu-panel">
 					<i class="icon-align-justify"></i>
 				</a>
 				<a class="brand" href="{% url landing %}"></a>
@@ -170,7 +171,7 @@
 	<script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
 	<script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
 	<script src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
-	<script src="{% static 'js/vendor/jPanelMenu.js' %}"></script>
+	<script src="{% static 'js/vendor/jquery.sidr.min.js' %}"></script>
 	<script src="{% static 'js/homepage.js' %}"></script>
 {% endcompress %}
 

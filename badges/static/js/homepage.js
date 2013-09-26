@@ -54,8 +54,15 @@ var Badges = window.Badges || {};
     };
 
     var side_plugin_handler = function() {
-        var colapse_button = $('[data-toggle="collapse"]');
-        var menu = $('.mindevices-side-menu');
+        //var colapse_button = $('[data-toggle="collapse"]');
+
+        $('.navbar-btn').sidr({
+                name: 'main-menu-panel',
+                source: '.nav-collapse.collapse'
+            });
+
+
+        /*var menu = $('.mindevices-side-menu');
 
         var jPM = $.jPanelMenu({
             menu: '.mindevices-side-menu',
@@ -66,7 +73,7 @@ var Badges = window.Badges || {};
 
         colapse_button.on('click', function() {
             menu.css('height', '0')
-        });
+        });*/
     };
 
     Badges.Splash = {};
