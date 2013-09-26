@@ -44,24 +44,25 @@
     //margin-top: 80px;
   }
 }
+
 // Phones and tablets
-@media (max-width: 979px){
-  body{
+@media (max-width: 979px) {
+  body {
     padding: 0;
   }
-  .wrap{
+  .wrap {
     padding: 0 20px;
   }
-  .nav-collapse{
-    .dropdown-menu{
+  .nav-collapse {
+    .dropdown-menu {
       display: block !important;
       margin: 0;
     }
-    .btn{
+    .btn {
       width: 23px;
       height: 25px;
     }
-    .nav{
+    .nav {
       margin-top: 160px;
     }
   }
@@ -70,8 +71,42 @@
     height: 0 !important;
   }
 
-  #jPanelMenu-menu{
-    background-color: #3b3b3b;
+  #main-menu-panel {
+    zoom: 1;
+    .sidr-class-nav {
+      margin-bottom: 0;
+      padding-top: 100px;
+    }
+    .sidr-class-dropdown-menu {
+      position: absolute;
+      width: 100%;
+      top: 10px;
+    }
+    .sidr-class-search {
+      border-radius: 50px;
+      padding: 0 20px;
+      color: $white;
+      background-color: lighten(#4d4d4d, 10%);
+    }
+    [title="My dashboard"] {
+      position: absolute;
+      width: 83%;
+      top: 50px;
+      z-index: 10000;
+      display: block;
+      margin: 0;
+      line-height: 48px;
+      border-top: 1px solid #4d4d4d;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 0 20px;
+      margin-top: -1px;
+      &:hover {
+        border-top: none;
+        line-height: 49px;
+        @include box-shadow(inset 0 0 15px 3px #222);
+      }
+    }
+    /*
     .btn-toolbar{
       float: left;
       margin-left: 10px !important;
@@ -158,33 +193,33 @@
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #484848), color-stop(1, #383838));
       background: -webkit-linear-gradient(#484848, #383838);
       background: linear-gradient(top, #484848, #383838);
-    }
+    }*/
   }
-  .navbar-inner{
+  .navbar-inner {
     position: relative;
   }
-  .openbadges-insignia{
+  .openbadges-insignia {
     position: absolute;
     right: 10px;
     top: -1px;
   }
-  .p2pu-badge{
-    .overflow-handle{
-       height: 245px;
+  .p2pu-badge {
+    .overflow-handle {
+      height: 245px;
     }
   }
 
-  // Dashboard
-  .dashboard-sidebar-img{
+// Dashboard
+  .dashboard-sidebar-img {
     width: 40px;
     height: 40px;
   }
-  .dashboard-title{
+  .dashboard-title {
     overflow: hidden;
     margin-bottom: 30px;
   }
 
-  // Browse all badges
+// Browse all badges
   .browse-badges {
     .thumbnails > li {
       margin-left: 0px;
@@ -193,79 +228,79 @@
       margin-left: 0;
     }
   }
-  // Badge view
-  .badge-info-horizontal-details{
+// Badge view
+  .badge-info-horizontal-details {
     border-left: none !important;
     padding-left: 10px !important;
   }
-  .badge-info-img{
+  .badge-info-img {
     margin-right: 20px;
   }
-  .badge-view-toolbar{
+  .badge-view-toolbar {
     position: absolute;
     bottom: 130px;
-    > .btn{
+    > .btn {
       float: left;
-       + .btn{
+      + .btn {
         margin-top: 0;
       }
     }
   }
-  .badge-details{
+  .badge-details {
     padding-bottom: 90px;
   }
   .badge-social .social-item {
     width: 105px;
-   }
+  }
 
-  //Project view
-  .project-view{
-    .project-info{
-      h3{
+//Project view
+  .project-view {
+    .project-info {
+      h3 {
         border-top: dotted 1px $slate;
         margin-top: 40px;
       }
-      img{
+      img {
         float: none !important;
       }
-      dl{
+      dl {
         word-wrap: break-word;
       }
     }
   }
-  .feedback-head{
+  .feedback-head {
     position: relative;
   }
 
-  .feedback-img{
+  .feedback-img {
     position: absolute;
     top: 5px;
     z-index: 1021;
     left: 25px;
     margin-right: 0;
-    img{
+    img {
       width: 40px;
       height: 40px;
       margin-left: 0 !important;
     }
   }
-  .feedback-improve{
-    .feedback-img{
+  .feedback-improve {
+    .feedback-img {
       right: 15px;
       width: 50px;
       left: initial;
     }
-    .popover-title{
+    .popover-title {
       text-align: right;
       padding-right: 70px;
       padding-left: 15px;
     }
   }
-  .popover-title{
+  .popover-title {
     padding-left: 70px;
     padding-bottom: 30px;
   }
-  #project-create-form{
+  #project-create-form {
     margin-top: 30px;
     border-top: dotted 1px $slate;
     padding-top: 20px;
@@ -277,11 +312,9 @@
 
 }
 
-
-
 // 10", 12" monitor
 @media (min-width: 979px) and (max-width: 1200px) {
-  // Navbar buttons
+// Navbar buttons
   .navbar .btn-group .btn {
     padding: 5px 5px;
   }
@@ -290,15 +323,15 @@
       width: 620px !important;
     }
   }
-  // Badge View
-  .badge-info-img{
+// Badge View
+  .badge-info-img {
     margin-right: 20px;
   }
 }
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  body{
+  body {
     background-color: red;
   }
   [class*="span"] {
@@ -311,9 +344,9 @@
     box-sizing: border-box;
   }
   .badge-info {
-      margin-left: 0;
-      margin-top: 80px;
-    }
+    margin-left: 0;
+    margin-top: 80px;
+  }
 }
 
 /* iPads (landscape) ----------- */
@@ -323,57 +356,53 @@
 
 /* iPads (portrait) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-  body{
-    background-color: red;
-  }
+
 }
+
 @media (min-width: 768px) and (max-width: 979px) {
 
 }
+
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 
 }
 
 /* Smartphones (landscape) ----------- */
-@media only screen
-and (min-width : 321px) {
-.project-view{
-    .popover{
+@media only screen and (min-width: 321px) {
+  .project-view {
+    .popover {
       //overflow: hidden;
     }
   }
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen
-and (max-width : 320px) {
-  body{
+@media only screen and (max-width: 320px) {
+  body {
 
   }
-  .badge-info{
+  .badge-info {
     margin-left: 0;
   }
-  .badge-info-img{
+  .badge-info-img {
     float: none !important;
     display: block;
     text-align: center;
   }
-  .badge-info-horizontal-details{
+  .badge-info-horizontal-details {
     border-left: none !important;
     padding-left: 10px !important;
   }
-  .badge-sharing{
-    .btn-sharing-controls{
+  .badge-sharing {
+    .btn-sharing-controls {
       margin-top: auto !important;
     }
-    .social-item{
+    .social-item {
       float: left !important;
     }
   }
-  .p2pu-project .p2pu-project-img-link{
+  .p2pu-project .p2pu-project-img-link {
     float: none;
   }
 

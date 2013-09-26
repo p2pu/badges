@@ -37,13 +37,8 @@ section{
   background: url("/static/img/bgtexture.png"), -ms-linear-gradient(top, #f3f4f8 0%, white 100%);
   background: url("/static/img/bgtexture.png"), linear-gradient(to bottom, #f3f4f8 0%, white 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$cloud', endColorstr='$white',GradientType=0 );
+  padding-bottom: 20px;
 }
-.row [class^="span"]{
-  &.first-element{
-    //margin-left: 0;
-  }
-}
-
 .well{
   .p2pu-badge{
     margin-top: 10px;
