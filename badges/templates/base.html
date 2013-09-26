@@ -14,10 +14,6 @@
 	<title>{% block title %}P2PU Badges{% endblock %}</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width">
-	{% comment %}
-        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    {% endcomment %}
 	{% compress css %}
 		<link rel="stylesheet" href="{% static 'css/p2pu-bootstrap.css' %}">
 		<link rel="stylesheet" type="text/x-scss"
@@ -54,9 +50,7 @@
 				   data-target=".nav-collapse">
 					<i class="icon-align-justify"></i>
 				</a>
-
 				<a class="brand" href="{% url landing %}"></a>
-
 				<ul class="nav">
 					<li>
 						<a class="p2pu-tab" href="#">
@@ -64,8 +58,6 @@
 						</a>
 					</li>
 				</ul>
-
-
 				<div class="nav-collapse collapse mindevices-side-menu">
 					<ul class="nav">
 						<li>
@@ -93,7 +85,6 @@
 							</a>
 						</li>
 					</ul>
-
 					<div class="pull-right btn-toolbar" style="margin: 0;">
 						<div class="btn-group">
 							{% if request.session.user %}
@@ -118,7 +109,6 @@
 							   title="{% trans 'Search' %}">
 								<i class="icon-search"></i>
 							</a>
-
 							<div class="dropdown-menu">
 								<form class="navbar-search" action="{% url search %}">
 									<input type="text" class="span4 search" name="q" value="{{ q }}"
@@ -132,7 +122,6 @@
 			</div>
 		</div>
 	</div>
-
 	<section>
 		{% if messages %}
 			<div class="messages container">
@@ -145,11 +134,8 @@
 			</div>
 		{% endif %}
 		{% block message %}{% endblock %}
-
-
 		{% block body %}{% endblock %}
 	</section>
-
 	<footer>
 		<div class="container">
 			<hr>
@@ -158,6 +144,11 @@
 				     src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png"
 				     width="200"
 				     height="40">
+			</a>
+			<a href="http://www.browserstack.com" target="_blank">
+				<h5 style="margin-bottom: 0"><small>Supported by</small></h5>
+				<img src="{% static 'img/browserstack.png' %}" alt="We are supported by Browserstack.com"
+						width="150" />
 			</a>
 			<a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank">
 				<img src="{% static 'img/cc-icons.png' %}" alt="" class="pull-right">
