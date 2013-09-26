@@ -131,6 +131,9 @@ class BadgeForm(forms.Form):
                 'title',
                 'description',
                 'requirements',
+            ),
+            ButtonHolder(
+                Submit('submit', _('Save and preview your Badge')),
             )
         )
         return helper
