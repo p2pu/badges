@@ -20,60 +20,46 @@ var Badges = window.Badges || {};
         });
     };
 
-    var dropdown_search_handler = function() {
+    var dropdown_search_handler = function () {
         var search_form = $('.dropdown-menu'),
-                dropdown_button = $('.dropdown-toggle');
+            dropdown_button = $('.dropdown-toggle');
 
-            $(document).bind('click', function() {
-               search_form.hide();
-            });
+        $(document).bind('click', function () {
+            search_form.hide();
+        });
 
-            dropdown_button.on('click', function(){
-                if(search_form.is(':visible')) {
-                    search_form.hide();
-                }else{
-                    search_form.show();
+        dropdown_button.on('click', function () {
+            if (search_form.is(':visible')) {
+                search_form.hide();
+            } else {
+                search_form.show();
 
-                }
-            });
+            }
+        });
 
-            search_form.bind('click', function(e) {
-                $(e.currentTarget).css('display', 'block');
-                dropdown_button.parent().addClass('open');
-                return false;
-            });
+        search_form.bind('click', function (e) {
+            $(e.currentTarget).css('display', 'block');
+            dropdown_button.parent().addClass('open');
+            return false;
+        });
     };
 
-    var clear_search_button_handler = function() {
+    var clear_search_button_handler = function () {
         var clear = $('.clear-search'),
-                search = $('.search');
+            search = $('.search');
 
-            clear.bind('click', function() {
-                search.val('');
-            });
+        clear.bind('click', function () {
+            search.val('');
+        });
     };
 
-    var side_plugin_handler = function() {
-        //var colapse_button = $('[data-toggle="collapse"]');
+    var side_plugin_handler = function () {
 
         $('.navbar-btn').sidr({
-                name: 'main-menu-panel',
-                source: '.nav-collapse.collapse'
-            });
-
-
-        /*var menu = $('.mindevices-side-menu');
-
-        var jPM = $.jPanelMenu({
-            menu: '.mindevices-side-menu',
-            trigger: '[data-toggle="collapse"]',
-            duration: 300
+            name: 'main-menu-panel',
+            source: '.nav-collapse.collapse'
         });
-        jPM.on();
 
-        colapse_button.on('click', function() {
-            menu.css('height', '0')
-        });*/
     };
 
     Badges.Splash = {};
