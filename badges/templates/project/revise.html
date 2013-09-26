@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
+{% load compress %}
 {% load crispy_forms_tags %}
 
 {% block title %}P2PU Badges | Revise Project{% endblock %}
@@ -12,36 +14,17 @@
         <div class="row">
             {% include 'badge/badge_info_vertical.html' with label='Revision for the Badge:' %}
             {% crispy form form.revise_feedback %}
-            {% comment %}
-            <form action="" method="POST" class="span7">
-                <fieldset>
-                    {% csrf_token %}
-
-                    <div class="control-group {% if form.errors.improvement %}error{% endif %}">
-                        <label>{% trans 'Improvements made' %}</label>
-                        <textarea rows="5" name="improvement" class="ckeditor span8"
-                                  placeholder="{% trans 'What changes have you made to the project?' %}"
-                                  {% if form.improvement.value %}value="{{ form.improvement.value }}"{% endif %}
-                                  ></textarea>
-                        {% for error in form.errors.improvement %}
-                            <span class="help-block">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    <div class="control-group {% if form.errors.work_url %}error{% endif %}">
-                        <label>{% trans 'New work URL (optional)' %}</label>
-                        <input type="url" name="work_url" class="span8"
-                               placeholder="{% trans 'What is good about the project?' %}"
-                               {% if form.work_url.value %}value="{{ form.work_url.value }}"{% endif %}>
-                        {% for error in form.errors.work_url %}
-                            <span class="help-block">{{ error }}</span>
-                        {% endfor %}
-                    </div>
-
-                    <button type="submit" class="btn btn-cyan btn-large">{% trans 'Submit feedback' %}</button>
-                </fieldset>
-            </form>
-            {% endcomment %}
         </div>
     </div>
 {% endblock %}
+
+{% block js %}
+	{% compress js %}
+		<script type="text/javascript">
+			this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
+		</script>
+		<script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
+		<script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
+		<script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
+	{% endcompress %}
+{% endblock js %}
