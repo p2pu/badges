@@ -1,29 +1,40 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load crispy_forms_tags %}
-
+{% load compress %}
+{% load static %}
 
 {% block title %}P2PU Badges | Give Feedback{% endblock %}
 
-{% block js %}
-    <script type="text/javascript">
-        Badges.ProjectView.init();
-    </script>
-{% endblock js %}
-
 {% block body %}
 
-    <div class="container ">
-        <div>
-            <h2>{% trans 'Review Project Progress' %}</h2>
-        </div>
-        <div class="row badge-and-feedback">
-            {% include 'badge/badge_info_vertical.html' with label='Feedback for the Badge:' %}
+	<div class="container ">
+		<div>
+			<h2>{% trans 'Review Project Progress' %}</h2>
+		</div>
+		<div class="row badge-and-feedback">
+			{% include 'badge/badge_info_vertical.html' with label='Feedback for the Badge:' %}
 
-            <div class="span9 clearfix project-feedback-form">
-                {% include 'project/feedback_thread.html' with feedback=feedback %}
-                {% crispy form form.give_feedback %}
-            </div>
-        </div>
-    </div>
+			<div class="span9 clearfix project-feedback-form">
+				{% include 'project/feedback_thread.html' with feedback=feedback %}
+				{% crispy form form.give_feedback %}
+			</div>
+		</div>
+	</div>
 {% endblock %}
+
+
+{% block js %}
+	<script type="text/javascript">
+		Badges.ProjectView.init();
+	</script>
+	{% compress js %}
+		<script type="text/javascript">
+			this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
+		</script>
+		<script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
+		<script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
+		<script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
+	{% endcompress %}
+{% endblock js %}
+

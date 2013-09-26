@@ -6,8 +6,9 @@
 {% block title %}P2PU Badges | Preview{% endblock %}
 
 {% block body %}
-<div class="container badge-create">
-	<h2>{% trans 'Create a Badge' %}</h2>
+	<div class="container badge-create">
+		<h2>{% trans 'Create a Badge' %}</h2>
+
 		<div class="badge-create-intro">
 			{% blocktrans %}
 				Here you can create a Badge to recognize the skills mastered in
@@ -26,7 +27,7 @@
 			{% include 'badge/badge_info/form.html' %}
 		</div>
 
-</div>
+	</div>
 {% endblock %}
 
 {% block js %}
@@ -37,5 +38,11 @@
 		<script type="text/javascript">
 			Badges.Form.validate("{% url name_search %}");
 		</script>
+		<script type="text/javascript">
+			this.CKEDITOR_BASEPATH = "{% static 'js/vendor/ckeditor/' %}";
+		</script>
+		<script src="{% static 'js/vendor/ckeditor/ckeditor.js' %}"></script>
+		<script src="{% static 'js/vendor/ckeditor/config.js' %}"></script>
+		<script src="{% static 'js/vendor/ckeditor/styles.js' %}"></script>
 	{% endcompress %}
 {% endblock js %}

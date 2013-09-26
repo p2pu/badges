@@ -28,15 +28,22 @@
   label[for$="good"]{
     @extend .alert-success;
   }
-  #cke_id_good {
-    border: 1px solid $dark-olive;
-  }
-  #cke_id_bad{
-    border: 1px solid $blood-orange;
+  label[for$="bad"]{
+    background-color: $clemintine;
+    border-color: darken($clemintine, 10%);
+    color: $slate;
+    text-shadow: none;
   }
   label[for$="ugly"]{
     @extend .alert-error;
   }
+  #cke_id_good {
+    border: 1px solid $dark-olive;
+  }
+  #cke_id_bad{
+    border: 1px solid $clemintine;
+  }
+
   #cke_id_ugly {
     border: 1px solid #af1c00;
   }
