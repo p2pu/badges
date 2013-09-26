@@ -5,7 +5,7 @@
 {% block title %}P2PU Badges | Browse{% endblock %}
 
 {% block js %}
-		<script type="text/javascript" src="{% static 'js/browse_items.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/vendor/jquery.infinitescroll.js' %}"></script>
 		<script type="text/javascript" src="{% static 'js/browse_items.js' %}"></script>
     <script>Badges.Browse.init('{% url browse_all_badges %}');</script>
 {% endblock %}
