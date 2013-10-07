@@ -10,8 +10,10 @@ from .notification_helpers import send_badge_awarded_notification
 class DuplicateTitleError(Exception):
     pass
 
+
 class NotTheAuthorError(Exception):
     pass
+
 
 class HasProjectsAttachedError(Exception):
     pass
@@ -36,7 +38,8 @@ def _badge2dict(badge_db):
         'author_uri': badge_db.author_uri,
         'deleted': badge_db.deleted,
         'partner_name': badge_db.partner_name,
-        'published': badge_db.date_published is not None
+        'published': badge_db.date_published is not None,
+        'published_date': badge_db.date_published
     }
     return badge
 
@@ -168,6 +171,7 @@ def get_user_earned_badges(user_uri):
         badge_dict = _badge2dict(award.badge)
         badge_dict['award_id'] = award.pk
         badge_dict['award_ob_state'] = award.ob_state
+        badge_dict['date_awarded'] = award.date_awarded
         ret_val.append(badge_dict)
     return ret_val
 
@@ -264,3 +268,10 @@ def if_title_exists(search_query, badge_id):
         return badges
 
     return None
+
+
+def get_badges_by_user(user_uri):
+    # Needs test
+    badges = Badge.objects.filter(author_uri=user_uri)
+
+    return [_badge2dict(badge) for badge in badges]

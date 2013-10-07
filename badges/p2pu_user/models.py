@@ -41,7 +41,8 @@ def _user2dict(user):
         'email': user.email,
         'uri': username2uri(user.username),
         'image_url': user.image_url,
-        'partner': _get_partners_for_user(user)
+        'date_joined': user.date_joined,
+        'partner': _get_partners_for_user(user),
     }
 
 

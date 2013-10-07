@@ -1,67 +1,74 @@
 {% load i18n %}
 
-<form action="" method="POST" enctype="multipart/form-data" class="span7 project-form-snippet" >
-  <fieldset>
-    {% csrf_token %}
+<form action="" method="POST" enctype="multipart/form-data" class="span7 project-form-snippet">
+	<fieldset>
+		{% csrf_token %}
 
-    <div class="control-group {% if form.errors.title %}error{% endif %}">
-      <label>{% trans 'Title:' %}</label>
-      <input type="text" name="title" class="span7" placeholder="{% trans 'What is the name of your masterpiece?' %}" {% if form.title.value %}value="{{form.title.value}}"{% endif %} required >
-      {% for error in form.errors.title %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+		<div class="control-group {% if form.errors.title %}error{% endif %}">
+			<label>{% trans 'Title:' %}</label>
+			<input type="text" name="title" class="span7" placeholder="{% trans 'What is the name of your masterpiece?' %}"
+			       {% if form.title.value %}value="{{ form.title.value }}"{% endif %} required>
+			{% for error in form.errors.title %}
+				<span class="help-block">{{ error }}</span>
+			{% endfor %}
+		</div>
 
-    <div class="control-group {% if form.errors.work_url %}error{% endif %}">
-      <label>{% trans 'Project URL:' %}</label>
-      <input type="url" name="work_url" class="span7" placeholder="{% trans 'Where can we find your work on the web?' %}" {% if form.work_url.value %}value="{{form.work_url.value}}"{% endif %} required>
-      {% for error in form.errors.work_url %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+		<div class="control-group {% if form.errors.work_url %}error{% endif %}">
+			<label>{% trans 'Project URL:' %}</label>
+			<input type="url" name="work_url" class="span7"
+			       placeholder="{% trans 'Where can we find your work on the web?' %}"
+			       {% if form.work_url.value %}value="{{ form.work_url.value }}"{% endif %} required>
+			{% for error in form.errors.work_url %}
+				<span class="help-block">{{ error }}</span>
+			{% endfor %}
+		</div>
 
-    <div class="control-group {% if form.errors.description %}error{% endif %}">
-      <label>{% trans 'Project description:' %}</label>
-      <textarea name="description" rows="4" class="ckeditor span7" placeholder="{% trans 'What steps did you take to complete this project? (This helps experts give you more precise feedback.)' %}">
-          {% if form.description.value %}
-              &lt;div&gt;{{form.description.value}}&lt;/div&gt;
-          {% endif %}
-      </textarea>
-      {% for error in form.errors.description %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+		<div class="control-group {% if form.errors.description %}error{% endif %}">
+			<label>{% trans 'Project description:' %}</label>
+			<textarea name="description" rows="4" class="ckeditor span7"
+			          placeholder="{% trans 'What steps did you take to complete this project? (This helps experts give you more precise feedback.)' %}">
+				{% if form.description.value %}
+					&lt;div&gt;{{ form.description.value }}&lt;/div&gt;
+				{% endif %}
+			</textarea>
+			{% for error in form.errors.description %}
+				<span class="help-block">{{ error }}</span>
+			{% endfor %}
+		</div>
 
-    <div class="control-group {% if form.errors.reflection %}error{% endif %}">
-      <label>{% trans 'Second thoughts?' %}</label>
-      <textarea name="reflection" rows="4" class="ckeditor span7" placeholder="{% trans 'What might you do differently next time? (Experts might have ideas and suggestions for you.)' %}">
-          {% if form.reflection.value %}
-              &lt;div&gt;{{form.reflection.value}}&lt;/div&gt;
-          {% endif %}
-      </textarea>
-      {% for error in form.errors.reflection %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+		<div class="control-group {% if form.errors.reflection %}error{% endif %}">
+			<label>{% trans 'Second thoughts?' %}</label>
+			<textarea name="reflection" rows="4" class="ckeditor span7"
+			          placeholder="{% trans 'What might you do differently next time? (Experts might have ideas and suggestions for you.)' %}">
+				{% if form.reflection.value %}
+					&lt;div&gt;{{ form.reflection.value }}&lt;/div&gt;
+				{% endif %}
+			</textarea>
+			{% for error in form.errors.reflection %}
+				<span class="help-block">{{ error }}</span>
+			{% endfor %}
+		</div>
 
-    <div class="control-group {% if form.errors.image %}error{% endif %}">
-      <label>{% trans 'Project cover image' %}</label>
-      <input type="file" name="image" class="span7">
-      <span class="help-block">{% trans 'Upload a screenshot of your glorious creation.' %}</span>
-      {% for error in form.errors.image %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+		<div class="control-group {% if form.errors.image %}error{% endif %}">
+			<label>{% trans 'Project cover image' %}</label>
+			<input type="file" name="image" class="span7">
+			<span class="help-block">{% trans 'Upload a screenshot of your glorious creation.' %}</span>
+			{% for error in form.errors.image %}
+				<span class="help-block">{{ error }}</span>
+			{% endfor %}
+		</div>
 
-    <div class="control-group {% if form.errors.tags %}error{% endif %}">
-      <label>{% trans 'Tags' %}</label>
-      <input type="text" name="tags" class="span7" placeholder="{% trans 'Add some tags so folks can find your masterpiece.' %}" {% if form.tags.value %}value="{{form.tags.value}}"{% endif %}>
-      {% for error in form.errors.tags %}
-        <span class="help-block">{{ error }}</span>
-      {% endfor %}
-    </div>
+		<div class="control-group {% if form.errors.tags %}error{% endif %}">
+			<label>{% trans 'Tags' %}</label>
+			<input type="text" name="tags" class="span7"
+			       placeholder="{% trans 'Add some tags so folks can find your masterpiece.' %}"
+			       {% if form.tags.value %}value="{{ form.tags.value }}"{% endif %}>
+			{% for error in form.errors.tags %}
+				<span class="help-block">{{ error }}</span>
+			{% endfor %}
+		</div>
 
-    <button type="submit" class="btn btn-cyan btn-large">{% trans 'Create project' %}</button>
-  </fieldset>
+		<button type="submit" class="btn btn-cyan btn-large">{% trans 'Create project' %}</button>
+	</fieldset>
 </form>
 

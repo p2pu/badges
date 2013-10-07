@@ -2,70 +2,76 @@
 
 
 <div class="span3 affix-top">
-    <label>{% trans label %}&nbsp;</label>
-    <div class="badge-info">
-        <div class="clearfix">
-            <a class="badge-info-vertical-img" href="{% url badge_view badge.id %}">
-                <img src="{{ badge.image.url }}"/>
-            </a>
-            <div class="badge-info-vertical-details">
-                <h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
-                <a class="badge-info-name" href="{% url badge_view badge.id %}">
-                    <h3>{{ badge.title }}</h3>
-                </a>
+	<label>{% trans label %}&nbsp;</label>
 
-                <h4 class="badge-info-desc">{% trans 'Description' %}:</h4>
-                <p>{{ badge.description }}</p>
+	<div class="badge-info">
+		<div class="clearfix">
+			<a class="badge-info-vertical-img" href="{% url badge_view badge.id %}">
+				<img src="{{ badge.image.url }}" />
+			</a>
 
-                <h4 class="badge-info-vertical-requirements">{% trans 'Criteria to receive the Badge' %}:</h4>
-                <p>{{ badge.requirements }}</p>
+			<div class="badge-info-vertical-details">
+				<h4 class="badge-info-title">{% trans 'We call this nifty badge' %}:</h4>
+				<a class="badge-info-name" href="{% url badge_view badge.id %}">
+					<h3>{{ badge.title }}</h3>
+				</a>
 
-                <h4 class="badge-info-horizontal-requirements">{% trans 'Experts' %}:</h4>
-                <ul class="badge-view-experts unstyled thumbnails">
-                    {% for expert in experts %}
-                        <li class="{% ifequal badge.author.username expert.username%}badge-author{% endifequal %}">
-                            <a href="{% url dashboard expert.username %}">
-                                <img class="img-rounded"
-                                     src="{{ expert.image_url }}"
-                                     alt="{{ expert.username }}"
-                                     title="{{ expert.username }}"/>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="badge-social clearfix">
-            <div class="pull-left social-item twitter">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu"
-                   data-size="large" data-text="Check out this {{ badge.title }} Badge {{ badge.url }}">Tweet</a>
-                <script>!function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = "//platform.twitter.com/widgets.js";
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-                }(document, "script", "twitter-wjs");</script>
-            </div>
-            <div class="pull-left social-item google">
-                <!-- Place this tag where you want the share button to render. -->
-                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="28"></div>
+				<h4 class="badge-info-desc">{% trans 'Description' %}:</h4>
 
-                <!-- Place this tag after the last share tag. -->
-                <script type="text/javascript">
-                    (function () {
-                        var po = document.createElement('script');
-                        po.type = 'text/javascript';
-                        po.async = true;
-                        po.src = 'https://apis.google.com/js/plusone.js';
-                        var s = document.getElementsByTagName('script')[0];
-                        s.parentNode.insertBefore(po, s);
-                    })();
-                </script>
-            </div>
-        </div>
-    </div>
+				<p>{{ badge.description }}</p>
+
+				<h4 class="badge-info-vertical-requirements">{% trans 'Criteria to receive the Badge' %}:</h4>
+
+				<p>{{ badge.requirements|safe }}</p>
+
+				{% if experts %}
+					<h4 class="badge-info-horizontal-requirements">{% trans 'Experts' %}:</h4>
+					<ul class="badge-view-experts unstyled thumbnails">
+						{% for expert in experts %}
+							<li class="{% ifequal badge.author.username expert.username %}badge-author{% endifequal %}">
+								<a href="{% url dashboard expert.username %}">
+									<img class="img-rounded"
+									     src="{{ expert.image_url }}"
+									     alt="{{ expert.username }}"
+									     title="{{ expert.username }}" />
+								</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+		<div class="badge-social clearfix">
+			<div class="pull-left social-item twitter">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-via="p2pu"
+				   data-size="large" data-text="Check out this {{ badge.title }} Badge {{ badge.url }}">Tweet</a>
+				<script>!function (d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (!d.getElementById(id)) {
+						js = d.createElement(s);
+						js.id = id;
+						js.src = "//platform.twitter.com/widgets.js";
+						fjs.parentNode.insertBefore(js, fjs);
+					}
+				}(document, "script", "twitter-wjs");</script>
+			</div>
+			<div class="pull-left social-item google">
+				<!-- Place this tag where you want the share button to render. -->
+				<div class="g-plus" data-action="share" data-annotation="bubble" data-height="28"></div>
+
+				<!-- Place this tag after the last share tag. -->
+				<script type="text/javascript">
+					(function () {
+						var po = document.createElement('script');
+						po.type = 'text/javascript';
+						po.async = true;
+						po.src = 'https://apis.google.com/js/plusone.js';
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(po, s);
+					})();
+				</script>
+			</div>
+		</div>
+	</div>
 </div>
 

@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 import json
 from badge.models import Badge
 from badge.models import Award
-from media.models import get_image
+from media.processors import get_image
 from p2pu_user.models import get_user
 from .responses import create_assertion_from_template
 from .responses import create_badge_from_template

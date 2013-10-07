@@ -79,7 +79,7 @@ def create_project(badge_uri, author_uri, title, image_uri, work_url, descriptio
 
 def get_project(uri):
     project_db = Project.objects.get(id=uri2id(uri))
-    if not project_db.date_deleted == None:
+    if not project_db.date_deleted is None:
         raise Exception('Project deleted')
 
     return _project2dict(project_db)
@@ -92,6 +92,21 @@ def last_n_projects(n):
 
 def get_projects():
     projects = Project.objects.filter(date_deleted__isnull=True)
+    return [_project2dict(project) for project in projects]
+
+
+def get_projects_submitted_by_user(user_uri):
+    projects = Project.objects.filter(author_uri=user_uri)
+    if projects:
+        for project in projects:
+            feedback = get_project_feedback(id2uri(project.pk))
+    return [_project2dict(project) for project in projects]
+
+
+def get_project_awarded_to_expert(badge_uri, expert_uri):
+
+    projects = Project.objects.filter(badge_uri=badge_uri, author_uri=expert_uri)
+
     return [_project2dict(project) for project in projects]
 
 
@@ -118,10 +133,17 @@ def search_projects(badge_uri=None, author_uri=None):
 
 
 def get_projects_ready_for_feedback(badge_uri):
-    projects = Project.objects.filter(date_deleted__isnull=True)
-    projects = projects.filter(badge_uri=badge_uri)
-    projects = [_project2dict(project) for project in projects if ready_for_feedback(id2uri(project.id))]
-    return projects
+    """
+    Getting projects for a Badge that are ready for feedback
+    """
+    projects_list = []
+
+    projects = Project.objects.filter(date_deleted__isnull=True, badge_uri=badge_uri)
+
+    for project in projects:
+        if project and ready_for_feedback(id2uri(project.id), project):
+            projects_list.append(_project2dict(project))
+    return projects_list
 
 
 def can_revise_project(project_uri):
@@ -167,13 +189,13 @@ def revise_project(project_uri, improvement, work_url=None):
     return _revision2dict(revision)
 
 
-def ready_for_feedback(project_uri):
-    """ check if this is the right time in the cycle for an expert to give feedback """
-    project=Project.objects.get(id=uri2id(project_uri))
+def ready_for_feedback(project_uri, project=None):
+    """
+    Check if this is the right time in the cycle for an expert to give feedback
+    """
+    if not project:
+        project = Project.objects.get(id=uri2id(project_uri))
 
-    last_revision = None
-    if project.revision_set.count() > 0:
-        last_revision = project.revision_set.latest('date_created')
     last_feedback = None
     if project.feedback_set.count() > 0:
         last_feedback = project.feedback_set.latest('date_created')
@@ -181,8 +203,7 @@ def ready_for_feedback(project_uri):
     if last_feedback:
         if last_feedback.badge_awarded:
             return False
-        #if not last_revision or last_feedback.date_created > last_revision.date_created:
-        #    return False
+
     return True
 
 
@@ -266,6 +287,7 @@ def _feedback2dict(feedback):
         'ugly': feedback.ugly,
         'date_created': feedback.date_created,
         'badge_awarded': feedback.badge_awarded,
+        'project': _project2dict(feedback.project)
     }
     return json
 
@@ -296,5 +318,11 @@ def get_badge_uri_from_project_under_revision(project_uri):
             return None
     return project.badge_uri
 
+
+def get_projects_user_gave_feedback(user_uri):
+
+    project_list = Project.objects.filter(feedback__expert_uri=user_uri).distinct()
+
+    return [_project2dict(project) for project in project_list]
 
 

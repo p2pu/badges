@@ -1,53 +1,102 @@
-.p2pu-project-list{
-  list-style-type: none;
+.project-list {
   margin-left: 0;
-  border: 1px solid #aaa;
-  >li:first-child{
-    >.p2pu-project{
-      border-top: none;
-    }
-  }
-  border-radius: 4px;
 }
-.p2pu-project{
+
+.project {
   padding: 15px;
   background-color: $white;
-  border-top: 1px dotted #aaa;
-  .p2pu-project-img-link{
+  position: relative;
+  margin: 20px -3px 20px 0;
+  z-index: 100;
+  .img-link {
     float: left;
     display: block;
     min-width: 128px;
-    min-height: 128px;
+
     margin-right: 20px;
     text-align: center;
+    position: relative;
+
+    //min-height: 128px;
+
   }
-  .p2pu-project-info-field{
-    .p2pu-project-title{
+  .info-field {
+    .title {
       font-size: 1.2em;
       font-weight: bold;
-      &:hover{
+      &:hover {
         text-decoration: none;
       }
-      .p2pu-project-desc{
+      .desc {
         margin-top: 10px;
       }
     }
-    .p2pu-project-submitter{
-        color: $gray;
-        &:hover{
-          color: $cyan;
-        }
+  }
+  .submitter {
+    position: absolute;
+    left: 10px;
+    bottom: -45px;
+    text-align: left;
+    @include transition(border, 500ms, ease-in);
+    &:hover {
+      .author-username {
+        color: $clemintine;
       }
+      img {
+        border-color: $clemintine;
+      }
+    }
+    .author-username {
+      font-size: 12px;
+      color: $steel;
+      margin-left: -10px;
+      height: 20px;
+      line-height: 18px;
+      width: 128px;
+      word-wrap: break-word;
+    }
+    img {
+      border: 4px solid $white;
+      max-width: 40px;
+
+    }
+  }
+}
+
+.project-badge-wrapper {
+  margin: 20px 0 0 0;
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+
+  .project-badge {
+    padding: 10px;
+    background-color: lighten($silverLight, 3%);
+    width: 102%;
+    margin-left: -19px;
+    @include box-shadow(0px 1px 10px 1px rgba(0, 0, 0, 0.1));
   }
 
-
+  .badge-title {
+    padding: 5px;
+    margin: 10px 0 0 0;
+  }
+  .badge-image{
+    max-width: 75px;
+    margin-right: 10px;
+  }
+  .badge-author{
+    margin: 10px 0 0 0;
+  }
 }
-.project-form-snippet{
+
+.project-form-snippet {
   margin-left: 0;
 }
-.project-summary{
-  dl{
-    &:first-child{
+
+.project-summary {
+  dl {
+    &:first-child {
       margin-top: 0;
     }
   }

@@ -5,7 +5,7 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 from django.conf import settings
-from ..models import process_image
+from ..processors import process_image
 
 class Migration(DataMigration):
 

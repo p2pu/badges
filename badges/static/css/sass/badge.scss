@@ -182,10 +182,9 @@
   position: relative;
   margin-left: 0;
   background-color: $white;
-  @extend .thumbnail;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border: 1px solid #aaa;
-
+  @extend .thumbnail;
+  @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
   .overflow-handle {
     width: 100%;
     height: 265px;
@@ -336,4 +335,56 @@
   .social-item {
     width: 120px;
   }
+}
+
+.p2pu-badge-mini{
+  padding: 10px 10px 5px;
+  position: relative;
+  margin-left: 0;
+  background-color: $white;
+  border: 1px solid #aaa;
+  @extend .thumbnail;
+  @include border-radius(20px);
+  @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+  .overflow-handle {
+    width: 100%;
+    height: 115px;
+    overflow: hidden;
+  }
+  .badge-image-wrap {
+    display: block;
+    text-align: center;
+    min-height: 60px;
+  }
+  .badge-img{
+    width: 60px;
+  }
+  .badge-title {
+    color: $cyan;
+    font-family: $baseFontFamily;
+    text-align: center;
+  }
+  .badge-author-wrap{
+    font-family: $baseFontFamily;
+    font-size: 12px;
+    border-top: $silverLight 1px solid;
+    padding: 0;
+    position: relative;
+    span{
+      line-height: 14px;
+    }
+  }
+  .badge-author-link{
+    line-height: 14px;
+    word-wrap: break-word;
+  }
+  .author-icon{
+    width: 20px;
+    height: 20px;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin-bottom: 0;
+  }
+
 }

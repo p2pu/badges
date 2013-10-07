@@ -1,23 +1,83 @@
 {% load i18n %}
+{% load humanize %}
 {% load projects_tags %}
+
 {% with username=project.author.username %}
-<li>
-    <div class="p2pu-project clearfix">
-        <a class="p2pu-project-img-link" href="{% url project_view project.id %}">
-            <img src="{{ project.image.url }}"/>
-        </a>
-        <div class="p2pu-project-info-field">
-            <a class="p2pu-project-title" href="{% url project_view project.id %}">{{ project.title }}</a>
-            <div class="p2pu-project-desc">
-                {{ project.description|purge_content|truncatewords:20 }}
-            </div>
-            <div class="p2pu-project-link">
-                <a href="{{ project.work_url }}">{{ project.work_url }}</a>
-            </div>
-            <a href="{% url dashboard username %}" class="p2pu-project-submitter">
-                {% blocktrans %}by {{ username }}{% endblocktrans %}
-            </a>
-        </div>
-    </div>
-</li>
+	<li class="clearfix">
+		<div class="project thumbnail {% if project.badgew %}span7{% endif %}">
+			<div class="img-link">
+				<a href="{% url project_view project.id %}">
+					<img src="{{ project.image.url }}" />
+				</a>
+				<a href="{% url dashboard username %}" class="submitter">
+					<img class="img-circle" src="{{ project.author.image_url }}" alt="{{ username }}" />
+
+					<div class="author-username">{% trans 'by' %} {{ username }}</div>
+				</a>
+			</div>
+
+			<div class="info-field">
+				<div class="overflow-hidden">
+					<h4 class="badge-info-title">
+						{% trans 'Title' %}
+					</h4>
+					<a class="title" href="{% url project_view project.id %}">{{ project.title }}</a>
+					<h4 class="badge-info-desc">Description</h4>
+
+					<div class="desc">
+						{{ project.description|purge_content }}
+					</div>
+
+					<h4 class="badge-info-desc">{% trans 'Evidence' %}</h4>
+
+					<div class="link">
+						<h5><a href="{{ project.work_url }}">{{ project.work_url }}</a></h5>
+					</div>
+					{% if give_feedback %}
+						<a class="btn btn-mini btn-primary revise-button pull-right" href="{% url project_view project.id %}">
+							{% trans 'Give feedback' %}
+						</a>
+					{% endif %}
+				</div>
+
+			</div>
+			{% if project.badge %}
+				{% with badge=project.badge %}
+					<div class="project-badge-wrapper ">
+						<div class="project-badge thumbnail text-left">
+							<img class="badge-image pull-left" src="{{ badge.image.url }}" alt="{{ baddge.title }}" />
+
+							<div class="badge-description overflow-hidden">
+								{% if project.feedback and project.feedback.badge_awarded %}
+									<h5 class="pull-right">
+										<a class="award-info" href="{% url project_view project.id %}">
+											{% trans 'This Badge was awarded' %} {{ project.feedback.badge_awarded_date|naturaltime }}
+										</a>
+									</h5>
+								{% elif project.feedback and not project.feedback.badge_awarded %}
+									<a class="award-info btn btn-mini btn-primary pull-right" href="{% url project_view project.id %}">
+										{% trans 'View Feedback' %}
+									</a>
+								{% else %}
+									<h5 class="award-info pull-right">{% trans 'This project has no feedback yet' %}</h5>
+								{% endif %}
+								<h5 class="badge-title">
+									<a href="{% url badge_view badge.id %}">{{ badge.title }}</a>
+								</h5>
+
+								<h5 class="badge-author">
+									<small>{% trans 'by' %} <a href="{% url dashboard badge.author.username %}">
+										{{ badge.author.username }}</a>
+									</small>
+									<a class="pull-right" href="{% url badge_view badge.id %}">{% trans 'More about this Badge' %} <i
+											class="icon-double-angle-right"></i></a>
+								</h5>
+							</div>
+						</div>
+					</div>
+				{% endwith %}
+			{% endif %}
+		</div>
+
+	</li>
 {% endwith %}

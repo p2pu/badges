@@ -1,7 +1,7 @@
 import os
 from PIL import Image
 from django.test import TestCase
-from media import models as media_api
+from media import processors as media_api
 
 
 class TestImageProcessing(TestCase):

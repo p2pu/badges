@@ -1,5 +1,6 @@
 # Django settings for badges project.
 import os
+import sys
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -233,3 +234,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap'
 # Embedding settings
 #################################################################
 ORGANISATION_URL = 'badges.p2pu.org'
+
+##################################################################
+# Testing mode
+#################################################################
+TEST = 'test' in sys.argv
