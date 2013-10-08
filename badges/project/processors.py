@@ -141,7 +141,9 @@ def get_projects_ready_for_feedback(badge_uri):
     projects = Project.objects.filter(date_deleted__isnull=True, badge_uri=badge_uri)
 
     for project in projects:
-        if project and ready_for_feedback(id2uri(project.id), project):
+        feedback = Feedback.objects.filter(project=project, badge_awarded=True).exists()
+
+        if project and not feedback and ready_for_feedback(id2uri(project.id), project):
             projects_list.append(_project2dict(project))
     return projects_list
 
