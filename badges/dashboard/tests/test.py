@@ -1,4 +1,5 @@
 from django.test import LiveServerTestCase
+from time import sleep
 
 
 class SeleniumTestCase(LiveServerTestCase):
@@ -9,3 +10,6 @@ class SeleniumTestCase(LiveServerTestCase):
 
     def open(self, url):
         self.wd.get("%s%s" % (self.live_server_url, url))
+
+    def pause(self, time):
+        sleep(time)

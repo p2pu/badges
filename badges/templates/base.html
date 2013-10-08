@@ -89,7 +89,7 @@
 					<div class="pull-right btn-toolbar" style="margin: 0;">
 						<div class="btn-group">
 							{% if request.session.user %}
-								<a class="btn" href="{% url dashboard request.session.user.username %}"
+								<a id="user_dashboard_btn" class="btn" href="{% url dashboard request.session.user.username %}"
 								   data-toggle="tooltip" title="{{ request.session.user.username }}'s {% trans 'Dashboard' %}">
 									<img src="{{ request.session.user.image_url }}"
 									     alt="{{ request.session.user.username }}" height="23px"

@@ -8,7 +8,7 @@ from webdriver import CustomWebDriver
 
 class Auth(SeleniumTestCase):
     def setUp(self):
-        # setUp is where you setup call fixture creation scripts
+        # setUp is where setup call fixture creation scripts
         # and instantiate the WebDriver, which in turns loads up the browser.
         self.user = User.objects.create(username='erika',
                                         image_url='http://placehold.it/40x40',
@@ -31,23 +31,42 @@ class Auth(SeleniumTestCase):
         """
 
         # Login
-        url = reverse('dashboard', args=[self.user.username])
-        self.open(url)
-
-        #self.open(reverse('become', args=[self.user.username]))
-
+        #url = reverse('dashboard', args=[self.user.username])
+        #self.open(url)
+        url = reverse('become', args=[self.user.username])
+        self.open(url=url)
+        self.wd.wait_for_css('[title="%s\'s Dashboard"]' % self.user.username)
 
         # Open the dashboard page
-        #self.open(reverse('dashboard', args=[self.user.username]))
+        self.wd.find_css('#user_dashboard_btn').click()
+        self.wd.wait_for_css('.user-img')
 
-        self.wd.wait_for_css('[title="My dashboard"]')
+        body = self.wd.find_element_by_tag_name('body')
+        self.assertIn('Projects that need your feedback', body.text)
+        self.assertIn('Get Your Own Nifty Badge!', body.text)
+        self.wd.find_element_by_link_text('Browse')
 
-        # Wait until redirect to dashboard page is done
-        #self.wd.wait_for_css('container.top.dashboard')
+        # Create a Badge
+        self.wd.find_element_by_link_text('Create a Badge').click()
+        self.wd.wait_for_css('.preview-badge-button')
+        body = self.wd.find_element_by_tag_name('body')
+        self.assertIn('Create a Badge', body.text)
 
+        self.wd.find_css('#id_title').send_keys("Test Badge")
+        self.wd.find_css('#id_description').send_keys("Test Badge description")
 
+        iframe = self.wd.find_elements_by_tag_name("iframe")
+        """
+        self.wd.switch_to_window(iframe)
 
+        tinymce = self.wd.find_elements_by_tag_name("body")
+        tinymce.clear()
+        tinymce.send_keys("Test Badge requirements")
 
+        self.wd.find_css('.preview-badge-button').click()
+        self.wd.wait_for_css('#div_id_image_uri .required')
+        self.pause(5000)
+        """
         # Selenium knows it has to wait for page loads (except for AJAX requests)
         # so we don't need to do anything about that, and can just
         # call find_css. Since we can chain methods, we can
