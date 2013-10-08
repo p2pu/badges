@@ -2,7 +2,7 @@ from django.utils import simplejson
 from django.core.files import File
 from django.conf import settings
 
-from media import models as media_api
+from media import processors as media_api
 from badge import models as badge_api
 from p2pu_user import models as p2pu_user_api
 import os

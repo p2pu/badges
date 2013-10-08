@@ -50,9 +50,6 @@
   body {
     padding: 0;
   }
-  .wrap {
-    padding: 0 20px;
-  }
   .nav-collapse {
     .dropdown-menu {
       display: block !important;
@@ -106,94 +103,6 @@
         @include box-shadow(inset 0 0 15px 3px #222);
       }
     }
-    /*
-    .btn-toolbar{
-      float: left;
-      margin-left: 10px !important;
-      width: 100%;
-      position: absolute;
-      top: 10px;
-      .btn-group{
-        width: 93%;
-        .navbar-search{
-        margin-top: 55px;
-        padding: 0;
-        border: none;
-        input{
-          padding-right: 25px;
-          height: 45px;
-          font-size: 20px;
-        }
-        .clear-search{
-          position: absolute;
-          right: 5px;
-          top: 15px;
-          color: #ccc;
-        }
-      }
-        > .btn:first-child{
-          position: absolute;
-          top: 0;
-          right: 0;
-        }
-        > .btn:nth-child(2){
-          position: absolute;
-          top: 0;
-          left: 45px;
-          line-height: 28px;
-        }
-        > .btn:last-child{
-          position: absolute;
-          top: 0;
-          left: 0;
-          line-height: 28px;
-        }
-      }
-
-    }
-    li a {
-      background: #3b3b3b;
-      background: -o-linear-gradient(top, #3e3e3e, #383838);
-      background: -ms-linear-gradient(top, #3e3e3e, #383838);
-      background: -moz-linear-gradient(top, #3e3e3e, #383838);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #3e3e3e), color-stop(1, #383838));
-      background: -webkit-linear-gradient(#3e3e3e, #383838);
-      background: linear-gradient(top, #3e3e3e, #383838);
-      font-family: "museo-sans","Museo Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-      font-weight: 300;
-      font-weight: 700;
-      display: block;
-      padding: 0.5em 5%;
-      border-top: 1px solid #484848;
-      border-bottom: 1px solid #2e2e2e;
-      text-decoration: none;
-      text-shadow: 0 -1px 2px #222;
-      color: #f7f7f7;
-    }
-    li a:active {
-      background: #363636;
-      background: -o-linear-gradient(top, #3e3e3e, #2e2e2e);
-      background: -ms-linear-gradient(top, #3e3e3e, #2e2e2e);
-      background: -moz-linear-gradient(top, #3e3e3e, #2e2e2e);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #3e3e3e), color-stop(1, #2e2e2e));
-      background: -webkit-linear-gradient(#3e3e3e, #2e2e2e);
-      background: linear-gradient(top, #3e3e3e, #2e2e2e);
-      -moz-box-shadow: 0 2px 7px #222 inset;
-      -webkit-box-shadow: 0 2px 7px #222 inset;
-      box-shadow: 0 2px 7px #222 inset;
-      border-top-color: #222;
-      padding-top: 0.55em;
-      padding-bottom: 0.45em;
-    }
-    li a:hover, li a:focus {
-      background: #404040;
-      background: -o-linear-gradient(top, #484848, #383838);
-      background: -ms-linear-gradient(top, #484848, #383838);
-      background: -moz-linear-gradient(top, #484848, #383838);
-      background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #484848), color-stop(1, #383838));
-      background: -webkit-linear-gradient(#484848, #383838);
-      background: linear-gradient(top, #484848, #383838);
-    }*/
   }
   .navbar-inner {
     position: relative;
@@ -305,6 +214,47 @@
     border-top: dotted 1px $slate;
     padding-top: 20px;
   }
+// Project tile
+  .project {
+    .img-link {
+      float: none;
+    }
+    .info-field {
+      padding-right: 0;
+      padding-top: 40px;
+    }
+    .project-badge-wrapper {
+      margin-left: -20px;
+    }
+    .project-badge {
+      position: initial;
+      margin: 20px auto;
+      border: 1px solid $silver;
+      @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.055));
+      @include border-radius(4px);
+    }
+    .badge-description {
+      overflow: initial;
+    }
+    .award-info {
+      position: absolute;
+      bottom: 40px;
+      right: -18px;
+      left: 95px;
+    }
+
+    .badge-title {
+      margin-top: 0;
+      margin-bottom: 50px;
+    }
+  }
+// User tile
+  .p2pu-user {
+    margin-left: 0 !important;
+    width: 100px;
+    float: left !important;
+    margin-right: 20px;
+  }
   footer a {
     float: left;
     margin: 10px;
@@ -331,9 +281,6 @@
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  body {
-    background-color: red;
-  }
   [class*="span"] {
     float: none;
     display: block;
@@ -356,7 +303,9 @@
 
 /* iPads (portrait) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
-
+  #landing-users {
+    margin-left: 0;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 979px) {

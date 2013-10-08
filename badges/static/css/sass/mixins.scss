@@ -1,4 +1,4 @@
-@mixin p2pu-btn($startColor, $endColor, $border) {
+/*@mixin p2pu-btn($startColor, $endColor, $border) {
   color: $slate;
   @include gradient-vertical($startColor: $startColor, $endColor: $endColor);
   border-color: $startColor $endColor $border;
@@ -21,5 +21,22 @@
 
 .btn-clementine{
   @include buttonBackground($clemintine, $pumpkin);
+}*/
+
+@mixin  transparent_class($opacity: 5) {
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 10})";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=$opacity * 10);
+
+  /* Netscape */
+  -moz-opacity: $opacity/10;
+
+  /* Safari 1.x */
+  -khtml-opacity: $opacity/10;
+
+  /* Good browsers */
+  opacity: $opacity/10;
 }
 

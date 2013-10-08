@@ -4,12 +4,13 @@ from django.db.models import Q
 from badge.models import Badge
 from badge.models import Award
 
-class BadgePublishedFilter(admin.SimpleListFilter):
-    title = ('Published')
-    parameter_name = 'published'
-    def lookups(self, request, model_admin):
 
-         return (
+class BadgePublishedFilter(admin.SimpleListFilter):
+    title = 'Published'
+    parameter_name = 'published'
+
+    def lookups(self, request, model_admin):
+        return (
             ('published',           'Published'),
             ('unpublished',         'Not published'),
             ('publishedeleted',     'Published but deleted'),
@@ -35,7 +36,7 @@ class AwardsEarnedAndPushedFilter(admin.SimpleListFilter):
     parameter_name = 'project'
 
     def lookups(self, request, model_admin):
-         return (
+        return (
             ('pushed',          'Pushed to backpack'),
             ('earned',          'Earned by project'),
             ('earnedandpushed', 'Earned by project and pushed'),

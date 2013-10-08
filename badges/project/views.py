@@ -8,7 +8,7 @@ from django.conf import settings
 
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
-from media import models as media_api
+from media import processors as media_api
 from p2pu_user import models as p2pu_user_api
 from project import processors as project_api
 from project.forms import ProjectForm
@@ -17,11 +17,12 @@ from project.forms import RevisionForm
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
 
+
 @require_login
-def create( request, badge_id ):
+def create(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
-    context = { 'badge': badge }
+    context = {'badge': badge}
     user_uri = request.session['user']['uri']
 
     if request.method == 'POST':
@@ -52,7 +53,7 @@ def create( request, badge_id ):
         except project_api.MultipleProjectError:
             messages.error(request, _('You have already submitted a project for this badge.'))
         except media_api.UploadImageError:
-            messages.error(request,_('Project image cannot be uploaded. Possible reasons: format not supported'
+            messages.error(request, _('Project image cannot be uploaded. Possible reasons: format not supported'
                                       '(png, jpeg, jpg, gif), file size too large (up to 256kb).'))
 
     context['form'] = form
@@ -64,7 +65,6 @@ def create( request, badge_id ):
 
 
 def view(request, project_id):
-
     project = project_api.get_project(project_api.id2uri(project_id))
     project = fetch_resources(project)
     badge = badge_api.get_badge(project['badge_uri'])
@@ -97,7 +97,7 @@ def view(request, project_id):
 
 
 @require_login
-def feedback(request, project_id ):
+def feedback(request, project_id):
     project = project_api.get_project(project_api.id2uri(project_id))
     fetch_resources(project)
     feedback = project_api.get_project_feedback(project_api.id2uri(project_id))
@@ -183,28 +183,33 @@ def revise(request, project_id):
     )
 
 
-def review( request ):
-    """ This view shows a list of projects for a user that he/she can submit feedback on """
+def review(request):
+    """
+    This view shows a list of projects for a user that he/she can submit feedback on
+    """
 
     user = request.session.get('user')
     projects = []
+
     if user:
         user_badges = badge_api.get_user_earned_badges(user['uri'])
         for badge in user_badges:
             projects += project_api.get_projects_ready_for_feedback(badge['uri'])
 
-
     badges = []
+    feedback_list = []
+
     if len(projects) == 0:
         badges = badge_api.get_published_badges()
-
-    context = {
-        'projects': map(fetch_resources, projects),
-        'badges': map(fetch_badge_resources, badges)
-    }
+    else:
+        for project in projects:
+            feedback_list = project_api.get_project_feedback(project['uri'])
+            fetch_resources(project, feedback_list)
 
     return render_to_response(
-        'project/review.html',
-        context,
+        'project/review.html', {
+            'projects': map(fetch_resources, projects),
+            'badges': map(fetch_badge_resources, badges)
+        },
         context_instance=RequestContext(request)
     )

@@ -6,84 +6,84 @@
 {% block title %}P2PU Badges | View Project{% endblock %}
 
 {% block message %}
-    {% for fb in feedback %}
-        {% if 'badge_awarded' in fb and fb.badge_awarded %}
-            <div class="messages container">
-                <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <h4>
-                        {% trans 'This project was awarded ' %}{{ badge.title }}
-                        {% trans 'Badge' %} {{ fb.date_created|naturaltime }}
-                        {% trans 'by' %} <a href="{% url dashboard fb.expert.username %}">{{ feedback.0.expert.username }}</a>
-                    </h4>
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
+	{% for fb in feedback %}
+		{% if 'badge_awarded' in fb and fb.badge_awarded %}
+			<div class="messages container">
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<h4>
+						{% trans 'This project was awarded ' %}{{ badge.title }}
+						{% trans 'Badge' %} {{ fb.date_created|naturaltime }}
+						{% trans 'by' %} <a href="{% url dashboard fb.expert.username %}">{{ feedback.0.expert.username }}</a>
+					</h4>
+				</div>
+			</div>
+		{% endif %}
+	{% endfor %}
 {% endblock %}
 
 {% block body %}
-    <div class="container project-view">
-        <div class="row">
-            <div class="span12">
-                <h2>
-                    {% blocktrans with badge_title=badge.title %}
-                        Project submitted for {{ badge_title }} Badge.{% endblocktrans %}
-                </h2>
-            </div>
-        </div>
-        <div class="row">
-            {% include 'badge/badge_info_vertical.html' with badge=badge %}
-            <div class="span9 project-info">
+	<div class="container project-view">
+		<div class="row">
+			<div class="span12">
+				<h2>
+					{% blocktrans with badge_title=badge.title %}
+						Project submitted for {{ badge_title }} Badge.{% endblocktrans %}
+				</h2>
+			</div>
+		</div>
+		<div class="row">
+			{% include 'badge/badge_info_vertical.html' with badge=badge %}
+			<div class="span9 project-info">
 
-                {% with username=project.author.username %}
-                <h3>
-                    {% trans 'Version submitted' %} {{ project.date_created|naturaltime }}
-                    {% trans 'by' %}
-                    <a href="{% url dashboard username %}">{{ username }}</a>
-                </h3>
-                {% endwith %}
-                <img class="img-polaroid" src="{{ project.image.url }}"/>
+				{% with username=project.author.username %}
+					<h3>
+						{% trans 'Version submitted' %} {{ project.date_created|naturaltime }}
+						{% trans 'by' %}
+						<a href="{% url dashboard username %}">{{ username }}</a>
+					</h3>
+				{% endwith %}
+				<img class="img-polaroid" src="{{ project.image.url }}" />
 
-                <div class="project-summary">
-                    <dl>
-                        <dt><i class="icon-caret-right"></i>{% trans 'Title' %}</dt>
-                        <dd>{{ project.title }}</dd>
-                    </dl>
-                    <dl>
-                        <dt><i class="icon-caret-right"></i>{% trans 'Url' %}</dt>
-                        <dd><a href="{{ project.work_url }}">{{ project.work_url }}</a></dd>
-                    </dl>
-                    <dl>
-                        <dt><i class="icon-caret-right"></i>{% trans 'Steps taken' %}</dt>
-                        <dd>{{ project.description|purge_content }}</dd>
-                    </dl>
-                    <dl>
-                        <dt><i class="icon-caret-right"></i>{% trans 'Lessons learned' %}</dt>
-                        <dd>{{ project.reflection|purge_content }}</dd>
-                    </dl>
-                </div>
-            {% if can_give_feedback and not feedback %}
-                <a href="{% url project_feedback project.id %}"
-                           class="btn btn-primary">{% trans 'Give feedback' %}</a>
-            {% endif %}
-            </div>
+				<div class="project-summary">
+					<dl>
+						<dt><i class="icon-caret-right"></i>{% trans 'Title' %}</dt>
+						<dd>{{ project.title }}</dd>
+					</dl>
+					<dl>
+						<dt><i class="icon-caret-right"></i>{% trans 'Url' %}</dt>
+						<dd><a href="{{ project.work_url }}">{{ project.work_url }}</a></dd>
+					</dl>
+					<dl>
+						<dt><i class="icon-caret-right"></i>{% trans 'Steps taken' %}</dt>
+						<dd>{{ project.description|purge_content }}</dd>
+					</dl>
+					<dl>
+						<dt><i class="icon-caret-right"></i>{% trans 'Lessons learned' %}</dt>
+						<dd>{{ project.reflection|purge_content }}</dd>
+					</dl>
+				</div>
+				{% if can_give_feedback and not feedback %}
+					<a href="{% url project_feedback project.id %}"
+					   class="btn btn-primary">{% trans 'Give feedback' %}</a>
+				{% endif %}
+			</div>
 
-            {% include 'project/feedback_thread_view.html' with badge=badge feedback=feedback %}
-            <div class="row">
-                <div class="span2">&nbsp;</div>
-                    <div class="span10 feedback-give-revise">
-                        {% if can_give_feedback and feedback %}
-                            <a href="{% url project_feedback project.id %}"
-                               class="btn btn-primary">{% trans 'Give feedback' %}</a>
-                        {% endif %}
-                        {% if can_revise %}
-                            <a href="{% url project_revise project.id %}"
-                               class="btn btn-primary">{% trans 'Revise project' %}</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
+			{% include 'project/feedback_thread_view.html' with badge=badge feedback=feedback %}
+			<div class="row">
+				<div class="span2">&nbsp;</div>
+				<div class="span10 feedback-give-revise">
+					{% if can_give_feedback and feedback %}
+						<a href="{% url project_feedback project.id %}"
+						   class="btn btn-primary">{% trans 'Give feedback' %}</a>
+					{% endif %}
+					{% if can_revise %}
+						<a href="{% url project_revise project.id %}"
+						   class="btn btn-primary">{% trans 'Revise project' %}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 
-        </div>
+	</div>
 {% endblock %}

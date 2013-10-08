@@ -85,7 +85,7 @@ def redirect( request ):
 
 
 def become( request, username ):
-    if settings.DEBUG:
+    if settings.DEBUG or settings.TEST:
         request.session['user'] = p2pu_user_api.save_user(
             username,
             'http://placehold.it/40x40',

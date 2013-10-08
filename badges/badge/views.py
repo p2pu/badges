@@ -12,7 +12,7 @@ from django.utils import simplejson as json
 from badge.forms import BadgeForm
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
-from media import models as media_api
+from media import processors as media_api
 from project import processors as project_api
 from project.view_helpers import fetch_resources
 from oauthclient.decorators import require_login
@@ -163,7 +163,11 @@ def publish(request, badge_id):
 def view(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
     fetch_badge_resources(badge)
-    projects = map(fetch_resources, project_api.search_projects_awarded_badges(badge_uri=badge['uri']))
+
+    projects = project_api.search_projects_awarded_badges(badge_uri=badge['uri'])
+    for project in projects:
+        fetch_resources(project, feedback_list=project_api.get_project_feedback(project['uri']))
+
     expert_uris = badge_api.get_badge_experts(badge['uri'])
     user = None
 
@@ -174,8 +178,11 @@ def view(request, badge_id):
         if user['is_author']:
             user['can_delete_badge'] = badge_api.is_allowed_to_remove(badge['uri'])
         if user['is_expert']:
-            user['can_revise_projects'] = map(fetch_resources, project_api.get_projects_ready_for_feedback(badge['uri']))
             user['added_to_backpack'] = badge_api.pushed_to_backpack(badge, user['uri'])
+            user['can_revise_projects'] = project_api.get_projects_ready_for_feedback(badge['uri'])
+            for project in user['can_revise_projects']:
+                feedback_list = project_api.get_project_feedback(project['uri'])
+                fetch_resources(project, feedback_list=feedback_list)
 
     experts = map(p2pu_user_api.get_user, expert_uris)
 

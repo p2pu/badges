@@ -18,7 +18,8 @@
 {% block body %}
 
 	<section>
-		<div class="container">
+
+		<div class="container" id="top-page">
 			<div class="badges-landing-unit">
 				<h2>Get <span class="highlight-1">Feedback</span>
 				    on a <span class="highlight-2">Project</span> You Love.
@@ -68,6 +69,8 @@
 	</section>
 	<section>
 		<div class="container">
+			<a href="#top-page" class="pull-right back-to-top-link"><i class="icon-angle-up"> </i></a>
+
 			<div class="learners">
 				<h1>Meet the Learners</h1>
 				<ul class="thumbnails" id="landing-users">
@@ -99,10 +102,12 @@
 	</section>
 	<section>
 		<div class="container">
+			<a href="#top-page" class="pull-right back-to-top-link"><i class="icon-angle-up"> </i></a>
+
 			<div class="projects">
 				<h1>Projects in the Community</h1>
 				{% if projects %}
-					<ul class="p2pu-project-list fit-thumbnails">
+					<ul class="project-list unstyled">
 						{% for project in projects %}
 							{% include 'project/project_tile.html' %}
 						{% endfor %}
@@ -111,6 +116,4 @@
 			</div>
 		</div>
 	</section>
-
-
 {% endblock %}

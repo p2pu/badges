@@ -19,7 +19,7 @@ class Project(models.Model):
     date_deleted = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
-        return self.title
+        return '%s-%s' % (self.pk, self.title, )
 
 
 class Revision(models.Model):
@@ -42,6 +42,5 @@ class Feedback(models.Model):
     date_created = models.DateTimeField()
     badge_awarded = models.BooleanField(default=False)
 
-
     def __unicode__(self):
-        return self.project.title
+        return '%s-%s' % (self.pk, self.project.title, )

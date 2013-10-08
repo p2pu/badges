@@ -5809,9 +5809,6 @@ a {
 .well {
   border-bottom: 2px solid #cccccc; }
 
-.alert-info a {
-  color: #11FF11; }
-
 label {
   font-family: "arvo", Helvetica, sans-serif; }
 
@@ -5829,6 +5826,19 @@ hr {
 
 .text-right {
   text-align: right; }
+
+.back-to-top-link {
+  background-color: #cccccc;
+  border-radius: 0 0 10px 10px;
+  width: 60px;
+  text-align: center;
+  line-height: 30px;
+  margin: 0; }
+  .back-to-top-link i {
+    color: #515665;
+    font-size: 1.5em; }
+  .back-to-top-link:hover {
+    text-decoration: none; }
 
 .navbar-inner {
   background-image: none;
@@ -6184,6 +6194,43 @@ hr {
 .btn[disabled],
 fieldset[disabled] .btn {
   opacity: 0.65; }
+
+.alert {
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6); }
+
+.alert {
+  background-color: #ffda80;
+  border-color: #ffbc1a;
+  color: #805b00; }
+  .alert h4 {
+    color: #805b00; }
+
+.alert-info {
+  background-color: #9bfcf3;
+  border-color: #05c6b4;
+  color: #049487; }
+  .alert-info h4 {
+    color: #049487; }
+  .alert-info .alert-link {
+    color: #8ba200; }
+    .alert-info .alert-link:hover {
+      text-decoration: underline; }
+
+.alert-success {
+  background-color: #e4ff3c;
+  border-color: #b7d500;
+  color: #8ba200; }
+  .alert-success h4 {
+    color: #8ba200; }
+
+.alert-error {
+  background-color: #ffad69;
+  border-color: #ff7503;
+  color: #cf5e00; }
+  .alert-error h4 {
+    color: #cf5e00; }
 
 .label-important {
   background-color: #b94a48; }

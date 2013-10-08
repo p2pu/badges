@@ -1,5 +1,38 @@
 {% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+
 
 {% block body %}
+	{% include 'dashboard/dashboard_navigation.html' with active='dashboard' %}
+	<div class="container top dashboard">
+		<div class="row">
+			<div class="span3">
+				<div class="toolbar">
+					<ul class="nav nav-list">
+						<li class="nav-header">{% trans 'Projects' %}</li>
+						<li class="active">
+							<a href="#projects">{% trans 'Projects that need your feedback' %} ({{ projects|length }})</a>
+						</li>
+					</ul>
+				</div>
+				<div class="user">
+					<img class="user-img img-polaroid" src="{{ user.image_url }}" alt="{{ user.username }}" />
+
+					<h3>{{ user.username }}</h3>
+					<h5>
+						<small>{% trans 'Came here' %} {{ user.date_joined|naturaltime }}</small>
+					</h5>
+				</div>
+
+			</div>
+			<div class="span9">
+				<div id=projects>
+					{% include 'dashboard/projects_that_need_feedback.html' %}
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

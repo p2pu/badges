@@ -26,7 +26,7 @@
                 {% endif %}
 
             </ul>
-            <div class="tab-content">
+            <div class="tab-content search-tab-content">
                 <div id="badges" class="tab-pane {% if active == 'badges' %}active{% endif %}">
                     <ul class="thumbnails">
                         {% for badge in results.badges %}
@@ -35,7 +35,7 @@
                     </ul>
                 </div>
                 <div id="projects" class="tab-pane {% if active == 'projects' %}active{% endif %}">
-                    <ul class="p2pu-project-list fit-thumbnails">
+                    <ul class="unstyled fit-thumbnails">
                         {% for project in results.projects %}
                             {% include 'project/project_tile.html' %}
                         {% endfor %}

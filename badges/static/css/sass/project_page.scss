@@ -1,16 +1,16 @@
-.alert-error{
+.alert-bad {
   background-color: $bloodRed;
   border-color: darken($bloodRed, 10%);
   color: $white;
   text-shadow: none;
 }
-.alert-success{
+.alert-good{
   background-color: $olive;
   border-color: darken($olive, 10%);
   color: $slate;
   text-shadow: none;
 }
-.alert-warning{
+.alert-ugly{
   background-color: $clemintine;
   border-color: darken($clemintine, 10%);
   color: $slate;
@@ -26,7 +26,16 @@
     box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 7px;
   }
   label[for$="good"]{
-    @extend .alert-success;
+    @extend .alert-good;
+  }
+  label[for$="bad"]{
+    background-color: $clemintine;
+    border-color: darken($clemintine, 10%);
+    color: $slate;
+    text-shadow: none;
+  }
+  label[for$="ugly"]{
+    @extend .alert-bad;
   }
   label[for$="bad"]{
     background-color: $clemintine;

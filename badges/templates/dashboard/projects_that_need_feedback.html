@@ -1,0 +1,25 @@
+{% load i18n %}
+
+
+{% if projects %}
+	<div class="alert">
+		<h4 class="dashboard-title">
+			<i class="icon-exclamation-sign"></i>
+			{% trans 'Theese Projects Need Your Feedback' %}
+		</h4>
+	</div>
+	<div class="projects">
+		<ul class="unstyled">
+			{% for project in projects %}
+				{% include 'project/project_tile.html' with project=project give_feedback='True' %}
+			{% endfor %}
+		</ul>
+	</div>
+{% else %}
+	<div class="alert text-center">
+		<h4>
+			{% trans 'Get Your Own Nifty Badge!' %}
+			<a class="btn btn-mini btn-success" href="{% url browse_all_badges %}">{% trans 'Browse' %}</a>
+		</h4>
+	</div>
+{% endif %}
