@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<ul class="toolbar nav nav-list">
+	<li class="nav-header">{% trans 'Badges' %}</li>
+	<li class="active">
+		<a href="#all-badges" data-toggle="tab">
+			{% trans 'All Of Your Badges' %} ({{ badges|length }})
+			<i class="icon-angle-right pull-right"></i>
+		</a>
+	</li>
+	<li>
+		<a href="#badges-user-earned" data-toggle="tab">
+			{% trans 'Badges You Earned' %} ({{ badges_user_earned|length }})
+			<i class="icon-angle-right pull-right"></i>
+		</a>
+	</li>
+	<li>
+		<a href="#badges-user-created" data-toggle="tab">
+			{% trans 'Badges You Created' %} ({{ badges_user_creaded|length }})
+			<i class="icon-angle-right pull-right"></i>
+		</a>
+	</li>
+	<li class="nav-header">{% trans 'Projects' %}</li>
+	<li>
+		<a href="#projects-that-need-feedback" data-toggle="tab">
+			{% trans 'That Need Your Feedback' %} ({{ projects|length }})
+			<i class="icon-angle-right pull-right"></i>
+		</a>
+	</li>
+	<li>
+		<a href="#projects-user-created" data-toggle="tab">
+			{% trans 'That You Created' %} ({{ my_projects|length }})
+			<i class="icon-angle-right pull-right"></i>
+		</a>
+	</li>
+</ul>

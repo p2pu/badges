@@ -1,27 +1,22 @@
 {% load i18n %}
 {% load open_badges_tags %}
 
-<li class="p2pu-badge span2
-    {% if earned == 'True' and user.username == request.session.user.username %}p2pu-badge-long{% endif %}"
-    data-next={{ next_page }}>
+<li class="p2pu-badge-mini span2" data-next={{ next_page }}>
     <div class="overflow-handle">
-
-        <a class="badge-image" href="
+        <a class="badge-image-wrap" href="
                 {% if badge.published %}
                     {% url badge_view badge.id %}
                 {% else %}
                     {% url badge_preview badge.id %}
                 {% endif %}">
-            <img src="{{ badge.image.url }}"/>
+            <img class="badge-img" src="{{ badge.image.url }}"/>
         </a>
 
         <div class="badge-container">
-            <a class="badge-title" href="{% if badge.published %}{% url badge_view badge.id %}
+            <a href="{% if badge.published %}{% url badge_view badge.id %}
                          {% else %}{% url badge_preview badge.id %}{% endif %}">
-                <h4>{{ badge.title }}</h4>
+                <h5 class="badge-title">{{ badge.title }}</h5>
             </a>
-
-            <p class="badge-description">{{ badge.description }}</p>
         </div>
 
     </div>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+
+
+{% block body %}
+	{% include 'dashboard/dashboard_navigation.html' with active='feedback' %}
+	<div class="container top dashboard">
+		<div class="row">
+			<div class="span3">
+				<div class="user">
+					<img class="user-img img-polaroid" src="{{ user.image_url }}" alt="{{ user.username }}" />
+
+					<h3>{{ user.username }}</h3>
+					<h5>
+						<small>{% trans 'Came here' %} {{ user.date_joined|naturaltime }}</small>
+					</h5>
+				</div>
+			</div>
+			<div class="span9" data-spy="scroll" data-target="#side-navigation" data-offset="0">
+				<div id="feedback-projects" class="dashboard-projects clearfix">
+					{% if projects %}
+						<h3 class="dashboard-title">
+							{% if user.is_owner %}
+								{% trans 'You Have Given Feedback on These Projects' %}
+							{% else %}
+								{{ user.username }} {% trans 'Has Given Feedback on These Projects' %}
+							{% endif %}
+						</h3>
+						<ul class="unstyled">
+							{% for project in projects %}
+								{% include 'project/project_tile.html' %}
+							{% endfor %}
+						</ul>
+					{% else %}
+						<div class="alert alert-info">
+							<h4>
+								{% if user.is_owner %}
+									{% trans 'You Have Not given Any Feedback yet.' %}
+								{% else %}
+									{{ user.username }} {% trans 'Did Not give Any Feedback yet.' %}
+								{% endif %}
+							</h4>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

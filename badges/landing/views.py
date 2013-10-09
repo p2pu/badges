@@ -26,19 +26,21 @@ def home(request):
         users = paginator.page(1)
     except EmptyPage:
         return HttpResponse(status=404)
-
-    last_n_projects = map(fetch_project_resources, project_api.last_n_projects(10))
-
     if request.is_ajax():
         return render_to_response('p2pu_user/browse_users.html',
                                   {'users': users},
                                   context_instance=RequestContext(request))
-    
-    return render_to_response('landing/home.html',{
+
+    last_n_projects = project_api.last_n_projects(10)
+    for project in last_n_projects:
+        fetch_project_resources(project,
+                                feedback_list=project_api.get_project_feedback(project['uri']))
+
+    return render_to_response('landing/home.html', {
         'badges': featured_badges,
         'users': users,
         'projects': last_n_projects,
-        },context_instance=RequestContext(request))
+    }, context_instance=RequestContext(request))
 
 
 def search(request):

@@ -89,8 +89,8 @@
 					<div class="pull-right btn-toolbar" style="margin: 0;">
 						<div class="btn-group">
 							{% if request.session.user %}
-								<a class="btn" href="{% url dashboard request.session.user.username %}"
-								   data-toggle="tooltip" title="{% trans 'My dashboard' %}">
+								<a id="user_dashboard_btn" class="btn" href="{% url dashboard request.session.user.username %}"
+								   data-toggle="tooltip" title="{{ request.session.user.username }}'s {% trans 'Dashboard' %}">
 									<img src="{{ request.session.user.image_url }}"
 									     alt="{{ request.session.user.username }}" height="23px"
 									     width="23px"
@@ -134,8 +134,8 @@
 				{% endfor %}
 			</div>
 		{% endif %}
-		{% block message %}{% endblock %}
-		{% block body %}{% endblock %}
+		{% block message %}{% endblock message %}
+		{% block body %}{% endblock body %}
 	</section>
 	<footer>
 		<div class="container">
@@ -170,12 +170,10 @@
 
 <script type="text/javascript"
         src="http://rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
-{% block js %}{% endblock %}
+{% block js %}{% endblock js %}
 <script>
 	Badges.Splash.init();
 </script>
-
-
 
 {% if not debug %}
 	{% compress js %}

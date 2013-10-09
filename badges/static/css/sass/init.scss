@@ -11,7 +11,7 @@ input, select, textarea, button, dl, dt, dd, label{
 }
 h1, h2, h3, h4{
   font-family: "arvo", Helvetica, sans-serif;
-  text-shadow: 0 1px 0 #fff;
+  text-shadow: 0 1px 0 $white;
 }
 legend{
   font-size: 1em;
@@ -25,6 +25,9 @@ p{
 }
 .messages{
   margin-top: 20px;
+}
+.top{
+  padding: 20px 0;
 }
 section{
   border-top: 1px solid #d8dbde;
@@ -49,7 +52,9 @@ section{
   margin-right: 5px;
 }
 footer{
-  margin: 1em 0;
+  margin: 0;
+  padding: 1em 0;
+  background-color: darken($silverLight, 5%);
 }
 
 .nav-tabs{
@@ -66,14 +71,7 @@ footer{
 
 }
 
-.tab-content{
-  background-color: $white;
-  border-bottom: 2px solid $silver;
-  border-left: 1px solid $silver;
-  border-right: 1px solid $silver;
-  padding: 12px 12px 12px 12px;
-  margin-bottom: 20px;
-}
+
 blockquote{
   margin: 0;
   p{
@@ -96,4 +94,8 @@ blockquote{
       float: none;
     }
   }
+}
+
+.overflow-hidden{
+  overflow: hidden;
 }

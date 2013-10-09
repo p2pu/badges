@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% load humanize %}
+
+
+{% block body %}
+	{% include 'dashboard/dashboard_navigation.html' with active='badges' %}
+	<div class="container top dashboard">
+		<div class="row">
+			<div class="span3">
+				<div class="toolbar">
+					<ul class="nav nav-list" id="side-navigation">
+						<li class="nav-header">{% trans 'Badges' %}</li>
+						<li>
+							<a href="#badges">{% trans 'Badges' %} ({{ badges|length }})</a>
+						</li>
+						{% if user.is_owner %}
+							<li>
+								<a href="#unpublished-badges">{% trans 'Unpublished Badges' %} ({{ draft_badges|length }})</a>
+							</li>
+						{% endif %}
+						<li class="nav-header">{% trans 'Projects' %}</li>
+						<li>
+							<a href="#projects">{% trans 'Projects' %} ({{ projects|length }})</a>
+						</li>
+					</ul>
+				</div>
+				<div class="user">
+					<img class="user-img img-polaroid" src="{{ user.image_url }}" alt="{{ user.username }}" />
+
+					<h3>{{ user.username }}</h3>
+					<h5>
+						<small>{% trans 'Came here' %} {{ user.date_joined|naturaltime }}</small>
+					</h5>
+				</div>
+			</div>
+			<div class="span9" data-spy="scroll" data-target="#side-navigation" data-offset="0">
+				{% if badges %}
+					<div id="badges" class="dashboard-badges clearfix">
+						<h3 class="dashboard-title">
+							{% if user.is_owner %}
+								{% trans 'Your Badges' %}
+							{% else %}
+								{{ user.username }}'s {% trans 'Badges' %}
+							{% endif %}
+						</h3>
+						<ul class="unstyled">
+							{% for badge in badges %}
+								{% include 'badge/badge_tile_mini.html' %}
+							{% endfor %}
+						</ul>
+					</div>
+				{% else %}
+					<div class="alert alert-info">
+						<h4>
+							{% if user.is_owner %}
+								{% trans 'You Have Not Published Any Badges yet.' %}
+							{% else %}
+								{{ user.username }} {% trans 'Did Not Published Any Badges yet.' %}
+							{% endif %}
+						</h4>
+					</div>
+				{% endif %}
+				{% if projects %}
+					<div id="projects" class="dashboard-projects clearfix">
+						<hr>
+						<h3 class="dashboard-title">
+							{% if user.is_owner %}
+								{% trans 'Your Projects' %}
+							{% else %}
+								{{ user.username }}'s {% trans 'Projects' %}
+							{% endif %}
+						</h3>
+						<ul class="unstyled">
+							{% for project in projects %}
+								{% include 'project/project_tile.html' %}
+							{% endfor %}
+						</ul>
+					</div>
+				{% else %}
+					<div class="alert alert-info">
+						<h4>
+							{% if user.is_owner %}
+								{% trans 'You Have Not Submitted Any Projects yet.' %}
+							{% else %}
+								{{ user.username }} {% trans 'Did Not Submitted Any Projects yet.' %}
+							{% endif %}
+						</h4>
+					</div>
+				{% endif %}
+				{% if user.is_owner %}
+					{% if draft_badges %}
+						<div id="unpublished-badges" class="dashboard-draft-badges clearfix">
+							<hr>
+							<h3 class="dashboard-title">{% trans 'Unpublished Badges' %}</h3>
+							<ul class="unstyled">
+								{% for badge in draft_badges %}
+									{% include 'badge/badge_tile_mini.html' %}
+								{% endfor %}
+							</ul>
+						</div>
+					{% else %}
+						<div class="alert alert-info">
+							<h4>
+								{% if user.is_owner %}
+									{% trans 'You Have Not Made Any Badges yet.' %}
+								{% else %}
+									{{ user.username }} {% trans 'Did Not Made Any Badges yet.' %}
+								{% endif %}
+							</h4>
+						</div>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

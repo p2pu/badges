@@ -1,0 +1,28 @@
+{% load i18n %}
+
+{% with username=user.username %}
+	<div class="dashboard-navigation">
+		<div class="container">
+			<nav class="navigation-list">
+				{% if user.is_owner %}
+					<a href="{% url dashboard username %}" class="list-item {% if active == 'dashboard' %}active{% endif %}">
+						<i class="icon-dashboard"></i>
+						{% trans 'Dashboard' %}
+						<i class="icon-caret-down"></i>
+					</a>
+				{% endif %}
+
+				<a href="{% url profile_badges username %}" class="list-item {% if active == 'badges' %}active{% endif %}">
+					<i class="icon-shield"></i>
+					Badges
+					<i class="icon-caret-down"></i>
+				</a>
+				<a href="{% url profile_feedback username %}" class="list-item {% if active == 'feedback' %}active{% endif %}">
+					<i class="icon-comments"></i>
+					{% trans 'Feedback' %}
+					<i class="icon-caret-down"></i>
+				</a>
+			</nav>
+		</div>
+	</div>
+{% endwith %}

@@ -3,60 +3,60 @@
 {% load projects_tags %}
 
 <div class="show-previous">
-    <div class="previous-interactions" id="previous-interactions">
-        {% if feedback %}
-            <div class="feedback-already-given">
-                {% for feed in feedback reversed %}
-                    <dl>
-                        {% if feed.expert %}
-                            <a href="{% url dashboard feed.expert.username %}">
-                                <img class="img-polaroid" src="{{ feed.expert.image_url }}" alt="{{ feed.expert.username }}"/>
-                            </a>
-                            <div class="feedback-thread-content">
-                                <h4>
-                                    {{ feed.expert.username }}
-                                    <i class="icon-angle-right"></i>
-                                    {{ feed.date_created|naturaltime }}
-                                </h4>
+	<div class="previous-interactions" id="previous-interactions">
+		{% if feedback %}
+			<div class="feedback-already-given">
+				{% for feed in feedback reversed %}
+					<dl>
+						{% if feed.expert %}
+							<a href="{% url dashboard feed.expert.username %}">
+								<img class="img-polaroid" src="{{ feed.expert.image_url }}" alt="{{ feed.expert.username }}" />
+							</a>
+							<div class="feedback-thread-content">
+								<h4>
+									{{ feed.expert.username }}
+									<i class="icon-angle-right"></i>
+									{{ feed.date_created|naturaltime }}
+								</h4>
 
-                                {% if feed.good %}
-                                    <dt>Kudos:</dt>
-                                    <dd>{{ feed.good|purge_content }}</dd>
-                                {% endif %}
-                                {% if feed.bad %}
-                                    <dt>Questions: </dt>
-                                    <dd>{{ feed.bad|purge_content }}</dd>
-                                {% endif %}
-                                {% if feed.ugly %}
-                                    <dt>Concerns: </dt>
-                                    <dd>{{ feed.ugly|purge_content }}</dd>
-                                {% endif %}
-                            </div>
+								{% if feed.good %}
+									<dt>Kudos:</dt>
+									<dd>{{ feed.good|purge_content }}</dd>
+								{% endif %}
+								{% if feed.bad %}
+									<dt>Questions:</dt>
+									<dd>{{ feed.bad|purge_content }}</dd>
+								{% endif %}
+								{% if feed.ugly %}
+									<dt>Concerns:</dt>
+									<dd>{{ feed.ugly|purge_content }}</dd>
+								{% endif %}
+							</div>
 
-                        {% else %}
-                            <a href="{% url dashboard project.author.username %}">
-                                <img class="img-polaroid" src="{{ project.author.image_url }}" alt=""/>
-                            </a>
+						{% else %}
+							<a href="{% url dashboard project.author.username %}">
+								<img class="img-polaroid" src="{{ project.author.image_url }}" alt="" />
+							</a>
 
-                            <div class="feedback-thread-content">
-                                <h4>{{ project.author.username }}
-                                    <i class="icon-angle-right"></i>
-                                    {{ feed.date_created|naturaltime }}
-                                </h4>
-                                {% if feed.improvement %}
-                                    <dt>Improvement: </dt>
-                                    <dd>{{ feed.improvement|purge_content }}</dd>
-                                {% endif %}
-                            </div>
-                        {% endif %}
-                    </dl>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="no-feedback-yet alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <p>There is no Feedback given yet for this Project</p>
-            </div>
-        {% endif %}
-    </div>
+							<div class="feedback-thread-content">
+								<h4>{{ project.author.username }}
+									<i class="icon-angle-right"></i>
+									{{ feed.date_created|naturaltime }}
+								</h4>
+								{% if feed.improvement %}
+									<dt>Improvement:</dt>
+									<dd>{{ feed.improvement|purge_content }}</dd>
+								{% endif %}
+							</div>
+						{% endif %}
+					</dl>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class="no-feedback-yet alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p>There is no Feedback given yet for this Project</p>
+			</div>
+		{% endif %}
+	</div>
 </div>
