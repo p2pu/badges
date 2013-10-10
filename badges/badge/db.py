@@ -1,5 +1,5 @@
 from django.db import models
-from p2pu_user.models import Partner
+
 
 def UriField(**kwargs):
     return models.CharField(max_length=255, **kwargs)
