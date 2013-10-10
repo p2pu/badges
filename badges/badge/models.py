@@ -258,11 +258,11 @@ def check_if_user_has_badge(badge_uri, user_uri):
     return False
 
 
-def if_title_exists(search_query, badge_id):
+def if_title_exists(search_query, user_uri):
     badges = None
 
     if search_query:
-        badges = Badge.objects.filter(title=search_query).exclude(id=badge_id).values('id')
+        badges = Badge.objects.filter(title=search_query).exclude(author_uri=user_uri).values('id')
 
     if badges:
         return badges
