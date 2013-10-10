@@ -1,4 +1,5 @@
 from datetime import datetime
+from dashboard.tests.ck_editor_object import Ckeditor
 from p2pu_user.models import User
 from django.core.urlresolvers import reverse
 
@@ -54,34 +55,11 @@ class Auth(SeleniumTestCase):
 
         self.wd.find_css('#id_title').send_keys("Test Badge")
         self.wd.find_css('#id_description').send_keys("Test Badge description")
+        self.pause(5)
 
-        iframe = self.wd.find_elements_by_tag_name("iframe")
-        """
-        self.wd.switch_to_window(iframe)
+        #cke_element = Ckeditor(self.wd.find_element_by_id('cke_id_requirements'))
+        #cke_element.clear()
+        #cke_element.send_keys('Hello World!')
+        #print cke_element.text
 
-        tinymce = self.wd.find_elements_by_tag_name("body")
-        tinymce.clear()
-        tinymce.send_keys("Test Badge requirements")
-
-        self.wd.find_css('.preview-badge-button').click()
-        self.wd.wait_for_css('#div_id_image_uri .required')
-        self.pause(5000)
-        """
-        # Selenium knows it has to wait for page loads (except for AJAX requests)
-        # so we don't need to do anything about that, and can just
-        # call find_css. Since we can chain methods, we can
-        # call the built-in send_keys method right away to change the
-        # value of the field
-        #self.wd.find_css('#id_username').send_keys("admin")
-        # for the password, we can now just call find_css since we know the page
-        # has been rendered
-        #self.wd.find_css("#id_password").send_keys('pw')
-        # You're not limited to CSS selectors only, check
-        # http://seleniumhq.org/docs/03_webdriver.html for
-        # a more compreehensive documentation.
-        #self.wd.find_element_by_xpath('//input[@value="Log in"]').click()
-        # Again, after submiting the form, we'll use the find_css helper
-        # method and pass as a CSS selector, an id that will only exist
-        # on the index page and not the login page
-        #self.wd.find_css("#content-main")
 

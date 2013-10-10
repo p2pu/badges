@@ -283,15 +283,14 @@ def featured_feed(request):
 
 
 def name_search(request):
+    user = request.session['user']
     search_q = request.GET.get('title', '')
     title_exists = {'success': ''}
 
     if request.is_ajax():
+        if badge_api.if_title_exists(search_q.strip(), user['uri']):
+            title_exists = {'error': _('Sorry, Badge with this name already exists')}
 
-        if badge_api.if_title_exists(search_q.strip(), 172):
-            title_exists = {
-                'error': _('Sorry, Badge with this name already exists')
-            }
     return HttpResponse(json.dumps(title_exists), content_type="application/json", status=200)
 
 
