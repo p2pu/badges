@@ -1,5 +1,6 @@
 {% extends 'emails/base.html' %}
 {% load i18n %}
+{% load projects_tags %}
 
 {% block body %}
 <p>
@@ -9,7 +10,7 @@ Howdy!
 Since you created an "Affiliate Badge" you'll need to approve a project before it receives the Badge'
 Now the time has come: someone has submitted a project for:
 
-{{ badge.title }} - {{ badge.description }}
+{{ badge.title }} - {{ badge.description|purge_content }}
 </p>
 <p>
 Please take some time to give them feedback--the sooner a learner gets feedback, the more likely they are to stay engaged in our learning community.

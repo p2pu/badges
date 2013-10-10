@@ -1,8 +1,8 @@
-{% load i18n %}Howdy,
+{% load projects_tags %}{% load i18n %}Howdy,
 
 An Expert has awarded your project '{{ project.title }}' a Badge. Check it out!
 
-{{ badge.title }} - {{ badge.description }}
+{{ badge.title }} - {{ badge.description|purge_content }}
 
 You are now an "Expert" in this area, and can award the Badge to others. Why not pay the learning karma forward and review a few projects?
 
