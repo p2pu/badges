@@ -8,22 +8,15 @@
 
 	<div class="container">
 		<h2>{% trans 'Give Feedback to this Projects' %}</h2>
-<<<<<<< HEAD
+
 
 		<div class="row">
-			<ul class="p2pu-project-list fit-thumbnails">
+			<ul class="p2pu-project-list unstyled">
 				{% for project in projects %}
 					{% include 'project/project_tile.html' %}
 				{% endfor %}
 			</ul>
 		</div>
-=======
-		<ul class="p2pu-project-list fit-thumbnails">
-			{% for project in projects %}
-				{% include 'project/project_tile.html' %}
-			{% endfor %}
-		</ul>
->>>>>>> master
 	</div>
 
 	{% if not projects %}

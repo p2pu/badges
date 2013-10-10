@@ -253,7 +253,7 @@ def submit_feedback(project_uri, expert_uri, good, bad, ugly, award_badge=False)
         feedback.badge_awarded = True
     elif award_badge: #and badge requires approval by partner
         result = submit_feedback_result.REQUIRES_APPROVAL
-        send_badge_needs_partner_feedback_notification(badge, _project2dict(project), expert_uri)
+        send_badge_needs_partner_feedback_notification(badge, _project2dict(project))
 
     last_revision = None
     if project.revision_set.count() > 0:
