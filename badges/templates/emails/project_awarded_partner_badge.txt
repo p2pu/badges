@@ -1,9 +1,9 @@
-{% load i18n %}Howdy,
+{% load projects_tags %}{% load i18n %}Howdy,
 
 Your Badge was awarded to someone, but you told us that you want to see who it is and be the first to
 congratulate them. Badge in question is:
 
-{{ badge.title }} - {{ badge.description }}
+{{ badge.title }} - {{ badge.description|purge_content }}
 
 You are an "Expert" in this area, and the only one who can award this Badge to others.
 Why not pay the learning karma forward and review this project?
