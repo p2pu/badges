@@ -7,11 +7,21 @@ var Badges = window.Badges || {};
     'use strict';
 
     var validate = function (url) {
+        /*$('#badge-create-form').submit(function(e){
+            console.log('pressed');
+            e.preventDefault();
+            return false;
+        });*/
         var form = $('#badge-create-form');
+
+        // CKEditor field needs to be updated it first
+        form.on('submit', function(){
+            CKEDITOR.instances.id_requirements.updateElement();
+        });
 
         $(function () {
             form.parsley({
-                trigger: 'keyup change blur'
+                trigger: 'change'
                 , validateIfUnchanged: false
                 , successClass: 'success'
                 , errorClass: 'error'
@@ -26,7 +36,16 @@ var Badges = window.Badges || {};
                         }
                         return $container;
                     }
-                }
+                  }
+                , listeners: {
+                    onFieldValidate: function (elem, ParsleyField) {
+
+                        // if field is readonly, do not apply Parsley validation!
+                        return ($(elem).is('[readonly]'));
+
+
+                    }
+                  }
             });
         });
     };
