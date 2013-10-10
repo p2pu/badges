@@ -1,4 +1,4 @@
-{% load i18n %}{% blocktrans with title=badge.title decription=badge.description requirements=badge.requirements%}
+{% load projects_tags %}{% load i18n %}{% blocktrans with title=badge.title decription=badge.description|purge_content requirements=badge.requirements%}
 Howdy!
 
 Your badge {{ title }} is published, live, and ready-to-go.

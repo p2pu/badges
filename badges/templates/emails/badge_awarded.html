@@ -1,5 +1,6 @@
 {% extends 'emails/base.html' %}
 {% load i18n %}
+{% load projects_tags %}
 
 {% block body %}
 <p>
@@ -18,7 +19,7 @@ An Expert has awarded your project {{ project.title }} a Badge. Check it out!
             </td>
             <td style="padding-left:20px; text-valign:top;">
                 <p>{{ badge.title }}</p>
-                <p>{{ badge.description }}</p>
+                <p>{{ badge.description|purge_content }}</p>
                 <p>{{ badge.requirements }}</p>
             </td>
         </tr>
