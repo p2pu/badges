@@ -1,3 +1,4 @@
+from django.core.serializers.json import DjangoJSONEncoder
 from django import http
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
@@ -279,7 +280,7 @@ def featured_feed(request):
         badge['url'] = ''.join(['http://', badge['url']])
         return badge
     featured = map(add_url, featured)
-    return http.HttpResponse(json.dumps(featured), content_type='application/json')
+    return http.HttpResponse(json.dumps(featured, cls=DjangoJSONEncoder), content_type='application/json')
 
 
 def name_search(request):
