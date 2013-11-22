@@ -51,11 +51,7 @@ section{
   font-size: 1.4em;
   margin-right: 5px;
 }
-footer{
-  margin: 0;
-  padding: 1em 0;
-  background-color: darken($silverLight, 5%);
-}
+
 
 .nav-tabs{
   margin-bottom: 0px;
@@ -98,4 +94,11 @@ blockquote{
 
 .overflow-hidden{
   overflow: hidden;
+}
+
+.first{
+  margin-left: 0;
+}
+.relative{
+  position: relative;
 }
