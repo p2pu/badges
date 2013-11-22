@@ -11,10 +11,32 @@
 {% endblock %}
 
 {% block body %}
+
     <section class="container browse-badges">
-        <h2>
-            {% trans 'Browse all the Badges.' %}
-        </h2>
+	    <ul class="nav nav-list badges-filter span3">
+		    <li {% if option == 'new' %} class="active" {% endif %}>
+			    <a href="{% url browse_badges 'new' %}">
+				    New <i class="icon-chevron-right pull-right"></i>
+			    </a>
+		    </li>
+		    <li {% if option == 'popular' %} class="active" {% endif %}>
+			    <a href="{% url browse_badges 'popular' %}">
+				    Popular <i class="icon-chevron-right pull-right"></i>
+			    </a>
+		    </li>
+		    <li {% if option == 'featured' %} class="active" {% endif %}>
+			    <a href="{% url browse_badges 'featured' %}">
+				    Featured <i class="icon-chevron-right pull-right"></i>
+			    </a>
+		    </li>
+		    <li {% if option == 'all' %} class="active" {% endif %}>
+			    <a href="{% url browse_badges 'all' %}">
+				    All <i class="icon-chevron-right pull-right"></i>
+			    </a>
+		    </li>
+	    </ul>
+        <div class="span9 first">
+
         <div class="content">
             <ul class="thumbnails row" id="badges">
                 {% for badge in badges %}
@@ -34,15 +56,14 @@
                         <a href="?page={{ badges.previous_page_number }}">&larr; {% trans 'Go to previous' %}</a>
                     {% endif %}
                 </li>
-                <span class="current">
-                    Page {{ badges.number }} of {{ badges.paginator.num_pages }}.
-                </span>
+
                 <li class="next">
                     {% if badges.has_next %}
                         <a href="?page={{ badges.next_page_number }}">{% trans 'Load more' %}</a>
                     {% endif %}
                 </li>
             </ul>
+        </div>
         </div>
 
     </section>
