@@ -33,6 +33,7 @@
 @import "dashboard";
 @import "user";
 @import "feedback";
+@import "browse_badges";
 
 // Navbar styling
 @import "navbar";
@@ -42,5 +43,10 @@
 @import "badge_page";
 @import "project_page";
 
+//Footer styling
+@import "footer";
 // Responsive styling
 @import "responsive";
+
+//Import 404 styling
+@import "errors_files";

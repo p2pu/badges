@@ -1,0 +1,82 @@
+{% load i18n %}
+
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="navbar-btn visible-phone visible-tablet" data-toggle="collapse"
+			   data-target=".nav-collapse" href="#main-menu-panel">
+				<i class="icon-align-justify"></i>
+			</a>
+			<a class="brand" href="{% url landing %}"></a>
+			<ul class="nav">
+				<li>
+					<a class="p2pu-tab" href="#">
+						<i class="icon-chevron-sign-down p2pu-tab-icon"></i>
+					</a>
+				</li>
+			</ul>
+			<div class="nav-collapse collapse mindevices-side-menu">
+				<ul class="nav">
+					<li>
+						<a href="{% url about %}"
+						   class="{% block about %}{% endblock about %}">
+
+							{% trans 'About Badges' %}
+						</a>
+					</li>
+					<li>
+						<a href="{% url badge_create %}">
+							{% trans 'Create a Badge' %}
+						</a>
+					</li>
+
+					<li>
+						<a href="{% url browse_badges 'new' %}">
+							{% trans 'Apply for a Badge' %}
+						</a>
+					</li>
+
+					<li>
+						<a href="{% url project_review %}">
+							{% trans 'Review a Project' %}
+						</a>
+					</li>
+				</ul>
+				<div class="pull-right btn-toolbar" style="margin: 0;">
+					<div class="btn-group">
+						{% if request.session.user %}
+							<a id="user_dashboard_btn" class="btn" href="{% url dashboard request.session.user.username %}"
+							   data-toggle="tooltip" title="{{ request.session.user.username }}'s {% trans 'Dashboard' %}">
+								<img src="{{ request.session.user.image_url }}"
+								     alt="{{ request.session.user.username }}" height="23px"
+								     width="23px"
+										/>
+							</a>
+							<a class="btn" href="{% url oauth_logout %}" data-toggle="tooltip"
+							   title="{% trans 'Sign out' %}">
+								<i class="icon-signout"></i>
+							</a>
+						{% else %}
+							<a class="btn" href="{% url oauth_login %}" data-toggle="tooltip"
+							   title="{% trans 'Sign in' %}">
+								<i class="icon-signin"></i>
+							</a>
+						{% endif %}
+						<a class="btn dropdown-toggle visible-desktop" data-toggle="dropdown"
+						   title="{% trans 'Search' %}">
+							<i class="icon-search"></i>
+						</a>
+
+						<div class="dropdown-menu">
+							<form class="navbar-search" action="{% url search %}">
+								<input type="text" class="span4 search" name="q" value="{{ q }}"
+								       placeholder="{% trans 'Search for Badges, Projects or people...' %}">
+								<i class="icon-remove-sign clear-search"></i>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

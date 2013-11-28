@@ -138,6 +138,7 @@ def publish_badge(uri):
     )
     return True
 
+
 def get_featured_badges():
     badges = Badge.objects.filter(featured=True, date_published__isnull=False).order_by('date_published')[:5]
     return [_badge2dict(badge) for badge in badges]

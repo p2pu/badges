@@ -1,3 +1,4 @@
+import copy
 from datetime import datetime
 
 from .models import Project
@@ -88,6 +89,31 @@ def get_project(uri):
 def last_n_projects(n):
     projects = Project.objects.filter(date_deleted__isnull=True).order_by('-pk')[:n]
     return [_project2dict(project) for project in projects]
+
+
+def get_badge_uri_by_number_of_projects():
+    """
+    Returns dict of badge uri and number of projects attached to the badge
+    """
+    badge_values = Project.objects.all().values('badge_uri')
+    count_list = [{'badge_uri': badge_values[0]['badge_uri'], 'badges_sum':1}]
+    for value in badge_values:
+        temp_count = copy.deepcopy(count_list)
+        uri = value['badge_uri']
+        item_exist = False
+
+        for count in temp_count:
+            if uri in count.values():
+                count['badges_sum'] += 1
+                item_exist = True
+                temp_count = count_list
+                continue
+
+        if not item_exist:
+            item = {'badge_uri': uri, 'badges_sum': 1}
+            count_list.append(item)
+
+    return sorted(count_list, key=lambda k: k['badges_sum'], reverse=True)
 
 
 def get_projects():

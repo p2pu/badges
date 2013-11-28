@@ -5,6 +5,7 @@ from django.template import RequestContext
 
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
+from landing.processors.get_badges import get_filtered_badges
 
 from project import processors as project_api
 from project.view_helpers import fetch_resources as fetch_project_resources
@@ -57,11 +58,11 @@ def search(request):
     )
 
 
-def browse_all_badges(request):
+def browse_badges(request, option):
 
-    badges = map(fetch_badge_resources, badge_api.get_published_badges())
+    badges = get_filtered_badges(option)
 
-    paginator = Paginator(badges, 10) # Show 10 badges per page
+    paginator = Paginator(badges, 8) # Show 10 badges per page
 
     page = request.GET.get('page')
     try:
@@ -78,8 +79,9 @@ def browse_all_badges(request):
                                   context_instance=RequestContext(request))
 
     return render_to_response(
-        'landing/list_badges.html',{
+        'landing/list_badges.html', {
             'badges': badges,
+            'option': option
         },
         context_instance=RequestContext(request)
     )

@@ -1,0 +1,54 @@
+.error-page {
+  padding-top: 40px;
+  ::-moz-selection {
+    background: $cyan;
+    color: $white;
+    text-shadow: none;
+  }
+
+  ::selection {
+    background: $cyan;
+    color: $white;
+    text-shadow: none;
+  }
+
+  h1 {
+    margin: 0 10px;
+    font-size: 50px;
+    text-align: center;
+  }
+
+  h1 span {
+    color: #bbb;
+    display: block;
+    margin: 20px;
+    @include rotate(90deg);
+  }
+
+  h3 {
+    margin: 1.5em 0 0.5em;
+  }
+
+  p {
+    margin: 1em 0;
+    text-align: center;
+  }
+
+  ul {
+    padding: 0 0 0 40px;
+    margin: 1em 0;
+  }
+
+  .container {
+    max-width: 380px;
+    _width: 380px;
+    margin: 0 auto;
+  }
+  a {
+    display: block;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}

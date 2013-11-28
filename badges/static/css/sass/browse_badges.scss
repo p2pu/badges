@@ -1,0 +1,48 @@
+.browse-badges {
+  margin-top: 60px;
+  border-top: 0;
+  @include box-shadow(none);
+  .badges-filter {
+    margin: 0;
+    padding: 0;
+    background-color: $white;
+    @include border-radius(6px);
+    @include box-shadow(0 1px 4px rgba(0, 0, 0, .065));
+    li {
+      &:first-child > a {
+        @include border-top-radius(6px);
+      }
+      &:last-child > a {
+        border-bottom: 1px solid $silver;
+        @include border-bottom-radius(6px);
+      }
+      &.active{
+        background-color: $cyan;
+      }
+      a {
+        border-top: 1px solid $silver;
+        border-left: 1px solid $silver;
+        border-right: 1px solid $silver;
+        padding: 8px 14px;
+        margin: 0;
+      }
+    }
+  }
+  #badges{
+    margin-left: 0;
+    li{
+      margin-left: 25px;
+    }
+  }
+  #infscr-loading {
+    clear: both;
+    text-align: center;
+    margin-left: 50px;
+    font-family: "arvo", Helvetica, sans-serif;
+    text-shadow: 0 1px 0 #fff;
+  }
+}
+
+.browse-badges-preloader {
+  text-align: center;
+}

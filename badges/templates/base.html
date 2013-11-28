@@ -44,85 +44,7 @@
 <body>
 
 <div class="wrap">
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="navbar-btn visible-phone visible-tablet" data-toggle="collapse"
-				   data-target=".nav-collapse" href="#main-menu-panel">
-					<i class="icon-align-justify"></i>
-				</a>
-				<a class="brand" href="{% url landing %}"></a>
-				<ul class="nav">
-					<li>
-						<a class="p2pu-tab" href="#">
-							<i class="icon-chevron-sign-down p2pu-tab-icon"></i>
-						</a>
-					</li>
-				</ul>
-				<div class="nav-collapse collapse mindevices-side-menu">
-					<ul class="nav">
-						<li>
-							<a href="{% url about %}"
-							   class="{% block about %}{% endblock about %}">
-
-								{% trans 'About Badges' %}
-							</a>
-						</li>
-						<li>
-							<a href="{% url badge_create %}">
-								{% trans 'Create a Badge' %}
-							</a>
-						</li>
-
-						<li>
-							<a href="{% url browse_all_badges %}">
-								{% trans 'Apply for a Badge' %}
-							</a>
-						</li>
-
-						<li>
-							<a href="{% url project_review %}">
-								{% trans 'Review a Project' %}
-							</a>
-						</li>
-					</ul>
-					<div class="pull-right btn-toolbar" style="margin: 0;">
-						<div class="btn-group">
-							{% if request.session.user %}
-								<a id="user_dashboard_btn" class="btn" href="{% url dashboard request.session.user.username %}"
-								   data-toggle="tooltip" title="{{ request.session.user.username }}'s {% trans 'Dashboard' %}">
-									<img src="{{ request.session.user.image_url }}"
-									     alt="{{ request.session.user.username }}" height="23px"
-									     width="23px"
-											/>
-								</a>
-								<a class="btn" href="{% url oauth_logout %}" data-toggle="tooltip"
-								   title="{% trans 'Sign out' %}">
-									<i class="icon-signout"></i>
-								</a>
-							{% else %}
-								<a class="btn" href="{% url oauth_login %}" data-toggle="tooltip"
-								   title="{% trans 'Sign in' %}">
-									<i class="icon-signin"></i>
-								</a>
-							{% endif %}
-							<a class="btn dropdown-toggle visible-desktop" data-toggle="dropdown"
-							   title="{% trans 'Search' %}">
-								<i class="icon-search"></i>
-							</a>
-							<div class="dropdown-menu">
-								<form class="navbar-search" action="{% url search %}">
-									<input type="text" class="span4 search" name="q" value="{{ q }}"
-									       placeholder="{% trans 'Search for Badges, Projects or people...' %}">
-									<i class="icon-remove-sign clear-search"></i>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	{% include 'navigation.html' %}
 	<section>
 		{% if messages %}
 			<div class="messages container">
@@ -140,20 +62,40 @@
 	<footer>
 		<div class="container">
 			<hr>
-			<a href="http://backpack.openbadges.org" target="_blank">
-				<img alt="We Issue OpenBadges"
-				     src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png"
-				     width="200"
-				     height="40">
-			</a>
-			<a href="http://www.browserstack.com" target="_blank">
-				<h5 style="margin-bottom: 0"><small>Supported by</small></h5>
-				<img src="{% static 'img/browserstack.png' %}" alt="We are supported by Browserstack.com"
-						width="150" />
-			</a>
-			<a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank">
-				<img src="{% static 'img/cc-icons.png' %}" alt="" class="pull-right">
-			</a>
+			<div class="clearfix">
+				<div class="span3 first">
+					<a href="http://backpack.openbadges.org" target="_blank">
+						<img alt="We Issue OpenBadges"
+						     src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png"
+						     width="200"
+						     height="40">
+					</a>
+
+				</div>
+				<div class="pull-right span6 cc-by-sa">
+					<img src="{% static 'img/cc-icons.png' %}" alt="Terms of use">
+
+					<p>
+						Unless otherwise noted, all the materials on this site are licensed under a
+						<a href="http://creativecommons.org/licenses/by-sa/3.0/">
+							Creative Commons Attribution Share Alike 3.0</a> Unported license.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="terms">
+			<div class="container relative">
+				<a href="https://p2pu.org/en/pages/terms-of-use/" target="_blank" class="terms-link">
+					Terms Of Use
+				</a>
+				<a href="http://www.browserstack.com" target="_blank" class="browser-stack-logo pull-right">
+					<h5 class="intro">
+						<small>Supported by</small>
+					</h5>
+					<img src="{% static 'img/browserstack.png' %}" alt="We are supported by Browserstack.com"
+					     width="150" />
+				</a>
+			</div>
 		</div>
 	</footer>
 </div>
