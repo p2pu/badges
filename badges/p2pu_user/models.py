@@ -1,3 +1,4 @@
+from django.http import Http404
 from p2pu_user.db import User
 from p2pu_user.db import Partner
 from datetime import datetime
@@ -47,7 +48,10 @@ def _user2dict(user):
 
 
 def get_user(user_uri):
-    user = User.objects.get(username=uri2username(user_uri))
+    try:
+        user = User.objects.get(username=uri2username(user_uri))
+    except User.DoesNotExist:
+        raise Http404
     return _user2dict(user)
 
 
