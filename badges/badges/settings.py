@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 path = lambda *a: os.path.join(ROOT, *a)
 
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+# ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -55,7 +55,6 @@ LANGUAGES = (
     ('en', gettext('English')),
     ('en-us', gettext('English-American')),
 )
-
 
 SECRET_KEY = '(auvykgyxsa=bv16j75p_p90jqx%d54)u=ilx2m0id-g-vg+eh'
 
@@ -124,13 +123,28 @@ INSTALLED_APPS = (
 #############################################################################
 # Logging settings
 #############################################################################
+from django.core.exceptions import SuspiciousOperation
+
+
+def skip_suspicious_operations(record):
+    if record.exc_info:
+        exc_value = record.exc_info[1]
+        if isinstance(exc_value, SuspiciousOperation):
+            return False
+    return True
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
+        'skip_suspicious_operations': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': skip_suspicious_operations,
+        },
     },
     'handlers': {
         'mail_admins': {
