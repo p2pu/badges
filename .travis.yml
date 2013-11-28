@@ -18,7 +18,6 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:  python badges/manage.py test badge
-                                      dashboard
                                       notifications
                                       oauthclient
                                       open_badges
