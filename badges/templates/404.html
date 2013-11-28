@@ -2,20 +2,22 @@
 {% load i18n %}
 
 {% block body %}
-	<div class="container">
-		<h1>Not found <span>:(</span></h1>
+	<div class="error-page">
+		<div class="container">
+			<h1>Not found <span>:(</span></h1>
 
-		<p>Sorry, but the page you were trying to view does not exist.</p>
+			<p>Sorry, but the page you were trying to view does not exist.</p>
 
-		<p>It looks like this was the result of either:</p>
-		<ul>
-			<li>a mistyped address</li>
-			<li>an out-of-date link</li>
-		</ul>
-		<p>
-			If you think that this may be a mistake, please don't hesitate to tell us at
-			<a href='http://help.p2pu.org'>help.p2pu.org</a>
-		</p>
+			<p>It looks like this was the result of either:</p>
+			<ul>
+				<li>a mistyped address</li>
+				<li>an out-of-date link</li>
+			</ul>
+			<p>
+				If you think that this may be a mistake, please don't hesitate to tell us at
+				<a href='http://help.p2pu.org'>help.p2pu.org</a>
+			</p>
+		</div>
 	</div>
 {% endblock %}
 
