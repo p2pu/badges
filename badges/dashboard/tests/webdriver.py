@@ -26,6 +26,12 @@ class CustomWebDriver(web_driver_module.WebDriver):
     def wait_for_css(self, css_selector, timeout=7):
         """ Shortcut for WebDriverWait"""
         try:
-            return WebDriverWait(self, timeout).until(lambda driver : driver.find_css(css_selector))
+            return WebDriverWait(self, timeout).until(lambda driver: driver.find_css(css_selector))
+        except:
+            self.quit()
+
+    def wait(self, timeout=30):
+        try:
+            return WebDriverWait(self, timeout)
         except:
             self.quit()

@@ -11,9 +11,9 @@ class Auth(SeleniumTestCase):
     def setUp(self):
         # setUp is where setup call fixture creation scripts
         # and instantiate the WebDriver, which in turns loads up the browser.
-        self.user = User.objects.create(username='erika',
+        self.user = User.objects.create(username='test_user',
                                         image_url='http://placehold.it/40x40',
-                                        email='erika@p2pu.com',
+                                        email='user@test.com',
                                         date_joined=datetime.utcnow(),
                                         date_updated=datetime.utcnow(),
                                         )
@@ -61,5 +61,6 @@ class Auth(SeleniumTestCase):
         #cke_element.clear()
         #cke_element.send_keys('Hello World!')
         #print cke_element.text
+
 
 
