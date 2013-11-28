@@ -1,13 +1,12 @@
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-
-
 from badge import models as badge_api
 from badge.view_helpers import fetch_badge_resources
-from project import processors as project_api
-from dashboard.processors import list_projects_ready_for_feedback, list_projects_by_user, list_projects_that_user_gave_feedback, check_if_owner
-from project.view_helpers import fetch_resources
+from dashboard.processors import list_projects_ready_for_feedback
+from dashboard.processors import list_projects_by_user
+from dashboard.processors import list_projects_that_user_gave_feedback
+from dashboard.processors import check_if_owner
 from p2pu_user import models as user_api
 
 
