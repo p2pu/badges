@@ -170,20 +170,20 @@ def view(request, badge_id):
         fetch_resources(project, feedback_list=project_api.get_project_feedback(project['uri']))
 
     expert_uris = badge_api.get_badge_experts(badge['uri'])
-    user = None
+    user = request.session.get('user')
 
-    if request.session.get('user'):
-        user = request.session['user']
+    if user:
         user['is_expert'] = user['uri'] in expert_uris
         user['is_author'] = _user_is_author(badge, user)
         if user['is_author']:
             user['can_delete_badge'] = badge_api.is_allowed_to_remove(badge['uri'])
         if user['is_expert']:
             user['added_to_backpack'] = badge_api.pushed_to_backpack(badge, user['uri'])
-            user['can_revise_projects'] = project_api.get_projects_ready_for_feedback(badge['uri'])
-            for project in user['can_revise_projects']:
-                feedback_list = project_api.get_project_feedback(project['uri'])
-                fetch_resources(project, feedback_list=feedback_list)
+
+    projects_ready_for_feedback = project_api.get_projects_ready_for_feedback(badge['uri'])
+    for project in projects_ready_for_feedback:
+        feedback_list = project_api.get_project_feedback(project['uri'])
+        fetch_resources(project, feedback_list=feedback_list)
 
     experts = map(p2pu_user_api.get_user, expert_uris)
 
@@ -195,6 +195,7 @@ def view(request, badge_id):
             'user': user,
             'badge': badge,
             'projects': projects,
+            'projects_ready_for_feedback': projects_ready_for_feedback,
             'experts': experts,
             'iframe': iframe,
         },
