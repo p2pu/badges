@@ -1,4 +1,3 @@
-import copy
 import itertools
 from datetime import datetime
 

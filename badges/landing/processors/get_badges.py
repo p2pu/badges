@@ -2,7 +2,7 @@ from badge.models import get_published_badges
 from badge.models import get_badge
 from badge.models import get_featured_badges
 from badge.models import last_n_published_badges
-from project.processors import get_badge_uri_by_number_of_projects, sort_badge_uris_by_attached_projects
+from project.processors import sort_badge_uris_by_attached_projects
 from badge.view_helpers import fetch_badge_resources
 
 
