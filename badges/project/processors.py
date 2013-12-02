@@ -106,6 +106,7 @@ def sort_badge_uris_by_attached_projects():
 
     return sorted(count_list, key=lambda k: k['badges_sum'], reverse=True)
 
+
 def get_projects():
     projects = Project.objects.filter(date_deleted__isnull=True)
     return [_project2dict(project) for project in projects]
