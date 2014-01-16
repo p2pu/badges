@@ -82,12 +82,12 @@
 					fjs.parentNode.insertBefore(js, fjs);
 				}(document, 'script', 'facebook-jssdk'));</script>
 
-				<div class="fb-share-button" data-href="http://badges.p2pu.org{{ request.get_full_path }}"
+				<div class="fb-share-button" data-href="http://{{ organisation_url }}{{ request.get_full_path }}"
 				     data-width="120" data-type="button_count" style="width: 120px"></div>
 			</div>
 			<div class="pull-right social-item fb">
 
-				<div class="fb-like" data-href="http://badges.p2pu.org{{ request.get_full_path }}" data-layout="button_count"
+				<div class="fb-like" data-href="http://{{ organisation_url }}{{ request.get_full_path }}" data-layout="button_count"
 				     data-action="like" data-show-faces="true" data-share="false" style="padding-top: 4px"></div>
 			</div>
 
