@@ -33,7 +33,7 @@ class ProjectForm(forms.Form):
 
     description = forms.CharField(
         max_length=1024,
-        label=_('Project description'),
+        label=_('Steps taken'),
         widget=forms.Textarea(
             attrs={
                 'placeholder': _('What steps did you take to complete this project? '
@@ -46,7 +46,7 @@ class ProjectForm(forms.Form):
 
     reflection = forms.CharField(
         max_length=1024,
-        label=_('Second thoughts?'),
+        label=_('Lessons learned'),
         widget=forms.Textarea(
             attrs={
                 'placeholder': _('What might you do differently next time? '

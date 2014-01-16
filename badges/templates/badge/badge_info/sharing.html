@@ -8,6 +8,20 @@
 	<div class="badge-sharing-inner clearfix">
 		<div class="badge-sharing-inner-wrap">
 			<div class="badge-social">
+				<div class="pull-right social-item fb">
+					<div id="fb-root"></div>
+					<script>(function (d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s);
+						js.id = id;
+						js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=562062293871238";
+						fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));</script>
+
+					<div class="fb-share-button" data-href="http://{{ organisation_url }}{{ request.get_full_path }}"
+					     data-width="120" data-type="button_count"></div>
+				</div>
 				<div class="pull-right social-item google">
 					<!-- Place this tag where you want the share button to render. -->
 					<div class="g-plus" data-action="share" data-annotation="bubble" data-height="28"></div>
@@ -39,7 +53,9 @@
 				</div>
 			</div>
 			<div class="badge-embed">
-				<textarea>{% autoescape on %}<iframe id="badge_embed" type="text/html" frameborder="0" height="310" width="210" src="{{ iframe }}"></iframe>{% endautoescape %}</textarea>
+				<textarea>{% autoescape on %}
+					<iframe id="badge_embed" type="text/html" frameborder="0" height="310" width="210" src="{{ iframe }}">
+					</iframe>{% endautoescape %}</textarea>
 			</div>
 		</div>
 	</div>
