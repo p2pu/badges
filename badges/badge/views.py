@@ -198,6 +198,7 @@ def view(request, badge_id):
             'projects_ready_for_feedback': projects_ready_for_feedback,
             'experts': experts,
             'iframe': iframe,
+            'organisation_url': settings.ORGANISATION_URL,
         },
         context_instance=RequestContext(request)
     )
