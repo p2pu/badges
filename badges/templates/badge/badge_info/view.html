@@ -92,15 +92,13 @@
 
 
 {% block js %}
-	{% if user.is_author %}
-		<script>
-			var js_open_badges = "{% static 'js/open_badges.js' %}";
-			var js_open_badges_issuer = "{{ OPEN_BADGES_ISSUER_JS_URL }}";
-			require(["jquery", js_open_badges, js_open_badges_issuer], function ($) {
-				P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
-			})
-		</script>
-	{% endif %}
+	<script>
+		var js_open_badges = "{% static 'js/open_badges.js' %}";
+		var js_open_badges_issuer = "{{ OPEN_BADGES_ISSUER_JS_URL }}";
+		require(["jquery", js_open_badges, js_open_badges_issuer], function ($) {
+			P2PU_OpenBadges.Issuer.init('.ob-push-to-backpack');
+		})
+	</script>
 	<script src="{% static 'js/badge_share.js' %}"></script>
 	<script type="text/javascript">
 		Badges.Tile.share();
