@@ -5,18 +5,28 @@ from django.core.exceptions import ValidationError
 
 
 def check_if_url_is_valid(url):
-    """ validates oEmbed url parameter"""
+	""" validates oEmbed url parameter"""
 
-    val = URLValidator(verify_exists=False)
-    try:
-        val(url)
-    except ValidationError:
-        return False
+	val = URLValidator(verify_exists=False)
 
-    domain = urlparse(url).netloc
-    if domain.split('.')[0] == 'www':
-        domain = '.'.join(domain.split('.')[1:])
+	try:
+		val(url)
+	except ValidationError as e:
+		print e
+		return False
 
-    if domain != settings.ORGANISATION_URL:
-        return False
-    return True
+	domain = urlparse(url).netloc
+	if domain.split('.')[0] == 'www':
+		domain = '.'.join(domain.split('.')[1:])
+
+	if domain != settings.ORGANISATION_URL:
+		return False
+	return True
+
+
+def set_url_to_relative(url):
+	if url.startswith('http://'):
+		return url[5:]
+	if url.startswith('https://'):
+		return url[6:]
+	return url
