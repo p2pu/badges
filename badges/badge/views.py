@@ -187,7 +187,7 @@ def view(request, badge_id):
 
     experts = map(p2pu_user_api.get_user, expert_uris)
 
-    iframe = 'http://%s%s?rendering=normal' % (settings.ORGANISATION_URL,
+    iframe = '//%s%s?rendering=normal' % (settings.ORGANISATION_URL,
                                                reverse('badge_view_embedded', args=[badge_id]))
 
     return render_to_response(
