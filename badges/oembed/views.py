@@ -20,10 +20,10 @@ def oembed(request):
     if url and url.startswith('http://'):
         url = url[5:]
 
-    if not settings.DEBUG:
-        valid_url = check_if_url_is_valid(url)
-        if not valid_url:
-            return HttpResponseNotFound(status=404)
+    #if not settings.DEBUG:
+    #    valid_url = check_if_url_is_valid(url)
+    #    if not valid_url:
+    #        return HttpResponseNotFound(status=404)
 
     maxwidth = request.GET.get('maxwidth', '100%')
     maxheight = request.GET.get('maxheight', 180)
