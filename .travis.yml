@@ -23,7 +23,6 @@ script:  python badges/manage.py test badge
                                       open_badges
                                       p2pu_user
                                       project
-                                      oembed
  --settings=badges.settings
 
 notifications:
