@@ -18,24 +18,29 @@
 		<div class="row">
 			{% include 'badge/badge_info_vertical.html' with label='Badge you are trying for' %}
 			<form id="project-create-form" class="span9" method="post" enctype="multipart/form-data">
-				<label for="image_uri">{{ form.fields.image.widget.attrs.title }}</label>
+				<div class="control-group {% if form.image.errors %}error{% endif %}">
+					<label for="image_uri" class="control-label">{{ form.image.label }}*</label>
 
-				<div class="fileupload fileupload-new" data-provides="fileupload">
-					<div class="fileupload-new thumbnail">
-						<img src="http://www.placehold.it/128x128/EFEFEF/AAAAAA&text=no+image" />
-					</div>
-					<div class="fileupload-preview fileupload-exists thumbnail"
-					     style="max-width: 128px; max-height: 128px; line-height: 20px;">
-					</div>
-					<div id="div_id_image_uri" class="control-group">
-						<div class="controls">
-              <span class="btn btn-file">
-                  <span class="fileupload-new">Select image</span>
-                  <span class="fileupload-exists">Change</span>
-                  <input id="id_image" type="file" class="fileinput"
-                         name="image" title="Upload a screenshot of your glorious creation.">
-              </span>
-							<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+					<div class="fileupload fileupload-new" data-provides="fileupload">
+						<div class="fileupload-new thumbnail">
+							<img src="http://www.placehold.it/128x128/EFEFEF/AAAAAA&text=no+image" />
+						</div>
+						<div class="fileupload-preview fileupload-exists thumbnail"
+						     style="max-width: 128px; max-height: 128px; line-height: 20px;">
+						</div>
+						<div id="div_id_image_uri" class="control-group">
+							<div class="controls">
+					              <span class="btn btn-file">
+					                  <span class="fileupload-new">Select image</span>
+					                  <span class="fileupload-exists">Change</span>
+					                  <input id="id_image" type="file" class="fileinput"
+					                         name="image" title="Upload a screenshot of your glorious creation.">
+					              </span>
+								<a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+							</div>
+							<span id="error_1_id_image" class="help-inline">
+								<strong>{{ form.image.errors }}</strong>
+							</span>
 						</div>
 					</div>
 				</div>
