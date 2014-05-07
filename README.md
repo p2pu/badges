@@ -59,7 +59,7 @@ pip install -r /path/to/code/badges/requirements.txt
 Copy settings_local.dist.py to settings_local.py
 ```sh
 cp settings_local.dist.py settings_local.py
-
+```
 #### Set up the database
 1. Sync database: ```python /path/to/code/badges/manage.py syncdb```
 1. Load some test data: ```python /path/to/code/badges/manage.py load_test_data /path/to/code/testdata/test_data.json```
