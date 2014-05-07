@@ -41,8 +41,8 @@ sudo gem install sass
 To get up and running for development
 
 #### Create a virtual environment
-1. Create a new virtual environment somewhere: ```virtualenv /path/to/somewhere```
-1. Activate the virtual environment: ```source /path/to/somewhere/bin/activate```
+1. Create a new virtual environment: ```mkvirtualenv P2PU-Badges```
+1. Activate the virtual environment: ```workon P2PU-Badges```
 
 #### Get the code
 1. Make a local copy of the code: ```git clone https://github.com/p2pu/badges```
