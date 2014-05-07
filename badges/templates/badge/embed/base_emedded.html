@@ -40,7 +40,7 @@
             {% endif %}
             <div class="badge-controls clearfix">
                 {% if not user_has_badge %}
-                    <a href="{% url project_create badge.id %}" class="btn btn-primary btn-mini">{% trans 'Apply for this Badge' %}</a>
+                    <a href="{% url badge_view badge.id %}" class="btn btn-primary btn-mini">{% trans 'Apply for this Badge' %}</a>
                 {% endif %}
             </div>
         </div>
