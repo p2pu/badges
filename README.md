@@ -66,7 +66,7 @@ cp badges/badges/settings_local.dist.py badges/badges/settings_local.py
 
 #### Set up the database
 1. Sync database: ```python badges/manage.py syncdb```
-1. Load some test data: ```python badges/manage.py load_test_data badges/testdata/test_data.json```
+1. Load some test data: ```python badges/manage.py load_test_data testdata/test_data.json```
 
 #### Start the server
 1. Run development server: ```python badges/manage.py runserver```
