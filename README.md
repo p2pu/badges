@@ -5,7 +5,7 @@ This is our third take on badges! It boils down to this: Create a badge, submit 
 
 ## Installation
 
-This project is written using django. Most dependencies are handled by POP, but there are a few initial system requirements.
+This project is written using django. Most dependencies are handled by Pip, but there are a few initial system requirements.
 
 ### System Requirements
 The following packages need to be installed on your system:
