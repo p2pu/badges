@@ -5,8 +5,8 @@ This is our third take on badges! It boils down to this: Create a badge, submit 
 
 ## Installation
 
-
 This project is written using django. Most dependencies are handled by POP, but there are a few initial system requirements.
+
 ### System Requirements
 The following packages need to be installed on your system:
 * [Python](http://python.org) 2.7+
@@ -24,12 +24,12 @@ To install the additional dependencies on Ubuntu Linux, use a graphical package 
 sudo apt-get install postgresql postgresql-server-dev-all
 ```
 
-#### virtualenv
+#### virtualenv / virtualenvwrapper
 ```sh
-sudo pip install virtualenv
+sudo pip install virtualenv virtualenvwrapper
 ```
 
-To complete the Virtualenv installation, follow the [virtualenv installation instructions](http://virtualenvwrapper.readthedocs.org/en/latest/install.html).
+To complete the virtualenvwrapper installation, follow the [virtualenv installation instructions](http://virtualenvwrapper.readthedocs.org/en/latest/install.html).
 
 #### SASS
 The SASS package can be installed through Ruby Gems.
@@ -37,22 +37,22 @@ The SASS package can be installed through Ruby Gems.
 sudo gem install sass
 ```
 
-
 ### Install Badges
 To get up and running for development
-
-#### Get the code
-1. Make a local copy of the code: ```git clone https://github.com/p2pu/badges```
-1. Init submodules: ```git submodule init```
-1. Fetch submodules: ```git submodule update```
 
 #### Create a virtual environment
 1. Create a new virtual environment somewhere: ```virtualenv /path/to/somewhere```
 1. Activate the virtual environment: ```source /path/to/somewhere/bin/activate```
 
+#### Get the code
+1. Make a local copy of the code: ```git clone https://github.com/p2pu/badges```
+1. Move into the code directory: ```cd badges```
+1. Init submodules: ```git submodule init```
+1. Fetch submodules: ```git submodule update```
+
 #### Install additional dependencies
 ```sh
-pip install -r /path/to/code/badges/requirements.txt
+pip install -r badges/requirements.txt
 ```
 
 #### Create a local settings file
@@ -61,15 +61,15 @@ Copy settings_local.dist.py to settings_local.py
 **Note:** settings_local.dist.py is located in the subfolder **/path/to/code/badges/badges/**
 
 ```sh
-cp settings_local.dist.py settings_local.py
+cp badges/badges/settings_local.dist.py badges/badges/settings_local.py
 ```
 
 #### Set up the database
-1. Sync database: ```python /path/to/code/badges/manage.py syncdb```
-1. Load some test data: ```python /path/to/code/badges/manage.py load_test_data /path/to/code/testdata/test_data.json```
+1. Sync database: ```python badges/manage.py syncdb```
+1. Load some test data: ```python badges/manage.py load_test_data badges/testdata/test_data.json```
 
 #### Start the server
-1. Run development server: ```python /path/to/code/badges/manage.py runserver```
+1. Run development server: ```python badges/manage.py runserver```
 1. Go to http://localhost:8000/ and play around
 
 #### Enjoy! 
