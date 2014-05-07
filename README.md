@@ -5,25 +5,76 @@ This is our third take on badges! It boils down to this: Create a badge, submit 
 
 ## Installation
 
-This project is written using django. To get up and running for development
+This project is written using django. Most dependencies are handled by Pip, but there are a few initial system requirements.
 
+### System Requirements
+The following packages need to be installed on your system:
+* [Python](http://python.org) 2.7+
+* [Virtualenv](http://virtualenv.org)
+* [Git](http://git-scm.com)
+* [PostgreSQL](http://postgresql.org) and PostgreSQL-dev
+* [Ruby](http://ruby-lang.org)
+
+### e.g. installation on Ubuntu Linux
+Ruby and Python come pre-installed on Ubuntu Linux.
+
+#### PostgreSQL
+To install the additional dependencies on Ubuntu Linux, use a graphical package manager or the following commands in Terminal:
+```sh
+sudo apt-get install postgresql postgresql-server-dev-all
+```
+
+#### virtualenv / virtualenvwrapper
+```sh
+sudo pip install virtualenv virtualenvwrapper
+```
+
+To complete the virtualenvwrapper installation, follow the [virtualenv installation instructions](http://virtualenvwrapper.readthedocs.org/en/latest/install.html).
+
+#### SASS
+The SASS package can be installed through Ruby Gems.
+```sh
+sudo gem install sass
+```
+
+### Install Badges
+To get up and running for development
+
+#### Create a virtual environment
+1. Create a new virtual environment: ```mkvirtualenv p2pu-badges```
+1. Activate the virtual environment: ```workon p2pu-badges```
+
+#### Get the code
 1. Make a local copy of the code: ```git clone https://github.com/p2pu/badges```
+1. Move into the code directory: ```cd badges```
 1. Init submodules: ```git submodule init```
 1. Fetch submodules: ```git submodule update```
-1. Install python and virtualenv (changes are good you already have them)
-1. Create a new virtual environment somewhere: ```virtualenv /path/to/somewhere```
-1. Activate the virtual environment: ```source /path/to/somewhere/bin/activate```
-1. Install dependancies: ```pip install -r /path/to/code/badges/requirements.txt```
-1. Install the sass compiler:
-    - Install ruby ```apt get install ruby``` (or user rbenv)
-    - Clone the sass git repository ```git clone git://github.com/nex3/sass.git```
-    - Install sass ```cd /path/to/sass/``` and ```rake install```
-1. Copy settings_local.dist.py to settings_local.py
-1. Sync database: ```python /path/to/code/badges/manage.py syncdb```
-1. Load some test data: ```python /path/to/code/badges/manage.py load_test_data /path/to/code/testdata/test_data.json```
-1. Run development server: ```python /path/to/code/badges/manage.py runserver```
+
+#### Install additional dependencies
+```sh
+pip install -r badges/requirements.txt
+```
+
+#### Create a local settings file
+Copy settings_local.dist.py to settings_local.py
+
+**Note:** settings_local.dist.py is located in the subfolder **/path/to/code/badges/badges/**
+
+```sh
+cp badges/badges/settings_local.dist.py badges/badges/settings_local.py
+```
+
+#### Set up the database
+1. Sync database: ```python badges/manage.py syncdb```
+1. Migrate the database schema: ```python badges/manage.py migrate```
+1. Load some test data: ```python badges/manage.py load_test_data testdata/test_data.json```
+
+#### Start the server
+1. Run development server: ```python badges/manage.py runserver```
 1. Go to http://localhost:8000/ and play around
-1. And lastly, fix all the bugs, add cool new features and take over the world :)
+
+#### Enjoy! 
+And lastly, fix all the bugs, add cool new features and take over the world :)
 
 ### Mozilla Open Badge Integration and Development
 
