@@ -1,64 +1,54 @@
+from smtplib import SMTPException
 from django.conf import settings
 from django.utils import simplejson
+from django.core.mail import EmailMultiAlternatives
 
 from notifications.utils import localize_for_user
 
 import requests
 
 import logging
+from p2pu_user.models import get_user
+
 log = logging.getLogger(__name__)
 
 
 def send_notification_i18n( receiver_uri, subject_template, text_template, html_template=None, context={}, sender=None, callback=None):
-    """ translate the notification before sending it """
-    
-    subject = localize_for_user(receiver_uri, subject_template, context).strip()
-    text = localize_for_user(receiver_uri, text_template, context).strip()
-    html = None
-    if html_template:
-        html = localize_for_user(receiver_uri, html_template, context).strip()
+	""" translate the notification before sending it """
 
-    #if settings.DEBUG:
-    #    return
-    return send_notification(receiver_uri, subject, text, html, sender, callback)
+	subject = localize_for_user(receiver_uri, subject_template, context).strip()
+	text = localize_for_user(receiver_uri, text_template, context).strip()
+	html = None
+	if html_template:
+		html = localize_for_user(receiver_uri, html_template, context).strip()
+
+	#if settings.DEBUG:
+	#    return
+	return send_notification(receiver_uri, subject, text, html, sender, callback)
 
 
 def send_notification( receiver_uri, subject, text, html=None, sender=None, callback=None):
-    """ Send a notification to a single receiver via the P2PU API to a user
-        receiver - uri of user to send the notification to
-        sender - name to use in from part of email
-    """
-    receiver_username = receiver_uri.strip('/').split('/')[-1]
+	""" Send a notification to a single receiver via the P2PU API to a user
+		receiver - uri of user to send the notification to
+		sender - name to use in from part of email
+	"""
+	receiver = get_user(receiver_uri)
 
-    if not sender:
-        sender = settings.DEFAULT_FROM_ADDRESS
+	msg = EmailMultiAlternatives(
+		subject=subject,
+		body=text,
+		from_email=settings.DEFAULT_FROM_EMAIL,
+		to=[receiver['email']],
+	)
 
-    data = {
-        'api-key': settings.LERNANTA_API_KEY,
-        'user': receiver_username,
-        'subject': subject,
-        'text': text,
-    }
+	if html:
+		msg.attach_alternative(html, "text/html")
 
-    if html:
-        data['html'] = html
-    
-    if sender:
-        data['sender'] = sender
+	# Send it:
+	try:
+		msg.send()
+		log.error(u'Could not send email notification to {0}'.format(receiver_uri))
+		return True
+	except SMTPException:
+		return False
 
-    if callback:
-        data['callback'] = callback
-
-    #if not settings.DEBUG:
-    response = None
-    try:
-        response = requests.post(settings.NOTIFICATION_URL, data=simplejson.dumps(data))
-    except requests.ConnectionError:
-        log.error('Could not connect to notification URL')
-        return False
-
-    if not response or not response.status_code == 200:
-        log.error(u'Could not send email notification to {0}'.format(receiver_uri))
-        return False
-
-    return True
