@@ -190,7 +190,7 @@ COMPRESS_PRECOMPILERS = (
 ##################################################################
 # Open badges settings
 #################################################################
-OPEN_BADGES_ISSUER_JS_URL = '//beta.openbadges.org/issuer.js'
+OPEN_BADGES_ISSUER_JS_URL = '//backpack.openbadges.org/issuer.js'
 
 ##################################################################
 # Crispy forms template
@@ -205,4 +205,6 @@ ORGANISATION_URL = 'badges.p2pu.org'
 ##################################################################
 # Testing mode
 #################################################################
-TEST = 'test' in sys.argv
+MANDRILL_API_KEY = ""
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+DEFAULT_FROM_EMAIL = "badges@p2pu.org"

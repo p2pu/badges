@@ -9,7 +9,7 @@ urlpatterns = patterns(
 )
 
 # Providing become feature only to TEST for easier selenium testing and when DEBUG is True
-if settings.DEBUG or settings.TEST:
+if settings.DEBUG:
     urlpatterns += patterns(
         '',
         url(r'^become/(?P<username>[\w\-\.]+)/$', 'oauthclient.views.become', name='become'),
