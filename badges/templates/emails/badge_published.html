@@ -7,18 +7,13 @@
 Howdy!
 </p>
 <p>
-Your badge {{ badge.title }} is created. Woohoo!
-</p>
-<p>
-    Your Badge is created, but that doesn't mean that people can apply for it yet. If you haven't already, then you
-    must publish it and let the world see your creation. Publish it by pressing on the "Publish" button
-    <a href="http://badges.p2pu.org{% url badge_preview badge.id %}">here</a>.
+Your badge {{ badge.title }} is published, live, and ready-to-go.
 </p>
 <table>
     <tbody>
         <tr>
             <td>
-                <a href="http://badges.p2pu.org{% url badge_preview badge.id %}">
+                <a href="http://badges.p2pu.org{% url badge_view badge.id %}">
                     <img src="http://badges.p2pu.org{{ badge.image.url }}" width="160px"/>
                 </a>
             </td>
@@ -30,7 +25,11 @@ Your badge {{ badge.title }} is created. Woohoo!
         </tr>
     </tbody>
 </table>
-<p>As the Badge's creator, this badge will automatically appear on your profile.
+<p>
+Your Badge now exists on <a href="http://badges.p2pu.org{% url badge_view badge.id %}">badges.p2pu.org</a> and learners can apply for it immediately.
+</p>
+<p>
+Tell the world about your spiffy Badge! {% include 'emails/social_buttons.html' %}
 </p>
 
 <p>

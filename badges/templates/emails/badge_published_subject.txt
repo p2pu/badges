@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans with badge_title=badge.title%}You've just published a {{ badge_title }} Badge. Congrats!{% endblocktrans %}

@@ -4,6 +4,7 @@ from datetime import datetime
 from .db import Badge
 from .db import Award
 from .notification_helpers import send_badge_creation_notification
+from .notification_helpers import send_badge_published_notification
 from .notification_helpers import send_badge_awarded_notification
 
 
@@ -136,6 +137,7 @@ def publish_badge(uri):
         badge_db.author_uri,
         reverse('badge_view', args=(badge_db.pk, )),
     )
+    send_badge_published_notification(_badge2dict(badge_db))
     return True
 
 
