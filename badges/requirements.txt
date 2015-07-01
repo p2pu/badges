@@ -1,3 +1,4 @@
+pip==7.1.0
 Django==1.4.5
 South==0.7.6
 Pillow==2.8.2
