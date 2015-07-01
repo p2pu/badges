@@ -190,7 +190,7 @@ COMPRESS_PRECOMPILERS = (
 ##################################################################
 # Open badges settings
 #################################################################
-OPEN_BADGES_ISSUER_JS_URL = '//beta.openbadges.org/issuer.js'
+OPEN_BADGES_ISSUER_JS_URL = '//backpack.openbadges.org/issuer.js'
 
 ##################################################################
 # Crispy forms template
