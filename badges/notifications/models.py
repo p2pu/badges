@@ -42,6 +42,6 @@ def send_notification(receiver_uri, subject, text, html=None, sender=None, callb
 
     try:
         msg.send()
-    except BadHeaderError:
-        log.error(u'Could not send email notification to {0}, Invalid header found.'.format(receiver['email']))
+    except:
+        log.error(u'Could not send email notification to {0}'.format(receiver['email']))
 
