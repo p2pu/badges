@@ -44,7 +44,12 @@
     text-shadow: none;
   }
   label[for$="ugly"]{
-    @extend .alert-error;
+    background-color: #ffad69;
+    border-color: #ff7503;
+    color: #cf5e00;
+  }
+  .alert-error h4 {
+    color: #cf5e00;
   }
   #cke_id_good {
     border: 1px solid $dark-olive;
