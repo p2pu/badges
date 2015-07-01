@@ -26,10 +26,10 @@ class Auth(SeleniumTestCase):
         # the browser is closed after the tests are ran
         self.wd.quit()
 
+    """
     def test_open(self):
-        """
-        Django Admin login test
-        """
+        #Django Admin login test
+
 
         # Login
         #url = reverse('dashboard', args=[self.user.username])
@@ -61,6 +61,5 @@ class Auth(SeleniumTestCase):
         #cke_element.clear()
         #cke_element.send_keys('Hello World!')
         #print cke_element.text
-
-
+    """
 
