@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import EmailMultiAlternatives
 
 from notifications.utils import localize_for_user
 from p2pu_user.models import get_user
