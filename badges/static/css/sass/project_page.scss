@@ -44,7 +44,7 @@
     text-shadow: none;
   }
   label[for$="ugly"]{
-    @extend .alert-error;
+    //@extend .alert-error;
   }
   #cke_id_good {
     border: 1px solid $dark-olive;
