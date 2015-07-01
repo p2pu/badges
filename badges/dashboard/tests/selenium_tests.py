@@ -1,65 +1,58 @@
 from datetime import datetime
-from dashboard.tests.ck_editor_object import Ckeditor
 from p2pu_user.models import User
 from django.core.urlresolvers import reverse
+from django.test import LiveServerTestCase
+from selenium.webdriver.chrome.webdriver import WebDriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
-from test import SeleniumTestCase
-from webdriver import CustomWebDriver
-
-
-class Auth(SeleniumTestCase):
+class Auth(LiveServerTestCase):
     def setUp(self):
-        # setUp is where setup call fixture creation scripts
-        # and instantiate the WebDriver, which in turns loads up the browser.
         self.user = User.objects.create(username='test_user',
                                         image_url='http://placehold.it/40x40',
                                         email='user@test.com',
                                         date_joined=datetime.utcnow(),
-                                        date_updated=datetime.utcnow(),
-                                        )
+                                        date_updated=datetime.utcnow(),)
 
-        # Instantiating the WebDriver will load your browser
-        self.wd = CustomWebDriver()
+    @classmethod
+    def setUpClass(cls):
+        cls.selenium = WebDriver()
+        super(Auth, cls).setUpClass()
 
-    def tearDown(self):
-        # Don't forget to call quit on your webdriver, so that
-        # the browser is closed after the tests are ran
-        self.wd.quit()
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(Auth, cls).tearDownClass()
 
-    """
-    def test_open(self):
-        #Django Admin login test
-
-
-        # Login
-        #url = reverse('dashboard', args=[self.user.username])
-        #self.open(url)
+    def test_login(self):
         url = reverse('become', args=[self.user.username])
-        self.open(url=url)
-        self.wd.wait_for_css('[title="%s\'s Dashboard"]' % self.user.username)
+        self.selenium.get('%s%s' % (self.live_server_url, url))
 
-        # Open the dashboard page
-        self.wd.find_css('#user_dashboard_btn').click()
-        self.wd.wait_for_css('.user-img')
+        wait = WebDriverWait(self.selenium, 10)
+        dashboard = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#user_dashboard_btn')))
+        dashboard.click()
 
-        body = self.wd.find_element_by_tag_name('body')
+        title = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.user h3')))
+        self. assertEquals(title.text, self.user.username)
+
+        body = self.selenium.find_element_by_tag_name('body')
         self.assertIn('Projects that need your feedback', body.text)
         self.assertIn('Get Your Own Nifty Badge!', body.text)
-        self.wd.find_element_by_link_text('Browse')
+        self.selenium.find_element_by_link_text('Browse')
 
         # Create a Badge
-        self.wd.find_element_by_link_text('Create a Badge').click()
-        self.wd.wait_for_css('.preview-badge-button')
-        body = self.wd.find_element_by_tag_name('body')
+        badge = wait.until(EC.visibility_of_element_located((By.LINK_TEXT, 'Create a Badge')))
+        badge.click()
+
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '.preview-badge-button')))
+        body = self.selenium.find_element_by_tag_name('body')
         self.assertIn('Create a Badge', body.text)
 
-        self.wd.find_css('#id_title').send_keys("Test Badge")
-        self.wd.find_css('#id_description').send_keys("Test Badge description")
-        self.pause(5)
+        badge_title = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#id_title')))
+        badge_title.send_keys("Test Badge")
+        badge_id = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, '#id_description')))
+        badge_id.send_keys("Test Badge description")
+        self.selenium.implicitly_wait(10)
 
-        #cke_element = Ckeditor(self.wd.find_element_by_id('cke_id_requirements'))
-        #cke_element.clear()
-        #cke_element.send_keys('Hello World!')
-        #print cke_element.text
-    """
 
