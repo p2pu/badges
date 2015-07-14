@@ -15,7 +15,7 @@ def uri2username(uri):
 def save_user(username, image_url, email):
 
     if not image_url.startswith('http'):
-        image_url = ''.join(['https://p2pu.org', image_url])
+        image_url = ''.join(['https://courses.p2pu.org', image_url])
 
     if User.objects.filter(username=username).exists():
         # update user
