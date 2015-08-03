@@ -1,6 +1,6 @@
 from django.core.serializers.json import DjangoJSONEncoder
 from django import http
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
@@ -70,6 +70,10 @@ def create(request):
 @require_login
 def preview(request, badge_id):
     badge = badge_api.get_badge(badge_api.id2uri(badge_id))
+
+    if badge['published_date']:
+        return HttpResponseRedirect(reverse('badge_view', args=[badge_id]))
+
     fetch_badge_resources(badge)
     user = request.session['user']
     user['is_author'] = _user_is_author(badge, user)

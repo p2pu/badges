@@ -207,4 +207,4 @@ ORGANISATION_URL = 'badges.p2pu.org'
 #################################################################
 MANDRILL_API_KEY = ""
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
-DEFAULT_FROM_EMAIL = "badges@p2pu.org"
+DEFAULT_FROM_EMAIL = "P2PU team <badges@p2pu.org>"
