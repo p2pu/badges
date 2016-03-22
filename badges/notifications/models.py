@@ -23,7 +23,7 @@ def send_notification_i18n(receiver_uri, subject_template, text_template, html_t
 
 def send_notification(receiver_uri, subject, text, html=None, sender=None, callback=None):
     """
-    Send a notification to a single receiver via the Django-mandrill to a user
+    Send a notification to a single receiver via email to a user
     receiver - uri of user to send the notification to
     sender - name to use in from part of email
     """

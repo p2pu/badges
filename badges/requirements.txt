@@ -9,7 +9,6 @@ django-compressor==1.2
 django-crispy-forms==1.2.8
 django-debug-toolbar==0.9.4
 django-parsley==0.0.2a0
-djrill==1.4.0
 ipython==0.13.2
 mock==1.0.1
 psycopg2==2.4.6
