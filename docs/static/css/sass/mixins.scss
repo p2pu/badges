@@ -1,0 +1,42 @@
+/*@mixin p2pu-btn($startColor, $endColor, $border) {
+  color: $slate;
+  @include gradient-vertical($startColor: $startColor, $endColor: $endColor);
+  border-color: $startColor $endColor $border;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  cursor: pointer !important;
+  font-size: 20px;
+  padding: 7px 20px;
+  margin-top: 1px;
+  @include box-shadow(0 2px 2px rgba(0, 0, 0, 0.35));
+  @include border-radius(5px);
+  border-radius: 5px;
+  font-weight: bold;
+  &:hover {
+    text-decoration: none;
+    @include gradient-vertical($startColor: $startColor, $endColor: $endColor);
+    @include box-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+  }
+}
+
+.btn-clementine{
+  @include buttonBackground($clemintine, $pumpkin);
+}*/
+
+@mixin  transparent_class($opacity: 5) {
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 10})";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=$opacity * 10);
+
+  /* Netscape */
+  -moz-opacity: $opacity/10;
+
+  /* Safari 1.x */
+  -khtml-opacity: $opacity/10;
+
+  /* Good browsers */
+  opacity: $opacity/10;
+}
+

@@ -1,0 +1,369 @@
+@media all and (max-width: 996px) {
+  body {
+    padding-top: 0;
+  }
+
+// navigation
+  .navbar {
+    .navbar-inner {
+      .nav li + li {
+        a {
+          border-left: none;
+          padding-left: 0;
+        }
+        .navbar-custom-header-text {
+          padding-left: 0;
+        }
+      }
+    }
+    .right-links {
+      *zoom: 1;
+
+      &:before, &:after{
+        display: table;
+        content: "";
+        line-height: 0;
+      }
+
+      &:after{
+        clear: both;
+      }
+
+      li:first-child {
+        float: left;
+      }
+      #user-dropdown {
+        float: right;
+        .dropdown-menu {
+          min-width: 0;
+        }
+      }
+    }
+  }
+  footer {
+    .container {
+      &:first-child {
+
+      }
+      &:last-child {
+
+      }
+    }
+  }
+  .badge-info {
+    margin-left: 0;
+    //margin-top: 80px;
+  }
+}
+
+// Phones and tablets
+@media (max-width: 979px) {
+  body {
+    padding: 0;
+  }
+  .nav-collapse {
+    .dropdown-menu {
+      display: block !important;
+      margin: 0;
+    }
+    .btn {
+      width: 23px;
+      height: 25px;
+    }
+    .nav {
+      margin-top: 160px;
+    }
+  }
+
+  .nav-collapse, .nav-collapse.collapse {
+    height: 0 !important;
+  }
+
+  #main-menu-panel {
+    zoom: 1;
+    .sidr-class-nav {
+      margin-bottom: 0;
+      padding-top: 100px;
+    }
+    .sidr-class-dropdown-menu {
+      position: absolute;
+      width: 100%;
+      top: 10px;
+    }
+    .sidr-class-search {
+      border-radius: 50px;
+      padding: 0 20px;
+      color: $white;
+      background-color: lighten(#4d4d4d, 10%);
+    }
+    [title="My dashboard"] {
+      position: absolute;
+      width: 83%;
+      top: 50px;
+      z-index: 10000;
+      display: block;
+      margin: 0;
+      line-height: 48px;
+      border-top: 1px solid #4d4d4d;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 0 20px;
+      margin-top: -1px;
+      &:hover {
+        border-top: none;
+        line-height: 49px;
+        @include box-shadow(inset 0 0 15px 3px #222);
+      }
+    }
+  }
+  .navbar-inner {
+    position: relative;
+  }
+  .openbadges-insignia {
+    position: absolute;
+    right: 10px;
+    top: -1px;
+  }
+  .p2pu-badge {
+    .overflow-handle {
+      height: 245px;
+    }
+  }
+
+// Dashboard
+  .dashboard-sidebar-img {
+    width: 40px;
+    height: 40px;
+  }
+  .dashboard-title {
+    overflow: hidden;
+    margin-bottom: 30px;
+  }
+
+// Browse all badges
+  .browse-badges {
+    .thumbnails > li {
+      margin-left: 0px;
+    }
+    .row {
+      margin-left: 0;
+    }
+  }
+// Badge view
+  .badge-info-horizontal-details {
+    border-left: none !important;
+    padding-left: 10px !important;
+  }
+  .badge-info-img {
+    margin-right: 20px;
+  }
+  .badge-view-toolbar {
+    position: absolute;
+    bottom: 130px;
+    > .btn {
+      float: left;
+      + .btn {
+        margin-top: 0;
+      }
+    }
+  }
+  .badge-details {
+    padding-bottom: 90px;
+  }
+  .badge-social .social-item {
+    width: 105px;
+  }
+
+//Project view
+  .project-view {
+    .project-info {
+      h3 {
+        border-top: dotted 1px $slate;
+        margin-top: 40px;
+      }
+      img {
+        float: none !important;
+      }
+      dl {
+        word-wrap: break-word;
+      }
+    }
+  }
+  .feedback-head {
+    position: relative;
+  }
+
+  .feedback-img {
+    position: absolute;
+    top: 5px;
+    z-index: 1021;
+    left: 25px;
+    margin-right: 0;
+    img {
+      width: 40px;
+      height: 40px;
+      margin-left: 0 !important;
+    }
+  }
+  .feedback-improve {
+    .feedback-img {
+      right: 15px;
+      width: 50px;
+      left: initial;
+    }
+    .popover-title {
+      text-align: right;
+      padding-right: 70px;
+      padding-left: 15px;
+    }
+  }
+  .popover-title {
+    padding-left: 70px;
+    padding-bottom: 30px;
+  }
+  #project-create-form {
+    margin-top: 30px;
+    border-top: dotted 1px $slate;
+    padding-top: 20px;
+  }
+// Project tile
+  .project {
+    .img-link {
+      float: none;
+    }
+    .info-field {
+      padding-right: 0;
+      padding-top: 40px;
+    }
+    .project-badge-wrapper {
+      margin-left: -20px;
+    }
+    .project-badge {
+      position: initial;
+      margin: 20px auto;
+      border: 1px solid $silver;
+      @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.055));
+      @include border-radius(4px);
+    }
+    .badge-description {
+      overflow: initial;
+    }
+    .award-info {
+      position: absolute;
+      bottom: 40px;
+      right: -18px;
+      left: 95px;
+    }
+
+    .badge-title {
+      margin-top: 0;
+      margin-bottom: 50px;
+    }
+  }
+// User tile
+  .p2pu-user {
+    margin-left: 0 !important;
+    width: 100px;
+    float: left !important;
+    margin-right: 20px;
+  }
+  footer a {
+    float: left;
+    margin: 10px;
+  }
+
+}
+
+// 10", 12" monitor
+@media (min-width: 979px) and (max-width: 1200px) {
+// Navbar buttons
+  .navbar .btn-group .btn {
+    padding: 5px 5px;
+  }
+  .popover {
+    &.span8 {
+      width: 620px !important;
+    }
+  }
+// Badge View
+  .badge-info-img {
+    margin-right: 20px;
+  }
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  [class*="span"] {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .badge-info {
+    margin-left: 0;
+    margin-top: 80px;
+  }
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  #landing-users {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width: 321px) {
+  .project-view {
+    .popover {
+      //overflow: hidden;
+    }
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width: 320px) {
+  body {
+
+  }
+  .badge-info {
+    margin-left: 0;
+  }
+  .badge-info-img {
+    float: none !important;
+    display: block;
+    text-align: center;
+  }
+  .badge-info-horizontal-details {
+    border-left: none !important;
+    padding-left: 10px !important;
+  }
+  .badge-sharing {
+    .btn-sharing-controls {
+      margin-top: auto !important;
+    }
+    .social-item {
+      float: left !important;
+    }
+  }
+  .p2pu-project .p2pu-project-img-link {
+    float: none;
+  }
+
+}

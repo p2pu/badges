@@ -1,0 +1,111 @@
+// Navigation specific to Dashboard
+
+.dashboard-navigation{
+  background-color: darken($silverLight, 5%);
+  .navigation-list{
+    margin-top: 5px;
+  }
+  .list-item{
+    display: inline-block;
+    text-align: center;
+    color: lighten($slate, 20%);
+    line-height: 42px;
+    margin: 0 25px 0 0;
+    padding: 0 15px;
+    position: relative;
+    transition: all 0.3s ease-in;
+    &:hover, &:active{
+      color: $slate;
+      [class^="icon"]{
+        color: $slate;
+      }
+    }
+    &.active{
+      background-color: lighten($slate, 20%);
+      color: $white;
+      [class^="icon"]{
+        color: $white;
+      }
+      [class="icon-caret-down"]{
+        color: lighten($slate, 20%);
+        @include transparent_class($opacity: 10);
+      }
+    }
+  }
+  [class^="icon"]{
+    margin-right: 10px;
+    font-size: 16px;
+    color: lighten($slate, 20%);
+    transition: color 0.3s ease-in;
+  }
+  [class="icon-caret-down"]{
+    position: absolute;
+    bottom: -19px;
+    color: lighten($slate, 10%);
+    font-size: 30px;
+    width: 18px;
+    margin-left: -9px;
+    left: 50%;
+    @include transparent_class($opacity: 0);
+  }
+}
+
+.dashboard{
+  .user{
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px 0;
+    display: block;
+    background-color: $white;
+    border: 1px solid $silver;
+    width: 100%;
+    @include box-shadow(0 1px 10px rgba(0, 0, 0, 0.1));
+    @include border-radius(5px);
+  }
+  .user-img {
+    width: 70%;
+  }
+  .toolbar {
+    background: $white;
+    border: 1px solid $silver;
+    margin-bottom: 50px;
+    @include box-shadow(0 1px 10px rgba(0, 0, 0, 0.1));
+    @include border-radius(5px);
+    li {
+      &.nav-header{
+        font-size: 12px;
+        background-color: $silverLight;
+      }
+      a {
+        padding: 10px;
+      }
+      &.active {
+        a {
+          background: $cyan;
+          color: $white;
+          cursor: pointer;
+        }
+      }
+    }
+    .nav-header {
+      margin-top: 0;
+    }
+  }
+  .dashboard-title{
+    [class^="icon"]{
+      margin-right: 10px;
+      color: $clemintine;
+    }
+  }
+  .p2pu-badge-mini{
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+}
+#feedback-projects{
+  margin-top: 10px;
+}
+// Sections styles
+#unpublished-badges {
+padding-top: 50px;
+}

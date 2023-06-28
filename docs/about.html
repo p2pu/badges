@@ -1,0 +1,335 @@
+---
+---
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>P2PU Badges</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="{{site.baseurl}}/static/css/p2pu-bootstrap.css">
+	<link rel="stylesheet" href="{{site.baseurl}}/static/css/libs/jquery.sidr.dark.css">
+	<link rel="stylesheet" type="text/css"
+	      href="{{site.baseurl}}/static/css/sass/badges.scss">
+
+  <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/static/css/9497d9499787.css">
+  <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/static/css/27b8b4b2c81f.css">
+  <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/static/css/704f4c3d4d14.css">
+	<link rel="stylesheet" href="{{site.baseurl}}/static/css/bootstrap-fileupload.min.css">
+	<link rel="shortcut icon" href="{{site.baseurl}}/static/img/favicon.ico">
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	      href="{{site.baseurl}}/static/img/apple-touch-icon-144x144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	      href="{{site.baseurl}}/static/img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	      href="{{site.baseurl}}/static/img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="57x57"
+	      href="{{site.baseurl}}/static/img/apple-touch-icon-57x57-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="{{site.baseurl}}/static/img/apple-touch-icon-precomposed.png">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Arvo:regular,italic,bold,bolditalic" rel="stylesheet"
+	      type="text/css">
+
+	<script src="{{site.baseurl}}/static/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="navbar-btn visible-phone visible-tablet" data-toggle="collapse"
+           data-target=".nav-collapse" href="#main-menu-panel">
+          <i class="icon-align-justify"></i>
+        </a>
+        <a class="brand" href="{{ site.baseurl }}"></a>
+        <ul class="nav">
+          <li>
+            <a class="p2pu-tab" href="#">
+              <i class="icon-chevron-sign-down p2pu-tab-icon"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="nav-collapse collapse mindevices-side-menu">
+          <ul class="nav">
+            <li>
+              <a href="">About Badges</a>
+            </li>
+            <li>
+              <a href="">Create a Badge</a>
+            </li>
+            <li>
+              <a href="">Apply for a Badge</a>
+            </li>
+            <li>
+              <a href="">Review a Project</a>
+            </li>
+          </ul>
+          <div class="pull-right btn-toolbar" style="margin: 0;">
+            <div class="btn-group">
+              <a class="btn" href="" data-toggle="tooltip" title="Sign in">
+                <i class="icon-signin"></i>
+              </a>
+              <a class="btn dropdown-toggle visible-desktop" data-toggle="dropdown" title="Search'">
+                <i class="icon-search"></i>
+              </a>
+
+              <div class="dropdown-menu">
+                <form class="navbar-search" action="search">
+                  <input type="text" class="span4 search" name="q" value="{{ q }}"
+                         placeholder="Search for Badges, Projects or people...">
+                  <i class="icon-remove-sign clear-search"></i>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<section>
+		<div class="messages container">
+			<div class="container alert alert-warning">
+				<p>This site has been archived and doesn't function anymore. See what P2PU is up to at <a href="https://www.p2pu.org">www.p2pu.org</a>.</p>
+			</div>
+		</div>
+
+    <!-- block body --> 
+
+    <div class="badges-about container">
+        <div class="about-content clearfix">
+            <div class="contents-title">Contents</div>
+            <ul class="nav nav-list span3">
+                <li><a href="#About_Badges">About Badges</a></li>
+                <li><a href="#Fast_Facts">Fast Facts</a></li>
+                <li><a href="#What_it_Looks_Like_in_Action">What it Looks Like in Action</a></li>
+                <li><a href="#Badges_and_P2PU_org">Badges and P2PU.org</a></li>
+
+                <li><a href="#Find_Out_More">Find Out More</a></li>
+            </ul>
+        </div>
+
+        <div id="About_Badges">
+            <h3>About Badges</h3>
+            <p>
+                At <a href="https://www.p2pu.org/" target="_blank">P2PU</a>, learning is guided by people,
+                passion, and projects. We’ve created this Badge platform to spark feedback between
+                Experts and Learners about their learning projects. A Badge is symbol of mastery that
+                comes out of those conversations. Here you’ll find out how Badges work, and some resources
+                to build your own.
+            </p>
+        </div>
+        <div id="Fast_Facts">
+            <h3>Fast Facts</h3>
+            <ul>
+                <li>Badges are a way for Learners to get feedback on their learning projects.</li>
+                <li>A "learning project" is an artifact that folks make in their learning experience--it can be
+                    a
+                    book report, an Arduino project, a presentation or a poem.
+                </li>
+                <li>On <a href="http://badges.p2pu.org/en/" target="_blank">badges.p2pu.org</a> we have two kinds of community
+                    members: Experts and Learners.
+                </li>
+                <li>An Expert is someone who can award the Badge because they have already achieved it. Only
+                    Experts
+                    can award Badges, but any Learner can give feedback on any project.
+                </li>
+                <li>Badges can be shared via Twitter or embedded in any website via iframe. We encourage you to
+                    share them!
+                </li>
+                <li>Our Badges do integrate with the <a href="http://openbadges.org/" target="_blank">Mozilla Open Badges
+                    Infrastructure</a>.
+                </li>
+            </ul>
+        </div>
+        <div id="What_it_Looks_Like_in_Action">
+            <h3>What it Looks Like in Action</h3>
+            <p>Christine is enrolled in the <a
+                    href="https://courses.p2pu.org/en/courses/49/writing-wikipedia-articles-the-basics-and-beyond/">Writing
+                Wikipedia Articles</a> course on <a href="https://courses.p2pu.org/en/" target="_blank">P2PU.org</a>.</p>
+
+            <p>Her learning project is to start a Wikipedia article, improve another Wikipedia article
+                demonstrably,
+                and make more than 200 edits to Wikipedia.</p>
+
+            <p>In her course, she clicks on the "WikiSOO Burba Badge" in the left column and applies for the
+                Badge.</p>
+
+            <p><img src="http://farm4.staticflickr.com/3812/9262630717_50d24e076d_o.png"
+                    alt="enter image description here" title=""/></p>
+
+            <p>When she submits her project, she is prompted to walk through the steps she took to accomplish
+                the
+                task, and to reflect a bit about what she would do differently next time. She clicks "Submit
+                Project."</p>
+
+            <p><img src="http://farm6.staticflickr.com/5509/9265525660_6460a2650c_o.png"
+                    alt="enter image description here" title=""/></p>
+
+            <p>Peter, an Expert at the SOO Burba Badge (meaning he created it or he has been awarded it already)
+                gets a notification that a project has been submitted and looks over Christina's project.</p>
+
+            <p><img src="http://farm6.staticflickr.com/5517/9262750891_c0ea5d188b_o.png"
+                    alt="enter image description here" title=""/></p>
+
+            <p>He then gives her qualitative feedback to improve her project in terms of "Kudos" "Questions" and
+                "Concerns." </p>
+
+            <p><img src="http://farm3.staticflickr.com/2815/9262751499_ef75bbf592_o.png"
+                    alt="enter image description here" title=""/></p>
+
+            <p>Since she has met the requirements to get the Badge, Christina is notified via email that she is
+                now
+                an Expert. The Badge now appears in her profile, and she can award the Badge to others. She can
+                also
+                push the Badge to her Mozilla Open Badges Backpack. Huzzah!</p>
+
+            <p><img src="http://farm3.staticflickr.com/2819/9265578464_73f6231f93_o.png"
+                    alt="enter image description here" title=""/></p>
+
+        </div>
+        <div id="Badges_and_P2PU_org">
+            <h3>Badges and P2PU.org</h3>
+            <ul>
+                <li>It’s easy to take a Badge you create on <a
+                        href="http://badges.p2pu.org/en/">badges.p2pu.org</a>
+                    and integrate it with your course on <a href="http://www.p2pu.org/" target="_blank">P2PU.org</a>.
+                </li>
+                <li>Simply create your badge <a href="http://badges.p2pu.org/en/badge/create/" target="_blank">here</a>, publish
+                    it,
+                    and copy the unique URL for the Badge that appears in the browser.</li>
+                        <li>Then revisit your course on <a href="http://www.p2pu.org/" target="_blank">P2PU.org</a>, click on
+                            the
+                            “Badges and Feedback” tab, and paste in the URL.
+                        </li>
+                    </ul>
+                </li>
+                <li>The Badge will appear as a content module, and you can move it around so it appears in the
+                    right
+                    spot.
+                </li>
+            </ul>
+        </div>
+        <div id="Find_Out_More">
+            <h3>Find Out More</h3>
+            <ul>
+                <li>Take our <a href="https://courses.p2pu.org/en/courses/653/p2pu-badge-maker/" target="_blank">Badgemaker P2PU
+                    Course</a>
+                    to find out more about Badges.
+                </li>
+                <li>Check out the <a
+                        href="http://info.p2pu.org/2013/01/25/its-the-feedback-silly-p2pus-plan-for-badges/">pedagogy
+                    behind Badges</a>.
+                <li> Our platform is open source--fork it <a
+                        href="https://github.com/p2pu/badges">on GitHub</a>.
+                </li>
+                <li>Follow our progress on our team <a href="https://trello.com/b/nxvdZ6fR/badges" target="_blank">Trello
+                    Board</a>.
+                </li>
+                <li>Leave feedback on Badges at <a href="http://community.p2pu.org/" target="_blank">P2PU Community</a> to find
+                    out
+                    what crafty experiments we're up to.
+                </li>
+                <li>Contact <a href="mailto:erika@p2pu.org">Erika</a>.</li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <!-- endblock body -->
+
+	</section>
+	<footer>
+		<div class="container">
+			<hr>
+			<div class="clearfix">
+				<div class="span3 first">
+					<a href="http://backpack.openbadges.org" target="_blank">
+						<img alt="We Issue OpenBadges"
+						     src="http://openbadges.org/wp-content/uploads/2013/02/OpenBadges_Insignia_WeIssue.png"
+						     width="200"
+						     height="40">
+					</a>
+
+				</div>
+				<div class="pull-right span6 cc-by-sa">
+					<img src="{{site.baseurl}}/static/img/cc-icons.png" alt="Terms of use">
+
+					<p>
+						Unless otherwise noted, all the materials on this site are licensed under a
+						<a href="http://creativecommons.org/licenses/by-sa/3.0/">
+							Creative Commons Attribution Share Alike 3.0</a> Unported license.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="terms">
+			<div class="container relative">
+				<a href="https://courses.p2pu.org/en/pages/terms-of-use/" target="_blank" class="terms-link">
+					Terms Of Use
+				</a>
+				<a href="http://www.browserstack.com" target="_blank" class="browser-stack-logo pull-right">
+					<h5 class="intro">
+						<small>Supported by</small>
+					</h5>
+					<img src="{{site.baseurl}}/static/img/browserstack.png" alt="We are supported by Browserstack.com"
+					     width="150" />
+				</a>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="{{site.baseurl}}/static/js/require.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ STATIC_URL }}js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
+
+<script src="{{site.baseurl}}/static/js/bootstrap.min.js"></script>
+<script src="{{site.baseurl}}/static/js/vendor/jquery.sidr.min.js"></script>
+<script src="{{site.baseurl}}/static/js/homepage.js"></script>
+
+<script type="text/javascript"
+        src="//rawgithub.com/ercchy/p2pu_navigation_widget/master/p2pu_menu_slider.js"></script>
+
+<!-- block js -->
+
+<script>
+var browse_users = "{{site.baseurl}}/static/js/browse_items.js";
+	var infinite_scroll_plugin = "{{site.baseurl}}/static/js/vendor/jquery.infinitescroll.js";
+	var twiter_behaviour = "{{site.baseurl}}/static/js/vendor/jquery.infinitescroll.twitter.behaviour.js";
+	require(["jquery", infinite_scroll_plugin, twiter_behaviour, browse_users], function ($) {
+		Badges.Browse.user();
+	})
+</script>
+
+<!-- endblock js -->
+
+
+<script>
+	Badges.Splash.init();
+</script>
+
+<script type="text/javascript">
+	var _gaq = [
+		['_setAccount', 'UA-5757664-7'],
+		['_trackPageview']
+	];
+	(function (d, t) {
+		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+		g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g, s)
+	}(document, 'script'));
+</script>
+
+</body>
+</html>

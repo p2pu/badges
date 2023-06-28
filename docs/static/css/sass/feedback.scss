@@ -1,0 +1,43 @@
+.no-feedback-yet{
+  font-family: "arvo", Helvetica, sans-serif;
+  text-shadow: 0 1px 0 #fff;
+}
+.show-previous{
+  font-size: 0.9em;
+  img{
+    float: left;
+    margin: 15px 15px 0 0;
+    width: 40px;
+    height: 40px;
+    &:hover{
+      margin-top: 13px;
+    }
+  }
+  .feedback-thread-content{
+    overflow: hidden;
+  }
+}
+
+.feedback-give-revise{
+  margin-top: 25px;
+  margin-left: 0;
+}
+.feedback-img{
+  margin-right: 30px;
+
+  img{
+    width: 100px;
+    height: 100px;
+  }
+
+}
+.feedback-given{
+  display: block;
+  position: relative;
+  &.popover.right .arrow, &.popover.left .arrow{
+    top:11%;
+  }
+  i{
+    margin: 0 5px;
+  }
+}

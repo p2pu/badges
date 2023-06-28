@@ -1,0 +1,43 @@
+/**
+ * Created with PyCharm.
+ * User: erika
+ * Date: 11/22/13
+ * Time: 10:38 AM
+ * To change this template use File | Settings | File Templates.
+ */
+footer {
+  margin: 0;
+  padding: 1em 0 0 0;
+  background-color: darken($silverLight, 5%);
+  .cc-by-sa {
+    img {
+      margin-bottom: 10px;
+      float: left;
+      margin-right: 20px;
+    }
+    p{
+      overflow: hidden;
+    }
+  }
+  .terms {
+    padding: 1rem 0 0 0;
+    background-color: $grayDark;
+  }
+  .terms-link{
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    color: #9ea3b1;
+    &:hover{
+      color: $silver;
+    }
+  }
+  .browser-stack-logo{
+    .intro{
+      margin-left: 35px;
+    }
+    img{
+      margin-top: -35px;
+    }
+  }
+}

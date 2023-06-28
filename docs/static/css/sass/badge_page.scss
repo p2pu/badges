@@ -1,0 +1,66 @@
+
+.badge-create-intro{
+  padding-bottom: 15px;
+  line-height: 1.5em;
+  margin-bottom: 15px;
+}
+.controls{
+  .help-block{
+    font-size: 12px;
+    font-style: italic;
+    color: #999 !important;
+    margin: 0 0 11px 0 !important;
+  }
+}
+/******Form char check with parsley*********/
+.control-group {
+  &.success{
+    .control-label{
+      color: #468847;
+    }
+    input, textarea, .controls #cke_id_requirements{
+      color: #468847;
+      border-color: #468847;
+      &:focus{
+        border-color: rgba(82, 168, 236, 0.8);
+        outline: 0;
+        outline: thin dotted \9;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+      }
+    }
+  }
+  &.error{
+    .help-inline {
+      ul{
+        list-style: none;
+        margin-bottom: 0;
+      }
+    }
+    .cke{
+      border-color: $errorText;
+    }
+  }
+  .parsley-error-list{
+    list-style-type: none;
+    font-weight: bold;
+    margin-left: 0;
+    font-size: 12px;
+  }
+  .error .btn-file{
+    overflow: visible;
+    .help-inline{
+      color: $errorText;
+      text-shadow: none;
+      font-size: 10px;
+      position: absolute;
+      top: 34px;
+      left: 5px;
+      ul li{
+        padding-top: 8px;
+        line-height: 10px;
+      }
+    }
+  }
+}

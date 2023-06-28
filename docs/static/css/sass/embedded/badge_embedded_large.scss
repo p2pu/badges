@@ -1,0 +1,70 @@
+// Bootstrap
+@import "../../libs/p2pu-css-framework/lib/bootstrap";
+$baseFontFamily:        "arvo", Helvetica, sans-serif;
+.p2pu-badge {
+  padding: 10px;
+  position: relative;
+  margin-left: 0;
+  background-color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #aaa;
+  font-family: $baseFontFamily;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @include border-radius(4px);
+
+  .badge-image{
+    display: block;
+    float: left;
+    margin-right: 20px;
+  }
+  .badge-title{
+    color: $slate;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: $baseFontFamily;
+    margin: 0 0 20px 0;
+    &:hover{
+      color: $cyan;
+      text-decoration: none;
+    }
+  }
+  .badge-container{
+    overflow: hidden;
+  }
+  .pending-projects-title{
+    color: $slate;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+
+  }
+  .pending-projects{
+    list-style-type: none;
+    margin-left: -10px;
+    li{
+      float: left;
+      margin-left: 10px;
+      padding: 5px;
+      width: 50px;
+      height: 50px;
+      @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
+      &:hover{
+        @include box-shadow(0 1px 6px rgba(0, 105, 214, 0.45));
+      }
+    }
+    a{
+      display: block;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+    }
+    img{
+      height: 100%;
+      @include border-radius(4px);
+    }
+  }
+}

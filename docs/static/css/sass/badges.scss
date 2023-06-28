@@ -1,0 +1,52 @@
+/*!
+ *
+ *
+ * P2PU Badges project v 0.0.1
+ *
+ * Author Erika
+ *
+ */
+// Bootstrap
+//@import "../libs/p2pu-css-framework/lib/bootstrap";
+
+// Bootstrap Responsive
+//@import "../libs/p2pu-css-framework/lib/responsive";
+
+// Mixins already created for P2PU
+//@import "../libs/p2pu-css-framework/p2pu/p2pu-mixins";
+
+@import "../libs/p2pu-css-framework/lib/mixins";
+@import "mixins";
+// Additional variables
+@import "variables";
+
+// Basic tags styles
+@import "init";
+//@import "overrides";
+
+// Badge styling (snippet to display a badge always the same)
+@import "about";
+@import "badge";
+@import "project";
+@import "buletin";
+@import "avatar";
+@import "dashboard";
+@import "user";
+@import "feedback";
+@import "browse_badges";
+
+// Navbar styling
+@import "navbar";
+
+// Pages styling
+@import "landing";
+@import "badge_page";
+@import "project_page";
+
+//Footer styling
+@import "footer";
+// Responsive styling
+@import "responsive";
+
+//Import 404 styling
+@import "errors_files";

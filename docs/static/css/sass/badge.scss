@@ -1,0 +1,390 @@
+.badge-view-badges{
+  margin-top: 50px;
+}
+.badge-info {
+  position: relative;
+  background: white;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  padding: 25px 15px;
+  color: rgba(0, 0, 0, .8);
+  text-shadow: 0 1px 0 #fff;
+  line-height: 1.5;
+  .badge-info-name {
+    display: block;
+    h3 {
+      color: $cyan;
+      margin: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      & h3 {
+        color: $clemintine;
+      }
+
+    }
+
+  }
+  .badge-info-img{
+    margin-right: 20px;
+  }
+  .badge-info-vertical-img, .badge-info-horizontal-img {
+    padding-bottom: 15px;
+    margin-left: 0;
+    text-align: center;
+
+  }
+  .badge-info-horizontal-img {
+    padding-right: 15px;
+  }
+  .badge-info-vertical-img {
+    display: block;
+  }
+  .badge-info-vertical-details, .badge-info-horizontal-details {
+    margin-left: 0;
+  }
+  .badge-info-horizontal-details {
+    border-left: 1px solid $silver;
+    padding-left: 30px;
+    overflow: hidden;
+  }
+  .badge-info-vertical-details {
+    border-top: 1px solid $silver;
+  }
+
+  [id^="hint"]{
+    display: inline-block;
+  }
+  p {
+    margin-left: 10px;
+  }
+  .badge-view-toolbar{
+    [class^="btn"]{
+      font-size: 10px !important;
+      padding: 5px !important;
+      width: 70px;
+      white-space: initial;
+      line-height: 14px;
+      display: block;
+    }
+    [class^="icon"]{
+      font-size: 20px;
+      display: block;
+      margin: 3px 0;
+    }
+  }
+  .badge-view-experts{
+    position: relative;
+    padding-left: 60px;
+    min-height: 50px;
+    li{
+      margin: 0px;
+      &.badge-author{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      a{
+        img{
+          width: 40px;
+          height: 40px;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+      p{
+        margin-left: 0px
+      }
+    }
+  }
+
+  .badge-sharing {
+    border-top: solid 1px $silver;
+    position: relative;
+    .btn-sharing-controls {
+      margin-top: -24px;
+      margin-left: 0px;
+      a {
+        font-family: $baseFontFamily;
+        font-size: 1em;
+        color: $pewter;
+        line-height: 20px;
+        margin-left: 10px;
+        padding: 0 8px;
+        &:hover, &.active {
+          text-decoration: none;
+          border-bottom: 2px $cyan solid;
+        }
+      }
+    }
+    .badge-sharing-inner {
+      position: relative;
+      left: 0;
+      padding-bottom: 70px;
+      overflow: hidden;
+      .badge-sharing-inner-wrap {
+        position: relative;
+        .badge-social {
+          position: absolute;
+          width: 100%;
+        }
+        .badge-embed {
+          position: absolute;
+          right: -100%;
+          width: 100%;
+          textarea {
+            width: 90%;
+            display: block;
+            margin: 16px auto;
+          }
+        }
+      }
+    }
+  }
+
+
+
+}
+
+.badge-info:before, .badge-info:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: 300px;
+  background: rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.badge-info:after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
+.p2pu-badge {
+  padding: 10px 10px 5px;
+  height: 300px;
+  position: relative;
+  margin-left: 0;
+  background-color: $white;
+  border: 1px solid #aaa;
+  @extend .thumbnail;
+  @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+  .overflow-handle {
+    width: 100%;
+    height: 265px;
+    overflow: hidden;
+  }
+  .close {
+    position: absolute;
+    right: 10px;
+    font-size: 25px;
+    color: red;
+    @include opacity(60);
+  }
+
+  .badge-delete-popover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: $slate;
+    color: $white;
+    left: 0;
+    top: 0;
+    @include opacity(90);
+    @include border-radius(4px);
+    z-index: 1;
+    p {
+      position: absolute;
+      bottom: 90px;
+      padding: 10px;
+      text-align: center;
+    }
+    .badge-delete-controls {
+      position: absolute;
+      bottom: 20px;
+      a {
+        display: inline-block;
+        margin: 4px 12px;
+      }
+    }
+  }
+
+  &.p2pu-badge-long {
+    height: 345px;
+  }
+  .badge-image {
+    text-align: center;
+    min-height: 128px;
+
+  }
+  .badge-container {
+    border-top: 1px dotted $silver;
+    h4 {
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .badge-description {
+      font-size: 12px;
+    }
+  }
+  .badge-title {
+    h4 {
+      color: $cyan;
+    }
+
+  }
+  .badge-controls {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 95%;
+    padding: 5px 5px;
+    height: 35px;
+
+
+    .badge-more-info-control {
+
+      .icon-angle-right {
+        line-height: 22px;
+        font-size: 12px;
+      }
+      .badge-more-info {
+        font-size: 15px;
+        font-weight: bold;
+        display: inline;
+        line-height: 45px;
+        position: relative;
+        right: 0;
+        bottom: -8px;
+        &:hover {
+          color: $cyan;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .badge-author-wrap{
+    font-family: $baseFontFamily;
+    font-size: 12px;
+    border-top: $silverLight 1px solid;
+    padding: 0;
+    position: relative;
+    span{
+      line-height: 14px;
+    }
+    .badge-author-link{
+      line-height: 14px;
+    }
+    .author-icon{
+      width: 30px;
+      height: 30px;
+      bottom: 0;
+      right: 0;
+      position: absolute;
+      margin-bottom: 0;
+    }
+  }
+  img {
+    margin-bottom: 10px;
+    max-height: 112px;
+  }
+  a {
+
+    display: block;
+    &:hover {
+      h4 {
+        color: $clemintine;
+      }
+    }
+  }
+  &:hover {
+    text-decoration: none;
+    border-color: $cyan;
+    @include box-shadow(0 1px 4px rgba(0, 105, 214, 0.25));
+
+  }
+}
+
+.badge-info-title,
+.badge-info-horizontal-requirements,
+.badge-info-vertical-requirements,
+.badge-info-desc {
+  color: $gray;
+  font-size: 0.8em;
+  text-transform: uppercase;
+}
+
+.badge-social {
+  margin-top: 1em;
+  .social-item {
+    width: 120px;
+  }
+}
+
+.p2pu-badge-mini{
+  padding: 10px 10px 5px;
+  position: relative;
+  margin-left: 0;
+  background-color: $white;
+  border: 1px solid #aaa;
+  @extend .thumbnail;
+  @include border-radius(20px);
+  @include box-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+  .overflow-handle {
+    width: 100%;
+    height: 115px;
+    overflow: hidden;
+  }
+  .badge-image-wrap {
+    display: block;
+    text-align: center;
+    min-height: 60px;
+  }
+  .badge-img{
+    width: 60px;
+  }
+  .badge-title {
+    color: $cyan;
+    font-family: $baseFontFamily;
+    text-align: center;
+  }
+  .badge-author-wrap{
+    font-family: $baseFontFamily;
+    font-size: 12px;
+    border-top: $silverLight 1px solid;
+    padding: 0;
+    position: relative;
+    span{
+      line-height: 14px;
+    }
+  }
+  .badge-author-link{
+    line-height: 14px;
+    word-wrap: break-word;
+  }
+  .author-icon{
+    width: 20px;
+    height: 20px;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    margin-bottom: 0;
+  }
+
+}

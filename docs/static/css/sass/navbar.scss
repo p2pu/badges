@@ -1,0 +1,28 @@
+.navbar{
+  .nav-collapse{
+    margin-top: 5px;
+  }
+  // Search repositioning
+  .btn-group > .dropdown-menu{
+    right: 0;
+    left: initial;
+  }
+  .navbar-search{
+    margin: 5px;
+  }
+  .clear-search{
+    position: absolute;
+    right: 5px;
+    top: 20%;
+    color: #CCC;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  input[type="text"]{
+    margin: 0;
+    padding-right: 30px;
+  }
+}
+#jPanelMenu-menu{
+  height: 100% !important;
+}

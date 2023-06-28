@@ -1,0 +1,8 @@
+.buletin{
+  margin-bottom: 0;
+  padding: 1em;
+  background-color: $snow;
+  @include border-radius(0);
+  border-bottom: 2px solid $metal;
+
+}
